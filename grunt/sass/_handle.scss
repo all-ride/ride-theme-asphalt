@@ -1,0 +1,17 @@
+.collection-control {
+  [data-order] & {
+    position: relative;
+    padding-left: 20px;
+  }
+}
+.order-handle {
+  display: none;
+  [data-order] & {
+    display: block;
+    cursor: move;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+  }
+}

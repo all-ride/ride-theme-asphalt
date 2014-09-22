@@ -1,0 +1,16 @@
+// Layout checkboxes
+.form__item--layout {
+  .form__radio-item {
+    float: left;
+    width: 100px;
+    height: 90px;
+  }
+}
+
+.form__image-preview {
+  display: inline-block;
+  border: 1px solid #b7b7b7;
+  margin-top: 5px;
+  padding: 5px;
+  text-align: right;
+}
