@@ -29,7 +29,7 @@ $.fn.table = function() {
     }
   });
 
-  $('td.action a').addClass('btn btn-default');
+  $('td.action a').addClass('btn btn--default');
 };
 
 $(function() {

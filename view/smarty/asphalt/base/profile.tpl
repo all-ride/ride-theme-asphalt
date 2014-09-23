@@ -14,12 +14,12 @@
     <form id="{$form->getId()}" class="form-horizontal" action="{$app.url.request}" method="POST" enctype="multipart/form-data" role="form">
         <div class="form__group">
             <div class="tabbable">
-            <ul class="nav nav-tabs">
+            <ul class="tabs">
             {foreach $hooks as $hookName => $hook}
-                <li{if $activeHook == $hookName} class="active"{/if}><a href="#hook-{$hookName}" data-toggle="tab">{translate key="profile.hook.`$hookName`"}</a></li>
+                <li class="tabs__tab {if $activeHook == $hookName} active{/if}"><a href="#hook-{$hookName}" data-toggle="tab">{translate key="profile.hook.`$hookName`"}</a></li>
             {/foreach}
             {if $form->hasRow('submit-unregister')}
-                <li><a href="#hook-unregister" data-toggle="tab">{translate key="button.unregister"}</a></li>
+                <li class="tabs__tab"><a href="#hook-unregister" data-toggle="tab">{translate key="button.unregister"}</a></li>
             {/if}
             </ul>
 

@@ -19,7 +19,7 @@
 
  $html = '<div class="btn-group">';
  foreach ($anchors as $anchor) {
-     $anchor->addToClass('btn btn-default');
+     $anchor->addToClass('btn btn--default');
 
      $html .= $anchor->getHtml();
  }
