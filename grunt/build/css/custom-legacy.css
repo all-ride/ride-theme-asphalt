@@ -26,20 +26,31 @@
   text-align: right;
 }
 
-[data-order] .collection-control {
-  position: relative;
-  padding-left: 20px;
+.sortables .ui-sortable-placeholder {
+  background: #faf5e6;
+  border: 1px dotted #b4a98b;
+  visibility: visible !important;
 }
 
-.order-handle {
+.sortable {
+  position: relative;
+  padding: 10px;
+  background: #f5f5f5;
+  border: 1px solid #b7b7b7;
+  margin-bottom: 10px;
+}
+
+.sortable__handle {
   display: none;
 }
 
-[data-order] .order-handle {
+[data-order] .sortable__handle {
   display: block;
-  cursor: move;
   position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 1;
+  right: 100%;
+  top: 10px;
+  border: 1px solid #b7b7b7;
+  border-radius: 3px 0 0 3px;
+  padding: 5px;
+  cursor: move;
 }
