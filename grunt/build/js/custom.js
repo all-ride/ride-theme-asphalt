@@ -27,6 +27,15 @@ $.fn.formCollection = function() {
 
         return false;
     });
+
+    $('[data-order=true] .collection-control-group').sortable({
+        axis: "y",
+        cursor: "move",
+        handle: ".order-handle",
+        items: "> .collection-control",
+        select: false,
+        scroll: true
+    });
 };
 
 $.fn.formFile = function() {
@@ -45,6 +54,36 @@ $(function() {
     $('form[role=form]').formCollection();
     $('form[role=form]').formFile();
 });
+
+$.fn.honeyPot = function(options) {
+    var $this = $(this);
+
+    $(options.fields).each(function(index, value) {
+        var $input = $('input[name=' + value + ']', $this);
+        if ($input.length === 0) {
+            return;
+        }
+
+        var defaultValue = $input.data('value');
+        if (defaultValue) {
+            // $input.val(defaultValue);
+        }
+
+        $input.parents('.form-group').hide();
+    });
+
+    $this.on('submit', function() {
+        var submitValue = '';
+
+        $(options.fields).each(function(index, value) {
+            var $input = $('input[name=' + value + ']', $this);
+
+            submitValue += (submitValue === '' ? '' : ',') + $input.val();
+        });
+
+        $('input[name=honeypot-submit]', $this).val(submitValue);
+    });
+};
 
 $.fn.table = function() {
   $(this).on('change', '.check-all', function() {
