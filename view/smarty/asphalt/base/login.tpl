@@ -3,9 +3,9 @@
 {block name="head_title" prepend}{translate key="title.login"} - {/block}
 
 {block name="content"}
-    <div class="grid--bp-med__offset-4 grid--bp-med__4">
+    <div class="grid--bp-med__offset-4 grid--bp-med__4 box login">
         <div class="page-header">
-            <h1>{translate key="title.login"}</h1>
+            <h1 class="heading--alt">{translate key="title.login"}</h1>
         </div>
 
         {$smarty.block.parent}
@@ -16,31 +16,31 @@
             <div class="form__group">
                 {$errors = $form->getValidationErrors('username')}
 
-                <div class="form__item {if $errors} has-error{/if}">
-                    <div class="col-lg-12">
-                        {call formWidget form=$form row="username"}
-                        {call formWidgetErrors form=$form row="username"}
-                    </div>
-                </div>
 
+                {call formRow form=$form row="username"}
                 <div class="form__item {if $errors} has-error{/if}">
                     <div class="col-lg-12">
+                        {$row = $form->getRow('password')}
+                        <label class="form__label" for="form-login-password">{$row->getLabel()}</label>
                         {call formWidget form=$form row="password"}
                         <a href="{url id="profile.password.request"}">{translate key="button.password.reset"}</a>
                     </div>
                 </div>
 
-                {call formActions referer=$referer}
+                <div class="form__actions">
+                    <button type="submit" class="btn btn--brand btn--large">{translate key="button.login"}</button>
+                    {if $urls}
+                        <div class="login__or"><span>Or</span></div>
+                        <ul class="list--unstyled">
+                            {foreach $urls as $service => $url}
+                                <li><a href="{$url}" class="btn">{translate key="button.login.`$service`"}</a></li>
+                            {/foreach}
+                        </ul>
+                    {/if}
+                </div>
             </div>
         </form>
 
-        {if $urls}
-        <ul class="list-unstyled">
-            {foreach $urls as $service => $url}
-            <li><a href="{$url}">{translate key="button.login.`$service`"}</a></li>
-            {/foreach}
-        </ul>
-        {/if}
     </div>
 {/block}
 
