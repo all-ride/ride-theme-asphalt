@@ -23,14 +23,16 @@
                         {$row = $form->getRow('password')}
                         <label class="form__label" for="form-login-password">{$row->getLabel()}</label>
                         {call formWidget form=$form row="password"}
-                        <a href="{url id="profile.password.request"}">{translate key="button.password.reset"}</a>
+                        <div class="form__help">
+                            <a href="{url id="profile.password.request"}">{translate key="button.password.reset"}</a>
+                        </div>
                     </div>
                 </div>
 
                 <div class="form__actions">
                     <button type="submit" class="btn btn--brand btn--large">{translate key="button.login"}</button>
                     {if $urls}
-                        <div class="login__or"><span>Or</span></div>
+                        <div class="login__or"><span>{translate key="label.or"}</span></div>
                         <ul class="list--unstyled">
                             {foreach $urls as $service => $url}
                                 <li><a href="{$url}" class="btn">{translate key="button.login.`$service`"}</a></li>
