@@ -1,33 +1,53 @@
-$.fn.formCollection = function() {
-    $(this).on('click', '.prototype-add:not(.disabled)', function() {
-        var parent = $(this).parent('.collection-controls');
-        var prototype = parent.attr('data-prototype');
-        var index = parent.attr('data-index');
-        if (!index) {
-            index = $('.collection-control', parent).length;
-        }
+var rideApp = rideApp || {};
 
-        prototype = prototype.replace(/%prototype%/g, 'prototype-' + index);
+rideApp.form = (function($, undefined) {
+  var _initialize = function() {
+    formFile();
+    formCollection();
+    sortables();
+  };
 
-        // add prototype to the container
-        $('.collection-control-group', parent).first().append(prototype);
+  var formFile = function() {
+    $(document).on('click', '.btn-file-delete', function(e) {
+      e.preventDefault();
+      var $anchor = $(this);
+      if (confirm($anchor.data('message'))) {
+        $anchor.parents('.form-group').find('input[type=hidden]').val('');
+        $anchor.parent('div').remove();
+      }
+    });
+  };
 
-        // increase the index for the next addition
-        index++;
+  var formCollection = function() {
+    $(document).on('click', '.prototype-add:not(.disabled)', function(e) {
+      e.preventDefault();
+      var parent = $(this).parent('.collection-controls');
+      var prototype = parent.attr('data-prototype');
+      var index = parent.attr('data-index');
+      if (!index) {
+        index = $('.collection-control', parent).length;
+      }
 
-        parent.attr('data-index', index);
+      prototype = prototype.replace(/%prototype%/g, 'prototype-' + index);
 
-        return false;
+      // add prototype to the container
+      $('.collection-control-group', parent).first().append(prototype);
+
+      // increase the index for the next addition
+      index++;
+
+      parent.attr('data-index', index);
     });
 
-    $(this).on('click', '.prototype-remove:not(.disabled)', function() {
-        if (confirm('Are you sure you want to remove this item?')) {
-            $(this).parents('.collection-control').remove();
-        }
-
-        return false;
+    $(document).on('click', '.prototype-remove:not(.disabled)', function(e) {
+      e.preventDefault();
+      if (confirm('Are you sure you want to remove this item?')) {
+        $(this).parents('.collection-control').remove();
+      }
     });
+  };
 
+  var sortables = function() {
     $('[data-order=true] .collection-control-group').sortable({
         axis: "y",
         cursor: "move",
@@ -36,21 +56,12 @@ $.fn.formCollection = function() {
         select: false,
         scroll: true
     });
-};
+  };
 
-$.fn.formFile = function() {
-    $(this).on('click', '.btn-file-delete', function() {
-        var anchor = $(this);
-        if (confirm(anchor.data('message'))) {
-            anchor.parents('.form-group').find('input[type=hidden]').val('');
-            anchor.parent('div').remove();
-        }
+  return {
+    initialize: _initialize
+  };
+})(jQuery);
 
-        return false;
-    });
-};
-
-$(function() {
-    $('form[role=form]').formCollection();
-    $('form[role=form]').formFile();
-});
+// Run the initializer
+rideApp.form.initialize();

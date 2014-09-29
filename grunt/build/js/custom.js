@@ -1,33 +1,53 @@
-$.fn.formCollection = function() {
-    $(this).on('click', '.prototype-add:not(.disabled)', function() {
-        var parent = $(this).parent('.collection-controls');
-        var prototype = parent.attr('data-prototype');
-        var index = parent.attr('data-index');
-        if (!index) {
-            index = $('.collection-control', parent).length;
-        }
+var rideApp = rideApp || {};
 
-        prototype = prototype.replace(/%prototype%/g, 'prototype-' + index);
+rideApp.form = (function($, undefined) {
+  var _initialize = function() {
+    formFile();
+    formCollection();
+    sortables();
+  };
 
-        // add prototype to the container
-        $('.collection-control-group', parent).first().append(prototype);
+  var formFile = function() {
+    $(document).on('click', '.btn-file-delete', function(e) {
+      e.preventDefault();
+      var $anchor = $(this);
+      if (confirm($anchor.data('message'))) {
+        $anchor.parents('.form-group').find('input[type=hidden]').val('');
+        $anchor.parent('div').remove();
+      }
+    });
+  };
 
-        // increase the index for the next addition
-        index++;
+  var formCollection = function() {
+    $(document).on('click', '.prototype-add:not(.disabled)', function(e) {
+      e.preventDefault();
+      var parent = $(this).parent('.collection-controls');
+      var prototype = parent.attr('data-prototype');
+      var index = parent.attr('data-index');
+      if (!index) {
+        index = $('.collection-control', parent).length;
+      }
 
-        parent.attr('data-index', index);
+      prototype = prototype.replace(/%prototype%/g, 'prototype-' + index);
 
-        return false;
+      // add prototype to the container
+      $('.collection-control-group', parent).first().append(prototype);
+
+      // increase the index for the next addition
+      index++;
+
+      parent.attr('data-index', index);
     });
 
-    $(this).on('click', '.prototype-remove:not(.disabled)', function() {
-        if (confirm('Are you sure you want to remove this item?')) {
-            $(this).parents('.collection-control').remove();
-        }
-
-        return false;
+    $(document).on('click', '.prototype-remove:not(.disabled)', function(e) {
+      e.preventDefault();
+      if (confirm('Are you sure you want to remove this item?')) {
+        $(this).parents('.collection-control').remove();
+      }
     });
+  };
 
+  var sortables = function() {
     $('[data-order=true] .collection-control-group').sortable({
         axis: "y",
         cursor: "move",
@@ -36,24 +56,15 @@ $.fn.formCollection = function() {
         select: false,
         scroll: true
     });
-};
+  };
 
-$.fn.formFile = function() {
-    $(this).on('click', '.btn-file-delete', function() {
-        var anchor = $(this);
-        if (confirm(anchor.data('message'))) {
-            anchor.parents('.form-group').find('input[type=hidden]').val('');
-            anchor.parent('div').remove();
-        }
+  return {
+    initialize: _initialize
+  };
+})(jQuery);
 
-        return false;
-    });
-};
-
-$(function() {
-    $('form[role=form]').formCollection();
-    $('form[role=form]').formFile();
-});
+// Run the initializer
+rideApp.form.initialize();
 
 $.fn.honeyPot = function(options) {
     var $this = $(this);
@@ -85,40 +96,63 @@ $.fn.honeyPot = function(options) {
     });
 };
 
-$.fn.table = function() {
-  $(this).on('change', '.check-all', function() {
-    var form = $(this).parents('form.table');
+var rideApp = rideApp || {};
 
-    var checked = this.checked;
-    $(':checkbox', form).each(function(i) {
-      this.checked = checked;
+rideApp.table = (function($, undefined) {
+  var _initialize = function() {
+    var $element = $('form.table'),
+        $form = $element.parents('form.table');
+
+    $element.on('change', '.check-all', function() {
+      checkAll($(this));
     });
-  });
 
-  $(this).on('change', 'select', function() {
+    $element.on('change', 'select', function() {
+      triggerAction($(this));
+    });
+  };
+
+  /**
+   * Check or uncheck all the row checkboxes based on the master checkbox state.
+   * @param  {jQuery Object} $elem    The master checkbox
+   */
+  var checkAll = function($elem) {
+    var $form = $elem.parents('form.table');
+
+    $form.find(':checkbox').prop('checked', $elem.prop('checked'));
+  };
+
+  /**
+   * Trigger a custom action for all the checked items in the tabel
+   * @param  {jQuery Object} $elem    The selectbox
+   */
+  var triggerAction = function($elem) {
     var submit = true;
 
-    if ($(this).attr('name') == 'action') {
-      var form = $(this).parents('form.table');
-      var messages = form.data('confirm-messages');
-      var action = this.options[this.selectedIndex].text;
+    if($elem.attr('name') == 'action') {
+      var $form = $elem.parents('form.table'),
+          messages = $form.data('confirm-messages'),
+          action = $elem.val();
 
       if (messages[action]) {
         submit = confirm(messages[action]);
+      }
+
+      if (submit) {
+        $elem.attr('readonly', true);
+        $form.submit();
       } else {
+        $elem.val('');
       }
     }
+  };
 
-    if (submit) {
-      $(this).attr('readonly', true).parents('form').submit();
-    } else {
-      $(this).val('');
-    }
-  });
 
-  $('td.action a').addClass('btn btn--default');
-};
+  return {
+    initialize: _initialize
+  };
+})(jQuery);
 
-$(function() {
-    $('form.table').table();
-});
+
+// Run the initializer
+rideApp.table.initialize();
