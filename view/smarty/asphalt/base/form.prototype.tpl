@@ -91,7 +91,9 @@
             {/if}
 
             <div class="form__item form__item--{$row->getName()|replace:'[':''|replace:']':''}{if $row->isRequired()} form__item--required{/if}{if $row->isDisabled()} form__item--disabled{/if}{if $row->isReadOnly()} form__item--readonly{/if} clearfix{if $errors} has-error{/if}{if $class} {$class}{/if}">
-                <label class="form__label" for="{$widget->getId()}">{if $type != 'button'}{$row->getLabel()}{/if}</label>
+                {if !empty($row->getLabel()|replace:' ':'')}
+                    <label class="form__label" for="{$widget->getId()}">{if $type != 'button'}{$row->getLabel()}{/if}</label>
+                {/if}
                 <div class="clearfix">
                     {call formWidget form=$form row=$row part=$part}
 
