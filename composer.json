@@ -1,0 +1,26 @@
+{
+    "name": "ride/theme-asphalt",
+    "description": "Asphalt theme for the base web application of the Ride framework",
+    "license": "MIT",
+    "version": "0.1.2",
+    "authors": [
+        {
+            "name": "Joris Vandeweerd",
+            "email": "joris@statik.be"
+        },
+        {
+            "name": "Bart Verbruggen",
+            "email": "bart@statik.be"
+        }
+    ],
+    "require": {
+        "ride/app-template-smarty": ">=0.2.0",
+        "ride/lib-template": ">=0.4.0",
+        "ride/web-template-smarty": ">=0.3.9"
+    },
+    "autoload": {
+        "psr-0": {
+            "ride\\library\\template\\theme\\": ["src/", "test/src/"]
+        }
+    }
+}

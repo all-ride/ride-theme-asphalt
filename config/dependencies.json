@@ -1,0 +1,9 @@
+{
+    "dependencies": [
+        {
+            "interfaces": "ride\\library\\template\\theme\\Theme",
+            "class": "ride\\library\\template\\theme\\AsphaltTheme",
+            "id": "asphalt"
+        }
+    ]
+}
