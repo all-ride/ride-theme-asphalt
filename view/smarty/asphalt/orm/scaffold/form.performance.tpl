@@ -83,7 +83,7 @@
                 </div>
             </div>
 
-            <div class="edit-confirm hide">
+            <div class="edit-confirm superhidden">
                 {call formRow form=$form row="editMode"}
                 {call formRow form=$form row="ignoreEdited"}
             </div>
