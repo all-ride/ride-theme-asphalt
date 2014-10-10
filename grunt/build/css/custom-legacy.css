@@ -51,7 +51,7 @@
   background: #ccc;
 }
 
-.sortables .ui-sortable-placeholder {
+.ui-sortable-placeholder {
   background: #faf5e6;
   border: 1px dotted #b4a98b;
   visibility: visible !important;
