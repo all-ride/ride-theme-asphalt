@@ -80,7 +80,7 @@ $.fn.honeyPot = function(options) {
             // $input.val(defaultValue);
         }
 
-        $input.parents('.form-group').hide();
+        $input.parents('.form__item').hide();
     });
 
     $this.on('submit', function() {
@@ -93,6 +93,33 @@ $.fn.honeyPot = function(options) {
         });
 
         $('input[name=honeypot-submit]', $this).val(submitValue);
+    });
+};
+
+
+var rideApp = rideApp || {};
+
+function findAncestor(el, cls) {
+    while ((el = el.parentElement) && !el.classList.contains(cls));
+    return el;
+}
+
+rideApp.honeyPot = function(form, options) {
+    [].prototype.forEach.call(options.fields, function(field) {
+        var input = form.querySelector('input[name=' + value + ']'),
+            defaultValue,
+            group;
+        if (input.length === 0) {
+            return;
+        }
+
+        defaultValue = input.dataset.value;
+        if (defaultValue) {
+            input.value = defaultValue;
+        }
+
+        group = findAncestor(input, 'form__item');
+        group.style.display = 'none';
     });
 };
 

@@ -3,16 +3,6 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
-        // CONCAT FILES
-        concat: {
-            main: {
-                src: [
-                    'js/*.js'  // The big custom file!
-                ],
-                dest: 'build/js/custom.js'
-            }
-        },
-
         // UGLIFY FILES
         uglify: {
             main: {
@@ -114,7 +104,7 @@ module.exports = function(grunt) {
 
     // Where we tell Grunt what to do when we type "grunt" into the terminal.
     grunt.registerTask('default', ['build', 'watch']);
-    grunt.registerTask('js', ['jshint', 'concat', 'uglify']);
+    grunt.registerTask('js', ['jshint', 'uglify']);
     grunt.registerTask('css', ['sass', 'autoprefixer', 'legacssy', 'cssmin']);
     grunt.registerTask('build', ['css', 'js']);
 };
