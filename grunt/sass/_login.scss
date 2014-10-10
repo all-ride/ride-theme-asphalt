@@ -1,0 +1,33 @@
+.login {
+  h1 {
+    padding-bottom: 10px;
+    border-bottom: 1px solid  #eee;
+    margin-bottom: 20px;
+  }
+  .form__actions {
+    text-align: center;
+  }
+}
+
+.login__or {
+  position: relative;
+  margin: 10px 0;
+  text-transform: uppercase;
+  font-weight: bold;
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: 0;
+    border-top: 1px solid #ccc;
+  }
+  span {
+    display: inline-block;
+    padding: 10px;
+    background: #fff;
+    position: relative;
+    z-index: 1;
+  }
+}

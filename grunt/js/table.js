@@ -1,37 +1,60 @@
-$.fn.table = function() {
-  $(this).on('change', '.check-all', function() {
-    var form = $(this).parents('form.table');
+var rideApp = rideApp || {};
 
-    var checked = this.checked;
-    $(':checkbox', form).each(function(i) {
-      this.checked = checked;
+rideApp.table = (function($, undefined) {
+  var _initialize = function() {
+    var $element = $('form.table'),
+        $form = $element.parents('form.table');
+
+    $element.on('change', '.check-all', function() {
+      checkAll($(this));
     });
-  });
 
-  $(this).on('change', 'select', function() {
+    $element.on('change', 'select', function() {
+      triggerAction($(this));
+    });
+  };
+
+  /**
+   * Check or uncheck all the row checkboxes based on the master checkbox state.
+   * @param  {jQuery Object} $elem    The master checkbox
+   */
+  var checkAll = function($elem) {
+    var $form = $elem.parents('form.table');
+
+    $form.find(':checkbox').prop('checked', $elem.prop('checked'));
+  };
+
+  /**
+   * Trigger a custom action for all the checked items in the tabel
+   * @param  {jQuery Object} $elem    The selectbox
+   */
+  var triggerAction = function($elem) {
     var submit = true;
 
-    if ($(this).attr('name') == 'action') {
-      var form = $(this).parents('form.table');
-      var messages = form.data('confirm-messages');
-      var action = this.options[this.selectedIndex].text;
+    if($elem.attr('name') == 'action') {
+      var $form = $elem.parents('form.table'),
+          messages = $form.data('confirm-messages'),
+          action = $elem.val();
 
       if (messages[action]) {
         submit = confirm(messages[action]);
+      }
+
+      if (submit) {
+        $elem.attr('readonly', true);
+        $form.submit();
       } else {
+        $elem.val('');
       }
     }
+  };
 
-    if (submit) {
-      $(this).attr('readonly', true).parents('form').submit();
-    } else {
-      $(this).val('');
-    }
-  });
 
-  $('td.action a').addClass('btn btn-default');
-};
+  return {
+    initialize: _initialize
+  };
+})(jQuery);
 
-$(function() {
-    $('form.table').table();
-});
+
+// Run the initializer
+rideApp.table.initialize();

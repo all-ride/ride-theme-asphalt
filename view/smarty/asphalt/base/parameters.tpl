@@ -24,7 +24,7 @@
             <div class="form__group">
                 <div class="col-lg-offset-2 col-lg-10">
                     <input type="submit" class="btn btn--default" value="{translate key="button.submit"}" />
-                    <a class="btn" href="{url id="system.parameters"}">{translate key="button.cancel"}</a>
+                    <a class="btn btn--link" href="{url id="system.parameters"}">{translate key="button.cancel"}</a>
                 </div>
             </div>
         </div>

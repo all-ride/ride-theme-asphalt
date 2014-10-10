@@ -47,7 +47,6 @@
             {block name="table.content"}
                 {$table->getHtml()}
             {/block}
-
             {if $table->hasActions() || $table->hasPaginationOptions()}
                 <div class="grid">
                     <div class="options grid--bp-med__3">

@@ -54,11 +54,12 @@
         {elseif $type == 'collection'}
             {$errors = $form->getValidationErrors($row->getName())}
 
-            <div class="form__group grid row-{$row->getName()|replace:'[':''|replace:']':''}{if $row->isRequired()} required{/if}{if $row->isDisabled()} disabled{/if}{if $row->isReadOnly()} readonly{/if} clearfix{if $errors} has-error{/if}{if $class} {$class}{/if}"{if $row->getOption('order')} data-order="true"{/if}>
-                <label class="grid--bp-med__2 form__label">{$row->getLabel()}</label>
+            <div class="form__group row-{$row->getName()|replace:'[':''|replace:']':''}{if $row->isRequired()} required{/if}{if $row->isDisabled()} disabled{/if}{if $row->isReadOnly()} readonly{/if} clearfix{if $errors} has-error{/if}{if $class} {$class}{/if}"{if $row->getOption('order')} data-order="true"{/if}>
+                <h2 class="heading--4">{$row->getLabel()}</h2>
 
                 {call formCollectionPrototype assign="prototype" form=$form row=$row part='%prototype%'}
-                <div class="grid--bp-med__10 collection-controls" data-prototype="{$prototype|escape:"html"|trim|replace:"\n":''}">
+
+                <div class="collection-controls form__collection" data-prototype="{$prototype|escape:"html"|trim|replace:"\n":''}">
                     {call formWidgetCollection form=$form row=$row part=$part}
 
                    {if $errors}
@@ -71,7 +72,7 @@
 
                     {$description = $row->getDescription()}
                     {if $description}
-                    <div class="form__help">{$description}</div>
+                        <div class="form__help">{$description}</div>
                     {/if}
                 </div>
             </div>
@@ -747,7 +748,7 @@
         {$form = $block_form}
     {/if}
 
-    <div class="collection-control-group">
+    <div class="collection-control-group sortables">
         {$widget = $row->getWidget()}
         {if $widget}
             {$values = $widget->getValue()}
@@ -764,7 +765,7 @@
         {/if}
     </div>
 
-    <a href="#" class="btn btn--brand prototype-add{if $row->isDisabled() || $row->isReadOnly()} disabled{/if}"><i class="glyphicon glyphicon-plus"></i> {translate key="button.add"}</a>
+    <a href="#" class="btn btn--brand prototype-add{if $row->isDisabled() || $row->isReadOnly()} disabled{/if}"><i class="icon icon--plus"></i> {translate key="button.add"}</a>
 {/function}
 
 {*
@@ -775,9 +776,9 @@
         {$row = $form->getRow($row)}
     {/if}
 
-    <div class="collection-control clearfix">
-        <div class="order-handle"><i class="icon icon--bars"></i></div>
-        <div class="grid grid--vr-m">
+    <div class="collection-control sortable clearfix">
+        <div class="order-handle sortable__handle"><i class="icon icon--bars"></i></div>
+        <div class="grid">
             <div class="grid--bp-med__10">
             {$widget = $row->getWidget()}
             {if $widget}
@@ -787,10 +788,9 @@
             {/if}
             </div>
             <div class="grid--bp-med__2">
-                <a href="#" class="btn btn--default prototype-remove{if $row->isDisabled() || $row->isReadOnly()} disabled{/if}"><i class="glyphicon glyphicon-minus"></i> {translate key="button.remove"}</a>
+                <a href="#" class="btn btn--default prototype-remove{if $row->isDisabled() || $row->isReadOnly()} disabled{/if}"><i class="icon icon--minus"></i> {translate key="button.remove"}</a>
             </div>
         </div>
-        <hr />
     </div>
 {/function}
 

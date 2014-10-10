@@ -14,3 +14,22 @@
   padding: 5px;
   text-align: right;
 }
+
+.form__item--layout {
+  .form__label--checkbox {
+    padding-left: 0;
+    text-align: center;
+    display: block;
+    cursor: pointer;
+  }
+  .form__radio {
+    visibility: hidden;
+  }
+  img {
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  input:checked + img {
+    background: #ccc;
+  }
+}

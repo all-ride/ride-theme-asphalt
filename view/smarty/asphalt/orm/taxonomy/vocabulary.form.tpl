@@ -17,7 +17,7 @@
                 <div class="grid--bp-med__offset-2 grid--bp-med__10">
                     <input type="submit" class="btn btn--default" value="{translate key="button.save"}" />
                     {if $referer}
-                        <a class="btn" href="{$referer}">{translate key="button.cancel"}</a>
+                        <a class="btn btn--link" href="{$referer}">{translate key="button.cancel"}</a>
                     {/if}
                 </div>
             </div>
