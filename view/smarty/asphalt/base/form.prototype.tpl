@@ -94,7 +94,7 @@
                 {if ($row->getLabel()|replace:' ':'')}
                     <label class="form__label" for="{$widget->getId()}">{if $type != 'button'}{$row->getLabel()}{/if}</label>
                 {/if}
-                <div class="clearfix">
+                {* <div class="clearfix"> *}
                     {call formWidget form=$form row=$row part=$part}
 
                     {if $errors}
@@ -121,7 +121,7 @@
                     {elseif $type == 'select' && $widget->isMultiple()}
                         <div class="form__help">{translate key="label.multiselect"}</div>
                     {/if}
-                </div>
+                {* </div> *}
             </div>
         {/if}
 
@@ -659,12 +659,14 @@
                name="{$widget->getName()}{if $part !== null}[{$part}]{/if}"
                value="{$value}" />
         {/if}
-        <input type="file"
-               name="{$widget->getName()}{if $part !== null}[{$part}]{/if}"
-           {foreach $attributes as $name => $attribute}
-               {$name}="{$attribute|escape}"
-           {/foreach}
-         />
+        <div>
+            <input type="file"
+                   name="{$widget->getName()}{if $part !== null}[{$part}]{/if}"
+               {foreach $attributes as $name => $attribute}
+                   {$name}="{$attribute|escape}"
+               {/foreach}
+             />
+         </div>
 
         {if $value}
         <div class="form__help">
@@ -697,12 +699,14 @@
                name="{$widget->getName()}{if $part !== null}[{$part}]{/if}"
                value="{$value}" />
         {/if}
-        <input type="file"
-               name="{$widget->getName()}{if $part !== null}[{$part}]{/if}"
-           {foreach $attributes as $name => $attribute}
-               {$name}="{$attribute|escape}"
-           {/foreach}
-         />
+        <div>
+            <input type="file"
+                   name="{$widget->getName()}{if $part !== null}[{$part}]{/if}"
+               {foreach $attributes as $name => $attribute}
+                   {$name}="{$attribute|escape}"
+               {/foreach}
+             />
+         </div>
 
         {if $value}
         <div class="form__help">
