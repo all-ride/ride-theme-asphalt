@@ -12,6 +12,13 @@ rideApp.table = (function($, undefined) {
     $element.on('change', 'select', function() {
       triggerAction($(this));
     });
+
+    $('td.action a').addClass('btn btn-default');
+
+    $("tr.disabled").css({ opacity: 0.5 });
+    $('tr.disabled a').contents().unwrap();
+    $('tr.disabled input[type=checkbox]').attr('disabled', 'disabled');
+
   };
 
   /**
@@ -29,23 +36,23 @@ rideApp.table = (function($, undefined) {
    * @param  {jQuery Object} $elem    The selectbox
    */
   var triggerAction = function($elem) {
-    var submit = true;
+    var submit = true,
+        $form = $elem.parents('form.table');
 
     if($elem.attr('name') == 'action') {
-      var $form = $elem.parents('form.table'),
-          messages = $form.data('confirm-messages'),
+      var messages = $form.data('confirm-messages'),
           action = $elem.val();
 
       if (messages[action]) {
         submit = confirm(messages[action]);
       }
+    }
 
-      if (submit) {
-        $elem.attr('readonly', true);
-        $form.submit();
-      } else {
-        $elem.val('');
-      }
+    if (submit) {
+      $elem.attr('readonly', true);
+      $form.submit();
+    } else {
+      $elem.val('');
     }
   };
 
