@@ -10,7 +10,7 @@ module.exports = function(grunt) {
                   expand: true,
                   cwd: 'js',
                   src: '**/*.js',
-                  dest: '../public/js'
+                  dest: '../public/asphalt/js'
               }]
             }
         },
@@ -57,7 +57,7 @@ module.exports = function(grunt) {
                 expand: true,
                 cwd: 'build/css/',
                 src: ['*.css', '!*.min.css'],
-                dest: '../public/css/',
+                dest: '../public/asphalt/css/',
                 ext: '.min.css'
             }
         },

@@ -53,6 +53,6 @@
 {/block}
 
 {block name="scripts" append}
-    <script src="{$app.url.base}/js/jquery-ui.js"></script>
-    <script src="{$app.url.base}/js/locales.js"></script>
+    <script src="{$app.url.base}/asphalt/js/jquery-ui.js"></script>
+    <script src="{$app.url.base}/asphalt/js/locales.js"></script>
 {/block}

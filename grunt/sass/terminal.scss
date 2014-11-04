@@ -1,0 +1,67 @@
+#form-terminal {
+    display: block;
+    height: 400px;
+    width: 100%;
+    background-color: #000;
+    color: #EEE;
+    padding: 5px;
+}
+
+#form-terminal-command:focus,
+#form-terminal-command {
+    background-color: #000;
+    border: 0;
+    box-shadow: none;
+    color: #EEE;
+    display: inline;
+    line-height: 0;
+    font-family: monospace;
+    font-size: 13px;
+    padding: 0 0 0 4px;
+    margin: 0;
+    height: 13px;
+    outline: 0;
+    width: 300px;
+}
+
+#form-terminal span {
+    display: inline;
+}
+
+#form-terminal div.result {
+    max-height: 380px;
+    padding: 0;
+    margin: 0;
+    overflow: auto;
+}
+
+#form-terminal pre {
+    background: none;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    color: #EEE;
+}
+
+#form-terminal pre.result {
+    line-height: 130%;
+    white-space: pre-wrap; /* css-3 */
+    white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+    white-space: -pre-wrap; /* Opera 4-6 */
+    white-space: -o-pre-wrap; /* Opera 7 */
+    word-wrap: break-word; /* Internet Explorer 5.5+ */
+}
+
+#form-terminal pre.bash {
+    display: inline;
+}
+
+#form-terminal span.path {
+    font-size: 100%;
+    color: #0F3;
+}
+
+#form-terminal .error {
+    color: #F00;
+    font-size: 1em;
+}

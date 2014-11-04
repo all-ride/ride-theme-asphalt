@@ -9,10 +9,10 @@
                 <meta http-equiv="X-UA-Compatible" content="IE=edge">
                 <title>{block name="head_title"}{if isset($app.taskbar)}{$app.taskbar->getTitle()}{/if}{/block}</title>
             {block name="styles"}
-                <!--[if gt IE 8]><!--><link rel="stylesheet" href="{$app.url.base}/buckleup/css/main.min.css"> <!--<![endif]-->
-                <!--[if lt IE 9]><link rel="stylesheet" href="{$app.url.base}/buckleup/css/main-legacy.min.css"><![endif]-->
-                <!--[if gt IE 8]><!--><link rel="stylesheet" href="{$app.url.base}/css/custom.min.css"> <!--<![endif]-->
-                <!--[if lt IE 9]><link rel="stylesheet" href="{$app.url.base}/buckleup/css/custom-legacy.min.css"><![endif]-->
+                <!--[if gt IE 8]><!--><link rel="stylesheet" href="{$app.url.base}/asphalt/buckleup/css/main.min.css"> <!--<![endif]-->
+                <!--[if lt IE 9]><link rel="stylesheet" href="{$app.url.base}/asphalt/buckleup/css/main-legacy.min.css"><![endif]-->
+                <!--[if gt IE 8]><!--><link rel="stylesheet" href="{$app.url.base}/asphalt/css/custom.min.css"> <!--<![endif]-->
+                <!--[if lt IE 9]><link rel="stylesheet" href="{$app.url.base}/asphalt/buckleup/css/custom-legacy.min.css"><![endif]-->
             {/block}
 
             {block name="styles_app"}
@@ -21,15 +21,15 @@
                         {if substr($style, 0, 7) == 'http://' || substr(style, 0, 8) == 'https://' || substr($style, 0, 2) == '//'}
                             <link href="{$style}" rel="stylesheet" media="screen">
                         {else}
-                            <link href="{$app.url.base}/{$style}" rel="stylesheet" media="screen">
+                            <link href="{$app.url.base}/asphalt/{$style}" rel="stylesheet" media="screen">
                         {/if}
                     {/foreach}
                 {/if}
             {/block}
 
             {block name="head_scripts"}
-                <script type="text/javascript" src="{$app.url.base}/buckleup/js/modernizr.custom.min.js"></script>
-                <!--[if lt IE 9]><script type="text/javascript" src="{$app.url.base}/buckleup/js/polyfill.min.js"></script><![endif]-->
+                <script type="text/javascript" src="{$app.url.base}/asphalt/buckleup/js/modernizr.custom.min.js"></script>
+                <!--[if lt IE 9]><script type="text/javascript" src="{$app.url.base}/asphalt/buckleup/js/polyfill.min.js"></script><![endif]-->
                 {literal}
                 <script type="text/javascript">
                     WebFontConfig = {
@@ -90,7 +90,7 @@
         </div>
     {/block}
     {block name="scripts"}
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="{$app.url.base}/asphalt/js/jquery.min.js"></script>
         <script type="text/javascript">
           window.app = window.app || {};
           app.variables = {
@@ -110,7 +110,7 @@
             }
           };
         </script>
-        <script type="text/javascript" src="{$app.url.base}/buckleup/js/main.min.js"></script>
+        <script type="text/javascript" src="{$app.url.base}/asphalt/buckleup/js/main.min.js"></script>
     {/block}
     {block name="scripts_app"}
     {if isset($app.javascripts)}
@@ -120,7 +120,7 @@
             {elseif substr($script, 0, 7) == '<script'}
         {$script}
             {else}
-        <script src="{$app.url.base}/{$script}"></script>
+        <script src="{$app.url.base}/asphalt/{$script}"></script>
             {/if}
         {/foreach}
     {/if}

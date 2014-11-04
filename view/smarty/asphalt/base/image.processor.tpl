@@ -33,11 +33,11 @@
 {/block}
 
 {block name="styles" append}
-    <link rel="stylesheet" type="text/css" href="{$app.url.base}/css/imgareaselect-animated.css">
+    <link rel="stylesheet" type="text/css" href="{$app.url.base}/asphalt/css/imgareaselect-animated.css">
 {/block}
 
 {block name="scripts" append}
-    <script src="{$app.url.base}/js/jquery.imgareaselect.pack.js"></script>
+    <script src="{$app.url.base}/asphalt/js/jquery.imgareaselect.pack.js"></script>
     <script type="text/javascript">
         var image = $('#image-input');
 
