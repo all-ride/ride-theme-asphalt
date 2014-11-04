@@ -1,0 +1,1 @@
+$(".role a").click(function(){return $(this).next().toggle(),!1}).next().hide();

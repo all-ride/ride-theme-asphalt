@@ -1,0 +1,19 @@
+#form-event-performance .row-until input,
+#form-event-performance select,
+#form-event-performance .date {
+    display: inline;
+    width: auto;
+}
+
+#form-event-performance .row-until input[name=occurences],
+#form-event-performance .time {
+    display: inline;
+    width: 70px;
+}
+
+#form-event-performance .row-weekly .checkbox,
+#form-event-performance .row-weekly .checkbox input,
+#form-event-performance .row-weekly .checkbox label {
+    display: inline;
+    float: none;
+}
