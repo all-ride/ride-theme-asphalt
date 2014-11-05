@@ -1,7 +1,5 @@
 ride = function() {
-
     terminal = function() {
-
         var scrollOffset = 15;
         var scrollOutputHeight = 380;
 
@@ -28,14 +26,14 @@ ride = function() {
                 'data': data,
                 'dataType': 'json',
                 'success': function(data) {
-                    var resultContainer = $("#form-terminal div.result");
-                    var scrollPosition = resultContainer.scrollTop();
-                    var scrollHeight = resultContainer[0].scrollHeight;
+                    var resultContainer = $('#form-terminal div.result'),
+                        scrollPosition = resultContainer.scrollTop(),
+                        scrollHeight = resultContainer[0].scrollHeight,
+                        result = $('#form-terminal pre.result'),
+                        path = $('#form-terminal pre.bash span.path'),
+                        previousResult = result.html(),
+                        output;
 
-                    var result = $('#form-terminal pre.result');
-                    var path = $('#form-terminal pre.bash span.path');
-
-                    var previousResult = result.html();
                     if (previousResult) {
                         previousResult += "\n";
                     } else {
@@ -45,12 +43,12 @@ ride = function() {
 
                     if (data.output) {
                         if (data.error) {
-                            var output = "\n<span class=\"error\">" + data.output + "</span>";
+                            output = "\n<span class=\"error\">" + data.output + "</span>";
                         } else {
-                            var output = "\n" + data.output;
+                            output = "\n" + data.output;
                         }
                     } else {
-                        var output = '';
+                        output = '';
                     }
 
                     result.html(previousResult + '<span class="path">' + path.html() + '</span> $ ' + data.command + output);
@@ -79,12 +77,12 @@ ride = function() {
             init: init,
             focus: focus,
             submit: submitForm
-        }
+        };
 
     }();
 
     return {
         terminal: terminal
-    }
+    };
 
 }();

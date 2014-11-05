@@ -3,6 +3,15 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
+        // JSHINT
+        jshint: {
+            options: {
+                reporter: require('jshint-stylish'),
+                ignores: ['js/jquery.js', 'js/jquery-ui.js', 'js/jquery.imgareaselect.pack.js']
+            },
+            target: ['js/*.js']
+        },
+
         // UGLIFY FILES
         uglify: {
             main: {
@@ -13,14 +22,6 @@ module.exports = function(grunt) {
                   dest: '../public/asphalt/js'
               }]
             }
-        },
-
-        // JSHINT
-        jshint: {
-            options: {
-                reporter: require('jshint-stylish')
-            },
-            target: ['js/*.js']
         },
 
         // SASS
