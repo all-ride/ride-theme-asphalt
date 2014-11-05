@@ -16,6 +16,7 @@
     "label.locales.information": "You can use drag and drop to change the priority of the languages.",
     "label.name.native": "Native name",
     "label.options": "Options",
+    "label.or": "Or",
     "label.table.order": "Order by",
     "label.table.confirm.delete": "Are you sure you want to delete the selected items?",
     "label.table.export": "Export to",
