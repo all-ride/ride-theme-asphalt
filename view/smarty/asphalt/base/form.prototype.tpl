@@ -803,9 +803,9 @@
 {*
     Renders the form actions, if a referer is passed, a cancel button will be presented
 *}
-{function name="formActions" referer=null}
+{function name="formActions" referer=null submit="button.save"}
     <div class="form__actions">
-        <button type="submit" class="btn btn--default">{translate key="button.save"}</button>
+        <button type="submit" class="btn btn--default">{translate key=$submit}</button>
         {if $referer}
             <a href="{$referer}" class="btn btn--link">{translate key="button.cancel"}</a>
         {/if}
