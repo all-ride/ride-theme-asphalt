@@ -13,7 +13,11 @@
 
     <form id="{$form->getId()}" class="form-horizontal" action="{$app.url.request}" method="POST" role="form">
         <div class="form__group">
-            {call formRow form=$form row="user"}
+            <div class="grid">
+                <div class="grid__12 grid--bp-sml__8">
+                    {call formRows form=$form}
+                </div>
+            </div>
 
             {call formActions referer=$referer}
         </div>
