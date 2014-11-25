@@ -26,7 +26,7 @@
                     <a class="btn btn--link" href="{$referer}">{translate key="button.cancel"}</a>
                 </div>
             </div>
-        </fieldset>
+        </div>
     </form>
 {/block}
 

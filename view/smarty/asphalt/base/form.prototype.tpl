@@ -339,7 +339,7 @@
             {$attributes.class = 'form__text'}
         {/if}
 
-        <input type="text" inputmode ="number"
+        <input type="text" inputmode="number"
                name="{$widget->getName()}{if $part}[{$part}]{/if}"
                value="{$widget->getValue($part)|escape}"
            {foreach $attributes as $name => $attribute}
@@ -565,6 +565,7 @@
              {/if}
         {else}
             {if is_array($options)}
+                <div>
                 {foreach $options as $option => $label}
                     <div class="form__{$type}-item">
                         <label class="form__label form__label--checkbox">
@@ -583,6 +584,7 @@
                         </label>
                     </div>
                 {/foreach}
+                </div>
             {else}
                 <div class="form__checkbox-type">
                     <label class="form__label form__label--checkbox{if isset($attributes.disabled)} form__label--muted{/if}">
