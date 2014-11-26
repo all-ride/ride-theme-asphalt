@@ -25,8 +25,8 @@
         {$method = "POST"}
     {/if}
     <li>
-        <form action="{$url}" class="navbar-form" role="search" method="{$method}">
-            <input type="text" name="query" class="form-control" placeholder="{translate key="label.search"}" value="{$query|escape}" />
+        <form action="{$url}" class="navbar__form" role="search" method="{$method}">
+            <input type="text" name="query" class="form__text" placeholder="{translate key="label.search"}" value="{$query|escape}" />
         </form>
     </li>
 {/function}
