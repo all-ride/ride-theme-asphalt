@@ -771,7 +771,9 @@
         {/if}
     </div>
 
+    {if !$row->getOption('disable_add')}
     <a href="#" class="btn btn--brand prototype-add{if $row->isDisabled() || $row->isReadOnly()} disabled{/if}"><i class="icon icon--plus"></i> {translate key="button.add"}</a>
+    {/if}
 {/function}
 
 {*
@@ -793,9 +795,11 @@
                 {call formRow form=$form row=$row->getRow($part)}
             {/if}
             </div>
+            {if !$row->getOption('disable_remove')}
             <div class="grid--bp-med__2">
                 <a href="#" class="btn btn--default prototype-remove{if $row->isDisabled() || $row->isReadOnly()} disabled{/if}"><i class="icon icon--minus"></i> {translate key="button.remove"}</a>
             </div>
+            {/if}
         </div>
     </div>
 {/function}
