@@ -26,5 +26,5 @@
 {/block}
 
 {block name="scripts" append}
-    <script src="{$app.url.base}/js/form.js"></script>
+    <script src="{$app.url.base}/asphalt/js/form.js"></script>
 {/block}
