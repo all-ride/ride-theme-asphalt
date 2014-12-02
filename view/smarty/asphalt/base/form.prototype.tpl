@@ -244,11 +244,12 @@
             {$attributes.class = 'form__label'}
         {/if}
 
+        {$value = $widget->getValue($part)}
         <p
            {foreach $attributes as $name => $attribute}
                {$name}="{$attribute|escape}"
            {/foreach}
-         >{$widget->getValue($part)|escape}</p>
+         >{if $row->getOption('html')}{$value}{else}{$value|escape}{/if}</p>
     {/if}
 {/function}
 
