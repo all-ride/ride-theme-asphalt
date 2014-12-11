@@ -22,7 +22,7 @@
                 {call formRows form=$form}
 
                 <div class="form__actions">
-                    <input type="submit" class="btn btn--default" value="{translate key="button.save"}" />
+                    <input type="submit" class="btn btn--default" value="{translate key="button.save"}"{if !$isWritable} disabled="disabled"{/if} />
                     <a class="btn btn--link" href="{$referer}">{translate key="button.cancel"}</a>
                 </div>
             </div>

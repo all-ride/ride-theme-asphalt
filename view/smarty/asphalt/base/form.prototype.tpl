@@ -1,3 +1,4 @@
+
 {*
     Prototype functions for the form rendering
 
@@ -57,6 +58,11 @@
             <div class="form__group row-{$row->getName()|replace:'[':''|replace:']':''}{if $row->isRequired()} required{/if}{if $row->isDisabled()} disabled{/if}{if $row->isReadOnly()} readonly{/if} clearfix{if $errors} has-error{/if}{if $class} {$class}{/if}"{if $row->getOption('order')} data-order="true"{/if}>
                 <h2 class="heading--4">{$row->getLabel()}</h2>
 
+                {$description = $row->getDescription()}
+                {if $description}
+                    <p class="form__help">{$description}</p>
+                {/if}
+
                 {call formCollectionPrototype assign="prototype" form=$form row=$row part='%prototype%'}
 
                 <div class="collection-controls form__collection" data-prototype="{$prototype|escape:"html"|trim|replace:"\n":''}">
@@ -68,11 +74,6 @@
                             <li>{$error}</li>
                         {/foreach}
                         </ul>
-                    {/if}
-
-                    {$description = $row->getDescription()}
-                    {if $description}
-                        <div class="form__help">{$description}</div>
                     {/if}
                 </div>
             </div>
@@ -244,11 +245,12 @@
             {$attributes.class = 'form__label'}
         {/if}
 
+        {$value = $widget->getValue($part)}
         <p
            {foreach $attributes as $name => $attribute}
                {$name}="{$attribute|escape}"
            {/foreach}
-         >{$widget->getValue($part)|escape}</p>
+         >{if $row->getOption('html')}{$value}{else}{$value|escape}{/if}</p>
     {/if}
 {/function}
 
