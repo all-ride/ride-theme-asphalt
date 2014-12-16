@@ -35,6 +35,12 @@
   }
 }
 
+table[data-order] td.sortable__handle {
+  width: 35px;
+  padding-left: 15px;
+  background-position: left 10px;
+}
+
 // .collection-control {
 //   [data-order] & {
 //     position: relative;

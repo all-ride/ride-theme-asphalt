@@ -19,6 +19,29 @@
         <div class="form__group grid">
 
             <div class="grid--bp-med__8">
+
+                {if $tabs}
+                <div class="tabbable">
+                    <ul class="tabs">
+                    {foreach $tabs as $tabName => $tab}
+                        <li class="tabs__tab{if $tabName == $activeTab} active{/if}">
+                            <a href="#tab{$tabName}" data-toggle="tab">{translate key=$tab.translation}</a>
+                        </li>
+                    {/foreach}
+                    </ul>
+                    <div class="tabs__content">
+                    {foreach $tabs as $tabName => $tab}
+                        <div id="tab{$tabName}" class="tabs__pane {if $tabName == $activeTab} active{/if}">
+                        {foreach $tab.rows as $row}
+                            {call formRow form=$form row=$row}
+                        {/foreach}
+                        </div>
+                    {/foreach}
+                    </div>
+                </div>
+                {/if}
+
+
                 {call formRows form=$form}
 
                 <div class="form__actions">
