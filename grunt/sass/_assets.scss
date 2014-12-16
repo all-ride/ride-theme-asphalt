@@ -1,0 +1,59 @@
+.btn-group,
+.form-filter select {
+    display: inline;
+    width: auto;
+}
+
+.btn-group {
+    float: left;
+    margin-right: 20px;
+}
+
+.form-filter {
+    float: left;
+}
+
+.actions {
+    margin-bottom: 20px;
+}
+
+.assets-list .asset-actions {
+    padding-left: 15px;
+}
+
+.assets-grid .asset-actions {
+    padding-left: 18px;
+}
+
+.assets .asset-actions input {
+    margin-right: 12px;
+}
+
+.assets-grid [data-type=folder] .image {
+    padding-top: 11%;
+    padding-bottom: 11%;
+}
+
+.assets-grid .order-item {
+    /* margin: 5px; */
+    margin-bottom: 25px;
+}
+
+.assets-grid .order-handle {
+    margin-left: 18px;
+    padding-left: 15px;
+    background-position: 2px 2px;
+}
+
+.assets-grid .name {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    height: 50px;
+    min-height: 50px;
+    overflow: hidden;
+    padding: 7px 15px 5px 53px;
+}

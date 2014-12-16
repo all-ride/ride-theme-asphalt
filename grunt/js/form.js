@@ -5,6 +5,12 @@ rideApp.form = (function($, undefined) {
     formFile();
     formCollection();
     sortables();
+
+    $('[data-toggle-dependant]').on('change', function() {
+        toggleDependantRows($(this));
+    }).filter(':checked').each(function() {
+        toggleDependantRows($(this));
+    });
   };
 
   var formFile = function() {
@@ -56,6 +62,14 @@ rideApp.form = (function($, undefined) {
         select: false,
         scroll: true
     });
+  };
+
+  var toggleDependantRows = function($input) {
+      var $parent = $input.parents('form');
+      var $styleClass = $input.data('toggle-dependant');
+
+      $('.' + $styleClass, $parent).parents('.form__group').hide();
+      $('.' + $styleClass + '-' + $input.val(), $parent).parents('.form__group').show();
   };
 
   return {
