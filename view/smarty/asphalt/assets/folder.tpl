@@ -6,7 +6,7 @@
     {if $folder->getId()}
         {url id="assets.folder.edit" parameters=["locale" => "%locale%", "folder" => $folder->getId()] var="url"}
     {else}
-        {url id="assets.add.add" parameters=["locale" => "%locale%"] var="url"}
+        {url id="assets.asset.add" parameters=["locale" => "%locale%"] var="url"}
     {/if}
 
     {call taskbarPanelLocales url=$url locale=$locale locales=$locales}
