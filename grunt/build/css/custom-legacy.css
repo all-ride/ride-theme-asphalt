@@ -504,6 +504,7 @@ input.tagmanager {
 }
 
 .assets-grid .order-item {
+  position: relative;
   margin-bottom: 25px;
 }
 

@@ -36,6 +36,7 @@
 
 .assets-grid .order-item {
     /* margin: 5px; */
+    position: relative;
     margin-bottom: 25px;
 }
 
@@ -51,7 +52,7 @@
     bottom: 0;
 
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(255, 255, 255, .95);
     height: 50px;
     min-height: 50px;
     overflow: hidden;
