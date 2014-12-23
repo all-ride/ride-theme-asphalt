@@ -33,3 +33,10 @@
     background: #ccc;
   }
 }
+
+.text--right,
+.options {
+  .form__select {
+    display: inline-block;
+  }
+}
