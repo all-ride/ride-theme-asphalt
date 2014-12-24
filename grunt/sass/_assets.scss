@@ -21,17 +21,30 @@
     padding-left: 15px;
 }
 
-.assets-grid .asset-actions {
-    padding-left: 18px;
+.assets-grid a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
 }
-
-.assets .asset-actions input {
-    margin-right: 12px;
+.assets-grid .checkbox {
+    display: block;
+    padding: 1px 5px 3px;
+    background: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid #efefef;
+}
+.assets-grid .icon {
+    color: #fff;
 }
 
 .assets-grid [data-type=folder] .image {
-    padding-top: 11%;
+    padding-top: 6%;
     padding-bottom: 11%;
+}
+.assets-grid .image a {
+    display: block;
 }
 
 .assets-grid .order-item {
@@ -41,20 +54,18 @@
 }
 
 .assets-grid .order-handle {
-    margin-left: 18px;
-    padding-left: 15px;
-    background-position: 2px 2px;
+    cursor: move;
 }
 
 .assets-grid .name {
     position: absolute;
-    left: 0;
+    right: 10px;
     bottom: 0;
-
-    width: 100%;
-    background-color: rgba(255, 255, 255, .95);
-    height: 50px;
-    min-height: 50px;
+    left: 10px;
+    background-color: rgba(0,0,0, .5);
     overflow: hidden;
-    padding: 7px 15px 5px 53px;
+    padding: 5px 10px;
+    height: 30px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }

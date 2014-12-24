@@ -68,8 +68,8 @@ rideApp.form = (function($, undefined) {
       var $parent = $input.parents('form');
       var $styleClass = $input.data('toggle-dependant');
 
-      $('.' + $styleClass, $parent).parents('.form__group').hide();
-      $('.' + $styleClass + '-' + $input.val(), $parent).parents('.form__group').show();
+      $('.' + $styleClass, $parent).closest('.form__item').hide();
+      $('.' + $styleClass + '-' + $input.val(), $parent).closest('.form__item').show();
   };
 
   return {

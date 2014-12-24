@@ -4,13 +4,16 @@
     {if $item->getType() == 'folder'}
         <div class="image">
             <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $item->id]}{$urlSuffix}">
-                <img src="{$app.url.base}/bootstrap/img/folder.svg" width="200" height="200" class="data img-responsive" />
+                <img src="{$app.url.base}/asphalt/img/folder.svg" width="200" height="200" class="data image image--responsive" />
             </a>
         </div>
+        <label class="checkbox">
+            <input type="checkbox" name="assets[]" value="{$item->getId()}" />
+        </label>
         <div class="name">
-            <div class="option order-handle">
-                <input type="checkbox" name="folders[]" value="{$item->getId()}" />
-            </div>
+            <span class="option order-handle">
+                <i class="icon icon--arrows"></i>
+            </span>
             <a href="{url id="assets.folder.edit" parameters=["locale" => $locale, "folder" => $item->getId()]}?referer={$app.url.request|urlencode}">
                 {$item->getName()}
             </a>
@@ -21,10 +24,13 @@
             <img src="{image src=$item->getThumbnail() width=200 height=200 transformation="crop"}" class="data image image--responsive" />
         {/if}
         </div>
+        <label class="checkbox">
+            <input type="checkbox" name="assets[]" value="{$item->getId()}" />
+        </label>
         <div class="name">
-            <div class="option order-handle">
-                <input type="checkbox" name="assets[]" value="{$item->getId()}" />
-            </div>
+            <span class="option order-handle">
+                <i class="icon icon--arrows"></i>
+            </span>
             <a href="{url id="assets.asset.edit" parameters=["locale" => $locale, "asset" => $item->getId()]}?referer={$app.url.request|urlencode}">
                 {$item->getName()}
             </a>

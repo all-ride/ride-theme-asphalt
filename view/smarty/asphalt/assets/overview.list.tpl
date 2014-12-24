@@ -8,7 +8,7 @@
     </td>
     <td>
         <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $item->id]}{$urlSuffix}">
-            <img src="{$app.url.base}/bootstrap/img/folder.svg" width="50" height="50" class="data img-responsive" />
+            <img src="{$app.url.base}/asphalt/img/folder.svg" width="50" height="50" class="data img-responsive" />
         </a>
         <a href="{url id="assets.folder.edit" parameters=["locale" => $locale, "folder" => $item->getId()]}?referer={$app.url.request|urlencode}">
             {$item->getName()}
