@@ -73,7 +73,7 @@
 {/block}
 
 {block name="scripts" append}
-    <script src="{$app.url.base}/bootstrap/js/jquery-ui.js"></script>
+    <script src="{$app.url.base}/asphalt/js/jquery-ui.js"></script>
     <script type="text/javascript">
         $(function () {
             $('.select-all').click(function() {
