@@ -56,7 +56,7 @@
             {$errors = $form->getValidationErrors($row->getName())}
 
             <div class="form__group row-{$row->getName()|replace:'[':''|replace:']':''}{if $row->isRequired()} required{/if}{if $row->isDisabled()} disabled{/if}{if $row->isReadOnly()} readonly{/if} clearfix{if $errors} has-error{/if}{if $class} {$class}{/if}"{if $row->getOption('order')} data-order="true"{/if}>
-                <h2 class="heading--4">{$row->getLabel()}</h2>
+                <h2 class="heading--3">{$row->getLabel()}</h2>
 
                 {$description = $row->getDescription()}
                 {if $description}
