@@ -54,6 +54,13 @@
 {/block}
 
 {block name="scripts" append}
-    <script src="{$app.url.base}/asphalt/js/jquery-ui.js"></script>
-    <script src="{$app.url.base}/asphalt/js/form.js"></script>
+    {$script = 'js/jquery-ui.js'}
+    {if !isset($app.javascripts[$script])}
+        <script src="{$app.url.base}/asphalt/js/jquery-ui.js"></script>
+    {/if}
+
+    {$script = 'js/form.js'}
+    {if !isset($app.javascripts[$script])}
+        <script src="{$app.url.base}/asphalt/js/form.js"></script>
+    {/if}
 {/block}

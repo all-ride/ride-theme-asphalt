@@ -55,21 +55,22 @@ rideApp.form = (function($, undefined) {
 
   var sortables = function() {
     $('[data-order=true] .collection-control-group').sortable({
-        axis: "y",
-        cursor: "move",
-        handle: ".order-handle",
-        items: "> .collection-control",
-        select: false,
-        scroll: true
+      axis: "y",
+      cursor: "move",
+      handle: ".order-handle",
+      items: "> .collection-control",
+      select: false,
+      scroll: true
     });
   };
 
   var toggleDependantRows = function($input) {
-      var $parent = $input.parents('form');
-      var $styleClass = $input.data('toggle-dependant');
+    var $parent = $input.parents('form');
+    var $styleClass = $input.data('toggle-dependant');
+    var value = $input.filter(':checked').length ? $input.val() : null;
 
-      $('.' + $styleClass, $parent).closest('.form__item').hide();
-      $('.' + $styleClass + '-' + $input.val(), $parent).closest('.form__item').show();
+    $('.' + $styleClass, $parent).parents('.form__item').hide();
+    $('.' + $styleClass + '-' + value, $parent).parents('.form__item').show();
   };
 
   return {
@@ -79,3 +80,23 @@ rideApp.form = (function($, undefined) {
 
 // Run the initializer
 rideApp.form.initialize();
+
+
+
+$.fn.formDependantRows = function() {
+    var toggleDependantRows = function($input) {
+        var $parent = $input.parents('form');
+        var $styleClass = $input.data('toggle-dependant');
+        var value = $input.filter(':checked').length ? $input.val() : null;
+
+        $('.' + $styleClass, $parent).parents('.form-group').hide();
+        $('.' + $styleClass + '-' + value, $parent).parents('.form-group').show();
+    };
+
+    $('[data-toggle-dependant]', $(this)).on('change', function() {
+        toggleDependantRows($(this));
+    }).each(function() {
+        toggleDependantRows($(this));
+    });
+}
+
