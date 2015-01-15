@@ -11,7 +11,7 @@
             <input type="checkbox" name="assets[]" value="{$item->getId()}" />
         </label>
         <div class="name">
-            <span class="option order-handle">
+            <span class="option{if !$flatten} order-handle{/if}">
                 <i class="icon icon--arrows"></i>
             </span>
             <a href="{url id="assets.folder.edit" parameters=["locale" => $locale, "folder" => $item->getId()]}?referer={$app.url.request|urlencode}">
@@ -28,7 +28,7 @@
             <input type="checkbox" name="assets[]" value="{$item->getId()}" />
         </label>
         <div class="name">
-            <span class="option order-handle">
+            <span class="option{if !$flatten} order-handle{/if}">
                 <i class="icon icon--arrows"></i>
             </span>
             <a href="{url id="assets.asset.edit" parameters=["locale" => $locale, "asset" => $item->getId()]}?referer={$app.url.request|urlencode}">

@@ -139,7 +139,7 @@
         <script src="{$script}"></script>
             {elseif substr($script, 0, 7) == '<script'}
         {$script}
-            {else}
+            {elseif $script != 'js/jquery.min.js' && $script != 'js/bootstrap.min.js'}
         <script src="{$app.url.base}/asphalt/{$script}"></script>
             {/if}
         {/foreach}

@@ -3,7 +3,7 @@
     {$type = $item->getType()}
 <tr class="order-item" data-type="{$type}" data-id="{$item->getId()}">
 {if $type == 'folder'}
-    <td class="option order-handle">
+    <td class="option{if !$flatten} order-handle{/if}">
         <input type="checkbox" name="folders[]" value="{$item->getId()}" />
     </td>
     <td>
@@ -19,7 +19,7 @@
     </td>
     <td>{$item->getDateAdded()|date_format}</td>
 {else}
-    <td class="option order-handle">
+    <td class="option{if !$flatten} order-handle{/if}">
         <input type="checkbox" name="assets[]" value="{$item->getId()}" />
     </td>
     <td>

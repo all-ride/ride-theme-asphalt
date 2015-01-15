@@ -101,7 +101,7 @@
 {/block}
 
 {block name="styles" append}
-    <link href="{$app.url.base}/css/calendar.css" rel="stylesheet" media="screen">
+    <link href="{$app.url.base}/asphalt/css/calendar.css" rel="stylesheet" media="screen">
 {/block}
 
 {block name="scripts" append}
