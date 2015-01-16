@@ -98,5 +98,5 @@ $.fn.formDependantRows = function() {
     }).each(function() {
         toggleDependantRows($(this));
     });
-}
+};
 

@@ -494,15 +494,9 @@ input.tagmanager {
   outline: 0;
 }
 
-.btn-group,
 .form-filter select {
   display: inline;
   width: auto;
-}
-
-.btn-group {
-  float: left;
-  margin-right: 20px;
 }
 
 .form-filter {
@@ -511,6 +505,11 @@ input.tagmanager {
 
 .actions {
   margin-bottom: 20px;
+}
+
+.actions .btn-group {
+  float: left;
+  margin-right: 20px;
 }
 
 .assets-list .asset-actions {
