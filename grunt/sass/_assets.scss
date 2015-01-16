@@ -1,12 +1,7 @@
-.btn-group,
+// .btn-group,
 .form-filter select {
     display: inline;
     width: auto;
-}
-
-.btn-group {
-    float: left;
-    margin-right: 20px;
 }
 
 .form-filter {
@@ -15,6 +10,10 @@
 
 .actions {
     margin-bottom: 20px;
+    .btn-group {
+        float: left;
+        margin-right: 20px;
+    }
 }
 
 .assets-list .asset-actions {
