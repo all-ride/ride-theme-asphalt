@@ -9,8 +9,8 @@
                 <meta http-equiv="X-UA-Compatible" content="IE=edge">
                 <title>{block name="head_title"}{if isset($app.taskbar)}{$app.taskbar->getTitle()}{/if}{/block}</title>
             {block name="styles"}
-                <!--[if gt IE 8]><!--><link rel="stylesheet" href="{$app.url.base}/asphalt/buckleup/css/main.min.css"> <!--<![endif]-->
-                <!--[if lt IE 9]><link rel="stylesheet" href="{$app.url.base}/asphalt/buckleup/css/main-legacy.min.css"><![endif]-->
+                <!--[if gt IE 8]><!--><link rel="stylesheet" href="{$app.url.base}/asphalt/css/main.min.css"> <!--<![endif]-->
+                <!--[if lt IE 9]><link rel="stylesheet" href="{$app.url.base}/asphalt/css/main-legacy.min.css"><![endif]-->
                 <!--[if gt IE 8]><!--><link rel="stylesheet" href="{$app.url.base}/asphalt/css/custom.min.css"> <!--<![endif]-->
                 <!--[if lt IE 9]><link rel="stylesheet" href="{$app.url.base}/asphalt/buckleup/css/custom-legacy.min.css"><![endif]-->
             {/block}

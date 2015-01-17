@@ -31,6 +31,7 @@ module.exports = function(grunt) {
                     style: 'compressed'
                 },
                 files: {
+                    'build/css/main.css': 'sass/main.scss',
                     'build/css/custom.css': 'sass/custom.scss',
                 }
             }
@@ -47,6 +48,7 @@ module.exports = function(grunt) {
         legacssy: {
             dist: {
                 files: {
+                    'build/css/main-legacy.css': 'main/css/custom.css',
                     'build/css/custom-legacy.css': 'build/css/custom.css'
                 },
             }
