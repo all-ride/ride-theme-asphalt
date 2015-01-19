@@ -9,10 +9,10 @@
                 <meta http-equiv="X-UA-Compatible" content="IE=edge">
                 <title>{block name="head_title"}{if isset($app.taskbar)}{$app.taskbar->getTitle()}{/if}{/block}</title>
             {block name="styles"}
-                <!--[if gt IE 8]><!--><link rel="stylesheet" href="{$app.url.base}/asphalt/buckleup/css/main.min.css"> <!--<![endif]-->
-                <!--[if lt IE 9]><link rel="stylesheet" href="{$app.url.base}/asphalt/buckleup/css/main-legacy.min.css"><![endif]-->
+                <!--[if gt IE 8]><!--><link rel="stylesheet" href="{$app.url.base}/asphalt/css/main.min.css"> <!--<![endif]-->
+                <!--[if lt IE 9]><link rel="stylesheet" href="{$app.url.base}/asphalt/css/main-legacy.min.css"><![endif]-->
                 <!--[if gt IE 8]><!--><link rel="stylesheet" href="{$app.url.base}/asphalt/css/custom.min.css"> <!--<![endif]-->
-                <!--[if lt IE 9]><link rel="stylesheet" href="{$app.url.base}/asphalt/buckleup/css/custom-legacy.min.css"><![endif]-->
+                <!--[if lt IE 9]><link rel="stylesheet" href="{$app.url.base}/asphalt/css/custom-legacy.min.css"><![endif]-->
             {/block}
 
             {block name="styles_app"}
@@ -28,8 +28,8 @@
             {/block}
 
             {block name="head_scripts"}
-                <script type="text/javascript" src="{$app.url.base}/asphalt/buckleup/js/modernizr.custom.min.js"></script>
-                <!--[if lt IE 9]><script type="text/javascript" src="{$app.url.base}/asphalt/buckleup/js/polyfill.min.js"></script><![endif]-->
+                <script type="text/javascript" src="{$app.url.base}/asphalt/js/singles/modernizr.min.js"></script>
+                <!--[if lt IE 9]><script type="text/javascript" src="{$app.url.base}/asphalt/js/polyfill.min.js"></script><![endif]-->
                 {literal}
                 <script type="text/javascript">
                     WebFontConfig = {
@@ -129,8 +129,8 @@
             }
           };
         </script>
-        <script type="text/javascript" src="{$app.url.base}/asphalt/buckleup/js/main.min.js"></script>
-        <script type="text/javascript" src="{$app.url.base}/asphalt/js/ajax.js"></script>
+        <script type="text/javascript" src="{$app.url.base}/asphalt/js/main.min.js"></script>
+        <script type="text/javascript" src="{$app.url.base}/asphalt/js/singles/ajax.js"></script>
     {/block}
     {block name="scripts_app"}
     {if isset($app.javascripts)}

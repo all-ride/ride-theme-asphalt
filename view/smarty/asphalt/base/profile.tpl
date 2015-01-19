@@ -42,6 +42,5 @@
 {/block}
 
 {block name="scripts" append}
-    <script src="{$app.url.base}/asphalt/js/jquery-ui.js"></script>
-    <script src="{$app.url.base}/asphalt/js/form.js"></script>
+    <script src="{$app.url.base}/asphalt/js/singles/form.js"></script>
 {/block}

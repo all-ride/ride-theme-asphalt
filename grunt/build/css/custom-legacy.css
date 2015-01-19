@@ -117,12 +117,6 @@ table[data-order] td.sortable__handle {
   background-position: left 10px;
 }
 
-.login h1 {
-  padding-bottom: 10px;
-  border-bottom: 1px solid  #eee;
-  margin-bottom: 20px;
-}
-
 .login .form__actions {
   text-align: center;
 }
