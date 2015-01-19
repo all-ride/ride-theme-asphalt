@@ -17,6 +17,7 @@ app.main = (function($, undefined) {
 
     // hit up common first.
     this.fire('common');
+    this.fire('form');
 
     // Hit up the page component
     if(dataComponents) {

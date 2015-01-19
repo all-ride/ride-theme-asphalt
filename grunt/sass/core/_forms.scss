@@ -1,7 +1,7 @@
 %ext-input-style {
   @include transitions((color, background, border));
   width: 100%;
-  padding: 14px 15px;
+  padding: 10px;
   border: 1px solid $gray-25;
   background-color: $white;
   color: $color-text;
