@@ -3,6 +3,45 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
+
+        // CONCAT FILES
+        // concat: {
+        //     main: {
+        //         src: [
+        //             'js/libs/*.js', // All JS in the libs folder
+        //             'js/libs/bootstrap/*.js', // All JS in the bootstrap folder
+        //             '!js/bootstrap/excludes/*', // Exclude some of the bootstrap files
+        //             'js/components/*.js', // All JS in the components folder
+        //             'js/main.js'  // The big main file!
+        //         ],
+        //         dest: 'build/js/main.js'
+        //     },
+        //     polyfill: {
+        //         src: [
+        //             'js/polyfill/*.js' // All JS in the polyfill folder
+        //         ],
+        //         dest: 'build/js/polyfill.js'
+        //     }
+        // },
+
+        // // UGLIFY FILES
+        // uglify: {
+        //     main: {
+        //         files: uglifyTargets['main']
+        //     },
+        //     polyfill: {
+        //         files: uglifyTargets['polyfill']
+        //     },
+        //     singles: {
+        //         files: [{
+        //           expand: true,
+        //           cwd: 'js/singles',
+        //           src: '**/*.js',
+        //           dest: target + '/js'
+        //       }]
+        //     }
+        // },
+
         // JSHINT
         jshint: {
             options: {

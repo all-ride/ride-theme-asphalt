@@ -33,6 +33,7 @@
 .heading--1 {
   @extend .heading;
   @include fsRem($font-size-h1);
+  color: $color-brand-primary;
 }
 .heading--2 {
   @extend .heading;

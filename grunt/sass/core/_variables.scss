@@ -25,7 +25,7 @@ $notice-colors: (
 );
 
 // Background color
-$color-background: #fff !default;
+$color-background: $white!default;
 // Text color
 $color-text: $gray-75 !default;
 
@@ -73,7 +73,7 @@ $fonts-icon-class: icon;
 //** By default, this inherits from the `<body>`.
 $headings-font-family: inherit !default;
 $headings-font-weight: $font-weight-light !default;
-$headings-line-height: ceil($line-height-base / 2.2);
+$headings-line-height: 1.1 !default;
 $headings-color: inherit !default;
 $headings-color-alt: $color-brand-primary !default;
 
@@ -109,11 +109,11 @@ $grid-container-width: 1200px !default;
 
 
 // Rhythm
-$rh-xxs: 5px;
-$rh-xsm: 10px;
-$rh-sml: 20px;
-$rh-med: 30px;
-$rh-lrg: 50px;
+$rh-xsm: ceil($line-height-base / 4);
+$rh-sml: ceil($line-height-base / 2);
+$rh-med: $line-height-base;
+$rh-lrg: ceil($line-height-base * 2);
+$rh-xlr: ceil($line-height-base * 4);
 
 // Transitions
 // -----------

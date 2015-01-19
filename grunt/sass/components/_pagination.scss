@@ -6,7 +6,7 @@
   li {
     display: inline-block;
     & + li {
-      margin-left: $rh-xxs;
+      margin-left: $rh-xsm;
     }
     &.here {
       a {
