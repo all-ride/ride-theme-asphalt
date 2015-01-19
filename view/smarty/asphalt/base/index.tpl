@@ -130,7 +130,7 @@
           };
         </script>
         <script type="text/javascript" src="{$app.url.base}/asphalt/buckleup/js/main.min.js"></script>
-        <script type="text/javascript" src="{$app.url.base}/asphalt/js/ajax.js"></script>
+        <script type="text/javascript" src="{$app.url.base}/asphalt/js/singles/ajax.js"></script>
     {/block}
     {block name="scripts_app"}
     {if isset($app.javascripts)}
