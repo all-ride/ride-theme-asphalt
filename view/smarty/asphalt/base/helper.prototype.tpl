@@ -5,12 +5,12 @@
     {* {$pagination = new Pagination($pages, $page);} *}
     {if $pagination}
         {$anchors = $pagination->getAnchors()}
-        <div class="btn-group">
+        <ul class="pagination">
             {foreach $anchors as $anchor}
-                {$anchor->addToClass('btn btn--default')}
-                {$anchor->getHtml()}
+                {* {$anchor->addToClass('btn btn--default')} *}
+                <li>{$anchor->getHtml()}</li>
             {/foreach}
-        </div>
+        </ul>
     {/if}
 {/function}
 

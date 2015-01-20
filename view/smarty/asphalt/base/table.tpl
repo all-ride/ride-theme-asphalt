@@ -66,7 +66,7 @@
                                 {assign var="pages" value=$table->getPages()}
                                 {assign var="href" value=$table->getPaginationUrl()}
 
-                                <div class="grid--bp-med__6 pagination">
+                                <div class="grid--bp-med__6">
                                     {if $pages > 1}
                                         {pagination pagination=$table->getPagination()}
                                     {/if}

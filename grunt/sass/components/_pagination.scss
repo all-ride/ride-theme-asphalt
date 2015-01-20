@@ -20,7 +20,18 @@
     }
   }
   a {
+    color: $color-text;
     display: inline-block;
+    padding: 0 $rh-xsm;
+    border: 1px solid $gray-25;
     text-decoration: none;
+    &:hover {
+      background: $gray-0;
+    }
+    &.active {
+      background: $black;
+      border-color: $black;
+      color: $white;
+    }
   }
 }
