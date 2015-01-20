@@ -101,11 +101,10 @@
 {/block}
 
 {block name="styles" append}
-    <link href="{$app.url.base}/css/calendar.css" rel="stylesheet" media="screen">
+    <link href="{$app.url.base}/asphalt/css/calendar.css" rel="stylesheet" media="screen">
 {/block}
 
 {block name="scripts" append}
-    <script src="{$app.url.base}/asphalt/js/jquery-ui.js"></script>
-    <script src="{$app.url.base}/asphalt/js/form.js"></script>
-    <script src="{$app.url.base}/asphalt/js/calendar.js"></script>
+    <script src="{$app.url.base}/asphalt/js/singles/form.js"></script>
+    <script src="{$app.url.base}/asphalt/js/singles/calendar.js"></script>
 {/block}

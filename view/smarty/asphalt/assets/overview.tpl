@@ -17,9 +17,9 @@
 {block name="content_body" append}
     <div class="breadcrumbs">
         <ol class="breadcrumb">
-            <li><a href="{url id="assets.overview.locale" parameters=["locale" => $locale]}{$urlSuffix}">{translate key="title.assets"}</a></li>
+            <li><a href="{url id="assets.overview.locale" parameters=["locale" => $locale]}?view={$view}&flatten={$flatten}">{translate key="title.assets"}</a></li>
         {foreach $breadcrumbs as $id => $name}
-            <li><a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $id]}{$urlSuffix}">{$name}</a></li>
+            <li><a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $id]}?view={$view}&flatten={$flatten}">{$name}</a></li>
         {/foreach}
         </ol>
     </div>
@@ -35,10 +35,10 @@
         </div>
 
         <div class="btn-group">
-            <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $folder->id]}?view=grid&type={$filter.type}&date={$filter.date}" class="btn btn--default{if $view == "grid"} active{/if}">
+            <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $folder->id]}?view=grid&type={$filter.type}&date={$filter.date}&flatten={$flatten}" class="btn btn-default{if $view == "grid"} active{/if}">
                 <i class="icon icon--th"></i>
             </a>
-            <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $folder->id]}?view=list&type={$filter.type}&date={$filter.date}" class="btn btn--default{if $view == "list"} active{/if}">
+            <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $folder->id]}?view=list&type={$filter.type}&date={$filter.date}&flatten={$flatten}" class="btn btn-default{if $view == "list"} active{/if}">
                 <i class="icon icon--th-list"></i>
             </a>
         </div>
@@ -73,7 +73,6 @@
 {/block}
 
 {block name="scripts" append}
-    <script src="{$app.url.base}/asphalt/js/jquery-ui.js"></script>
     <script type="text/javascript">
         $(function () {
             $('.select-all').click(function() {
