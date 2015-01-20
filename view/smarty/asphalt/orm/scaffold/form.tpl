@@ -8,7 +8,7 @@
 
 {block name="content_title"}
     <div class="page-header">
-        <h1>{$title}</h1>
+        <h1>{$title}{if $subtitle} <small>{$subtitle}</small>{/if}</h1>
     </div>
 {/block}
 
