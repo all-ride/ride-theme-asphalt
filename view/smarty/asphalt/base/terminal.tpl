@@ -26,7 +26,7 @@
 {/block}
 
 {block name="scripts" append}
-    <script src="{$app.url.base}/asphalt/js/singles/terminal.js"></script>
+    <script src="{$app.url.base}/asphalt/js/terminal.js"></script>
     <script type="text/javascript">
         $(function() {
             ride.terminal.init();

@@ -37,7 +37,7 @@
 {/block}
 
 {block name="scripts" append}
-    <script src="{$app.url.base}/asphalt/js/singles/jquery.imgareaselect.pack.js"></script>
+    <script src="{$app.url.base}/asphalt/js/jquery.imgareaselect.pack.js"></script>
     <script type="text/javascript">
         var image = $('#image-input');
 

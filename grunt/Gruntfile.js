@@ -60,7 +60,7 @@ module.exports = function(grunt) {
                   expand: true,
                   cwd: 'js/singles',
                   src: '**/*.js',
-                  dest: target + '/js/singles'
+                  dest: target + '/js'
               }]
             }
         },

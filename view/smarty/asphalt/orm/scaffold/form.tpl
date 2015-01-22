@@ -56,6 +56,6 @@
 {block name="scripts" append}
     {$script = 'js/form.js'}
     {if !isset($app.javascripts[$script])}
-        <script src="{$app.url.base}/asphalt/js/singles/form.js"></script>
+        <script src="{$app.url.base}/asphalt/js/form.js"></script>
     {/if}
 {/block}
