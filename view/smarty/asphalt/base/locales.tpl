@@ -53,5 +53,5 @@
 {/block}
 
 {block name="scripts" append}
-    <script src="{$app.url.base}/asphalt/js/singles/locales.js"></script>
+    <script src="{$app.url.base}/asphalt/js/locales.js"></script>
 {/block}

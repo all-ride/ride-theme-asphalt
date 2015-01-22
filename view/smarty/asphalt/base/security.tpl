@@ -48,5 +48,5 @@
 {/block}
 
 {block name="scripts" append}
-    <script src="{$app.url.base}/asphalt/js/singles/security.js"></script>
+    <script src="{$app.url.base}/asphalt/js/security.js"></script>
 {/block}

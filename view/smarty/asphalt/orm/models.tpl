@@ -13,5 +13,5 @@
 {/block}
 
 {block name="scripts" append}
-    <script src="{$app.url.base}/asphalt/js/singles/table.js"></script>
+    <script src="{$app.url.base}/asphalt/js/table.js"></script>
 {/block}
