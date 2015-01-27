@@ -8,7 +8,7 @@ rideApp.form = (function($, undefined) {
 
     $('[data-toggle-dependant]').on('change', function() {
         toggleDependantRows($(this));
-    }).filter(':checked').each(function() {
+    }).each(function() {
         toggleDependantRows($(this));
     });
   };
