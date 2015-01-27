@@ -3,7 +3,7 @@
   font-size: 0;
   position: relative;
   overflow: hidden;
-  margin-bottom: $rh-xsm;
+  margin-bottom: $rh-med;
   &:after {
     content: '';
     display: block;
@@ -45,7 +45,7 @@
   a {
     display: block;
     text-decoration: none;
-    padding: $rh-xsm $rh-sml;
+    padding: $rh-sml $rh-med;
     background: $gray-0;
     color: $gray-50;
     &:hover,
