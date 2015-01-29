@@ -6,6 +6,8 @@ rideApp.form = (function($, undefined) {
     formCollection();
     sortables();
 
+    _selectize();
+
     $('[data-toggle-dependant]').on('change', function() {
         toggleDependantRows($(this));
     }).each(function() {
@@ -62,6 +64,10 @@ rideApp.form = (function($, undefined) {
       select: false,
       scroll: true
     });
+  };
+
+  var _selectize = function() {
+      $('select').selectize();
   };
 
   var toggleDependantRows = function($input) {
