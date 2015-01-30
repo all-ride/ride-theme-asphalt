@@ -67,7 +67,7 @@ rideApp.form = (function($, undefined) {
   };
 
   var _selectize = function() {
-      $('select').selectize();
+      $('.form--selectize select').selectize();
   };
 
   var toggleDependantRows = function($input) {

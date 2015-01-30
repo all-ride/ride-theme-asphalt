@@ -13,13 +13,11 @@
         <div class="form__group">
             {call formRows form=$form}
 
-            <div class="form__group">
-                <div class="grid--bp-med__offset-2 grid--bp-med__10">
-                    <input type="submit" class="btn btn--default" value="{translate key="button.save"}" />
-                    {if $referer}
-                        <a class="btn btn--link" href="{$referer}">{translate key="button.cancel"}</a>
-                    {/if}
-                </div>
+            <div class="form__actions">
+                <button type="submit" class="btn btn--default">{translate key="button.save"}</button>
+                {if $referer}
+                    <a class="btn btn--link" href="{$referer}">{translate key="button.cancel"}</a>
+                {/if}
             </div>
         </div>
     </form>
