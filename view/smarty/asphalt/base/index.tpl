@@ -49,7 +49,7 @@
             {/block}
         {/block}
     </head>
-    <body>
+    <body{block name="body_attributes"}{/block}>
 {block name="body"}
     {block name="taskbar"}
         {if isset($app.taskbar)}
