@@ -814,7 +814,7 @@
             </div>
             {if !$row->getOption('disable_remove')}
             <div class="grid--bp-med__2">
-                <a href="#" class="btn btn--default prototype-remove{if $row->isDisabled() || $row->isReadOnly()} disabled{/if}"><i class="icon icon--times"></i></a>
+                <a href="#" class="btn btn--default btn--small prototype-remove{if $row->isDisabled() || $row->isReadOnly()} disabled{/if}"><i class="icon icon--times"></i></a>
             </div>
             {/if}
         </div>
