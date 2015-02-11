@@ -67,7 +67,11 @@ rideApp.form = (function($, undefined) {
   };
 
   var _selectize = function() {
-      $('.form--selectize select').selectize();
+    var $form = $('.form--selectize');
+    $('.form--selectize select:visible').selectize();
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        $('.form--selectize select:visible').selectize();
+    });
   };
 
   var toggleDependantRows = function($input) {
