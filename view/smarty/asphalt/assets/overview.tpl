@@ -69,11 +69,20 @@
                 <button class="btn btn--default" type="submit">{translate key="button.apply"}</button>
             </div>
         </form>
+        <form action="{$app.url.request}" class="form-horizontal form-limit" method="POST" role="form">
+            <select name="limit" class="form-control">
+                <option value="12"{if $limit == 12} selected="selected"{/if}>12</option>
+                <option value="24"{if $limit == 24} selected="selected"{/if}>24</option>
+                <option value="48"{if $limit == 48} selected="selected"{/if}>48</option>
+                <option value="96"{if $limit == 96} selected="selected"{/if}>96</option>
+            </select>
+            <button class="btn btn--default" type="submit">{translate key="button.apply"}</button>
+        </form>
     </div>
 
     {if $pages > 1}
         {url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $folder->id] var="urlPagination"}
-        {$urlPagination = "`$urlPagination``$urlSuffix`&page=%page%"}
+        {$urlPagination = "`$urlPagination``$urlSuffix`&flatten=`$flatten`&limit=`$limit`&page=%page%"}
         {pagination page=$page pages=$pages href=$urlPagination}
     {/if}
 {/block}
@@ -105,7 +114,7 @@
                         });
                     });
 
-                    $.post(sortUrl, {ldelim}order: order});
+                    $.post(sortUrl, {ldelim}order: order, index: {(($page - 1) * $limit) + 1}});
                 }
             });
         });
