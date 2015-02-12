@@ -15,7 +15,7 @@
 {/block}
 
 {block name="content_body" append}
-    <div class="breadcrumbs">
+    <div class="breadcrumb">
         <ol class="breadcrumb">
             <li><a href="{url id="assets.overview.locale" parameters=["locale" => $locale]}?view={$view}&flatten={$flatten}">{translate key="title.assets"}</a></li>
         {foreach $breadcrumbs as $id => $name}
@@ -70,6 +70,12 @@
             </div>
         </form>
     </div>
+
+    {if $pages > 1}
+        {url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $folder->id] var="urlPagination"}
+        {$urlPagination = "`$urlPagination``$urlSuffix`&page=%page%"}
+        {pagination page=$page pages=$pages href=$urlPagination}
+    {/if}
 {/block}
 
 {block name="scripts" append}
