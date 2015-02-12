@@ -522,7 +522,7 @@ input.tagmanager {
   background: #fff;
   position: absolute;
   top: 0;
-  left: 0;
+  left: 10px;
   border: 1px solid #efefef;
 }
 
@@ -530,13 +530,23 @@ input.tagmanager {
   color: #fff;
 }
 
-.assets-grid [data-type=folder] .image {
+.assets-grid .image--folder {
+  background: #f5f6f7;
   padding-top: 6%;
   padding-bottom: 11%;
 }
 
+.assets-grid .image--folder a {
+  padding: 25%;
+}
+
 .assets-grid .image a {
   display: block;
+}
+
+.assets-grid .image img {
+  float: none;
+  margin: 0;
 }
 
 .assets-grid .order-item {

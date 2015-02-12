@@ -20,30 +20,41 @@
     padding-left: 15px;
 }
 
-.assets-grid a {
+.assets-grid {
+  a {
     color: #fff;
     text-decoration: none;
     font-weight: bold;
-}
-.assets-grid .checkbox {
+  }
+  .checkbox {
     display: block;
     padding: 1px 5px 3px;
     background: #fff;
     position: absolute;
     top: 0;
-    left: 0;
+    left: 10px;
     border: 1px solid #efefef;
-}
-.assets-grid .icon {
+  }
+  .icon {
     color: #fff;
-}
-
-.assets-grid [data-type=folder] .image {
-    padding-top: 6%;
-    padding-bottom: 11%;
-}
-.assets-grid .image a {
-    display: block;
+  }
+  .image {
+    &--folder {
+      background: #f5f6f7;
+      padding-top: 6%;
+      padding-bottom: 11%;
+      a {
+        padding: 25%;
+      }
+    }
+    a {
+      display: block;
+    }
+    img {
+      float: none;
+      margin: 0;
+    }
+  }
 }
 
 .assets-grid .order-item {

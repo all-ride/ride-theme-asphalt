@@ -15,30 +15,38 @@
 {/block}
 
 {block name="content_body" append}
+
     <div class="breadcrumb">
-        <ol class="breadcrumb">
-            <li><a href="{url id="assets.overview.locale" parameters=["locale" => $locale]}?view={$view}&flatten={$flatten}">{translate key="title.assets"}</a></li>
+        <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="breadcrumb__item{if $breadcrumbs|count == 0} breadcrumb__item--active{/if}">
+          <a href="{url id="assets.overview.locale" parameters=["locale" => $locale]}?view={$view}&flatten={$flatten}" itemprop="url">
+            <span itemprop="title">{translate key="title.assets"}</span>
+          </a> &rsaquo;
+        </span>
         {foreach $breadcrumbs as $id => $name}
-            <li><a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $id]}?view={$view}&flatten={$flatten}">{$name}</a></li>
+            <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="breadcrumb__item{if $name@last} breadcrumb__item--active{/if}">
+              <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $id]}?view={$view}&flatten={$flatten}" itemprop="url">
+                <span itemprop="title">{$name}</span>
+              </a>{if !$name@last} &rsaquo;{/if}
+            </span>
         {/foreach}
-        </ol>
     </div>
+
 
     <div class="actions clearfix">
         <div class="btn-group">
-            <a href="{url id="assets.asset.add" parameters=["locale" => $locale]}?folder={$folder->id}&referer={$app.url.request|urlencode}" class="btn btn--default">
+            <a href="{url id="assets.asset.add" parameters=["locale" => $locale]}?folder={$folder->id}&referer={$app.url.request|urlencode}" class="btn btn--default btn--small">
                {translate key="button.add.asset"}
             </a>
-            <a href="{url id="assets.folder.add" parameters=["locale" => $locale]}?folder={$folder->id}&referer={$app.url.request|urlencode}" class="btn btn--default">
+            <a href="{url id="assets.folder.add" parameters=["locale" => $locale]}?folder={$folder->id}&referer={$app.url.request|urlencode}" class="btn btn--default btn--small">
                {translate key="button.add.folder"}
             </a>
         </div>
 
         <div class="btn-group">
-            <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $folder->id]}?view=grid&type={$filter.type}&date={$filter.date}&flatten={$flatten}" class="btn btn-default{if $view == "grid"} active{/if}">
+            <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $folder->id]}?view=grid&type={$filter.type}&date={$filter.date}&flatten={$flatten}" class="btn btn--default btn--small{if $view == "grid"} active{/if}">
                 <i class="icon icon--th"></i>
             </a>
-            <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $folder->id]}?view=list&type={$filter.type}&date={$filter.date}&flatten={$flatten}" class="btn btn-default{if $view == "list"} active{/if}">
+            <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $folder->id]}?view=list&type={$filter.type}&date={$filter.date}&flatten={$flatten}" class="btn btn--default btn--small{if $view == "list"} active{/if}">
                 <i class="icon icon--th-list"></i>
             </a>
         </div>
@@ -47,7 +55,7 @@
         <form id="{$form->getId()}" class="form-horizontal form-filter" action="{$app.url.request}" method="POST" role="form">
             {call formWidget form=$form row="type"}
             {call formWidget form=$form row="date"}
-            <button type="submit" class="btn btn--default">{translate key="button.filter"}</button>
+            <button type="submit" class="btn btn--default btn--small">{translate key="button.filter"}</button>
         </form>
     </div>
 
@@ -66,25 +74,33 @@
                     <option value="">- {translate key="label.actions.bulk"} -</option>
                     <option value="delete">{translate key="button.delete"}</option>
                 </select>
-                <button class="btn btn--default" type="submit">{translate key="button.apply"}</button>
+                <button class="btn btn--default btn--small" type="submit">{translate key="button.apply"}</button>
             </div>
         </form>
-        <form action="{$app.url.request}" class="form-horizontal form-limit" method="POST" role="form">
-            <select name="limit" class="form-control">
-                <option value="12"{if $limit == 12} selected="selected"{/if}>12</option>
-                <option value="24"{if $limit == 24} selected="selected"{/if}>24</option>
-                <option value="48"{if $limit == 48} selected="selected"{/if}>48</option>
-                <option value="96"{if $limit == 96} selected="selected"{/if}>96</option>
-            </select>
-            <button class="btn btn--default" type="submit">{translate key="button.apply"}</button>
-        </form>
+        {* {include file="base/helper.prototype"} *}
+        <div class="grid">
+            <div class="grid--bp-med__6">
+                {if $pages > 1}
+                    {url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $folder->id] var="urlPagination"}
+                    {$urlPagination = "`$urlPagination``$urlSuffix`&flatten=`$flatten`&limit=`$limit`&page=%page%"}
+                    {pagination page=$page pages=$pages href=$urlPagination}
+                {/if}
+            </div>
+            <div class="grid--bp-med__6 text--right">
+                <form action="{$app.url.request}" class="form-horizontal form-limit" method="POST" role="form">
+                    <select name="limit" class="form-control">
+                        <option value="12"{if $limit == 12} selected="selected"{/if}>12</option>
+                        <option value="24"{if $limit == 24} selected="selected"{/if}>24</option>
+                        <option value="48"{if $limit == 48} selected="selected"{/if}>48</option>
+                        <option value="96"{if $limit == 96} selected="selected"{/if}>96</option>
+                    </select>
+                    <button class="btn btn--default btn--small" type="submit">{translate key="button.apply"}</button>
+                </form>
+            </div>
+        </div>
     </div>
 
-    {if $pages > 1}
-        {url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $folder->id] var="urlPagination"}
-        {$urlPagination = "`$urlPagination``$urlSuffix`&flatten=`$flatten`&limit=`$limit`&page=%page%"}
-        {pagination page=$page pages=$pages href=$urlPagination}
-    {/if}
+
 {/block}
 
 {block name="scripts" append}

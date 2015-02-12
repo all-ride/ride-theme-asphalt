@@ -7,6 +7,7 @@ rideApp.form = (function($, undefined) {
     sortables();
 
     _selectize();
+    _assets();
 
     $('[data-toggle-dependant]').on('change', function() {
         toggleDependantRows($(this));
@@ -72,6 +73,79 @@ rideApp.form = (function($, undefined) {
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         $('.form--selectize select:visible').selectize();
     });
+  };
+
+  var _assets = function() {
+    var $assets = $('.form__assets');
+
+    $assets.each(function() {
+      var $this = $(this),
+          $field = $this.next('.form__assets-input'),
+          $edit = $this.find('.form__edit-assets'),
+          editText = $edit.text(),
+          $add = $this.find('.form__add-assets'),
+          isRemovable = false;
+
+      $this.sortable({
+          items: '.form__asset'
+        })
+        .on('sortstop', function(event, ui) {
+          setOrder($this);
+        }).disableSelection();
+
+      function setOrder($item) {
+        var order = $item.sortable('toArray', {attribute: 'data-id'});
+        $field[0].value = order.join(',');
+      }
+
+      $add.on('click', function(e) {
+        e.preventDefault();
+        if(isRemovable) return;
+        var asset = prompt("Enter an asset ID");
+        if (asset !== null) {
+          var assets = asset.split(','),
+              i = 0;
+          while(assets[i]) {
+            if(!isNaN(assets[i])) {
+              $('<div class="form__asset" data-id="' + assets[i] + '"><img src="http://lorempixel.com/100/100/"></div>').insertBefore($add);
+            }
+            i++;
+          }
+          setOrder($this);
+        }
+      });
+
+      $edit.on('click', function(e) {
+        e.preventDefault();
+        if(isRemovable) {
+          $edit.text(editText);
+          $this.sortable('enable');
+          $this.removeClass('is-removable');
+          $add.attr('disabled', false);
+          isRemovable = false;
+        } else {
+          $edit.text($edit.data('alt'));
+          $this.sortable('disable');
+          $this.addClass('is-removable');
+          $add.attr('disabled', true);
+          isRemovable = true;
+        }
+      });
+
+      $($this).on('click', '.form__asset', function(e) {
+        e.preventDefault();
+        if(!isRemovable) return;
+        var $elem = $(this);
+        $elem
+          .addClass('is-removed')
+          .on('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function() {
+            $elem.remove();
+            setOrder($this);
+          });
+      });
+    });
+
+
   };
 
   var toggleDependantRows = function($input) {

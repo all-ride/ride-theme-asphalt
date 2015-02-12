@@ -540,15 +540,23 @@
     {if $widget}
         {$attributes = $widget->getAttributes()}
         {if isset($attributes.class)}
-            {$attributes.class = "`$attributes.class` form__assets"}
+            {$attributes.class = "`$attributes.class` form__assets-input"}
         {else}
-            {$attributes.class = 'form__assets'}
+            {$attributes.class = 'form__assets-input'}
         {/if}
 
-        {$assets = $widget->getAssets()}
-        {foreach $assets as $asset}
-            <img src="{image src=$asset->getThumbnail() transformation="crop" width=150 height=150}">
-        {/foreach}
+        <div class="form__assets">
+            {$assets = $widget->getAssets()}
+            {foreach $assets as $asset}
+                <div class="form__asset" data-id="{$asset->getId()}"><img src="{image src=$asset->getThumbnail() transformation="crop" width=100 height=100}" width="100" height="100"></div>
+            {/foreach}
+            {if $widget->getFolderId()}
+                {url id="assets.folder.overview" parameters=["folder" => $widget->getFolderId(), "locale" => $locale] var="assetsUrl"}
+            {else}
+                {url id="assets.folder.overview" parameters=["locale" => $locale] var="assetsUrl"}
+            {/if}
+            <a href="{$assetsUrl}?embed=1" class="btn btn--default btn--xsmall prototype-remove{if $row->isDisabled() || $row->isReadOnly()} disabled{/if}" class="form__add-assets btn btn--default"><i class="icon icon--plus"></i> add</a>
+        </div>
 
         {$value = $widget->getValue($part)}
         {if is_array($value)}
@@ -861,7 +869,7 @@
             </div>
             {if !$row->getOption('disable_remove')}
             <div class="grid--bp-med__2">
-                <a href="#" class="btn btn--default btn--small prototype-remove{if $row->isDisabled() || $row->isReadOnly()} disabled{/if}"><i class="icon icon--times"></i></a>
+                <a href="#" class="btn btn--default btn--xsmall prototype-remove{if $row->isDisabled() || $row->isReadOnly()} disabled{/if}"><i class="icon icon--times"></i></a>
             </div>
             {/if}
         </div>

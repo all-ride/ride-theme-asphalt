@@ -2,7 +2,7 @@
 {foreach $items as $item}
 <div class="grid__item order-item" data-type="{$item->getType()}" data-id="{$item->getId()}">
     {if $item->getType() == 'folder'}
-        <div class="image">
+        <div class="image image--folder">
             <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $item->id]}{$urlSuffix}">
                 <img src="{$app.url.base}/asphalt/img/folder.svg" width="200" height="200" class="data image image--responsive" />
             </a>
