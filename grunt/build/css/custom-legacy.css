@@ -545,6 +545,7 @@ input.tagmanager {
 }
 
 .assets-grid .image img {
+  vertical-align: middle;
   float: none;
   margin: 0;
 }
@@ -569,4 +570,6 @@ input.tagmanager {
   height: 30px;
   white-space: nowrap;
   text-overflow: ellipsis;
+  color: #fff;
+  font-weight: bold;
 }

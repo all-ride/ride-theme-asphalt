@@ -550,12 +550,7 @@
             {foreach $assets as $asset}
                 <div class="form__asset" data-id="{$asset->getId()}"><img src="{image src=$asset->getThumbnail() transformation="crop" width=100 height=100}" width="100" height="100"></div>
             {/foreach}
-            {if $widget->getFolderId()}
-                {url id="assets.folder.overview" parameters=["folder" => $widget->getFolderId(), "locale" => $locale] var="assetsUrl"}
-            {else}
-                {url id="assets.folder.overview" parameters=["locale" => $locale] var="assetsUrl"}
-            {/if}
-            <a href="{$assetsUrl}?embed=1" class="btn btn--default btn--xsmall prototype-remove{if $row->isDisabled() || $row->isReadOnly()} disabled{/if}" class="form__add-assets btn btn--default"><i class="icon icon--plus"></i> add</a>
+            <a href="#modalAssetsAdd-{$widget->getName()}" class="form__add-assets btn btn--default"><i class="icon icon--plus"></i> add</a>
         </div>
 
         {$value = $widget->getValue($part)}
@@ -578,8 +573,27 @@
                {/foreach}
              />
         {/if}
+
+        <div class="modal modal--large fade" id="modalAssetsAdd-{$widget->getName()}" tabindex="-1" role="dialog" aria-labelledby="myModalAssetsAdd" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        {if $widget->getFolderId()}
+                            {url id="assets.folder.overview" parameters=["folder" => $widget->getFolderId(), "locale" => $locale] var="assetsUrl"}
+                        {else}
+                            {url id="assets.overview.locale" parameters=["locale" => $locale] var="assetsUrl"}
+                        {/if}
+                        <iframe src="{$assetsUrl}?embed=1" frameborder="0" width="100%" height="500"></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn--link" data-dismiss="modal">{translate key="button.cancel"}</button>
+                        <button type="button" class="btn btn--default widget-add-submit">{translate key="button.add"}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     {/if}
-    {/function}
+{/function}
 
 {function name="formWidgetOption" form=null row=null part=null}
     {if !$form && isset($block_form)}

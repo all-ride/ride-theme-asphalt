@@ -86,6 +86,8 @@ rideApp.form = (function($, undefined) {
           $add = $this.find('.form__add-assets'),
           isRemovable = false;
 
+      console.log($add);
+
       $this.sortable({
           items: '.form__asset'
         })
@@ -99,20 +101,24 @@ rideApp.form = (function($, undefined) {
       }
 
       $add.on('click', function(e) {
+        console.log('dgfsdfjhgjksdfhgjksdfhkjlsdfhkjsadhh jksdfh jklsdfh');
         e.preventDefault();
-        if(isRemovable) return;
-        var asset = prompt("Enter an asset ID");
-        if (asset !== null) {
-          var assets = asset.split(','),
-              i = 0;
-          while(assets[i]) {
-            if(!isNaN(assets[i])) {
-              $('<div class="form__asset" data-id="' + assets[i] + '"><img src="http://lorempixel.com/100/100/"></div>').insertBefore($add);
-            }
-            i++;
-          }
-          setOrder($this);
-        }
+        // if(isRemovable) return;
+        var assetsModal = $(this).attr('href');
+        $(assetsModal).modal('show');
+console.log('s');
+        // var asset = prompt("Enter an asset ID");
+        // if (asset !== null) {
+        //   var assets = asset.split(','),
+        //       i = 0;
+        //   while(assets[i]) {
+        //     if(!isNaN(assets[i])) {
+        //       $('<div class="form__asset" data-id="' + assets[i] + '"><img src="http://lorempixel.com/100/100/"></div>').insertBefore($add);
+        //     }
+        //     i++;
+        //   }
+        //   setOrder($this);
+        // }
       });
 
       $edit.on('click', function(e) {

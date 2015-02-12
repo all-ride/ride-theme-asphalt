@@ -51,6 +51,7 @@
       display: block;
     }
     img {
+      vertical-align: middle;
       float: none;
       margin: 0;
     }
@@ -78,4 +79,6 @@
     height: 30px;
     white-space: nowrap;
     text-overflow: ellipsis;
+    color: #fff;
+    font-weight: bold;
 }
