@@ -526,6 +526,53 @@
     {/if}
 {/function}
 
+
+{function name="formWidgetAssets" form=null row=null part=null}
+    {if !$form && isset($block_form)}
+        {$form = $block_form}
+    {/if}
+
+    {if is_string($row) && $form}
+        {$row = $form->getRow($row)}
+    {/if}
+
+    {$widget = $row->getWidget()}
+    {if $widget}
+        {$attributes = $widget->getAttributes()}
+        {if isset($attributes.class)}
+            {$attributes.class = "`$attributes.class` form__assets"}
+        {else}
+            {$attributes.class = 'form__assets'}
+        {/if}
+
+        {$assets = $widget->getAssets()}
+        {foreach $assets as $asset}
+            <img src="{image src=$asset->getThumbnail() transformation="crop" width=150 height=150}">
+        {/foreach}
+
+        {$value = $widget->getValue($part)}
+        {if is_array($value)}
+            {foreach $value as $part => $val}
+            <input type="text"
+                   name="{$widget->getName()}{if $widget->isMultiple() || $part !== null}[{$part}]{/if}"
+                   value="{$val|escape}"
+               {foreach $attributes as $name => $attribute}
+                   {$name}="{$attribute|escape}"
+               {/foreach}
+             />
+             {/foreach}
+        {else}
+            <input type="text"
+                   name="{$widget->getName()}{if $widget->isMultiple() || $part !== null}[{$part}]{/if}"
+                   value="{$value|escape}"
+               {foreach $attributes as $name => $attribute}
+                   {$name}="{$attribute|escape}"
+               {/foreach}
+             />
+        {/if}
+    {/if}
+    {/function}
+
 {function name="formWidgetOption" form=null row=null part=null}
     {if !$form && isset($block_form)}
         {$form = $block_form}
