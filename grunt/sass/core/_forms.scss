@@ -306,6 +306,7 @@ p.form__label {
   margin-bottom: 10px;
   transition: transform 250ms;
   cursor: move;
+  position: relative;
   &.is-removed {
     transform: scale(0);
   }
@@ -316,39 +317,67 @@ p.form__label {
     vertical-align: middle;
     width: 100px;
     height: 100px;
+    transition: opacity 250ms;
+    .form__assets--sml & {
+      width: 50px;
+      height: 50px;
+    }
   }
-  .is-removable & {
-    cursor: pointer;
-    position: relative;
-    &:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      background: rgba($white, .75);
+  &:hover {
+    img {
+      opacity: .5;
     }
-    &:after {
-      content: '×';
-      display: none;
-      position: absolute;
-      top: 50%;
-      right: 0;
-      left: 0;
-      text-align: center;
-      // font-weight: $font-weight-bold;
-      color: map-get($notice-colors, danger);
-      line-height: 1;
-      @include fsRem(70px);
-      transform: translateY(-60%);
+    .form__remove-asset {
+      opacity: 1;
     }
-    &:hover {
-      // opacity: 1;
-      &:after {
-        display: block;
-      }
-    }
+  }
+  // .is-removable & {
+  //   cursor: pointer;
+  //   position: relative;
+  //   &:before {
+  //     content: '';
+  //     position: absolute;
+  //     top: 0;
+  //     right: 0;
+  //     bottom: 0;
+  //     left: 0;
+  //     background: rgba($white, .75);
+  //   }
+  //   &:after {
+  //     content: '×';
+  //     display: none;
+  //     position: absolute;
+  //     top: 50%;
+  //     right: 0;
+  //     left: 0;
+  //     text-align: center;
+  //     // font-weight: $font-weight-bold;
+  //     color: map-get($notice-colors, danger);
+  //     line-height: 1;
+  //     @include fsRem(70px);
+  //     transform: translateY(-60%);
+  //   }
+  //   &:hover {
+  //     // opacity: 1;
+  //     &:after {
+  //       display: block;
+  //     }
+  //   }
+  // }
+}
+.form__remove-asset {
+  position: absolute;
+  top: 0;
+  right: 5px;
+  @include fsRem(30px);
+  line-height: 1;
+  color: map-get($notice-colors, danger);
+  text-decoration: none;
+  font-weight: $font-weight-bold;
+  opacity: 0;
+  transition: opacity 250ms;
+  &:hover {
+    color: lighten(map-get($notice-colors, danger), 10%);
   }
 }
 .form__add-assets {

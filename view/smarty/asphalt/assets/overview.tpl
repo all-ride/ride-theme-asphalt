@@ -143,4 +143,10 @@
             });
         });
     </script>
+
+    {$script = 'js/assets.js'}
+    {if !isset($app.javascripts[$script]) && $embed}
+        <script src="{$app.url.base}/asphalt/js/assets.js"></script>
+    {/if}
 {/block}
+

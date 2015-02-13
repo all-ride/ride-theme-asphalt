@@ -545,10 +545,13 @@
             {$attributes.class = 'form__assets-input'}
         {/if}
 
-        <div class="form__assets">
+        <div class="form__assets" data-field="{$attributes.id}">
             {$assets = $widget->getAssets()}
             {foreach $assets as $asset}
-                <div class="form__asset" data-id="{$asset->getId()}"><img src="{image src=$asset->getThumbnail() transformation="crop" width=100 height=100}" width="100" height="100"></div>
+                <div class="form__asset" data-id="{$asset->getId()}">
+                    <img src="{image src=$asset->getThumbnail() transformation="crop" width=100 height=100}" width="100" height="100">
+                    <a href="#" class="form__remove-asset">&times;</a>
+                </div>
             {/foreach}
             <a href="#modalAssetsAdd-{$widget->getName()}" class="form__add-assets btn btn--default"><i class="icon icon--plus"></i> add</a>
         </div>
@@ -556,7 +559,7 @@
         {$value = $widget->getValue($part)}
         {if is_array($value)}
             {foreach $value as $part => $val}
-            <input type="text"
+            <input type="hidden"
                    name="{$widget->getName()}{if $widget->isMultiple() || $part !== null}[{$part}]{/if}"
                    value="{$val|escape}"
                {foreach $attributes as $name => $attribute}
@@ -565,7 +568,7 @@
              />
              {/foreach}
         {else}
-            <input type="text"
+            <input type="hidden"
                    name="{$widget->getName()}{if $widget->isMultiple() || $part !== null}[{$part}]{/if}"
                    value="{$value|escape}"
                {foreach $attributes as $name => $attribute}
@@ -586,8 +589,22 @@
                         <iframe src="{$assetsUrl}?embed=1" frameborder="0" width="100%" height="500"></iframe>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn--link" data-dismiss="modal">{translate key="button.cancel"}</button>
-                        <button type="button" class="btn btn--default widget-add-submit">{translate key="button.add"}</button>
+                        <div class="grid">
+                            <div class="grid--bp-xsm__9">
+                                <div class="form__assets form__assets--sml" data-field="{$attributes.id}">
+                                    {$assets = $widget->getAssets()}
+                                    {foreach $assets as $asset}
+                                        <div class="form__asset" data-id="{$asset->getId()}">
+                                            <img src="{image src=$asset->getThumbnail() transformation="crop" width=40 height=40}" width="40" height="40">
+                                            <a href="#" class="form__remove-asset">&times;</a>
+                                        </div>
+                                    {/foreach}
+                                </div>
+                            </div>
+                            <div class="grid--bp-xsm__3 text--right">
+                                <button type="button" class="btn btn--default" data-dismiss="modal">{translate key="button.done"}</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
