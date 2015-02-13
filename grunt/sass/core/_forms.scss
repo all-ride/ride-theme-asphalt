@@ -331,39 +331,9 @@ p.form__label {
       opacity: 1;
     }
   }
-  // .is-removable & {
-  //   cursor: pointer;
-  //   position: relative;
-  //   &:before {
-  //     content: '';
-  //     position: absolute;
-  //     top: 0;
-  //     right: 0;
-  //     bottom: 0;
-  //     left: 0;
-  //     background: rgba($white, .75);
-  //   }
-  //   &:after {
-  //     content: '×';
-  //     display: none;
-  //     position: absolute;
-  //     top: 50%;
-  //     right: 0;
-  //     left: 0;
-  //     text-align: center;
-  //     // font-weight: $font-weight-bold;
-  //     color: map-get($notice-colors, danger);
-  //     line-height: 1;
-  //     @include fsRem(70px);
-  //     transform: translateY(-60%);
-  //   }
-  //   &:hover {
-  //     // opacity: 1;
-  //     &:after {
-  //       display: block;
-  //     }
-  //   }
-  // }
+  .form__assets--sml & {
+    cursor: default;
+  }
 }
 .form__remove-asset {
   position: absolute;

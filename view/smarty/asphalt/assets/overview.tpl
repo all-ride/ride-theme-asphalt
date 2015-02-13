@@ -91,6 +91,7 @@
                 {if $pages > 1}
                     {url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $folder->id] var="urlPagination"}
                     {$urlPagination = "`$urlPagination``$urlSuffix`&flatten=`$flatten`&limit=`$limit`&page=%page%"}
+
                     {pagination page=$page pages=$pages href=$urlPagination}
                 {/if}
             </div>

@@ -545,7 +545,7 @@
             {$attributes.class = 'form__assets-input'}
         {/if}
 
-        <div class="form__assets" data-field="{$attributes.id}"{if $widget->isMultiple()} data-max="999"{else} data-max="1"{/if}>
+        <div class="form__assets form__assets--sortable" data-field="{$attributes.id}"{if $widget->isMultiple()} data-max="999"{else} data-max="1"{/if}>
             {$assets = $widget->getAssets()}
             {foreach $assets as $asset}
                 <div class="form__asset" data-id="{$asset->getId()}">
@@ -557,25 +557,14 @@
         </div>
 
         {$value = $widget->getValue($part)}
-        {if is_array($value)}
-            {foreach $value as $part => $val}
-            <input type="hidden"
-                   name="{$widget->getName()}{if $widget->isMultiple() || $part !== null}[{$part}]{/if}"
-                   value="{$val|escape}"
-               {foreach $attributes as $name => $attribute}
-                   {$name}="{$attribute|escape}"
-               {/foreach}
-             />
-             {/foreach}
-        {else}
-            <input type="hidden"
-                   name="{$widget->getName()}{if $widget->isMultiple() || $part !== null}[{$part}]{/if}"
-                   value="{$value|escape}"
-               {foreach $attributes as $name => $attribute}
-                   {$name}="{$attribute|escape}"
-               {/foreach}
-             />
-        {/if}
+
+        <input type="hidden"
+               name="{$widget->getName()}"
+               value="{$value|escape}"
+           {foreach $attributes as $name => $attribute}
+               {$name}="{$attribute|escape}"
+           {/foreach}
+         />
 
         <div class="modal modal--large fade" id="modalAssetsAdd-{$widget->getName()}" tabindex="-1" role="dialog" aria-labelledby="myModalAssetsAdd" aria-hidden="true">
             <div class="modal-dialog">

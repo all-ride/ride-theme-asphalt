@@ -90,7 +90,7 @@ rideApp.form = (function($, undefined) {
 
         rideApp.form.assets.checkAssetsLimit();
 
-        $this.sortable({
+        $this.filter('.form__assets--sortable').sortable({
             items: '.form__asset'
           })
           .on('sortstop', function(event, ui) {
