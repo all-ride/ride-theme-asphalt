@@ -545,7 +545,7 @@
             {$attributes.class = 'form__assets-input'}
         {/if}
 
-        <div class="form__assets" data-field="{$attributes.id}">
+        <div class="form__assets" data-field="{$attributes.id}"{if $widget->isMultiple()} data-max="999"{else} data-max="1"{/if}>
             {$assets = $widget->getAssets()}
             {foreach $assets as $asset}
                 <div class="form__asset" data-id="{$asset->getId()}">
@@ -591,7 +591,7 @@
                     <div class="modal-footer">
                         <div class="grid">
                             <div class="grid--bp-xsm__9">
-                                <div class="form__assets form__assets--sml" data-field="{$attributes.id}">
+                                <div class="form__assets form__assets--sml" data-field="{$attributes.id}"{if $widget->isMultiple()} data-max="999"{else} data-max="1"{/if}>
                                     {$assets = $widget->getAssets()}
                                     {foreach $assets as $asset}
                                         <div class="form__asset" data-id="{$asset->getId()}">

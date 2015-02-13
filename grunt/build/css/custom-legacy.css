@@ -533,6 +533,7 @@ input.tagmanager {
 .assets-grid .preview {
   position: relative;
   padding-bottom: 100%;
+  background: rgba(41,128,185,0.1);
 }
 
 .assets-grid .preview--folder {
