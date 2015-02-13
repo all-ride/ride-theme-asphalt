@@ -76,8 +76,9 @@ rideApp.form = (function($, undefined) {
   };
 
   var _assets = {
+    allAssets: $('.form__assets'),
     init: function() {
-      var $assets = $('.form__assets');
+      var $assets = rideApp.form.assets.allAssets;
 
       $assets.each(function() {
         var $this = $(this),
@@ -90,11 +91,11 @@ rideApp.form = (function($, undefined) {
 
         rideApp.form.assets.checkAssetsLimit();
 
-        $this.filter('.form__assets--sortable').sortable({
+        $this.sortable({
             items: '.form__asset'
           })
           .on('sortstop', function(event, ui) {
-            rideApp.form.assets.setAssetsOrder($field, $this);
+            rideApp.form.assets.setAssetsOrder($this);
           }).disableSelection();
 
         $add.on('click', function(e) {
@@ -109,9 +110,16 @@ rideApp.form = (function($, undefined) {
         });
       });
     },
-    setAssetsOrder: function($field, $item) {
-        var order = $item.sortable('toArray', {attribute: 'data-id'});
+    setAssetsOrder: function($item) {
+        var order = $item.sortable('toArray', {attribute: 'data-id'}),
+            field = $item.data('field'),
+            $field = $('#' + field);
         $field[0].value = order.join(',');
+
+        // find grouped assets and reorder them...
+        var $linked = rideApp.form.assets.allAssets.filter('[data-field="' + field + '"] ').not($item);
+        $linked.find('.form__asset').detach();
+        $linked.prepend($item.find('.form__asset').clone());
     },
     checkAssetsLimit: function() {
       var $assets = $('.form__assets');
@@ -140,7 +148,7 @@ rideApp.form = (function($, undefined) {
         .addClass('is-removed')
         .on('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function() {
           $asset.remove();
-          rideApp.form.assets.setAssetsOrder($field, $group);
+          rideApp.form.assets.setAssetsOrder($group);
           rideApp.form.assets.checkAssetsLimit();
         });
     },
@@ -151,16 +159,14 @@ rideApp.form = (function($, undefined) {
           assetsFieldId = $assetsField.data('field'),
           $field = $('#' + assetsFieldId),
           $assets = $('[data-field="' + assetsFieldId + '"]'),
-          $items = $assetsField.find('.form__asset'),
+          $items = $assets.find('.form__asset'),
           max = $assetsField.data('max');
 
       // check if the image is already added or the limit is exceded
       if($assets.find('[data-id="' + id + '"]').length || $items.length >= max) {
-        console.log('niet toevoegen');
         return;
       }
 
-      console.log($items.last());
       var $newItem = $('<div class="form__asset" data-id="' + id + '"><img src="' + thumb + '" alt="' + name + '"><a href="#" class="form__remove-asset">×</a></div>');
       if($items.last().length) {
         $newItem.insertAfter($items.last());
@@ -169,7 +175,7 @@ rideApp.form = (function($, undefined) {
       }
       $assets.sortable('refresh');
       rideApp.form.assets.checkAssetsLimit();
-      rideApp.form.assets.setAssetsOrder($field, $assetsField);
+      rideApp.form.assets.setAssetsOrder($assetsField);
     }
   };
 
