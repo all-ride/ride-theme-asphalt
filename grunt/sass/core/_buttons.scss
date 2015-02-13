@@ -22,8 +22,10 @@
     cursor: not-allowed;
   }
 
-  > .icon:first-child {
-    margin: 0 5px;
+  > .icon {
+    &:first-child {
+      margin: 0 5px;
+    }
   }
 
   // + .btn {
@@ -73,12 +75,17 @@
   }
 
   &--small {
-    padding: 5px;
+    padding: 7px 10px;
   }
 
   &--xsmall {
     @include fsRem($font-size-small);
-    padding: 0px 10px;
+    padding: 2px 5px;
+    > .icon {
+      &:first-child {
+        margin: 0;
+      }
+    }
   }
 
   &--block {

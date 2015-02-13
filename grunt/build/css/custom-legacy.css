@@ -522,7 +522,7 @@ input.tagmanager {
   background: #fff;
   position: absolute;
   top: 0;
-  left: 0;
+  left: 10px;
   border: 1px solid #efefef;
 }
 
@@ -530,18 +530,43 @@ input.tagmanager {
   color: #fff;
 }
 
-.assets-grid [data-type=folder] .image {
-  padding-top: 6%;
-  padding-bottom: 11%;
+.assets-grid .preview {
+  position: relative;
+  padding-bottom: 100%;
 }
 
-.assets-grid .image a {
+.assets-grid .preview--folder {
+  background: #f5f6f7;
+}
+
+.assets-grid .preview--folder .image {
+  padding: 25%;
+}
+
+.assets-grid .preview a {
   display: block;
+}
+
+.assets-grid .preview img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  vertical-align: middle;
+  float: none;
+  margin: 0;
+  object-fit: cover;
+}
+
+.assets-grid .preview.is-addable {
+  cursor: pointer;
+}
+
+.asset-items {
+  margin-bottom: 20px;
 }
 
 .assets-grid .order-item {
   position: relative;
-  margin-bottom: 25px;
 }
 
 .assets-grid .order-handle {
@@ -559,4 +584,6 @@ input.tagmanager {
   height: 30px;
   white-space: nowrap;
   text-overflow: ellipsis;
+  color: #fff;
+  font-weight: bold;
 }

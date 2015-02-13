@@ -20,51 +20,73 @@
     padding-left: 15px;
 }
 
-.assets-grid a {
+.assets-grid {
+  a {
     color: #fff;
     text-decoration: none;
     font-weight: bold;
-}
-.assets-grid .checkbox {
+  }
+  .checkbox {
     display: block;
     padding: 1px 5px 3px;
     background: #fff;
     position: absolute;
     top: 0;
-    left: 0;
+    left: 10px;
     border: 1px solid #efefef;
-}
-.assets-grid .icon {
+  }
+  .icon {
     color: #fff;
+  }
+  .preview {
+    position: relative;
+    padding-bottom: 100%;
+    &--folder {
+      background: #f5f6f7;
+      .image {
+        padding: 25%;
+      }
+    }
+    a {
+      display: block;
+    }
+    img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      vertical-align: middle;
+      float: none;
+      margin: 0;
+      object-fit: cover
+    }
+    &.is-addable {
+      cursor: pointer;
+    }
+  }
 }
-
-.assets-grid [data-type=folder] .image {
-    padding-top: 6%;
-    padding-bottom: 11%;
-}
-.assets-grid .image a {
-    display: block;
+.asset-items {
+  margin-bottom: 20px;
 }
 
 .assets-grid .order-item {
-    /* margin: 5px; */
-    position: relative;
-    margin-bottom: 25px;
+  position: relative;
 }
 
 .assets-grid .order-handle {
-    cursor: move;
+  cursor: move;
 }
 
 .assets-grid .name {
-    position: absolute;
-    right: 10px;
-    bottom: 0;
-    left: 10px;
-    background-color: rgba(0,0,0, .5);
-    overflow: hidden;
-    padding: 5px 10px;
-    height: 30px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+  position: absolute;
+  right: 10px;
+  bottom: 0;
+  left: 10px;
+  background-color: rgba(0,0,0, .5);
+  overflow: hidden;
+  padding: 5px 10px;
+  height: 30px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #fff;
+  font-weight: bold;
 }

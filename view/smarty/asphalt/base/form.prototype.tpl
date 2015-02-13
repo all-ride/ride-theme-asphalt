@@ -540,20 +540,26 @@
     {if $widget}
         {$attributes = $widget->getAttributes()}
         {if isset($attributes.class)}
-            {$attributes.class = "`$attributes.class` form__assets"}
+            {$attributes.class = "`$attributes.class` form__assets-input"}
         {else}
-            {$attributes.class = 'form__assets'}
+            {$attributes.class = 'form__assets-input'}
         {/if}
 
-        {$assets = $widget->getAssets()}
-        {foreach $assets as $asset}
-            <img src="{image src=$asset->getThumbnail() transformation="crop" width=150 height=150}">
-        {/foreach}
+        <div class="form__assets" data-field="{$attributes.id}">
+            {$assets = $widget->getAssets()}
+            {foreach $assets as $asset}
+                <div class="form__asset" data-id="{$asset->getId()}">
+                    <img src="{image src=$asset->getThumbnail() transformation="crop" width=100 height=100}" width="100" height="100">
+                    <a href="#" class="form__remove-asset">&times;</a>
+                </div>
+            {/foreach}
+            <a href="#modalAssetsAdd-{$widget->getName()}" class="form__add-assets btn btn--default"><i class="icon icon--plus"></i> add</a>
+        </div>
 
         {$value = $widget->getValue($part)}
         {if is_array($value)}
             {foreach $value as $part => $val}
-            <input type="text"
+            <input type="hidden"
                    name="{$widget->getName()}{if $widget->isMultiple() || $part !== null}[{$part}]{/if}"
                    value="{$val|escape}"
                {foreach $attributes as $name => $attribute}
@@ -562,7 +568,7 @@
              />
              {/foreach}
         {else}
-            <input type="text"
+            <input type="hidden"
                    name="{$widget->getName()}{if $widget->isMultiple() || $part !== null}[{$part}]{/if}"
                    value="{$value|escape}"
                {foreach $attributes as $name => $attribute}
@@ -570,8 +576,41 @@
                {/foreach}
              />
         {/if}
+
+        <div class="modal modal--large fade" id="modalAssetsAdd-{$widget->getName()}" tabindex="-1" role="dialog" aria-labelledby="myModalAssetsAdd" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        {if $widget->getFolderId()}
+                            {url id="assets.folder.overview" parameters=["folder" => $widget->getFolderId(), "locale" => $locale] var="assetsUrl"}
+                        {else}
+                            {url id="assets.overview.locale" parameters=["locale" => $locale] var="assetsUrl"}
+                        {/if}
+                        <iframe src="{$assetsUrl}?embed=1" frameborder="0" width="100%" height="500"></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="grid">
+                            <div class="grid--bp-xsm__9">
+                                <div class="form__assets form__assets--sml" data-field="{$attributes.id}">
+                                    {$assets = $widget->getAssets()}
+                                    {foreach $assets as $asset}
+                                        <div class="form__asset" data-id="{$asset->getId()}">
+                                            <img src="{image src=$asset->getThumbnail() transformation="crop" width=40 height=40}" width="40" height="40">
+                                            <a href="#" class="form__remove-asset">&times;</a>
+                                        </div>
+                                    {/foreach}
+                                </div>
+                            </div>
+                            <div class="grid--bp-xsm__3 text--right">
+                                <button type="button" class="btn btn--default" data-dismiss="modal">{translate key="button.done"}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     {/if}
-    {/function}
+{/function}
 
 {function name="formWidgetOption" form=null row=null part=null}
     {if !$form && isset($block_form)}
@@ -861,7 +900,7 @@
             </div>
             {if !$row->getOption('disable_remove')}
             <div class="grid--bp-med__2">
-                <a href="#" class="btn btn--default btn--small prototype-remove{if $row->isDisabled() || $row->isReadOnly()} disabled{/if}"><i class="icon icon--times"></i></a>
+                <a href="#" class="btn btn--default btn--xsmall prototype-remove{if $row->isDisabled() || $row->isReadOnly()} disabled{/if}"><i class="icon icon--times"></i></a>
             </div>
             {/if}
         </div>

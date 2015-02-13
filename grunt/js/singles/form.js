@@ -7,6 +7,7 @@ rideApp.form = (function($, undefined) {
     sortables();
 
     _selectize();
+    this.assets.init();
 
     $('[data-toggle-dependant]').on('change', function() {
         toggleDependantRows($(this));
@@ -74,6 +75,75 @@ rideApp.form = (function($, undefined) {
     });
   };
 
+  var _assets = {
+    init: function() {
+      var $assets = $('.form__assets');
+
+      $assets.each(function() {
+        var $this = $(this),
+            fieldId = $this.data('field'),
+            $field = $('#' + fieldId),
+            $edit = $this.find('.form__edit-assets'),
+            editText = $edit.text(),
+            $add = $this.find('.form__add-assets'),
+            isRemovable = false;
+
+        $this.sortable({
+            items: '.form__asset'
+          })
+          .on('sortstop', function(event, ui) {
+            rideApp.form.assets.setAssetsOrder($field, $this);
+          }).disableSelection();
+
+        $add.on('click', function(e) {
+          e.preventDefault();
+          var assetsModal = $(this).attr('href');
+          $(assetsModal).modal('show');
+        });
+
+        $this.on('click', '.form__remove-asset', function(e) {
+          rideApp.form.assets.removeAsset(this);
+        });
+      });
+    },
+    setAssetsOrder: function($field, $item) {
+        var order = $item.sortable('toArray', {attribute: 'data-id'});
+        $field[0].value = order.join(',');
+    },
+    removeAsset: function(element) {
+      var $elem = $(element).parent(),
+          $group = $elem.parent(),
+          assetId = $elem.data('id'),
+          field = $group.data('field'),
+          $field = $('#' + field),
+          $asset = $('[data-field="' + field + '"] [data-id="' + assetId + '"]');
+
+      $asset
+        .addClass('is-removed')
+        .on('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function() {
+          $asset.remove();
+          rideApp.form.assets.setAssetsOrder($field, $group);
+        });
+    },
+    addAsset: function(id, name, thumb) {
+      // Get the open model
+      var $openModal = $('.modal.in'),
+          $assetsField = $openModal.find('.form__assets')
+          assetsFieldId = $assetsField.data('field'),
+          $field = $('#' + assetsFieldId),
+          $assets = $('[data-field="' + assetsFieldId + '"]');
+
+      // check if the image is already added
+      if($assets.find('[data-id="' + id + '"]').length) {
+        return;
+      }
+
+      $('<div class="form__asset" data-id="' + id + '"><img src="' + thumb + '" alt="' + name + '"><a href="#" class="form__remove-asset">×</a></div>').insertAfter($assets.find('.form__asset:last'));
+      $assets.sortable('refresh');
+      rideApp.form.assets.setAssetsOrder($field, $assetsField);
+    }
+  };
+
   var toggleDependantRows = function($input) {
     var $parent = $input.parents('form'),
         $styleClass = $input.data('toggle-dependant'),
@@ -86,7 +156,8 @@ rideApp.form = (function($, undefined) {
   };
 
   return {
-    initialize: _initialize
+    initialize: _initialize,
+    assets: _assets
   };
 })(jQuery);
 
