@@ -558,7 +558,7 @@
 
         {$value = $widget->getValue($part)}
 
-        <input type="text"
+        <input type="hidden"
                name="{$widget->getName()}"
                value="{$value|escape}"
            {foreach $attributes as $name => $attribute}
