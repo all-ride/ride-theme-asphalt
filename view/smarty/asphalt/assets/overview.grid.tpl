@@ -13,11 +13,11 @@
             </label>
         {/if}
         <div class="name">
+            <span class="option{if !$flatten} order-handle{/if}">
+                <i class="icon icon--arrows"></i>
+            </span>
             {if $embed}
-                <span class="option{if !$flatten} order-handle{/if}">
-                    <i class="icon icon--arrows"></i>
-                </span>
-                <a href="{url id="assets.folder.edit" parameters=["locale" => $locale, "folder" => $item->getId()]}?referer={$app.url.request|urlencode}">
+                <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $item->id]}{$urlSuffix}">
                     {$item->getName()}
                 </a>
             {else}
@@ -38,15 +38,12 @@
             </label>
         {/if}
         <div class="name">
+            <span class="option{if !$flatten} order-handle{/if}">
+                <i class="icon icon--arrows"></i>
+            </span>
             {if $embed}
-                <span class="option{if !$flatten} order-handle{/if}">
-                    <i class="icon icon--arrows"></i>
-                </span>
                 <span>{$item->getName()}</span>
             {else}
-                <span class="option{if !$flatten} order-handle{/if}">
-                    <i class="icon icon--arrows"></i>
-                </span>
                 <a href="{url id="assets.asset.edit" parameters=["locale" => $locale, "asset" => $item->getId()]}?referer={$app.url.request|urlencode}">
                     {$item->getName()}
                 </a>
