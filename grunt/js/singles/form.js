@@ -100,8 +100,14 @@ rideApp.form = (function($, undefined) {
 
         $add.on('click', function(e) {
           e.preventDefault();
-          var assetsModal = $(this).attr('href');
-          $(assetsModal).modal('show');
+          var assetsModal = $(this).attr('href'),
+              $modal = $(assetsModal),
+              $iframe = $modal.find('iframe');
+
+          if($iframe.attr('src') === undefined) {
+            $iframe.attr('src', $iframe.data('src'));
+          }
+          $modal.modal('show');
         });
 
         $this.on('click', '.form__remove-asset', function(e) {
