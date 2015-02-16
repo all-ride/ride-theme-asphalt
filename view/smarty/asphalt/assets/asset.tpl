@@ -2,6 +2,8 @@
 
 {block name="head_title" prepend}{if $asset->getId()}{$asset->getName()}{else}{translate key="button.add.asset"}{/if} - {translate key="title.assets"} - {/block}
 
+{block name="taskbar"}{if !$embed}{$smarty.block.parent}{/if}{/block}
+
 {block name="taskbar_panels" append}
     {if $asset->getId()}
         {url id="assets.asset.edit" parameters=["locale" => "%locale%", "asset" => $asset->getId()] var="url"}

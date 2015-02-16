@@ -7,6 +7,7 @@ rideApp.assets = (function($, undefined) {
       $body = $('body');
 
   var _initialize = function() {
+    parent.rideApp.form.assets.resizeIframe(parent, $document.height());
     $document.on('click', '.preview.is-addable', function(e) {
       e.preventDefault();
       var $photo = $(this).parent(),

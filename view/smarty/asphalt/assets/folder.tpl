@@ -2,6 +2,8 @@
 
 {block name="head_title" prepend}{if $folder->getId()}{$folder->getName()}{else}{translate key="button.add.folder"}{/if} - {translate key="title.assets"} - {/block}
 
+{block name="taskbar"}{if !$embed}{$smarty.block.parent}{/if}{/block}
+
 {block name="taskbar_panels" append}
     {if $folder->getId()}
         {url id="assets.folder.edit" parameters=["locale" => "%locale%", "folder" => $folder->getId()] var="url"}

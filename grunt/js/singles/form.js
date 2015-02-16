@@ -77,6 +77,7 @@ rideApp.form = (function($, undefined) {
 
   var _assets = {
     allAssets: $('.form__assets'),
+    iframes: [],
     init: function() {
       var $assets = rideApp.form.assets.allAssets;
 
@@ -104,6 +105,7 @@ rideApp.form = (function($, undefined) {
               $modal = $(assetsModal),
               $iframe = $modal.find('iframe');
 
+          // check if there is an other iframe with this source on the page
           if($iframe.attr('src') === undefined) {
             $iframe.attr('src', $iframe.data('src'));
           }
@@ -182,6 +184,10 @@ rideApp.form = (function($, undefined) {
       $assets.sortable('refresh');
       rideApp.form.assets.checkAssetsLimit();
       rideApp.form.assets.setAssetsOrder($assetsField);
+    },
+    resizeIframe: function(doc, height) {
+      console.log($('iframe', doc.document));
+      $('iframe', doc.document).height(height);
     }
   };
 
