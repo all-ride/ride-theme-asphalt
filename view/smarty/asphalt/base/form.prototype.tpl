@@ -553,7 +553,7 @@
                     <a href="#" class="form__remove-asset">&times;</a>
                 </div>
             {/foreach}
-            <a href="#modalAssetsAdd-{$widget->getName()}" class="form__add-assets btn btn--default"><i class="icon icon--plus"></i> add</a>
+            <a href="#modalAssetsAdd-{$widget->getName()}" class="form__add-assets btn btn--default"><i class="icon icon--plus"></i> {'button.add'|translate}</a>
         </div>
 
         {$value = $widget->getValue($part)}

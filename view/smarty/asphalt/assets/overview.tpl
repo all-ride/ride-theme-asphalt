@@ -36,20 +36,20 @@
     </div>
     <div class="actions clearfix">
         <div class="btn-group">
-            <a href="{url id="assets.asset.add" parameters=["locale" => $locale]}?folder={$folder->id}&referer={$app.url.request|urlencode}" class="btn btn--default btn--small">
+            <a href="{url id="assets.asset.add" parameters=["locale" => $locale]}?folder={$folder->id}&embed={$embed}&referer={$app.url.request|urlencode}" class="btn btn--default btn--small">
                {translate key="button.add.asset"}
             </a>
-            <a href="{url id="assets.folder.add" parameters=["locale" => $locale]}?folder={$folder->id}&referer={$app.url.request|urlencode}" class="btn btn--default btn--small">
+            <a href="{url id="assets.folder.add" parameters=["locale" => $locale]}?folder={$folder->id}&embed={$embed}&referer={$app.url.request|urlencode}" class="btn btn--default btn--small">
                {translate key="button.add.folder"}
             </a>
         </div>
 
         {if !$embed}
             <div class="btn-group">
-                <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $folder->id]}?view=grid&type={$filter.type}&date={$filter.date}&flatten={$flatten}" class="btn btn--default btn--small{if $view == "grid"} active{/if}">
+                <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $folder->id]}?view=grid&type={$filter.type}&date={$filter.date}&flatten={$flatten}&embed={$embed}" class="btn btn--default btn--small{if $view == "grid"} active{/if}">
                     <i class="icon icon--th"></i>
                 </a>
-                <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $folder->id]}?view=list&type={$filter.type}&date={$filter.date}&flatten={$flatten}" class="btn btn--default btn--small{if $view == "list"} active{/if}">
+                <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $folder->id]}?view=list&type={$filter.type}&date={$filter.date}&flatten={$flatten}&embed={$embed}" class="btn btn--default btn--small{if $view == "list"} active{/if}">
                     <i class="icon icon--th-list"></i>
                 </a>
             </div>
@@ -85,27 +85,26 @@
                 <button class="btn btn--default btn--small" type="submit">{translate key="button.apply"}</button>
             </div>
         </form>
-        {* {include file="base/helper.prototype"} *}
-        <div class="grid">
-            <div class="grid--bp-med__6">
-                {if $pages > 1}
-                    {url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $folder->id] var="urlPagination"}
-                    {$urlPagination = "`$urlPagination``$urlSuffix`&flatten=`$flatten`&limit=`$limit`&page=%page%"}
-
-                    {pagination page=$page pages=$pages href=$urlPagination}
-                {/if}
-            </div>
-            <div class="grid--bp-med__6 text--right">
-                <form action="{$app.url.request}" class="form-horizontal form-limit" method="POST" role="form">
-                    <select name="limit" class="form-control">
-                        <option value="12"{if $limit == 12} selected="selected"{/if}>12</option>
-                        <option value="24"{if $limit == 24} selected="selected"{/if}>24</option>
-                        <option value="48"{if $limit == 48} selected="selected"{/if}>48</option>
-                        <option value="96"{if $limit == 96} selected="selected"{/if}>96</option>
-                    </select>
-                    <button class="btn btn--default btn--small" type="submit">{translate key="button.apply"}</button>
-                </form>
-            </div>
+    </div>
+    {include file="base/helper.prototype"}
+    <div class="grid">
+        <div class="grid--bp-med__6 text--left">
+            {if $pages > 1}
+                {url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $folder->id] var="urlPagination"}
+                {$urlPagination = "`$urlPagination``$urlSuffix`&flatten=`$flatten`&limit=`$limit`&page=%page%"}
+                {pagination pagination=$pagination}
+            {/if}
+        </div>
+        <div class="grid--bp-med__6 text--right">
+            <form action="{$app.url.request}" class="form-horizontal form-limit" method="POST" role="form">
+                <select name="limit" class="form-control">
+                    <option value="12"{if $limit == 12} selected="selected"{/if}>12</option>
+                    <option value="24"{if $limit == 24} selected="selected"{/if}>24</option>
+                    <option value="48"{if $limit == 48} selected="selected"{/if}>48</option>
+                    <option value="96"{if $limit == 96} selected="selected"{/if}>96</option>
+                </select>
+                <button class="btn btn--default btn--small" type="submit">{translate key="button.apply"}</button>
+            </form>
         </div>
     </div>
 

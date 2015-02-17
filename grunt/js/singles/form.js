@@ -112,7 +112,7 @@ rideApp.form = (function($, undefined) {
           $modal.modal('show');
         });
 
-        $this.on('click', '.form__remove-asset', function(e) {
+        $document.on('click', '.form__remove-asset', function(e) {
           e.preventDefault();
           rideApp.form.assets.removeAsset(this);
         });
