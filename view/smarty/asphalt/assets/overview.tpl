@@ -36,20 +36,20 @@
     </div>
     <div class="actions clearfix">
         <div class="btn-group">
-            <a href="{url id="assets.asset.add" parameters=["locale" => $locale]}?folder={$folder->id}&referer={$app.url.request|urlencode}" class="btn btn--default btn--small">
+            <a href="{url id="assets.asset.add" parameters=["locale" => $locale]}?folder={$folder->id}&embed={$embed}&referer={$app.url.request|urlencode}" class="btn btn--default btn--small">
                {translate key="button.add.asset"}
             </a>
-            <a href="{url id="assets.folder.add" parameters=["locale" => $locale]}?folder={$folder->id}&referer={$app.url.request|urlencode}" class="btn btn--default btn--small">
+            <a href="{url id="assets.folder.add" parameters=["locale" => $locale]}?folder={$folder->id}&embed={$embed}&referer={$app.url.request|urlencode}" class="btn btn--default btn--small">
                {translate key="button.add.folder"}
             </a>
         </div>
 
         {if !$embed}
             <div class="btn-group">
-                <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $folder->id]}?view=grid&type={$filter.type}&date={$filter.date}&flatten={$flatten}" class="btn btn--default btn--small{if $view == "grid"} active{/if}">
+                <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $folder->id]}?view=grid&type={$filter.type}&date={$filter.date}&flatten={$flatten}&embed={$embed}" class="btn btn--default btn--small{if $view == "grid"} active{/if}">
                     <i class="icon icon--th"></i>
                 </a>
-                <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $folder->id]}?view=list&type={$filter.type}&date={$filter.date}&flatten={$flatten}" class="btn btn--default btn--small{if $view == "list"} active{/if}">
+                <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $folder->id]}?view=list&type={$filter.type}&date={$filter.date}&flatten={$flatten}&embed={$embed}" class="btn btn--default btn--small{if $view == "list"} active{/if}">
                     <i class="icon icon--th-list"></i>
                 </a>
             </div>
