@@ -68,11 +68,13 @@ rideApp.form = (function($, undefined) {
   };
 
   var _selectize = function() {
-    var $form = $('.form--selectize');
-    $('.form--selectize select:visible').selectize();
-    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-        $('.form--selectize select:visible').selectize();
-    });
+    if (jQuery.fn.selectize) {
+      var $form = $('.form--selectize');
+      $('.form--selectize select:visible').selectize();
+      $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+          $('.form--selectize select:visible').selectize();
+      });
+    }
   };
 
   var _assets = {
