@@ -51,7 +51,7 @@ rideApp.form = (function($, undefined) {
     $(document).on('click', '.prototype-remove:not(.disabled)', function(e) {
       e.preventDefault();
       if (confirm('Are you sure you want to remove this item?')) {
-        $(this).parents('.collection-control').remove();
+        $(this).closest('.collection-control').remove();
       }
     });
   };
