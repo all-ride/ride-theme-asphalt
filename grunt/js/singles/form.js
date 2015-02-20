@@ -46,6 +46,8 @@ rideApp.form = (function($, undefined) {
       index++;
 
       parent.attr('data-index', index);
+
+      parent.trigger('collectionAdded');
     });
 
     $(document).on('click', '.prototype-remove:not(.disabled)', function(e) {
