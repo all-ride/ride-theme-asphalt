@@ -14,14 +14,14 @@
 {/block}
 
 {block name="content_body" append}
-    <div class="btn--group">
-        <a class="btn btn--default" href="{url id="taxonomy.term.add" parameters=["vocabulary" => $vocabulary->getId(), "locale" => $locale]}">{translate key="button.term.add"}</a>
-        <a class="btn btn--default" href="{url id="taxonomy.vocabulary.list"}">{translate key="button.vocabulary.manage"}</a>
-    </div>
+    {url id="taxonomy.term.add" parameters=["vocabulary" => $vocabulary->getId(), "locale" => $locale] var="urlTermAdd"}
+    {url id="taxonomy.vocabulary.list" var="urlVocabularies"}
 
-    <p></p>
+    {$tableActions = []}
+    {$tableActions.$urlTermAdd = "button.term.add"|translate}
+    {$tableActions.$urlVocabularies = "button.vocabulary.manage"|translate}
 
-    {include file="base/table" table=$table tableForm=$form}
+    {include file="base/table" table=$table tableForm=$form tableActions=$tableActions}
 {/block}
 
 {block name="scripts" append}

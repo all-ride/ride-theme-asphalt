@@ -11,7 +11,16 @@
 
         {if $table->hasOrderMethods() || $table->hasSearch()}
             <div class="grid table-header clearfix">
-                <div class="grid--bp-med__4"></div>
+                <div class="grid--bp-med__4">
+                    {if isset($tableActions) && $tableActions}
+                        <div class="btn--group">
+                            {foreach $tableActions as $url => $dataAction}
+                                <a class="btn btn--default" href="{$url}">{$dataAction}</a>
+                            {/foreach}
+
+                        </div>
+                    {/if}
+                </div>
                 <div class="grid--bp-med__4 search form__item">
                     {if $table->hasSearch()}
                         {block name="table.search"}
