@@ -21,7 +21,7 @@
                     {$item->getName()}
                 </a>
             {else}
-                <a href="{url id="assets.folder.edit" parameters=["locale" => $locale, "folder" => $item->getId()]}?referer={$app.url.request|urlencode}">
+                <a href="{url id="assets.folder.edit" parameters=["locale" => $locale, "folder" => $item->getId()]}?embed={$embed}&referer={$app.url.request|urlencode}">
                     {$item->getName()}
                 </a>
             {/if}
@@ -44,7 +44,7 @@
             {if $embed}
                 <span>{$item->getName()}</span>
             {else}
-                <a href="{url id="assets.asset.edit" parameters=["locale" => $locale, "asset" => $item->getId()]}?referer={$app.url.request|urlencode}">
+                <a href="{url id="assets.asset.edit" parameters=["locale" => $locale, "asset" => $item->getId()]}?embed={$embed}&referer={$app.url.request|urlencode}">
                     {$item->getName()}
                 </a>
             {/if}

@@ -22,13 +22,13 @@
 
     <div class="breadcrumb">
         <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="breadcrumb__item{if $breadcrumbs|count == 0} breadcrumb__item--active{/if}">
-          <a href="{url id="assets.overview.locale" parameters=["locale" => $locale]}?view={$view}&flatten={$flatten}&embed={$embed}" itemprop="url">
+          <a href="{url id="assets.overview.locale" parameters=["locale" => $locale]}?view={$view}&flatten={$flatten}&embed={$embed}&limit={$limit}" itemprop="url">
             <span itemprop="title">{translate key="title.assets"}</span>
           </a>{if $breadcrumbs|count != 0}  &rsaquo;{/if}
         </span>
         {foreach $breadcrumbs as $id => $name}
             <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="breadcrumb__item{if $name@last} breadcrumb__item--active{/if}">
-              <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $id]}?view={$view}&flatten={$flatten}&embed={$embed}" itemprop="url">
+              <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $id]}?view={$view}&flatten={$flatten}&embed={$embed}&limit={$limit}" itemprop="url">
                 <span itemprop="title">{$name}</span>
               </a>{if !$name@last} &rsaquo;{/if}
             </span>

@@ -9,14 +9,21 @@
 {/block}
 
 {block name="content" append}
-    <div class="btn--group">
-        <a class="btn btn--default" href="{url id="system.security.role.add"}?referer={$app.url.request|escape}">{translate key="button.role.add"}</a>
-        <a class="btn btn--default" href="{url id="system.security.user"}">{translate key="button.users.manage"}</a>
-    </div>
+    {$tableActions = []}
+    {$referer = $app.url.request|escape}
 
-    <p></p>
+    {url id="system.security.role.add" var="urlRoleAdd"}
+    {url id="system.security.user" var="urlUsers"}
 
-    {include file="base/table" table=$table tableForm=$form}
+    {isGranted url=$urlRoleAdd}
+        {$urlRoleAdd = "`$urlRoleAdd`?referer=`$referer`"}
+        {$tableActions.$urlRoleAdd = "button.role.add"|translate}
+    {/isGranted}
+    {isGranted url=$urlUsers}
+        {$tableActions.$urlUsers = "button.users.manage"|translate}
+    {/isGranted}
+
+    {include file="base/table" table=$table tableForm=$form tableActions=$tableActions}
 {/block}
 
 {block name="scripts" append}

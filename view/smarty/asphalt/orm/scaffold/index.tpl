@@ -15,15 +15,7 @@
 {/block}
 
 {block name="content_body" append}
-    <div class="btn--group">
-    {foreach $actions as $url => $dataAction}
-        <a href="{$url}" class="btn btn--default">{$dataAction}</a>
-    {/foreach}
-    </div>
-
-    <p></p>
-
-    {include file="base/table" table=$table tableForm=$form}
+    {include file="base/table" table=$table tableForm=$form tableActions=$actions}
 
     {if $exports}
         {translate key="orm.label.export"}
