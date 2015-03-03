@@ -352,3 +352,10 @@ p.form__label {
     display: none;
   }
 }
+
+.form__countdown {
+  @include fsRem($font-size-small);
+  font-weight: $font-weight-bold;
+  text-align: right;
+  color: $gray-50;
+}

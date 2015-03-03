@@ -9,6 +9,8 @@ rideApp.form = (function($, undefined) {
     _selectize();
     this.assets.init();
 
+    this.checkLength.init($('[maxlength]'));
+
     $('[data-toggle-dependant]').on('change', function() {
         toggleDependantRows($(this));
     }).each(function() {
@@ -69,6 +71,27 @@ rideApp.form = (function($, undefined) {
       select: false,
       scroll: true
     });
+  };
+
+  var _checkLength = {
+    init: function($field) {
+      if(!$field.length) return false;
+      var maxChars = $field.attr('maxlength');
+      if(!maxChars) return false;
+      var $countDown = $('<div class="form__countdown" />').insertAfter($field);
+      rideApp.form.checkLength.updateCount($field, $countDown, maxChars);
+
+      $field.on('keyup', function() {
+        rideApp.form.checkLength.updateCount($field, $countDown, maxChars);
+      });
+    },
+    updateCount: function($field, $label, max) {
+      var length = $field.val().length,
+          maxChars = parseInt(max, 10),
+          count = (maxChars - length) >= 0 ? (maxChars - length) : 0;
+      $label.text(count);
+      if(count <= 0) return false;
+    }
   };
 
   var _selectize = function() {
@@ -210,6 +233,7 @@ rideApp.form = (function($, undefined) {
 
   return {
     initialize: _initialize,
+    checkLength: _checkLength,
     assets: _assets
   };
 })(jQuery);
