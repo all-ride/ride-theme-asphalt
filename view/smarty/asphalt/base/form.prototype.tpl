@@ -301,6 +301,17 @@
             {$attributes.class = 'form__text'}
         {/if}
 
+        {$validators = $row->getValidators()}
+        {foreach $validators as $validator}
+            {foreach $validator->getOptions() as $option => $value}
+                {if $option == 'minimum'}
+                    {$attributes.minlength = $value}
+                {else if $option == 'maximum'}
+                    {$attributes.maxlength = $value}
+                {/if}
+            {/foreach}
+        {/foreach}
+
         {$value = $widget->getValue($part)}
         {if is_array($value)}
             {foreach $value as $part => $val}
@@ -370,6 +381,17 @@
             {$attributes.class = 'form__text'}
         {/if}
 
+        {$validators = $row->getValidators()}
+        {foreach $validators as $validator}
+            {foreach $validator->getOptions() as $option => $value}
+                {if $option == 'minimum'}
+                    {$attributes.minlength = $value}
+                {else if $option == 'maximum'}
+                    {$attributes.maxlength = $value}
+                {/if}
+            {/foreach}
+        {/foreach}
+
         <input type="email"
                name="{$widget->getName()}{if $part}[{$part}]{/if}"
                value="{$widget->getValue($part)|escape}"
@@ -426,6 +448,17 @@
             {$attributes.class = 'form__text'}
         {/if}
 
+        {$validators = $row->getValidators()}
+        {foreach $validators as $validator}
+            {foreach $validator->getOptions() as $option => $value}
+                {if $option == 'minimum'}
+                    {$attributes.minlength = $value}
+                {else if $option == 'maximum'}
+                    {$attributes.maxlength = $value}
+                {/if}
+            {/foreach}
+        {/foreach}
+
         <input type="website"
                name="{$widget->getName()}{if $part}[{$part}]{/if}"
                value="{$widget->getValue($part)|escape}"
@@ -454,6 +487,17 @@
             {$attributes.class = 'form__text'}
         {/if}
 
+        {$validators = $row->getValidators()}
+        {foreach $validators as $validator}
+            {foreach $validator->getOptions() as $option => $value}
+                {if $option == 'minimum'}
+                    {$attributes.minlength = $value}
+                {else if $option == 'maximum'}
+                    {$attributes.maxlength = $value}
+                {/if}
+            {/foreach}
+        {/foreach}
+
         <input type="password"
                name="{$widget->getName()}{if $part}[{$part}]{/if}"
            {foreach $attributes as $name => $attribute}
@@ -479,6 +523,17 @@
         {else}
             {$attributes.class = 'form__text'}
         {/if}
+
+        {$validators = $row->getValidators()}
+        {foreach $validators as $validator}
+            {foreach $validator->getOptions() as $option => $value}
+                {if $option == 'minimum'}
+                    {$attributes.minlength = $value}
+                {else if $option == 'maximum'}
+                    {$attributes.maxlength = $value}
+                {/if}
+            {/foreach}
+        {/foreach}
 
         {$value = $widget->getValue($part)}
         {if is_array($value)}
@@ -516,6 +571,17 @@
         {else}
             {$attributes.class = 'form__text'}
         {/if}
+
+        {$validators = $row->getValidators()}
+        {foreach $validators as $validator}
+            {foreach $validator->getOptions() as $option => $value}
+                {if $option == 'minimum'}
+                    {$attributes.minlength = $value}
+                {else if $option == 'maximum'}
+                    {$attributes.maxlength = $value}
+                {/if}
+            {/foreach}
+        {/foreach}
 
         <textarea name="{$widget->getName()}{if $part}[{$part}]{/if}"
            {foreach $attributes as $name => $attribute}
