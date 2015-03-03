@@ -46,7 +46,7 @@
 
             {$errors = $form->getValidationErrors($row->getName())}
             {if $errors}
-            <div class="form__group has-error">
+            <div class="form__group form__error">
                 {call formWidgetErrors form=$form row=$row}
             </div>
             {/if}
@@ -55,7 +55,7 @@
         {elseif $type == 'collection'}
             {$errors = $form->getValidationErrors($row->getName())}
 
-            <div class="form__group row-{$row->getName()|replace:'[':''|replace:']':''}{if $row->isRequired()} required{/if}{if $row->isDisabled()} disabled{/if}{if $row->isReadOnly()} readonly{/if} clearfix{if $errors} has-error{/if}{if $class} {$class}{/if}"{if $row->getOption('order')} data-order="true"{/if}>
+            <div class="form__group row-{$row->getName()|replace:'[':''|replace:']':''}{if $row->isRequired()} required{/if}{if $row->isDisabled()} disabled{/if}{if $row->isReadOnly()} readonly{/if} clearfix{if $errors} form__error{/if}{if $class} {$class}{/if}"{if $row->getOption('order')} data-order="true"{/if}>
                 <h2 class="heading--3">{$row->getLabel()}</h2>
 
                 {$description = $row->getDescription()}
@@ -69,7 +69,7 @@
                     {call formWidgetCollection form=$form row=$row part=$part}
 
                    {if $errors}
-                        <ul class="text-danger">
+                        <ul class="form__error-list">
                         {foreach $errors as $error => $null}
                             <li>{$error}</li>
                         {/foreach}
@@ -91,7 +91,7 @@
                 {$errors = array()}
             {/if}
 
-            <div class="form__item form__item--{$row->getName()|replace:'[':''|replace:']':''}{if $row->isRequired()} form__item--required{/if}{if $row->isDisabled()} form__item--disabled{/if}{if $row->isReadOnly()} form__item--readonly{/if} clearfix{if $errors} has-error{/if}{if $class} {$class}{/if}">
+            <div class="form__item form__item--{$row->getName()|replace:'[':''|replace:']':''}{if $row->isRequired()} form__item--required{/if}{if $row->isDisabled()} form__item--disabled{/if}{if $row->isReadOnly()} form__item--readonly{/if} clearfix{if $errors} form__error{/if}{if $class} {$class}{/if}">
                 {if ($row->getLabel()|replace:' ':'')}
                     <label class="form__label" for="{$widget->getId()}">{if $type != 'button'}{$row->getLabel()}{if $type != 'component' && !$row->isRequired()} <small>({translate key="label.optional"})</small>{/if}{/if}</label>
                 {/if}
@@ -99,7 +99,7 @@
                     {call formWidget form=$form row=$row part=$part}
 
                     {if $errors}
-                        <ul class="text-danger">
+                        <ul class="form__error-list">
                         {foreach $errors as $error}
                             <li>{$error->getCode()|translate:$error->getParameters()}</li>
                         {/foreach}
@@ -471,7 +471,6 @@
     {if is_string($row) && $form}
         {$row = $form->getRow($row)}
     {/if}
-
     {$widget = $row->getWidget()}
     {if $widget}
         {$attributes = $widget->getAttributes()}
