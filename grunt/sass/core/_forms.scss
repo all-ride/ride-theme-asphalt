@@ -22,7 +22,9 @@
     cursor: not-allowed;
     background: $gray-0;
   }
-  .parsley-error & {
+  .parsley-error &,
+  .form__error & {
+    border-color: map-get($notice-colors, 'danger');
     background-color: lighten(map-get($notice-colors, 'danger'), 52%);
   }
 }
@@ -283,6 +285,7 @@ p.form__label {
 .parsley-errors-container {
   clear: both;
 }
+.form__error-list,
 .parsley-errors-list {
   @include listreset;
   @include fsRem(13px);
