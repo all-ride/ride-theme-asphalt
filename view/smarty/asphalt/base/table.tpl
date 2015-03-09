@@ -15,7 +15,7 @@
                     {if isset($tableActions) && $tableActions}
                         <div class="btn--group">
                             {foreach $tableActions as $url => $dataAction}
-                                <a class="btn btn--default" href="{$url}">{$dataAction}</a>
+                                <a class="btn btn--brand" href="{$url}"><i class="icon icon--plus"></i> {$dataAction}</a>
                             {/foreach}
 
                         </div>
