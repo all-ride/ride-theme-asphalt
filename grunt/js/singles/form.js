@@ -89,7 +89,7 @@ rideApp.form = (function($, undefined) {
       var length = $field.val().length,
           maxChars = parseInt(max, 10),
           count = (maxChars - length) >= 0 ? (maxChars - length) : 0;
-      $label.text(count);
+      $label.text(count + '/' + max);
       if(count <= 0) return false;
     }
   };
