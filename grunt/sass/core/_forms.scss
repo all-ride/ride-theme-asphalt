@@ -6,6 +6,7 @@
   background-color: $white;
   color: $color-text;
   line-height: normal;
+  border-radius: $border-radius-small;
   &:focus {
     outline: none;
     border-color: $gray-75;
