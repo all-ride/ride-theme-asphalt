@@ -78,7 +78,7 @@
             </div>
             <div class="asset-actions">
                 <input type="checkbox" name="all" class="select-all" />
-                <select name="action" class="form-control">
+                <select name="action" class="form-control form__select form__select--inline">
                     <option value="">- {translate key="label.actions.bulk"} -</option>
                     <option value="delete">{translate key="button.delete"}</option>
                 </select>
@@ -97,7 +97,7 @@
         </div>
         <div class="grid--bp-med__6 text--right">
             <form action="{$app.url.request}" class="form-horizontal form-limit" method="POST" role="form">
-                <select name="limit" class="form-control">
+                <select name="limit" class="form-control form__select form__select--inline">
                     <option value="12"{if $limit == 12} selected="selected"{/if}>12</option>
                     <option value="24"{if $limit == 24} selected="selected"{/if}>24</option>
                     <option value="48"{if $limit == 48} selected="selected"{/if}>48</option>

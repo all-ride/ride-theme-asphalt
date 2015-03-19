@@ -229,6 +229,10 @@ p.form__label {
   background: none;
   display: block;
   cursor: pointer;
+  vertical-align: middle;
+  &--inline {
+    display: inline-block;
+  }
 }
 
 .form__radio,

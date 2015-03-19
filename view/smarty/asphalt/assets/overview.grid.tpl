@@ -1,4 +1,4 @@
-<div class="grid grid--bp-xsm-3-col grid--bp-sml-6-col" data-order="true">
+<div class="grid grid--2-col grid--bp-xsm-4-col grid--bp-sml-8-col" data-order="true">
 {foreach $items as $item}
 <div class="grid__item order-item" data-type="{$item->getType()}" data-id="{$item->getId()}">
     {if $item->getType() == 'folder'}

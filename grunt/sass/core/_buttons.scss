@@ -35,12 +35,10 @@
   // Modifiers
   &--default {
     @include button-variant($color-text, $gray-0, $gray-25);
-    &:hover,
-    &:focus,
     &:active,
     &.active,
     .open > &.dropdown-toggle {
-      background-color: $gray-0;
+      background-color: $gray-25;
     }
   }
   &--brand {
