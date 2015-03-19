@@ -19,7 +19,7 @@
     &:first-of-type {
       border-top-left-radius: $border-radius-base;
       border-bottom-left-radius: $border-radius-base;
-      border-right: 0;
+      border-right-width: 1px;
     }
     &:last-of-type {
       border-top-right-radius: $border-radius-base;
