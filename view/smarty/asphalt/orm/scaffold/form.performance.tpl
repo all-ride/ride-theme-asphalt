@@ -15,7 +15,7 @@
 {block name="content" append}
     {include file="base/form.prototype"}
 
-    <form id="{$form->getId()}" class="form-horizontal" action="{$app.url.request}" method="POST" role="form" enctype="multipart/form-data">
+    <form id="{$form->getId()}" class="form" action="{$app.url.request}" method="POST" role="form" enctype="multipart/form-data">
         <div class="form__group">
             <div class="form-group row-date clearfix">
                 <label for="form-event-dateStart" class="grid--bp-med__2 control-label">{translate key="label.date"}</label>
@@ -90,11 +90,9 @@
 
             {call formRows form=$form}
 
-            <div class="form__group">
-                <div class="grid--bp-med__offset-2 grid--bp-med__10">
-                    <input type="submit" class="btn btn--default" value="{translate key="button.save"}" />
-                    <a class="btn btn--link" href="{$referer}">{translate key="button.cancel"}</a>
-                </div>
+            <div class="form__actions">
+                <button type="submit" class="btn btn--brand">{translate key="button.save"}</button>
+                <a class="btn btn--link" href="{$referer}">{translate key="button.cancel"}</a>
             </div>
         </div>
     </form>

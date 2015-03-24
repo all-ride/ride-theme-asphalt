@@ -11,14 +11,12 @@
 {block name="content" append}
     {include file="base/form.prototype"}
 
-    <form id="{$form->getId()}" class="form-horizontal" action="{$app.url.request}" method="POST" role="form">
+    <form id="{$form->getId()}" class="form" action="{$app.url.request}" method="POST" role="form">
         <div class="form__group">
             {call formRows form=$form}
 
-            <div class="form__group">
-                <div class="col-lg-offset-2 col-lg-10">
-                    <input type="submit" class="btn btn--default" value="{translate key="button.save"}" />
-                </div>
+            <div class="form__actions">
+                <button type="submit" class="btn btn--brand">{translate key="button.save"}</button>
             </div>
         </div>
     </form>

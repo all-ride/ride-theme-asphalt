@@ -9,11 +9,9 @@
 {/block}
 
 {block name="content_body" append}
-    <div class="btn--group">
-        <a class="btn btn--default" href="{url id="taxonomy.vocabulary.add"}?referer={$app.url.request|urlencode}">{translate key="button.vocabulary.add"}</a>
+    <div class="btn-group">
+        <a class="btn btn--brand" href="{url id="taxonomy.vocabulary.add"}?referer={$app.url.request|urlencode}">{translate key="button.vocabulary.add"}</a>
     </div>
-
-    <p></p>
 
     {include file="base/table" table=$table tableForm=$form}
 {/block}

@@ -23,7 +23,13 @@ app.form = (function($, undefined) {
     var $form = $(this.form);
 
     if($form.data('is-submitted')) return false;
-    if($form.parsley().isValid()) {
+    if($form.filter('data-parsley-validate').length) {
+      if($form.parsley().isValid()) {
+        $form
+          .data('is-submitted', true)
+          .addClass('is-submitted');
+      }
+    } else {
       $form
         .data('is-submitted', true)
         .addClass('is-submitted');

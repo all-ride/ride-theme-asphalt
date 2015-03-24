@@ -13,22 +13,18 @@
 
     {include file="base/form.prototype"}
 
-    <form id="{$form->getId()}" class="form-horizontal" action="{$app.url.request}" method="POST">
+    <form id="{$form->getId()}" class="form" action="{$app.url.request}" method="POST">
         <div class="form__group">
-            <div class="form__group">
-                <div class="col-lg-12">
-                    {foreach $controls as $name => $control}
-                        {call formWidget form=$form row=$name}
-                    {/foreach}
-                </div>
-            </div>
+            {foreach $controls as $name => $control}
+                {call formWidget form=$form row=$name}
+            {/foreach}
 
-            <div class="form-actions">
-                <input type="submit" name="submit" class="btn btn--default" value="{"label.`$action`"|translate}" />
+            <div class="form__actions">
+                <button type="submit" name="submit" class="btn btn--brand">{"label.`$action`"|translate}</button>
                 {if $action == "enable"}
-                    <a href="{url id="system.cache.clear"}" class="btn">{translate key="button.cache.clear"}</a>
+                    <a href="{url id="system.cache.clear"}" class="btn btn--link">{translate key="button.cache.clear"}</a>
                 {else}
-                    <a href="{url id="system.cache"}" class="btn">{translate key="button.cancel"}</a>
+                    <a href="{url id="system.cache"}" class="btn btn--link">{translate key="button.cancel"}</a>
                 {/if}
             </div>
         </div>

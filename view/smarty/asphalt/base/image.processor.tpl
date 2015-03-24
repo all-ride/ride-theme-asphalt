@@ -15,13 +15,15 @@
 
     <div class="grid--bp-med__3">
         {include file="base/form.prototype"}
-        <form id="{$form->getId()}" class="form-horizontal" enctype="multipart/form-data" method="post" action="{$app.url.request}" name="{$form->getId()}" role="form">
+        <form id="{$form->getId()}" class="form" enctype="multipart/form-data" method="post" action="{$app.url.request}" name="{$form->getId()}" role="form">
             {call formRows form=$form}
 
-            <input type="submit" class="btn btn--default btn-lg" value="{translate key="button.save.image"}" />
-            {if $referer}
-                <a href="{$referer}" class="btn">{translate key="button.cancel"}</a>
-            {/if}
+            <div class="form__actions">
+                <button type="submit" class="btn btn--brand">{translate key="button.save.image"}</button>
+                {if $referer}
+                    <a href="{$referer}" class="btn btn--link">{translate key="button.cancel"}</a>
+                {/if}
+            </div>
         </form>
 
         <h3>{translate key="image.processor.label.instruction"}</h3>
