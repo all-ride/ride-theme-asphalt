@@ -15,7 +15,7 @@
 {block name="content" append}
     {include file="base/form.prototype"}
 
-    <form id="{$form->getId()}" class="form form--selectize" action="{$app.url.request}" method="POST" role="form" enctype="multipart/form-data">
+    <form id="{$form->getId()}" class="form form--selectize" novalidate data-parsley-validate action="{$app.url.request}" method="POST" role="form" enctype="multipart/form-data">
         <div class="form__group grid">
             <div class="grid--bp-med__8">
 
@@ -48,7 +48,7 @@
                 {call formRows form=$form}
 
                 <div class="form__actions">
-                    <input type="submit" class="btn btn--default" value="{translate key="button.save"}"{if !$isWritable} disabled="disabled"{/if} />
+                    <button type="submit" class="btn btn--default"{if !$isWritable} disabled="disabled"{/if}>{translate key="button.save"}</button>
                     <a class="btn btn--link" href="{$referer}">{translate key="button.cancel"}</a>
                 </div>
             </div>
