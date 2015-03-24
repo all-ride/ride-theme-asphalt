@@ -764,24 +764,29 @@
 
         {$value = $widget->getValue()}
 
-        <select name="{$widget->getName()}{if $part}[{$part}]{elseif $widget->isMultiple()}[]{/if}"
-           {if $widget->isMultiple()} multiple="multiple"{/if}
-           {foreach $attributes as $name => $attribute}
-               {$name}="{$attribute|escape}"
-           {/foreach}
-         >
-         {foreach $widget->getOptions() as $option => $label}
-            {if is_array($label)}
-            <optgroup label="{$option|escape}">
-            {foreach $label as $o => $l}
-                <option value="{$o|escape}"{if (!is_array($value) && strcmp($o, $value) == 0) || (is_array($value) && isset($value[$o]))} selected="selected"{/if}>{$l}</option>
+        {* <div class="form__select-item"> *}
+            <select name="{$widget->getName()}{if $part}[{$part}]{elseif $widget->isMultiple()}[]{/if}"
+               {if $widget->isMultiple()} multiple="multiple"{/if}
+               {foreach $attributes as $name => $attribute}
+                   {$name}="{$attribute|escape}"
+               {/foreach}
+            >
+            {foreach $widget->getOptions() as $option => $label}
+                {if is_array($label)}
+                <optgroup label="{$option|escape}">
+                {foreach $label as $o => $l}
+                    <option value="{$o|escape}"{if (!is_array($value) && strcmp($o, $value) == 0) || (is_array($value) && isset($value[$o]))} selected="selected"{/if}>{$l}</option>
+                {/foreach}
+                </optgroup>
+                {else}
+                <option value="{$option|escape}"{if (!is_array($value) && strcmp($option, $value) == 0) || (is_array($value) && isset($value[$option]))} selected="selected"{/if}>{$label}</option>
+                {/if}
             {/foreach}
-            </optgroup>
-            {else}
-            <option value="{$option|escape}"{if (!is_array($value) && strcmp($option, $value) == 0) || (is_array($value) && isset($value[$option]))} selected="selected"{/if}>{$label}</option>
-            {/if}
-         {/foreach}
-         </select>
+            </select>
+            {* <label for="{$attributes.id}"><i class="icon icon--chevron-down"></i></label>
+        </div> *}
+
+
     {/if}
 {/function}
 

@@ -23,7 +23,7 @@
             {call formRows form=$form}
 
             <div class="form__actions">
-                <button type="submit" class="btn btn--default">{translate key="button.save"}</button>
+                <button type="submit" class="btn btn--brand">{translate key="button.save"}</button>
                 {if $referer}
                     <a class="btn btn--link" href="{$referer}">{translate key="button.cancel"}</a>
                 {/if}

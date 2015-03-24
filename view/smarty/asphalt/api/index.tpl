@@ -37,13 +37,13 @@
 {/block}
 
 {block name="content_main" prepend}
-    <ol class="breadcrumb">
-    {foreach $breadcrumbs as $url => $label}
-        {if $label@last}
-            <li class="active">{$label}</li>
-        {else}
-            <li><a href="{$url}">{$label}</a></li>
-        {/if}
-    {/foreach}
-    </ol>
+    <div class="breadcrumb">
+        {foreach $breadcrumbs as $url => $label}
+            <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="breadcrumb__item{if $label@last} breadcrumb__item--active{/if}">
+              <a href="{$url}" itemprop="url">
+                <span itemprop="title">{$label}</span>
+              </a>{if !$label@last} &rsaquo;{/if}
+            </span>
+        {/foreach}
+    </div>
 {/block}

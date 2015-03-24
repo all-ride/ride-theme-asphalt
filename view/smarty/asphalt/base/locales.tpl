@@ -24,7 +24,7 @@
                 <dt>{translate key="label.code"}</dt>
                 <dd>{$code}</dd>
             </dl>
-            <div class="btn--group">
+            <div class="btn-group">
                 <a class="btn btn--default" href="{url id="system.translations.locale" parameters=["locale" => $code]}?referer={$app.url.request|escape}">{translate key="button.translations.manage"}</a>
             {if $properties}
                 <a class="btn btn--default btn-toggle-properties" href="#" class="btn-toggle-properties" data-target=".locale-{$code} .properties">{translate key="button.properties.toggle"}</a>

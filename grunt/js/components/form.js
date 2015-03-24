@@ -13,7 +13,7 @@ window.ParsleyConfig = {
 window.ParsleyValidator.setLocale('nl');
 
 app.form = (function($, undefined) {
-  var $forms = $('form');
+  var $forms = $('form[novalidate]');
 
   var _initialize = function() {
     $forms.on('click', 'button[type=submit]', this.submit);
