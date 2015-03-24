@@ -17,3 +17,12 @@
             transform: rotate(359deg);
   }
 }
+
+
+.roll-in {
+  @include transitions((opacity, transform));
+}
+.roll-in--pre {
+  opacity: 0;
+  transform: translateY(30px);
+}

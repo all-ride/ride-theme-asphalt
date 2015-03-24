@@ -14,6 +14,16 @@ app.common = (function($, undefined) {
     this.svgFallback();
 
     _flyoutNavigation();
+    // _animations();
+  };
+
+  var _animations = function() {
+    $('.roll-in--pre').each(function() {
+      var el = this;
+      setTimeout(function() {
+        el.classList.remove('roll-in--pre');
+      }, 500);
+    });
   };
 
   var _windowResize = function() {
