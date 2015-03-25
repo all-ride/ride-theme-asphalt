@@ -14,6 +14,8 @@ app.common = (function($, undefined) {
     this.svgFallback();
 
     _flyoutNavigation();
+
+    // $('[data-toggle="tooltip"]').tooltip();
   };
 
   var _windowResize = function() {
