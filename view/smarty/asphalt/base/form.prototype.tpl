@@ -583,6 +583,17 @@
             {/foreach}
         {/foreach}
 
+        {$validators = $row->getValidators()}
+        {foreach $validators as $validator}
+            {foreach $validator->getOptions() as $option => $value}
+                {if $option == 'minimum'}
+                    {$attributes.minlength = $value}
+                {else if $option == 'maximum'}
+                    {$attributes.maxlength = $value}
+                {/if}
+            {/foreach}
+        {/foreach}
+
         <textarea name="{$widget->getName()}{if $part}[{$part}]{/if}"
            {foreach $attributes as $name => $attribute}
                {$name}="{$attribute|escape}"

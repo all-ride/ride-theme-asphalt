@@ -16,7 +16,7 @@
 }
 
 .tabs__tab {
-  @include fsRem($font-size-small);
+  @include fsRem($font-size-base);
   position: relative;
   z-index: $zindex-layer-1;
   display: inline-block;
@@ -58,11 +58,13 @@
 .tabs__content {
   border-bottom: 1px solid $gray-25;
   margin-bottom: $rh-med;
-  > .tabs__pane {
-    display: none;
-  }
-  > .active {
-    display: block;
+  .js & {
+    > .tabs__pane {
+      display: none;
+    }
+    > .active {
+      display: block;
+    }
   }
 }
 
