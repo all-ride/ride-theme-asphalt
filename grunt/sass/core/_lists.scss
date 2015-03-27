@@ -115,17 +115,17 @@
   // }
 }
 
-// dl {
-//   dt {
-//     font-weight: $font-weight-bold;
-//   }
-//   dd {
-//     margin-left: 0;
-//     & + dt {
-//       margin-top: 5px;
-//     }
-//   }
-// }
+dl {
+  dt {
+    font-weight: $font-weight-bold;
+  }
+  dd {
+    margin-left: 0;
+    & + dt {
+      margin-top: 5px;
+    }
+  }
+}
 
 // @include breakpoint(map-get($breakpoints, med)) {
 //   .dl--horizontal {
