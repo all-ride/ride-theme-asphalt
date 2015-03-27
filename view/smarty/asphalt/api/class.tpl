@@ -244,5 +244,5 @@
 {/block}
 
 {block name="scripts" append}
-    {script src="asphalt/js/api.js"}
+    <script src="{$app.url.base}/asphalt/js/api.js"></script>
 {/block}
