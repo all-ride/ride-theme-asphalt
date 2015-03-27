@@ -9,40 +9,21 @@
 {/block}
 
 {block name="content" append}
-    <table class="table table-responsive table-striped table-log">
-    {foreach $logRequests as $logRequest}
+    <table class="table table--striped table--log">
+    {foreach $logSessions as $logSession}
     <tr>
-        <td>{$logRequest->getId()}</td>
-        <td>{$logRequest->getClient()}</td>
-        <td>{$logRequest->getDate()|date_format:"%Y-%m-%d %H:%M:%S"}</td>
-        <td>{$logRequest->getMicroTime()}</td>
-        <td>{$logRequest->getTitle()}</td>
-        <td><a class="btn btn-default" href="#">Toggle details</a></td>
-    </tr>
-    <tr class="superhidden">
-        <td colspan="6">
-            <ul>
-            {foreach $logRequest->getLogMessages() as $logMessage}
-                <li>
-                    <strong>{$logMessage->getTitle()}</strong><br>
-                    {$logMessage->getDescription()}
-                </li>
-            {/foreach}
-            </ul>
-        </td>
+        <td><a href="{url id="system.log.detail" parameters=["id" => $logSession->getId()]}">{$logSession->getId()}</a></td>
+        <td>{$logSession->getClient()}</td>
+        <td>{$logSession->getDate()|date_format:"%Y-%m-%d %H:%M:%S"}</td>
+        <td>{$logSession->getMicroTime()}</td>
+        <td>{$logSession->getTitle()}</td>
     </tr>
     {/foreach}
     </table>
-{/block}
 
-{block name="scripts_app" append}
-    <script type="text/javascript">
-        $(function() {
-            $('.table-log .btn').on('click', function(e) {
-                e.preventDefault();
-
-                $(this).parents('tr').next().toggleClass('superhidden');
-            });
-        });
-    </script>
+    {if $pagination->getPages() > 1}
+    <div class="text--center">
+        {pagination page=$pagination->getPage() pages=$pagination->getPages() href=$pagination->getHref()}
+    </div>
+    {/if}
 {/block}
