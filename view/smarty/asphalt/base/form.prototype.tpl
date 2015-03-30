@@ -646,13 +646,18 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-body">
+                        {if !isset($locale)}
+                            {$locale = null}
+                        {/if}
                         {if $widget->getFolderId()}
-                            {if !isset($locale)}
-                                {$locale = null}
-                            {/if}
                             {url id="assets.folder.overview" parameters=["folder" => $widget->getFolderId(), "locale" => $locale] var="assetsUrl"}
                         {else}
-                            {url id="assets.overview.locale" parameters=["locale" => $locale] var="assetsUrl"}
+                            {if $locale}
+                                {url id="assets.overview.locale" parameters=["locale" => $locale] var="assetsUrl"}
+                            {else}
+                                {url id="assets.overview" var="assetsUrl"}
+
+                            {/if}
                         {/if}
                         <iframe data-src="{$assetsUrl}?embed=1" frameborder="0" width="100%" height="500"></iframe>
                     </div>
