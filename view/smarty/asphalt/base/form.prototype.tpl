@@ -647,6 +647,9 @@
                 <div class="modal-content">
                     <div class="modal-body">
                         {if $widget->getFolderId()}
+                            {if !isset($locale)}
+                                {$locale = null}
+                            {/if}
                             {url id="assets.folder.overview" parameters=["folder" => $widget->getFolderId(), "locale" => $locale] var="assetsUrl"}
                         {else}
                             {url id="assets.overview.locale" parameters=["locale" => $locale] var="assetsUrl"}
