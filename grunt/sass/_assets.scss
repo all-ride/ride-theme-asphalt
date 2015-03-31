@@ -58,10 +58,16 @@
       vertical-align: middle;
       float: none;
       margin: 0;
-      object-fit: cover
+      object-fit: cover;
+      transition: border 500ms;
     }
     &.is-addable {
       cursor: pointer;
+    }
+    &.is-selected {
+      img {
+        border: 10px solid #2980b9;
+      }
     }
   }
 }

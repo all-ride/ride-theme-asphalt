@@ -201,6 +201,7 @@ rideApp.form = (function($, undefined) {
 
       // check if the image is already added or the limit is exceded
       if($assets.find('[data-id="' + id + '"]').length || $items.length >= max) {
+        $assets.find('[data-id="' + id + '"]').find('.form__remove-asset').click();
         return;
       }
 
