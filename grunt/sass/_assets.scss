@@ -66,7 +66,8 @@
     }
     &.is-selected {
       img {
-        border: 10px solid #2980b9;
+        border: 2px solid #2980b9;
+        box-shadow: 0 0 15px #2980b9;
       }
     }
   }
