@@ -556,10 +556,15 @@ input.tagmanager {
   float: none;
   margin: 0;
   object-fit: cover;
+  transition: border 500ms;
 }
 
 .assets-grid .preview.is-addable {
   cursor: pointer;
+}
+
+.assets-grid .preview.is-selected img {
+  border: 10px solid #2980b9;
 }
 
 .asset-items {

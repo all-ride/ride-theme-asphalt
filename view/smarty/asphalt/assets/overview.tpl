@@ -22,13 +22,13 @@
 
     <div class="breadcrumb">
         <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="breadcrumb__item{if $breadcrumbs|count == 0} breadcrumb__item--active{/if}">
-          <a href="{url id="assets.overview.locale" parameters=["locale" => $locale]}?view={$view}&flatten={$flatten}&embed={$embed}&limit={$limit}" itemprop="url">
+          <a href="{url id="assets.overview.locale" parameters=["locale" => $locale]}?view={$view}&flatten={$flatten}&embed={$embed}&limit={$limit}&assets={$app.request->getQueryParameter('assets')}" itemprop="url">
             <span itemprop="title">{translate key="title.assets"}</span>
           </a>{if $breadcrumbs|count != 0}  &rsaquo;{/if}
         </span>
         {foreach $breadcrumbs as $id => $name}
             <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="breadcrumb__item{if $name@last} breadcrumb__item--active{/if}">
-              <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $id]}?view={$view}&flatten={$flatten}&embed={$embed}&limit={$limit}" itemprop="url">
+              <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $id]}?view={$view}&flatten={$flatten}&embed={$embed}&limit={$limit}&assets={$app.request->getQueryParameter('assets')}" itemprop="url">
                 <span itemprop="title">{$name}</span>
               </a>{if !$name@last} &rsaquo;{/if}
             </span>
@@ -59,6 +59,7 @@
         <form id="{$form->getId()}" class="form-horizontal form-filter" action="{$app.url.request}" method="POST" role="form">
             {call formWidget form=$form row="type"}
             {call formWidget form=$form row="date"}
+            {call formWidget form=$form row="query"}
             <button type="submit" class="btn btn--default btn--small">{translate key="button.filter"}</button>
         </form>
     </div>
@@ -91,7 +92,7 @@
         <div class="grid--bp-med__6 text--left">
             {if $pages > 1}
                 {url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $folder->id] var="urlPagination"}
-                {$urlPagination = "`$urlPagination``$urlSuffix`&flatten=`$flatten`&limit=`$limit`&page=%page%"}
+                {$urlPagination = "`$urlPagination``$urlSuffix`&flatten=`$flatten`&limit=`$limit`&page=%page%&assets=`$app.request->getQueryParameter('assets')`"}
                 {pagination pagination=$pagination}
             {/if}
         </div>

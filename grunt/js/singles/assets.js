@@ -10,11 +10,13 @@ rideApp.assets = (function($, undefined) {
     parent.rideApp.form.assets.resizeIframe(parent, $document.height());
     $document.on('click', '.preview.is-addable', function(e) {
       e.preventDefault();
-      var $photo = $(this).parent(),
+      var $this = $(this),
+          $photo = $this.parent(),
           id = $photo.data('id'),
           name = $.trim($photo.find('.name').text()),
           thumb = $photo.find('.image').attr('src');
 
+      $this.toggleClass('is-selected');
       parent.rideApp.form.assets.addAsset(id, name, thumb);
     });
   };
