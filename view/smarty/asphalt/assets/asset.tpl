@@ -67,8 +67,10 @@
 
             {if $media}
                 <iframe width="560" height="315" src="{$media->getEmbedUrl()}" frameborder="0" allowfullscreen></iframe>
+            {elseif $asset->isImage()}
+                <img class="img-responsive" src="{image src=$asset->getValue()}" />
             {else}
-                <img class="img-responsive" src="{image src=$asset->getThumbnail() default="img/.png"}"/>
+                <img class="img-responsive" src="{image src=$asset->getThumbnail()}"/>
             {/if}
         </div>
         {/if}

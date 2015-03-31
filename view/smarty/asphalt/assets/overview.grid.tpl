@@ -4,7 +4,7 @@
 <div class="grid__item order-item" data-type="{$item->getType()}" data-id="{$item->getId()}">
     {if $item->getType() == 'folder'}
         <div class="preview preview--folder">
-            <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $item->id]}{$urlSuffix}&assets={$app.request->getQueryParameter('assets')}">
+            <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $item->id]}{$urlSuffix}&selected={$app.request->getQueryParameter('selected')}">
                 <img src="{$app.url.base}/asphalt/img/folder.svg" width="200" height="200" class="data image image--responsive" />
             </a>
         </div>
@@ -18,7 +18,7 @@
                 <i class="icon icon--arrows"></i>
             </span>
             {if $embed}
-                <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $item->id]}{$urlSuffix}&assets={$app.request->getQueryParameter('assets')}">
+                <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $item->id]}{$urlSuffix}&selected={$app.request->getQueryParameter('selected')}">
                     {$item->getName()}
                 </a>
             {else}
@@ -28,7 +28,7 @@
             {/if}
         </div>
     {else}
-        {$selected = ($app.request->getQueryParameter('assets') && strpos($app.request->getQueryParameter('assets'), $item->getId()) !== false)}
+        {$selected = ($app.request->getQueryParameter('selected') && strpos($app.request->getQueryParameter('selected'), $item->getId()) !== false)}
         <div class="preview{if $embed} is-addable{/if}{if $selected} is-selected{/if}">
         {if $item->getThumbnail()}
             <img src="{image src=$item->getThumbnail() width=200 height=200 transformation="crop"}" class="data image image--responsive" />
