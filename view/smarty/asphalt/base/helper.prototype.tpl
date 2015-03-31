@@ -1,7 +1,7 @@
 {*
     Renders the pagination
 *}
-{function name="pagination"  pagination=null}
+{function name="pagination" pagination=null}
     {* {$pagination = new Pagination($pages, $page);} *}
     {if $pagination}
         {$anchors = $pagination->getAnchors()}
