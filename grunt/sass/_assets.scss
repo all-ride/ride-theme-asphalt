@@ -9,11 +9,15 @@
 }
 
 .actions {
-    margin-bottom: 20px;
-    .btn-group {
-        float: left;
-        margin-right: 20px;
-    }
+  margin-bottom: 20px;
+  .btn-group {
+    padding-top: 7px;
+    float: left;
+    margin-right: 20px;
+  }
+  .form__text {
+    width: auto;
+  }
 }
 
 .assets-list .asset-actions {
