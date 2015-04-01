@@ -510,87 +510,92 @@ input.tagmanager {
   padding-left: 15px;
 }
 
-.assets-grid a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
+.asset-items {
+  margin-bottom: 20px;
 }
 
-.assets-grid .checkbox {
+.preview {
+  position: relative;
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.2);
+}
+
+.preview.is-addable {
+  cursor: pointer;
+}
+
+.preview__checkbox {
   display: block;
   padding: 1px 5px 3px;
   background: #fff;
   position: absolute;
   top: 0;
-  left: 10px;
+  left: 0;
   border: 1px solid #efefef;
 }
 
-.assets-grid .icon {
-  color: #fff;
-}
-
-.assets-grid .preview {
+.preivew__image-container {
   position: relative;
-  padding-bottom: 100%;
-  background: rgba(41,128,185,0.1);
+  padding-top: 75%;
 }
 
-.assets-grid .preview--folder {
-  background: #f5f6f7;
-}
-
-.assets-grid .preview--folder .image {
-  padding: 25%;
-}
-
-.assets-grid .preview a {
-  display: block;
-}
-
-.assets-grid .preview img {
+.preview__image {
+  background: #fff;
+  border-radius: 1px;
   position: absolute;
-  left: 0;
   top: 0;
-  vertical-align: middle;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  overflow: hidden;
+}
+
+.preview__image img {
   float: none;
   margin: 0;
-  object-fit: cover;
-  transition: border 500ms;
+  vertical-align: middle;
+  max-height: 100%;
+  max-width: 100%;
 }
 
-.assets-grid .preview.is-addable {
-  cursor: pointer;
+.preview--folder .preview__image img {
+  padding: 20px;
 }
 
-.assets-grid .preview.is-selected img {
-  border: 2px solid #2980b9;
-  box-shadow: 0 0 15px #2980b9;
+.is-selected .preview__image {
+  box-shadow: none;
 }
 
-.asset-items {
-  margin-bottom: 20px;
+.preview__name-container {
+  height: 37px;
+  background: #efefef;
 }
 
-.assets-grid .order-item {
-  position: relative;
+.is-selected .preview__name-container {
+  background: #2980b9;
 }
 
-.assets-grid .order-handle {
-  cursor: move;
-}
-
-.assets-grid .name {
-  position: absolute;
-  right: 10px;
-  bottom: 0;
-  left: 10px;
-  background-color: rgba(0,0,0,0.5);
-  overflow: hidden;
-  padding: 5px 10px;
-  height: 30px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+.is-selected .preview__name-container .icon,
+.is-selected .preview__name-container .preview__name {
   color: #fff;
+}
+
+.preview__handle {
+  float: left;
+  padding: 8px;
+}
+
+.preview__name {
+  display: block;
+  padding: 8px 8px 8px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #535455;
   font-weight: bold;
+}
+
+.preview__name:hover,
+.preview__name:visited {
+  color: #535455;
 }

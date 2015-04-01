@@ -1,4 +1,4 @@
-// .btn-group,
+// // .btn-group,
 .form-filter select {
     display: inline;
     width: auto;
@@ -20,81 +20,168 @@
     padding-left: 15px;
 }
 
-.assets-grid {
-  a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  .checkbox {
-    display: block;
-    padding: 1px 5px 3px;
-    background: #fff;
-    position: absolute;
-    top: 0;
-    left: 10px;
-    border: 1px solid #efefef;
-  }
-  .icon {
-    color: #fff;
-  }
-  .preview {
-    position: relative;
-    padding-bottom: 100%;
-    background: rgba(41, 128, 185, .1);
-    &--folder {
-      background: #f5f6f7;
-      .image {
-        padding: 25%;
-      }
-    }
-    a {
-      display: block;
-    }
-    img {
-      position: absolute;
-      left: 0;
-      top: 0;
-      vertical-align: middle;
-      float: none;
-      margin: 0;
-      object-fit: cover;
-      transition: border 500ms;
-    }
-    &.is-addable {
-      cursor: pointer;
-    }
-    &.is-selected {
-      img {
-        border: 2px solid #2980b9;
-        box-shadow: 0 0 15px #2980b9;
-      }
-    }
-  }
-}
 .asset-items {
   margin-bottom: 20px;
+  // background: #efefef;
+  // padding: 20px;
+  // // box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
+  // border: 1px solid #e1e1e1;
 }
 
-.assets-grid .order-item {
+.preview {
   position: relative;
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
+  &.is-addable {
+    cursor: pointer;
+  }
+  // &.is-selected {
+  // }
 }
 
-.assets-grid .order-handle {
-  cursor: move;
-}
-
-.assets-grid .name {
+.preview__checkbox {
+  display: block;
+  padding: 1px 5px 3px;
+  background: #fff;
   position: absolute;
-  right: 10px;
-  bottom: 0;
-  left: 10px;
-  background-color: rgba(0,0,0, .5);
-  overflow: hidden;
-  padding: 5px 10px;
-  height: 30px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  color: #fff;
-  font-weight: bold;
+  top: 0;
+  left: 0;
+  border: 1px solid #efefef;
 }
+.preivew__image-container {
+  position: relative;
+  padding-top: 75%;
+}
+
+.preview__image {
+  background: #fff;
+  // box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
+  border-radius: 1px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  overflow: hidden;
+  img {
+    float: none;
+    margin: 0;
+    vertical-align: middle;
+    max-height: 100%;
+    max-width: 100%;
+    .preview--folder & {
+      padding: 20px;
+    }
+  }
+  .is-selected & {
+    box-shadow: none;
+  }
+}
+
+.preview__name-container {
+  height: 37px;
+  background: #efefef;
+  .is-selected & {
+    background: #2980b9;
+    .icon,
+    .preview__name {
+      color: #fff;
+    }
+  }
+}
+.preview__handle {
+  float: left;
+  padding: 8px;
+}
+.preview__name {
+  display: block;
+  padding: 8px 8px 8px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #535455;
+  font-weight: bold;
+  &:hover,
+  &:visited {
+    color: #535455;
+  }
+}
+
+// .assets-grid {
+//   a {
+//     color: #fff;
+//     text-decoration: none;
+//     font-weight: bold;
+//   }
+//   .checkbox {
+//     display: block;
+//     padding: 1px 5px 3px;
+//     background: #fff;
+//     position: absolute;
+//     top: 0;
+//     left: 10px;
+//     border: 1px solid #efefef;
+//   }
+//   .icon {
+//     color: #fff;
+//   }
+//   .preview {
+//     position: relative;
+//     padding-bottom: 100%;
+//     background: rgba(41, 128, 185, .1);
+//     &--folder {
+//       background: #f5f6f7;
+//       .image {
+//         padding: 25%;
+//       }
+//     }
+//     a {
+//       display: block;
+//     }
+//     img {
+//       position: absolute;
+//       left: 0;
+//       top: 0;
+//       vertical-align: middle;
+//       float: none;
+//       margin: 0;
+//       object-fit: cover;
+//       transition: border 500ms;
+//     }
+//     &.is-addable {
+//       cursor: pointer;
+//     }
+//     &.is-selected {
+//       img {
+//         border: 2px solid #2980b9;
+//         box-shadow: 0 0 15px #2980b9;
+//       }
+//     }
+//   }
+// }
+// .asset-items {
+//   margin-bottom: 20px;
+// }
+
+// .assets-grid .order-item {
+//   position: relative;
+// }
+
+// .assets-grid .order-handle {
+//   cursor: move;
+// }
+
+// .assets-grid .name {
+//   position: absolute;
+//   right: 10px;
+//   bottom: 0;
+//   left: 10px;
+//   background-color: rgba(0,0,0, .5);
+//   overflow: hidden;
+//   padding: 5px 10px;
+//   height: 30px;
+//   white-space: nowrap;
+//   text-overflow: ellipsis;
+//   color: #fff;
+//   font-weight: bold;
+// }
