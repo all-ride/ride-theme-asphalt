@@ -528,6 +528,10 @@ input.tagmanager {
   cursor: pointer;
 }
 
+.preview.is-selected {
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.25);
+}
+
 .preview__checkbox {
   display: block;
   padding: 1px 5px 3px;
@@ -567,10 +571,6 @@ input.tagmanager {
   padding: 20px;
 }
 
-.is-selected .preview__image {
-  box-shadow: none;
-}
-
 .preview__name-container {
   height: 37px;
   background: #efefef;
@@ -588,6 +588,7 @@ input.tagmanager {
 .preview__handle {
   float: left;
   padding: 8px;
+  cursor: move;
 }
 
 .preview__name {
