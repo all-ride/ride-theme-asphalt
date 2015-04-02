@@ -64,7 +64,7 @@
             {call formWidget form=$form row="type"}
             {call formWidget form=$form row="date"}
             {call formWidget form=$form row="query"}
-            <button type="submit" value="filter" class="btn btn--default btn--small">{translate key="button.filter"}</button>
+            <button type="submit" name="submit" value="filter" class="btn btn--default btn--small">{translate key="button.filter"}</button>
         </div>
 
         {if $folder->description}
@@ -87,7 +87,7 @@
                             <option value="">- {translate key="label.actions.bulk"} -</option>
                             <option value="delete">{translate key="button.delete"}</option>
                         </select>
-                        <button class="btn btn--default btn--small" value="bulk-action" type="submit">{translate key="button.apply"}</button>
+                        <button class="btn btn--default btn--small" name="submit" value="bulk-action" type="submit">{translate key="button.apply"}</button>
                     </div>
                     <div class="grid__12 grid--bp-med__6 text--center">
                         {if $pages > 1}
@@ -104,7 +104,7 @@
                                 <option value="48"{if $limit == 48} selected="selected"{/if}>48</option>
                                 <option value="96"{if $limit == 96} selected="selected"{/if}>96</option>
                             </select>
-                            <button value="limit" class="btn btn--default btn--small" type="submit">{translate key="button.apply"}</button>
+                            <button value="limit" name="submit" class="btn btn--default btn--small" type="submit">{translate key="button.apply"}</button>
                         </form>
                     </div>
                 </div>
