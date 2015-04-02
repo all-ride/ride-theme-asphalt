@@ -92,7 +92,7 @@
                     <div class="grid__12 grid--bp-med__6 text--center">
                         {if $pages > 1}
                             {url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $folder->id] var="urlPagination"}
-                            {$urlPagination = "`$urlPagination``$urlSuffix`&flatten=`$flatten`&limit=`$limit`&page=%page%"}
+                            {$urlPagination = "`$urlPagination``$urlSuffix`&limit=`$limit`&page=%page%"}
                             {pagination pagination=$pagination}
                         {/if}
                     </div>
