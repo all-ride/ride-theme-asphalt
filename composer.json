@@ -2,7 +2,7 @@
     "name": "ride/theme-asphalt",
     "description": "Asphalt theme for the base web application of the Ride framework",
     "license": "MIT",
-    "version": "0.3.43",
+    "version": "0.3.44",
     "authors": [
         {
             "name": "Joris Vandeweerd",
