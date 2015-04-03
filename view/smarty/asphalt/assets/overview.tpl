@@ -39,7 +39,7 @@
     {include file="base/form.prototype"}
     {include file="base/helper.prototype"}
 
-    <form id="{$form->getId()}" class="form form-filter" action="{$app.url.request}" method="POST" role="form">
+    <form id="{$form->getId()}" class="form form-filter{*  form--selectize *}" action="{$app.url.request}" method="POST" role="form">
         <div class="actions clearfix">
             <div class="btn-group">
                 <a href="{url id="assets.asset.add" parameters=["locale" => $locale]}?folder={$folder->id}&embed={$embed}&referer={$app.url.request|urlencode}" class="btn btn--default btn--small">
@@ -180,10 +180,13 @@
         {/if}
         });
     </script>
-
     {$script = 'js/assets.js'}
     {if !isset($app.javascripts[$script]) && $embed}
         <script src="{$app.url.base}/asphalt/js/assets.js"></script>
     {/if}
-{/block}
 
+    {* {$script = 'js/form.js'}
+    {if !isset($app.javascripts[$script])}
+        <script src="{$app.url.base}/asphalt/js/form.js"></script>
+    {/if} *}
+{/block}

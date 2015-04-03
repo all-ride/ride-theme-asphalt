@@ -493,6 +493,10 @@ input.tagmanager {
   width: auto;
 }
 
+.form-filter .selectize-control {
+  display: inline-block;
+}
+
 .actions {
   margin-bottom: 20px;
 }
