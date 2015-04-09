@@ -96,10 +96,13 @@ rideApp.form = (function($, undefined) {
 
   var _selectize = function() {
     if (jQuery.fn.selectize) {
-      var $form = $('.form--selectize');
-      $('.form--selectize select:visible').selectize();
+      var $form = $('.form--selectize'),
+          selectizeOption = {
+            plugins: ['drag_drop']
+          };
+      $('.form--selectize select:visible').selectize(selectizeOption);
       $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-          $('.form--selectize select:visible').selectize();
+          $('.form--selectize select:visible').selectize(selectizeOption);
       });
     }
   };
