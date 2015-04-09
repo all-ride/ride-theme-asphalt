@@ -1,7 +1,12 @@
 // // .btn-group,
-.form-filter select {
-  display: inline;
-  width: auto;
+.form-filter {
+  select {
+    display: inline;
+    width: auto;
+  }
+  .selectize-control {
+    display: inline-block;
+  }
 }
 
 .form-filter {

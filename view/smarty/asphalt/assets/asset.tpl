@@ -30,11 +30,12 @@
 
 {block name="content_body" append}
     {include file="base/form.prototype"}
-    <div class="grid">
-        <div class="grid__item grid--bp-med__{if $asset->getId()}6{else}12{/if}">
-            <form id="{$form->getId()}" class="form" action="{$app.url.request}" method="POST" role="form" enctype="multipart/form-data">
+    <form id="{$form->getId()}" class="form" action="{$app.url.request}" method="POST" role="form" enctype="multipart/form-data">
+
+        <div class="grid">
+            <div class="grid__item grid--bp-med__{if $asset->getId()}6{else}12{/if}">
                 <div class="form__group">
-                    {call formRows form=$form}
+                    {call formRow form=$form row="asset"}
 
                     <div class="form__actions">
                         <button type="submit" class="btn btn--default">{translate key="button.save"}</button>
@@ -43,38 +44,88 @@
                         {/if}
                     </div>
                 </div>
-            </form>
-        </div>
-        {if $asset->getId()}
-        <div class="grid__item grid--bp-med__6">
-            <dl>
-                <dt>{translate key="label.url"}</dt>
-                <dd>
-                    {url id="assets.value" parameters=["asset" => $asset->getId()] var="valueUrl"}
-                    <a href="{$valueUrl}">{$valueUrl}</a>
-                </dd>
-                <dt>{translate key="label.type"}</dt>
-                <dd>{$asset->getType()}</dd>
-                {if $dimension}
-                    <dt>{translate key="label.dimension"}</dt>
-                    <dd>{$dimension->getWidth()} x {$dimension->getHeight()}</dd>
-                {/if}
-                <dt>{translate key="label.date.added"}<dt>
-                <dd>{$asset->getDateAdded()|date_format : "%d-%m-%Y %T"}</dd>
-                <dt>{translate key="label.date.modified"}</dt>
-                <dd>{$asset->getDateModified()|date_format : "%d-%m-%Y %T"}</dd>
-            </dl>
+            </div>
+            {if $asset->getId()}
+                <div class="grid__item grid--bp-med__6">
+                    {* <dl>
+                        <dt>{translate key="label.url"}</dt>
+                        <dd>
+                            {url id="assets.value" parameters=["asset" => $asset->getId()] var="valueUrl"}
+                            <a href="{$valueUrl}">{$valueUrl}</a>
+                        </dd>
+                        <dt>{translate key="label.type"}</dt>
+                        <dd>{$asset->getType()}</dd>
+                        {if $dimension}
+                            <dt>{translate key="label.dimension"}</dt>
+                            <dd>{$dimension->getWidth()} x {$dimension->getHeight()}</dd>
+                        {/if}
+                        <dt>{translate key="label.date.added"}<dt>
+                        <dd>{$asset->getDateAdded()|date_format : "%d-%m-%Y %T"}</dd>
+                        <dt>{translate key="label.date.modified"}</dt>
+                        <dd>{$asset->getDateModified()|date_format : "%d-%m-%Y %T"}</dd>
+                    </dl>
 
-            {if $media}
-                <iframe width="560" height="315" src="{$media->getEmbedUrl()}" frameborder="0" allowfullscreen></iframe>
-            {elseif $asset->isImage()}
-                <img class="img-responsive" src="{image src=$asset->getValue()}" />
-            {else}
-                <img class="img-responsive" src="{image src=$asset->getThumbnail()}"/>
+                    {if $media}
+                        <iframe width="560" height="315" src="{$media->getEmbedUrl()}" frameborder="0" allowfullscreen></iframe>
+                    {elseif $asset->isImage()}
+                        <img class="img-responsive" src="{image src=$asset->getValue()}" />
+                    {else}
+                        <img class="img-responsive" src="{image src=$asset->getThumbnail()}"/>
+                    {/if} *}
+
+                    <div class="tabbable">
+                        <ul class="tabs">
+                            <li class="tabs__tab active"><a href="#tab-original" data-toggle="tab">{translate key="label.original"}</a></li>
+                            {foreach $styles as $style}
+                                <li class="tabs__tab"><a href="#tab-{$style->getSlug()}" data-toggle="tab">{$style->getName()}</a></li>
+                            {/foreach}
+                        </ul>
+
+                        <div class="tabs__content">
+                            <div id="tab-original" class="tabs__pane active">
+                                <dl>
+                                    <dt>{translate key="label.url"}</dt>
+                                    <dd>
+                                        {url id="assets.value" parameters=["asset" => $asset->getId()] var="valueUrl"}
+                                        <a href="{$valueUrl}">{$valueUrl}</a>
+                                    </dd>
+                                    <dt>{translate key="label.type"}</dt>
+                                    <dd>{$asset->getType()}</dd>
+                                    {if $dimension}
+                                        <dt>{translate key="label.dimension"}</dt>
+                                        <dd>{$dimension->getWidth()} x {$dimension->getHeight()}</dd>
+                                    {/if}
+                                </dl>
+
+                                {if $media}
+                                    <iframe width="560" height="315" src="{$media->getEmbedUrl()}" frameborder="0" allowfullscreen></iframe>
+                                {else}
+                                    <img class="img-responsive" src="{image src=$asset->getImage()}" />
+                                {/if}
+                            </div>
+
+                            {foreach $styles as $style}
+                            <div id="tab-{$style->getSlug()}" class="tabs__pane">
+                                <ul>
+                                {foreach $style->getTransformations() as $transformation}
+                                    <li>{$transformation->getName()}</li>
+                                {/foreach}
+                                </ul>
+
+                                <div class="form__group">
+                                    {call formWidget form=$form row="style-`$style->slug`"}
+                                    {call formWidgetErrors form=$form row="style-`$style->slug`"}
+                                </div>
+                            </div>
+                            {/foreach}
+                        </div>
+                    </div>
+
+
+                </div>
             {/if}
         </div>
-        {/if}
-    </div>
+    </form>
 {/block}
 
 {block name="scripts" append}

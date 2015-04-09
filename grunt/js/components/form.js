@@ -23,8 +23,15 @@ app.form = (function($, undefined) {
     var $form = $(this.form);
 
     if($form.data('is-submitted')) return false;
-    console.log($form.filter('[data-parsley-validate]').length);
+
     if($form.filter('[data-parsley-validate]').length) {
+      // check if the form has tabs
+      var $tabs = $form.find('.tabs__pane');
+
+      if($tabs.length) {
+
+      }
+
       if($form.parsley().isValid()) {
         $form
           .data('is-submitted', true)
