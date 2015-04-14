@@ -70,9 +70,6 @@
         &__#{$column} {
           margin-top: 0;
           @include make-column($column);
-          + [class*="#{$bp}__#{$grid-columns}"] {
-            margin-top: $rh-sml;
-          }
         }
       }
     }
@@ -101,12 +98,6 @@
       &--#{$column}-col {
         > .grid__item {
           @include make-column($grid-columns / $column);
-          &:nth-child(n+#{($column+1)}) {
-            margin-top: $rh-sml;
-          }
-          &:nth-child(-n+#{($column)}) {
-            margin-top: 0;
-          }
           &:nth-child(#{$column}n+#{($column+1)}) {
             clear: left;
           }
