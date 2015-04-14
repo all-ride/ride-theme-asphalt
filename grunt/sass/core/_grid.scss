@@ -15,6 +15,7 @@
 
 .grid {
   @include make-row;
+  clear: both;
   &--vr-m {
     margin-bottom: $rh-sml;
   }
