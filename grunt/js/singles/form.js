@@ -1,6 +1,8 @@
 var rideApp = rideApp || {};
 
 rideApp.form = (function($, undefined) {
+  var $document = $(document);
+
   var _initialize = function() {
     formFile();
     formCollection();
@@ -19,7 +21,7 @@ rideApp.form = (function($, undefined) {
   };
 
   var formFile = function() {
-    $(document).on('click', '.btn-file-delete', function(e) {
+    $document.on('click', '.btn-file-delete', function(e) {
       e.preventDefault();
       var $anchor = $(this);
       if (confirm($anchor.data('message'))) {
@@ -30,7 +32,7 @@ rideApp.form = (function($, undefined) {
   };
 
   var formCollection = function() {
-    $(document).on('click', '.prototype-add:not(.disabled)', function(e) {
+    $document.on('click', '.prototype-add:not(.disabled)', function(e) {
       e.preventDefault();
       var parent = $(this).parent('.collection-controls');
       var prototype = parent.attr('data-prototype');
@@ -52,7 +54,7 @@ rideApp.form = (function($, undefined) {
       parent.trigger('collectionAdded');
     });
 
-    $(document).on('click', '.prototype-remove:not(.disabled)', function(e) {
+    $document.on('click', '.prototype-remove:not(.disabled)', function(e) {
       e.preventDefault();
       if (confirm('Are you sure you want to remove this item?')) {
         var parent = $(this).closest('.collection-control');
@@ -100,9 +102,12 @@ rideApp.form = (function($, undefined) {
           selectizeOption = {
             plugins: ['drag_drop']
           };
-      $('.form--selectize select:visible').selectize(selectizeOption);
+      $('.form--selectize select:visible:not(.selectized)').selectize(selectizeOption).addClass('selectized');
       $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
           $('.form--selectize select:visible').selectize(selectizeOption);
+      });
+      $document.on('collectionAdded', function() {
+        $('.form--selectize select:visible:not(.selectized)').selectize(selectizeOption).addClass('selectized');
       });
     }
   };
