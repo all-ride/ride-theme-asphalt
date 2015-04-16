@@ -23,11 +23,11 @@
                                 <i class="icon icon--arrows"></i>
                             </div>
                             {if $embed}
-                                <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $item->id]}{$urlSuffix}&selected={$app.request->getQueryParameter('selected')}" class="preview__name">
+                                <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $item->id]}{$urlSuffix}&selected={$app.request->getQueryParameter('selected')}" class="preview__name" title="{$item->getName()}">
                                     {$item->getName()}
                                 </a>
                             {else}
-                                <a href="{url id="assets.folder.edit" parameters=["locale" => $locale, "folder" => $item->getId()]}?embed={$embed}&referer={$app.url.request|urlencode}" class="preview__name">
+                                <a href="{url id="assets.folder.edit" parameters=["locale" => $locale, "folder" => $item->getId()]}?embed={$embed}&referer={$app.url.request|urlencode}" class="preview__name" title="{$item->getName()}">
                                     {$item->getName()}
                                 </a>
                             {/if}
@@ -53,9 +53,9 @@
                                 <i class="icon icon--arrows"></i>
                             </div>
                             {if $embed}
-                                <span class="preview__name">{$item->getName()}</span>
+                                <span class="preview__name" title="{$item->getName()}">{$item->getName()}</span>
                             {else}
-                                <a href="{url id="assets.asset.edit" parameters=["locale" => $locale, "asset" => $item->getId()]}?embed={$embed}&referer={$app.url.request|urlencode}" class="preview__name">
+                                <a href="{url id="assets.asset.edit" parameters=["locale" => $locale, "asset" => $item->getId()]}?embed={$embed}&referer={$app.url.request|urlencode}" class="preview__name" title="{$item->getName()}">
                                     {$item->getName()}
                                 </a>
                             {/if}
