@@ -615,6 +615,7 @@
     {$widget = $row->getWidget()}
     {if $widget}
         {$attributes = $widget->getAttributes()}
+        {$safeName = $widget->getName()|replace:"[":"_"|replace:"]":"_"}
         {if isset($attributes.class)}
             {$attributes.class = "`$attributes.class` form__assets-input"}
         {else}
@@ -629,20 +630,21 @@
                     <a href="#" class="form__remove-asset">&times;</a>
                 </div>
             {/foreach}
-            <a href="#modalAssetsAdd-{$widget->getName()}" class="form__add-assets btn btn--default"><i class="icon icon--plus"></i> {'button.add'|translate}</a>
+            <a href="#modalAssetsAdd-{$safeName}" class="form__add-assets btn btn--default"><i class="icon icon--plus"></i> {'button.add'|translate}</a>
         </div>
 
         {$value = $widget->getValue($part)}
 
-        <input type="hidden"
+        <input type="text"
                name="{$widget->getName()}"
+               data-name="{$safeName}"
                value="{$value|escape}"
            {foreach $attributes as $name => $attribute}
                {$name}="{$attribute|escape}"
            {/foreach}
          />
 
-        <div class="modal modal--large fade" id="modalAssetsAdd-{$widget->getName()}" tabindex="-1" role="dialog" aria-labelledby="myModalAssetsAdd" aria-hidden="true">
+        <div class="modal modal--large fade" id="modalAssetsAdd-{$safeName}" tabindex="-1" role="dialog" aria-labelledby="myModalAssetsAdd" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-body">
