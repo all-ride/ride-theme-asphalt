@@ -635,7 +635,7 @@
 
         {$value = $widget->getValue($part)}
 
-        <input type="text"
+        <input type="hidden"
                name="{$widget->getName()}"
                data-name="{$safeName}"
                value="{$value|escape}"
