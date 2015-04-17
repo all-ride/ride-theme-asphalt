@@ -138,6 +138,10 @@ rideApp.form = (function($, undefined) {
 
         $add.on('click', function(e) {
           e.preventDefault();
+          var attr = $(this).attr('disabled');
+          if (attr === 'disabled') {
+            return;
+          }
           var assetsModal = $(this).attr('href'),
               $modal = $(assetsModal),
               $iframe = $modal.find('iframe');
@@ -160,6 +164,13 @@ rideApp.form = (function($, undefined) {
             field = $item.data('field'),
             $field = $('#' + field);
         $field[0].value = order.join(',');
+
+        // Find iframe url and update query parameter
+        // var $iframe = $field.next().find('iframe');
+        // var parsed = queryString.parse($iframe.data('src'));
+
+        // parsed.selected = order.join(',');
+        // console.log(queryString.stringify(parsed));
 
         // find grouped assets and reorder them...
         var $linked = rideApp.form.assets.allAssets.filter('[data-field="' + field + '"] ').not($item);
@@ -224,7 +235,6 @@ rideApp.form = (function($, undefined) {
       rideApp.form.assets.setAssetsOrder($assetsField);
     },
     resizeIframe: function(doc, height) {
-      console.log($('iframe', doc.document));
       $('iframe', doc.document).height(height);
     }
   };
