@@ -92,6 +92,15 @@
             {/if}
 
             <div class="form__item form__item--{$row->getName()|replace:'[':''|replace:']':''}{if $row->isRequired()} form__item--required{/if}{if $row->isDisabled()} form__item--disabled{/if}{if $row->isReadOnly()} form__item--readonly{/if} clearfix{if $errors} form__error{/if}{if $class} {$class}{/if}">
+            {if $widget->getType() == 'component'}
+                {$attributes = $widget->getAttributes()}
+                <div
+                {foreach $attributes as $name => $attribute}
+                    {$name}="{$attribute|escape}"
+                {/foreach}
+                >
+            {/if}
+
                 {if ($row->getLabel()|replace:' ':'')}
                     <label class="form__label" for="{$widget->getId()}">{if $type != 'button'}{$row->getLabel()}{if $type != 'component' && !$row->isRequired()} <small>({translate key="label.optional"})</small>{/if}{/if}</label>
                 {/if}
@@ -122,7 +131,10 @@
                     {elseif $type == 'select' && $widget->isMultiple()}
                         <div class="form__help">{translate key="label.multiselect"}</div>
                     {/if}
-                {* </div> *}
+
+            {if $widget->getType() == 'component'}
+                </div>
+            {/if}
             </div>
         {/if}
 
@@ -790,6 +802,14 @@
                {foreach $attributes as $name => $attribute}
                    {$name}="{$attribute|escape}"
                {/foreach}
+
+               {if $value}
+                  {if is_array($value)}
+                     data-value="{foreach $value as $k => $v}{$k}{if !$v@last},{/if}{/foreach}"
+                  {else}
+                     data-value="{$value}"
+                  {/if}
+              {/if}
             >
             {foreach $widget->getOptions() as $option => $label}
                 {if is_array($label)}
