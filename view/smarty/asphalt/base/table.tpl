@@ -13,15 +13,24 @@
             <div class="grid table-header clearfix">
                 <div class="grid--bp-med__4">
                     {if isset($tableActions) && $tableActions}
-                        <div class="btn--group">
+                        <div class="btn-group">
                             {foreach $tableActions as $url => $dataAction}
                                 {if $dataAction@first}
                                     <a class="btn btn--brand" href="{$url}"><i class="icon icon--plus"></i> {$dataAction}</a>
+                                    {if $tableActions|count > 1}
+                                        <a href="#" class="btn btn--brand" data-toggle="dropdown">
+                                          <i class="icon icon--angle-down"></i>
+                                          <span class="visuallyhidden">Toggle Dropdown</span>
+                                        </a>
+                                        <ul class="dropdown__menu" role="menu">
+                                    {/if}
                                 {else}
-                                    <a class="btn btn--default" href="{$url}">{$dataAction}</a>
+                                    <li><a href="{$url}">{$dataAction}</a></li>
                                 {/if}
                             {/foreach}
-
+                            {if $tableActions|count > 1}
+                                </ul>
+                            {/if}
                         </div>
                     {/if}
                 </div>
