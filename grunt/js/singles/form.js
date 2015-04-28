@@ -147,7 +147,7 @@ rideApp.form = (function($, undefined) {
             rideApp.form.assets.setAssetsOrder($this);
           }).disableSelection();
 
-        $add.on('click', function(e) {
+        $document.on('click', '.form__add-assets', function(e) {
           e.preventDefault();
           var attr = $(this).attr('disabled');
           if (attr === 'disabled') {
