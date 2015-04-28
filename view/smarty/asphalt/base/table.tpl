@@ -15,7 +15,11 @@
                     {if isset($tableActions) && $tableActions}
                         <div class="btn--group">
                             {foreach $tableActions as $url => $dataAction}
-                                <a class="btn btn--brand" href="{$url}"><i class="icon icon--plus"></i> {$dataAction}</a>
+                                {if $dataAction@first}
+                                    <a class="btn btn--brand" href="{$url}"><i class="icon icon--plus"></i> {$dataAction}</a>
+                                {else}
+                                    <a class="btn btn--default" href="{$url}">{$dataAction}</a>
+                                {/if}
                             {/foreach}
 
                         </div>
