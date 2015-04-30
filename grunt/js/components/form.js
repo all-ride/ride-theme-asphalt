@@ -17,7 +17,19 @@ app.form = (function($, undefined) {
 
   var _initialize = function() {
     $forms.on('click', 'button[type=submit]', this.submit);
+
+    // $.listen('parsley:form:error', $forms, _checkValidation);
   };
+
+  // var _checkValidation = function() {
+  //   console.log('not valid!', this);
+  //   // check if the form has tabs
+  //   var $tabs = this.find('.tabs__pane');
+
+  //   if($tabs.length) {
+
+  //   }
+  // };
 
   var _submit = function() {
     var $form = $(this.form);
@@ -25,13 +37,6 @@ app.form = (function($, undefined) {
     if($form.data('is-submitted')) return false;
 
     if($form.filter('[data-parsley-validate]').length) {
-      // check if the form has tabs
-      var $tabs = $form.find('.tabs__pane');
-
-      if($tabs.length) {
-
-      }
-
       if($form.parsley().isValid()) {
         $form
           .data('is-submitted', true)

@@ -49,7 +49,7 @@
             {/block}
         {/block}
     </head>
-    <body{block name="body_attributes"}{/block}>
+    <body data-translation-url="{url id="api.locales.translations.exposed" parameters=["locale" => $app.locale]}" {block name="body_attributes"}{/block}>
 {block name="body"}
     {block name="taskbar"}
         {if isset($app.taskbar)}
