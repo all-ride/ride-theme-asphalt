@@ -14,7 +14,7 @@ app.common = (function($, undefined) {
     this.svgFallback();
 
     _flyoutNavigation();
-    // _animations();
+    _animations();
   };
 
   var _animations = function() {
