@@ -8,20 +8,20 @@ app.dropper = (function($, undefined) {
 
   $(".dropper").dropper({
     action: "http://ronwec.local.statik.be/admin/assets/nl/items/add?folder=" +folderId+ "&referer=http%3A%2F%2Fronwec.local.statik.be%2Fadmin%2Fassets%2Fnl",
-    maxSize: 1048576
-  }).on("start.dropper", onStart)
-    .on("complete.dropper", onComplete)
-    .on("fileStart.dropper", onFileStart)
-    .on("fileProgress.dropper", onFileProgress)
+    maxSize: 20971520
+  })
     .on("fileComplete.dropper", onFileComplete)
-    .on("fileError.dropper", onFileError);
+    // .on("start.dropper", onStart)
+    // .on("complete.dropper", onComplete)
+    // .on("fileStart.dropper", onFileStart)
+    // .on("fileProgress.dropper", onFileProgress)
+    // .on("fileError.dropper", onFileError);
 
 
   function onStart(e, files) {
   }
 
   function onComplete(e) {
-    location.reload();
     // All done!
   }
 
@@ -32,6 +32,7 @@ app.dropper = (function($, undefined) {
   }
 
   function onFileComplete(e, file, response) {
+    location.reload();
   }
 
   function onFileError(e, file, error) {

@@ -20,6 +20,11 @@
 
 {block name="content_body" append}
 
+    <script>
+        window.folderId = {$folder->id};
+    </script>
+
+
     <div class="breadcrumb">
         <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="breadcrumb__item{if $breadcrumbs|count == 0} breadcrumb__item--active{/if}">
           <a href="{url id="assets.overview.locale" parameters=["locale" => $locale]}?view={$view}&embed={$embed}&limit={$limit}&selected={$app.request->getQueryParameter('selected')}" itemprop="url">
@@ -38,7 +43,6 @@
 
     {include file="base/form.prototype"}
     {include file="base/helper.prototype"}
-
     <form id="{$form->getId()}" class="form form-filter{*  form--selectize *}" action="{$app.url.request}" method="POST" role="form">
         <div class="actions clearfix">
             <div class="btn-group">
