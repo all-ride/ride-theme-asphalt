@@ -1,10 +1,7 @@
 
 
-<div class="grid grid--2-col grid--bp-xsm-4-col grid--bp-sml-8-col asset-items-folders" data-order="true">
+<div class="gridOverview grid grid--2-col grid--bp-xsm-4-col grid--bp-sml-8-col asset-items-folders" data-order="true">
     {if $folders}
-        <form action="#">
-            <div class="grid__item order-item dropper"></div>
-        </form>
         {foreach $folders as $item}
             <div class="grid__item order-item" data-type="{$item->getType()}" data-id="{$item->getId()}">
 
@@ -73,12 +70,6 @@
 </div>
 <div class="grid grid--2-col grid--bp-xsm-4-col grid--bp-sml-8-col asset-items-assets" data-order="true">
     {if $assets}
-        {if !$folders}
-            <form action="#">
-                <div class="grid__item order-item dropper"></div>
-            </form>
-        {/if}
-
         {foreach $assets as $item}
             <div class="grid__item order-item" data-type="{$item->getType()}" data-id="{$item->getId()}">
 

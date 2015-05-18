@@ -17,7 +17,7 @@ app.main = (function($, undefined) {
 
     // hit up common first.
     this.fire('common');
-    this.fire('dropper');
+    this.fire('dropzone');
     this.fire('form');
 
     // Hit up the page component

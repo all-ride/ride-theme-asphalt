@@ -1,7 +1,4 @@
 <table class="table table-striped" data-order="true">
-    <form action="#">
-        <div class="grid__item order-item dropper"></div>
-    </form>
     {if $folders}
         <tbody class="asset-items--folders">
             {foreach $folders as $item}
