@@ -17,25 +17,7 @@ app.dropper = (function($, undefined) {
     // .on("fileProgress.dropper", onFileProgress)
     // .on("fileError.dropper", onFileError);
 
-
-  function onStart(e, files) {
-  }
-
-  function onComplete(e) {
-    // All done!
-  }
-
-  function onFileStart(e, file) {
-  }
-
-  function onFileProgress(e, file, percent) {
-  }
-
   function onFileComplete(e, file, response) {
     location.reload();
   }
-
-  function onFileError(e, file, error) {
-  }
-
 })(jQuery);
