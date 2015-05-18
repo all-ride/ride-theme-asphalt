@@ -2,3 +2,4 @@
 *.project
 *.settings/*
 grunt/build
+grunt/node_modules
