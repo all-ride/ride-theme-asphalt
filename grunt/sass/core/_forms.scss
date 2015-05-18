@@ -140,7 +140,9 @@
   }
 }
 .form__item {
-  margin-bottom: $rh-med;
+  & + & {
+    margin-top: $rh-med;
+  }
   &--radios,
   &--checkboxes {}
 }
