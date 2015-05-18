@@ -44,5 +44,6 @@
     "title.roles": "Rollen",
     "title.terminal": "Terminal",
     "title.terms.vocabulary": "Termen van %vocabulary%",
-    "label.save" : "Opslaan"
+    "label.save" : "Opslaan",
+    "label.error.size" : "Bestand is te groot"
 }

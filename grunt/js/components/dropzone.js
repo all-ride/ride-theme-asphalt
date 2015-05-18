@@ -10,7 +10,13 @@ app.dropzone = (function($, undefined) {
         location.reload();
       });
     },
-    dictDefaultMessage : "Upload"
+    dictDefaultMessage : "Upload",
+
+    success : function(file, html) {
+        var elem = $(html);
+        $('.gridOverview').append(elem);
+        this.removeFile(file);
+    }
   };
 
 })(jQuery);

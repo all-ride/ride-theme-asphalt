@@ -44,5 +44,6 @@
     "title.roles": "Roles",
     "title.terminal": "Terminal",
     "title.terms.vocabulary": "Terms of %vocabulary%",
-    "label.save" : "Save"
+    "label.save" : "Save",
+    "label.error.size" : "File is too large"
 }

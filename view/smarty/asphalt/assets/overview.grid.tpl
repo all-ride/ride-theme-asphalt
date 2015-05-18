@@ -1,6 +1,6 @@
 
 
-<div class="gridOverview grid grid--2-col grid--bp-xsm-4-col grid--bp-sml-8-col asset-items-folders" data-order="true">
+<div class="grid grid--2-col grid--bp-xsm-4-col grid--bp-sml-8-col asset-items-folders" data-order="true">
     {if $folders}
         {foreach $folders as $item}
             <div class="grid__item order-item" data-type="{$item->getType()}" data-id="{$item->getId()}">
@@ -68,7 +68,7 @@
         {/foreach}
     {/if}
 </div>
-<div class="grid grid--2-col grid--bp-xsm-4-col grid--bp-sml-8-col asset-items-assets" data-order="true">
+<div class="gridOverview grid grid--2-col grid--bp-xsm-4-col grid--bp-sml-8-col asset-items-assets" data-order="true">
     {if $assets}
         {foreach $assets as $item}
             <div class="grid__item order-item" data-type="{$item->getType()}" data-id="{$item->getId()}">

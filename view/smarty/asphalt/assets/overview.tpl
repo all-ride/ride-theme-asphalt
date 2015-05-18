@@ -46,9 +46,6 @@
             <input name="file" type="file" multiple />
         </div>
     </form>
-    <div class="btn-group">
-        <a id="dropzone-upload" href="#" class="btn btn--default btn--small">{translate key="label.save"}</a>
-    </div>
     <form id="{$form->getId()}" class="form form-filter{*  form--selectize *}" action="{$app.url.request}" method="POST" role="form">
         <div class="actions clearfix">
             <div class="btn-group">
