@@ -35,14 +35,14 @@ $.fn.performanceForm = function() {
             $('.step-' + mode, $this).show();
 
             if (mode == 'weekly') {
-                $('.row-weekly').show();
-                $('.row-monthly').hide();
+                $('.form__item--weekly').show();
+                $('.form__item--monthly').hide();
             } else if (mode == 'monthly') {
-                $('.row-weekly').hide();
-                $('.row-monthly').show();
+                $('.form__item--weekly').hide();
+                $('.form__item--monthly').show();
             } else {
-                $('.row-weekly').hide();
-                $('.row-monthly').hide();
+                $('.form__item--weekly').hide();
+                $('.form__item--monthly').hide();
             }
         } else {
             $('.repeater', $this).hide();
