@@ -3,10 +3,6 @@
 ::-moz-selection { background: rgba($color-link,0.8); color: #fff; text-shadow: none; }
 ::selection { background: rgba($color-link,0.8); color: #fff; text-shadow: none; }
 
-*:last-child {
-  margin-bottom: 0;
-}
-
 // Reset box-sizing
 //
 *, *:before, *:after { box-sizing: border-box; }

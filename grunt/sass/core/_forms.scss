@@ -129,7 +129,9 @@
 }
 
 .form__group {
-  margin-bottom: $rh-med;
+  & + & {
+    margin-top: $rh-med;
+  }
   h1,
   h2,
   h3,
@@ -137,6 +139,9 @@
     &:first-child {
       margin-top: 0;
     }
+  }
+  &:empty {
+    display: none;
   }
 }
 .form__item {
@@ -187,7 +192,8 @@
     padding-bottom: 0;
     position: relative;
     padding-left: 20px;
-    input {
+    .form__radio,
+    .form__checkbox {
       position: absolute;
       left: 0;
       top: 4px;
