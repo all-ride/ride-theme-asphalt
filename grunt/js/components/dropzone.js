@@ -16,7 +16,9 @@ app.dropzone = (function($, undefined) {
         var elem = $(html);
         $('.gridOverview').append(elem);
         this.removeFile(file);
-    }
+    },
+
+    parallelUploads : 1
   };
 
 })(jQuery);
