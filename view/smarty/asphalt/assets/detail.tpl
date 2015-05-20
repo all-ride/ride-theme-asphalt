@@ -1,3 +1,4 @@
+
 <div class="grid__item order-item" data-type="{$item->getType()}" data-id="{$item->getId()}">
     <div class="preview preview--asset{if $embed} is-addable{/if}">
         {if !$embed}
