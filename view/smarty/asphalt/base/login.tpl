@@ -16,9 +16,10 @@
             <div class="form__group">
                 {$errors = $form->getValidationErrors('username')}
 
-
-                {call formRow form=$form row="username"}
-                <div class="form__item {if $errors} has-error{/if}">
+                <div class="roll-in roll-in--pre">
+                    {call formRow form=$form row="username"}
+                </div>
+                <div class="form__item roll-in roll-in--pre {if $errors} has-error{/if}">
                     <div class="col-lg-12">
                         {$row = $form->getRow('password')}
                         <label class="form__label" for="form-login-password">{$row->getLabel()}</label>
@@ -28,8 +29,7 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="form__actions">
+                <div class="form__actions roll-in roll-in--pre">
                     <button type="submit" class="btn btn--brand btn--large">{translate key="button.login"}</button>
                     {if $urls}
                         <div class="login__or"><span>{translate key="label.or"}</span></div>
