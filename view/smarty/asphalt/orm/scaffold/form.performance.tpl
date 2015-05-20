@@ -16,6 +16,10 @@
     {include file="base/form.prototype"}
 
     <form id="{$form->getId()}" class="form" action="{$app.url.request}" method="POST" role="form" enctype="multipart/form-data">
+        {$allowDay = $form->getRow('date')->hasRow('isDay')}
+        {$allowPeriod = $form->getRow('date')->hasRow('isPeriod')}
+        {$allowRepeat = $form->getRow('date')->hasRow('isRepeat')}
+
         <div class="form__group row-date">
             <div class="form__group">
                 <label for="date-dateStart" class="form__label">{translate key="label.date"}</label>
@@ -23,27 +27,36 @@
                     {call formWidget form=$form row=$form->getRow('date')->getRow('dateStart')}
                     {call formWidget form=$form row=$form->getRow('date')->getRow('timeStart')}
                     <span class="until">&nbsp;{"label.until"|translate|lower}&nbsp;</span>
+                {if $allowPeriod}
                     {call formWidget form=$form row=$form->getRow('date')->getRow('dateStop')}
+                {/if}
                     {call formWidget form=$form row=$form->getRow('date')->getRow('timeStop')}
                 </div>
+            {if $allowDay || $allowPeriod || $allowRepeat}
                 <div class="form__item">
+                {if $allowDay}
                     {call formWidget form=$form row=$form->getRow('date')->getRow('isDay')}
+                {/if}
+                {if $allowPeriod}
                     {call formWidget form=$form row=$form->getRow('date')->getRow('isPeriod')}
+                {/if}
+                {if $allowRepeat}
                     {call formWidget form=$form row=$form->getRow('date')->getRow('isRepeat')}
+                {/if}
                 </div>
+            {/if}
             </div>
             <div class="form__group">
                 {call formWidgetErrors form=$form row=$form->getRow('date')->getRow('dateStart')}
                 {call formWidgetErrors form=$form row=$form->getRow('date')->getRow('timeStart')}
+            {if $allowPeriod}
                 {call formWidgetErrors form=$form row=$form->getRow('date')->getRow('dateStop')}
+            {/if}
                 {call formWidgetErrors form=$form row=$form->getRow('date')->getRow('timeStop')}
-
-                {call formWidgetErrors form=$form row=$form->getRow('date')->getRow('isDay')}
-                {call formWidgetErrors form=$form row=$form->getRow('date')->getRow('isPeriod')}
-                {call formWidgetErrors form=$form row=$form->getRow('date')->getRow('isRepeat')}
             </div>
         </div>
 
+        {if $allowRepeat}
         <div class="repeater">
             <div class="form__group row-step">
                 <label for="date-mode" class="form__label">{translate key="label.mode"}</label>
@@ -86,6 +99,7 @@
                 </div>
             </div>
         </div>
+        {/if}
 
         <div class="form__group edit-confirm superhidden">
             {call formRow form=$form row="editMode"}
