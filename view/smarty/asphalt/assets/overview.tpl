@@ -38,7 +38,7 @@
     {include file="base/form.prototype"}
     {include file="base/helper.prototype"}
 
-    <form action="{$app.url.base}/admin/assets/{$app.locale}/items/upload?folder={$folder->id}"
+    <form action="{$app.url.base}/admin/assets/{$app.locale}/items/add?folder={$folder->id}"
         class="dropzone"
         id="asset-dropzone">
 
