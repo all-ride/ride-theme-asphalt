@@ -101,36 +101,36 @@
                 >
             {/if}
 
-                {if ($row->getLabel()|replace:' ':'')}
-                    <label class="form__label" for="{$widget->getId()}">{if $type != 'button'}{$row->getLabel()}{if $type != 'component' && !$row->isRequired()} <small>({translate key="label.optional"})</small>{/if}{/if}</label>
-                {/if}
-                {* <div class="clearfix"> *}
-                    {call formWidget form=$form row=$row part=$part}
+            {if ($row->getLabel()|replace:' ':'')}
+                <label class="form__label" for="{$widget->getId()}">{if $type != 'button'}{$row->getLabel()}{if $type != 'label' && $type != 'component' && !$row->isRequired()} <small>({translate key="label.optional"})</small>{/if}{/if}</label>
+            {/if}
 
-                    {if $errors}
-                        <ul class="form__error-list">
-                        {foreach $errors as $error}
-                            <li>{$error->getCode()|translate:$error->getParameters()}</li>
-                        {/foreach}
-                        </ul>
-                    {/if}
+            {call formWidget form=$form row=$row part=$part}
 
-                    {if $widget && $type == 'option'}
-                        {$widgetOptions = $widget->getOptions()}
-                    {else}
-                        {$widgetOptions = array()}
-                    {/if}
+            {if $errors}
+                <ul class="form__error-list">
+                {foreach $errors as $error}
+                    <li>{$error->getCode()|translate:$error->getParameters()}</li>
+                {/foreach}
+                </ul>
+            {/if}
 
-                    {$description = $row->getDescription()}
-                    {if $description && $type !== 'checkbox' && ($type !== 'option' || ($type === 'option' && $widget && $widgetOptions))}
-                        <div class="form__help">{$description}</div>
-                    {/if}
+            {if $widget && $type == 'option'}
+                {$widgetOptions = $widget->getOptions()}
+            {else}
+                {$widgetOptions = array()}
+            {/if}
 
-                    {if $type == 'date'}
-                        <div class="form__help">{translate key="label.date.example" example=time()|date_format:$row->getFormat() format=$row->getFormat()}</div>
-                    {elseif $type == 'select' && $widget->isMultiple()}
-                        <div class="form__help">{translate key="label.multiselect"}</div>
-                    {/if}
+            {$description = $row->getDescription()}
+            {if $description && $type !== 'checkbox' && ($type !== 'option' || ($type === 'option' && $widget && $widgetOptions))}
+                <div class="form__help">{$description}</div>
+            {/if}
+
+            {if $type == 'date'}
+                <div class="form__help">{translate key="label.date.example" example=time()|date_format:$row->getFormat() format=$row->getFormat()}</div>
+            {elseif $type == 'select' && $widget->isMultiple()}
+                <div class="form__help">{translate key="label.multiselect"}</div>
+            {/if}
 
             {if $widget->getType() == 'component'}
                 </div>
