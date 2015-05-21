@@ -974,7 +974,11 @@
     </div>
 
     {if !$row->getOption('disable_add')}
-    <a href="#" class="btn btn--brand prototype-add{if $row->isDisabled() || $row->isReadOnly()} disabled{/if}"><i class="icon icon--plus"></i> {translate key="button.add"}</a>
+        {$label = $row->getOption('label_add')}
+        {if !$label}
+            {$label = "button.add"|translate}
+        {/if}
+        <a href="#" class="btn btn--brand prototype-add{if $row->isDisabled() || $row->isReadOnly()} disabled{/if}"><i class="icon icon--plus"></i> {$label}</a>
     {/if}
 {/function}
 
