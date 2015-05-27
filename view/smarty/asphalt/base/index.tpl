@@ -135,7 +135,7 @@
     {block name="scripts_app"}
     {if isset($app.javascripts)}
         {foreach $app.javascripts as $script => $null}
-            {if substr($script, 0, 7) == 'http://' || substr(script, 0, 8) == 'https://' || substr($script, 0, 2) == '//'}
+            {if substr($script, 0, 7) == 'http://' || substr($script, 0, 8) == 'https://' || substr($script, 0, 2) == '//'}
         <script src="{$script}"></script>
             {elseif substr($script, 0, 7) == '<script'}
         {$script}
