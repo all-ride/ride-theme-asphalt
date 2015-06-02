@@ -58,6 +58,7 @@
 .tabs__content {
   border-bottom: 1px solid $gray-25;
   margin-bottom: $rh-med;
+  padding-bottom: $rh-med;
   .js & {
     > .tabs__pane {
       display: none;
