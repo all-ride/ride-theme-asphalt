@@ -17,7 +17,10 @@ rideApp.form = (function($, undefined) {
   var _initialize = function() {
     formFile();
     formCollection();
-    sortables();
+
+    if (jQuery.fn.sortable) {
+      sortables();
+    }
 
     _selectize();
     this.assets.init();
