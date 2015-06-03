@@ -45,8 +45,11 @@
                         <div class="preivew__image-container">
                             <div class="preview__image">
                                 {if $item->getThumbnail()}
-                                    <img src="{image src=$item->getThumbnail() width=160 height=125 transformation="crop"}" class="image image--full-width" />
+                                    {$imgSource = $item->getThumbnail()}
+                                {else}
+                                    {$imgSource = "asphalt/img/unknonw.png"}
                                 {/if}
+                                <img src="{image src=$imgSource width=160 height=125 transformation="crop"}" class="image image--full-width" />
                             </div>
                         </div>
                         <div class="preview__name-container">
