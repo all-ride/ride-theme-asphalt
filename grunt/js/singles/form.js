@@ -25,7 +25,9 @@ rideApp.form = (function($, undefined) {
     _selectize();
     this.assets.init();
 
-    this.checkLength.init($('[maxlength]'));
+    $('[maxlength]').each(function() {
+      rideApp.form.checkLength.init($(this));
+    });
 
     $('[data-toggle-dependant]').on('change', function() {
         toggleDependantRows($(this));
