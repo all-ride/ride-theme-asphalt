@@ -814,11 +814,9 @@
                 {$options = $widget->getOptions()}
 
                 {* Print selected items first *}
-                {if !is_array($value)}
+                {if !is_array($value) && isset($value)}
                     <option value="{$value|escape}" selected="selected">{$options[$value]}</option>
-                {/if}
-
-                {if is_array($value)}
+                {else}
                     {foreach $value as $option}
                         <option value="{$option|escape}" selected="selected">{$options[$option]}</option>
                     {/foreach}
