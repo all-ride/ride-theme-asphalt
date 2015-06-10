@@ -320,6 +320,8 @@
                     {$attributes.minlength = $value}
                 {else if $option == 'maximum'}
                     {$attributes.maxlength = $value}
+                {else if $option == 'regex'}
+                    {$attributes.pattern = $value}
                 {/if}
             {/foreach}
         {/foreach}
