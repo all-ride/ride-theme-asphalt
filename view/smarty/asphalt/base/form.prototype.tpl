@@ -797,6 +797,7 @@
         {/if}
 
         {$value = $widget->getValue()}
+        {$options = $widget->getOptions()}
 
         {* <div class="form__select-item"> *}
             <select name="{$widget->getName()}{if $part}[{$part}]{elseif $widget->isMultiple()}[]{/if}"
@@ -813,7 +814,7 @@
                   {/if}
               {/if}
             >
-                {$options = $widget->getOptions()}
+
 
                 {* Print selected items first *}
                 {if !is_array($value) && isset($value)}
@@ -828,14 +829,16 @@
                 {foreach $options as $option => $label}
                     {if (!is_array($value) && !strcmp($option, $value) == 0) || (is_array($value) && !isset($value[$option]))}
                         {if is_array($label)}
-                        <optgroup label="{$option|escape}">
-                        {foreach $label as $o => $l}
-                            <option value="{$o|escape}"{if (!is_array($value) && strcmp($o, $value) == 0) || (is_array($value) && isset($value[$o]))} selected="selected"{/if}>{$l}</option>
-                        {/foreach}
-                        </optgroup>
+                            <optgroup label="{$option|escape}">
+                                {foreach $label as $o => $l}
+                                    <option value="{$o|escape}"{if (!is_array($value) && strcmp($o, $value) == 0) || (is_array($value) && isset($value[$o]))} selected="selected"{/if}>{$l}</option>
+                                {/foreach}
+                            </optgroup>
                         {else}
-                        <option value="{$option|escape}">{$label}</option>
+                            <option value="{$option|escape}">{$label}</option>
                         {/if}
+                    {else}
+                        <option value="{$option|escape}">{$label}</option>
                     {/if}
                 {/foreach}
             </select>
