@@ -827,7 +827,7 @@
 
                 {* Print other items *}
                 {foreach $options as $option => $label}
-                    {if (!is_array($value) && !strcmp($option, $value) == 0) || (is_array($value) && !isset($value[$option]))}
+                    {if !isset($value) || (!is_array($value) && !strcmp($option, $value) == 0) || (is_array($value) && !isset($value[$option]))}
                         {if is_array($label)}
                             <optgroup label="{$option|escape}">
                                 {foreach $label as $o => $l}
@@ -837,8 +837,6 @@
                         {else}
                             <option value="{$option|escape}">{$label}</option>
                         {/if}
-                    {else}
-                        <option value="{$option|escape}">{$label}</option>
                     {/if}
                 {/foreach}
             </select>
