@@ -814,11 +814,11 @@
                   {/if}
               {/if}
             >
-
-
                 {* Print selected items first *}
                 {if !is_array($value) && isset($value)}
-                    <option value="{$value|escape}" selected="selected">{$options[$value]}</option>
+                    {if isset($options[$value])}
+                        <option value="{$value|escape}" selected="selected">{$options[$value]}</option>
+                    {/if}
                 {else}
                     {foreach $value as $option}
                         <option value="{$option|escape}" selected="selected">{$options[$option]}</option>
