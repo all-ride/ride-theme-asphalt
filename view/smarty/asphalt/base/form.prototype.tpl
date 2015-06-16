@@ -1,3 +1,7 @@
+{$bodyComponent = $app.cms.node->get('body.components')}
+{if !$bodyComponent|strstr:'form'}
+    {$app.cms.node->set('body.components', "`$bodyComponent` form")}
+{/if}
 
 {*
     Prototype functions for the form rendering
