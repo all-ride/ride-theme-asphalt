@@ -29,6 +29,7 @@
                         </div>
                     </div>
                 </div>
+                {call formRows form=$form}
                 <div class="form__actions roll-in roll-in--pre">
                     <button type="submit" class="btn btn--brand btn--large">{translate key="button.login"}</button>
                     {if $urls}
