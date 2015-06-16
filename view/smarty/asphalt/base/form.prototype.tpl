@@ -1,6 +1,8 @@
-{$bodyComponent = $app.cms.node->get('body.components')}
-{if !$bodyComponent|strstr:'form'}
-    {$app.cms.node->set('body.components', "`$bodyComponent` form")}
+{if isset($app.cms.node)}
+    {$bodyComponent = $app.cms.node->get('body.components')}
+    {if !$bodyComponent|strstr:'form'}
+        {$app.cms.node->set('body.components', "`$bodyComponent` form")}
+    {/if}
 {/if}
 
 {*
