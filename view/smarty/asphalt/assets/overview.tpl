@@ -34,18 +34,19 @@
         {/foreach}
     </div>
 
-
     {include file="base/form.prototype"}
     {include file="base/helper.prototype"}
 
     <form action="{url id="assets.asset.add" parameters=["locale" => $locale]}?folder={$folder->id}&embed={$embed}"
         class="dropzone"
-        id="asset-dropzone">
+        id="asset-dropzone"
+        data-error-filesize="{translate key="error.filesize"}">
 
         <div class="fallback">
             <input name="file" type="file" multiple />
         </div>
     </form>
+
     <form id="{$form->getId()}" class="form form-filter{*  form--selectize *}" action="{$app.url.request}" method="POST" role="form">
         <div class="actions clearfix">
             <div class="btn-group">
