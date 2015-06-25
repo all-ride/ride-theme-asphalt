@@ -31,15 +31,6 @@
 {block name="content_body" append}
     {include file="base/form.prototype"}
 
-    <form action="{$app.url.request}"
-        class="dropzone"
-        id="dropzone">
-
-        <div class="fallback">
-            <input name="file" type="file" multiple />
-        </div>
-    </form>
-
     <form id="{$form->getId()}" class="form" action="{$app.url.request}" method="POST" role="form" enctype="multipart/form-data">
 
         <div class="grid">
