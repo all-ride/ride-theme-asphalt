@@ -14,6 +14,7 @@
     "button.users.manage": "Manage the users",
     "button.vocabulary.add": "Add a new vocabulary",
     "button.vocabulary.manage": "Manage the vocabularies",
+    "error.filesize": "This file is too big. (Max %size%MB)",
     "image.processor.error.resize.value": "No valid width and/or height given",
     "image.processor.label.aspect": "Ratio 4:3",
     "image.processor.label.height": "Original height of your image",
