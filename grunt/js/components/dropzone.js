@@ -2,7 +2,8 @@ window.app = window.app || {};
 
 app.dropzone = (function($, undefined) {
   var maxFilesize = 2,
-      errorFilesize = ($("#asset-dropzone").data('errorFilesize')).replace("%size%", ""+maxFilesize) || "This file is too big.";
+      errorFilesize = $("#asset-dropzone").data('errorFilesize') || "This file is too big.";
+  errorFilesize = errorFilesize.replace("%size%", ""+maxFilesize);
 
   Dropzone.options.assetDropzone = {
     maxFilesize: maxFilesize,
