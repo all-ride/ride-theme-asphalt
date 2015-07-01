@@ -22,7 +22,7 @@
 
         {foreach $exports as $extension => $url}
             <a href="{$url}" title="{translate key="label.export.to" format=$extension}">
-                <img src="{image src="asphalt/img/export/`$extension`.png"}" />
+                <img src="{image src="asphalt/img/export/`$extension`.png" transformation="resize" width=16 height=16}" />
             </a>
         {/foreach}
     {/if}
