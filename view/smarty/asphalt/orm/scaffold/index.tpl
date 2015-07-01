@@ -18,11 +18,11 @@
     {include file="base/table" table=$table tableForm=$form tableActions=$actions}
 
     {if $exports}
-        {translate key="orm.label.export"}
+        {translate key="label.export"}
 
         {foreach $exports as $extension => $url}
-            <a href="{$url}" title="{translate key="orm.label.export.to" format=$extension}">
-                <img src="{image src="img/export/`$extension`.png"}" />
+            <a href="{$url}" title="{translate key="label.export.to" format=$extension}">
+                <img src="{image src="asphalt/img/export/`$extension`.png"}" />
             </a>
         {/foreach}
     {/if}
