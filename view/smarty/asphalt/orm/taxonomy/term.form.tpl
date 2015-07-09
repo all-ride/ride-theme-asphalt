@@ -24,6 +24,7 @@
 
             <div class="form__actions">
                 <button type="submit" class="btn btn--brand">{translate key="button.save"}</button>
+                <button name="submit" value="new" type="submit" class="btn btn--link" action="{$app.url.request}"><span>{translate key="label.term.next"}</span></button>
                 {if $referer}
                     <a class="btn btn--link" href="{$referer}">{translate key="button.cancel"}</a>
                 {/if}
