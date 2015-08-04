@@ -5,9 +5,12 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="{$app.locale}"><!--<![endif]-->
     <head>
         {block name="head"}
-                <meta charset="utf-8">
-                <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                <title>{block name="head_title"}{if isset($app.taskbar)}{$app.taskbar->getTitle()}{/if}{/block}</title>
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <title>{block name="head_title"}{if isset($app.taskbar)}{$app.taskbar->getTitle()}{/if}{/block}</title>
+            {block "favicon"}
+                <link rel="icon" type="image/png" href="{$app.url.base}/img/favicon.png" />
+            {/block}
             {block name="styles"}
                 <!--[if gt IE 8]><!--><link rel="stylesheet" href="{$app.url.base}/asphalt/css/main.min.css"> <!--<![endif]-->
                 <!--[if lt IE 9]><link rel="stylesheet" href="{$app.url.base}/asphalt/css/main-legacy.min.css"><![endif]-->
