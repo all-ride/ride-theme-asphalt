@@ -38,6 +38,13 @@
       }
     }
   }
+  &.error {
+    border-top-color: map-get($notice-colors, danger);
+    a {
+      box-shadow: inset 0 3px 0 map-get($notice-colors, danger);
+      color: map-get($notice-colors, danger);
+    }
+  }
   span {
     font-weight: $font-weight-bold;
     text-transform: uppercase;
