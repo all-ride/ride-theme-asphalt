@@ -118,19 +118,6 @@
           app.variables = {
             assetsPath: "/",
           };
-
-          // Parsley config
-          window.ParsleyConfig = window.ParsleyConfig || {};
-          window.ParsleyConfig = {
-            trigger: 'change, focusout',
-            excluded: 'input:not(:visible)',
-            classHandler: function (ParsleyField) {
-              return ParsleyField.$element.closest('.form__item');
-            },
-            errorsContainer: function (ParsleyField) {
-              return ParsleyField.$element.closest('.form__item');
-            }
-          };
         </script>
         <script type="text/javascript" src="{$app.url.base}/asphalt/js/main.min.js"></script>
         <script type="text/javascript" src="{$app.url.base}/asphalt/js/ajax.js"></script>
