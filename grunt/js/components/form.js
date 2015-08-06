@@ -18,18 +18,14 @@ app.form = (function($, undefined) {
   var _initialize = function() {
     $forms.on('click', 'button[type=submit]', this.submit);
 
-    // $.listen('parsley:form:error', $forms, _checkValidation);
-
-    $forms.parsley().on('form:error', function() {
-      _checkValidation(this.$element);
-    });
-    // $forms.parsley().on('field:success', _checkValidation);
-    $forms.parsley().on('field:success', function() {
-      _checkValidation(this.$element.parents('form'));
-    });
-
-    // $.listen('parsley:field:success', $('.parsley-error'), _checkValidation);
-
+    if($forms.length) {
+      $forms.parsley().on('form:error', function() {
+        _checkValidation(this.$element);
+      });
+      $forms.parsley().on('field:success', function() {
+        _checkValidation(this.$element.parents('form'));
+      });
+    }
   };
 
   var _checkValidation = function($form) {
