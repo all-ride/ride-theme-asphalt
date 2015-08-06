@@ -18,7 +18,7 @@ app.form = (function($, undefined) {
   var _initialize = function() {
     $forms.on('click', 'button[type=submit]', this.submit);
 
-    if($forms.length) {
+    if($forms.length && $forms.parsley().on !== undefined) {
       $forms.parsley().on('form:error', function() {
         _checkValidation(this.$element);
       });
