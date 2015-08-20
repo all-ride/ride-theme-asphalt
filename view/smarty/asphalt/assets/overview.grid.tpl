@@ -9,7 +9,7 @@
                     <div class="preview preview--folder">
                         {if !$embed}
                             <label class="preview__checkbox checkbox">
-                                <input type="checkbox" name="assets[]" value="{$item->getId()}" />
+                                <input type="checkbox" name="folders[]" value="{$item->getId()}" />
                             </label>
                         {/if}
                         <div class="preivew__image-container">
