@@ -824,7 +824,7 @@
             >
                 {* Print selected items first *}
                 {if !is_array($value) && isset($value)}
-                    {if isset($options[$value])}
+                    {if !is_object($value) && isset($options.$value)}
                         <option value="{$value|escape}" selected="selected">{$options[$value]}</option>
                     {/if}
                 {else}
