@@ -258,7 +258,7 @@ rideApp.form = (function($, undefined) {
   var toggleDependantRows = function($input) {
     var $parent = $input.parents('form'),
         $styleClass = $input.data('toggle-dependant'),
-        $group = $parent.find('[name^="' + $input.attr('name') + '""]'),
+        $group = $parent.find('[name^="' + $input.attr('name') + '"]'),
         $checked = $group.filter(':checked'),
         value = $checked.length ? $checked.val() : null;
 
