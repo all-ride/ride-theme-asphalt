@@ -2,7 +2,7 @@ $.fn.honeyPot = function(options) {
     var $this = $(this);
 
     $(options.fields).each(function(index, value) {
-        var $input = $('input[name=' + value + ']', $this);
+        var $input = $('input[name*="[' + value + ']"]', $this);
         if ($input.length === 0) {
             return;
         }
@@ -19,19 +19,19 @@ $.fn.honeyPot = function(options) {
         var submitValue = '';
 
         $(options.fields).each(function(index, name) {
-            var $input = $('input[name=' + name + ']', $this),
+            var $input = $('input[name*="[' + name + ']"]', $this),
                 value = $input.val();
 
             if (value === '') {
-                value = $input.attr('name');
+                value = name;
             } else {
-                value = $input.attr('name') + ':' + value;
+                value = name + ':' + value;
             }
 
             submitValue += (submitValue === '' ? '' : ',') + value;
         });
 
-        $('input[name=honeypot-submit]', $this).val(submitValue);
+        $('input[name*="[honeypot-submit]"]', $this).val(submitValue);
     });
 };
 
@@ -42,22 +42,3 @@ function findAncestor(el, cls) {
     while ((el = el.parentElement) && !el.classList.contains(cls));
     return el;
 }
-
-// rideApp.honeyPot = function(form, options) {
-//     [].prototype.forEach.call(options.fields, function(field) {
-//         var input = form.querySelector('input[name=' + value + ']'),
-//             defaultValue,
-//             group;
-//         if (input.length === 0) {
-//             return;
-//         }
-
-//         defaultValue = input.dataset.value;
-//         if (defaultValue) {
-//             input.value = defaultValue;
-//         }
-
-//         group = findAncestor(input, 'form__item');
-//         group.style.display = 'none';
-//     });
-// };
