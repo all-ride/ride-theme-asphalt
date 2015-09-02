@@ -11,7 +11,7 @@
                             <input type="checkbox" name="folders[]" value="{$item->getId()}" />
                         </label>
                     {/if}
-                    <div class="preivew__image-container">
+                    <div class="preview__image-container">
                         <div class="preview__image">
                             <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $item->id]}{$urlSuffix}&selected={$app.request->getQueryParameter('selected')}">
                                 <img src="{$app.url.base}/asphalt/img/folder.svg" width="160" height="125" class="image image--full-width" />
@@ -50,10 +50,14 @@
                             <input type="checkbox" name="assets[]" value="{$item->getId()}" />
                         </label>
                     {/if}
-                    <div class="preivew__image-container">
+                    <div class="preview__image-container">
                         <div class="preview__image">
                             {if $item->getThumbnail()}
                                 {$imgSource = $item->getThumbnail()}
+                            {elseif !$item->getThumbnail() && $item->getType() == 'audio'}
+                                {$imgSource = "asphalt/img/audio.svg"}
+                            {elseif !$item->getThumbnail() && $item->getType() == 'pdf'}
+                                {$imgSource = "asphalt/img/pdf.svg"}
                             {else}
                                 {$imgSource = "asphalt/img/unknown.png"}
                             {/if}
