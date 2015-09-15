@@ -26,7 +26,11 @@ rideApp.form = (function($, undefined) {
     this.assets.init();
 
     $('[maxlength]').each(function() {
-      rideApp.form.checkLength.init($(this));
+      rideApp.form.checkLength.init($(this), false);
+    });
+
+    $('[data-recommended-maxlength]').each(function() {
+      rideApp.form.checkLength.init($(this), true);
     });
 
     $('[data-toggle-dependant]').on('change', function() {
@@ -92,23 +96,33 @@ rideApp.form = (function($, undefined) {
   };
 
   var _checkLength = {
-    init: function($field) {
+    init: function($field,recommended) {
       if(!$field.length) return false;
-      var maxChars = $field.attr('maxlength');
+      if(recommended) {
+        var maxChars = $field.attr('data-recommended-maxlength');
+      }
+      else var maxChars = $field.attr('maxlength');
       if(!maxChars) return false;
       var $countDown = $('<div class="form__countdown" />').insertAfter($field);
-      rideApp.form.checkLength.updateCount($field, $countDown, maxChars);
+      rideApp.form.checkLength.updateCount($field, $countDown, maxChars, recommended);
 
       $field.on('keyup', function() {
-        rideApp.form.checkLength.updateCount($field, $countDown, maxChars);
+        rideApp.form.checkLength.updateCount($field, $countDown, maxChars, recommended);
       });
     },
-    updateCount: function($field, $label, max) {
+    updateCount: function($field, $label, max, recommended) {
       var length = $field.val().length,
-          maxChars = parseInt(max, 10),
-          count = (maxChars - length) >= 0 ? (maxChars - length) : 0;
-      $label.text(count + '/' + max);
-      if(count <= 0) return false;
+          maxChars = parseInt(max, 10);
+      if(recommended){
+        var count = (maxChars - length);
+        $label.text('Recommended length' + ': ' + count + '/' + max);
+      } else {
+        var count = (maxChars - length) >= 0 ? (maxChars - length) : 0;
+        $label.text(count + '/' + max); 
+      }
+      console.log(rideApp);
+      
+      if(count <= 0 && !recommended) return false;
     }
   };
 

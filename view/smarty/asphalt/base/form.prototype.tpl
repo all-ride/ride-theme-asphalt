@@ -755,7 +755,7 @@
                     <div class="form__{$type}-item">
                         <label class="form__label form__label--checkbox">
                             <input type="{$type}"
-                                   name="{$widget->getName()}{if $part}[{$part}]{elseif $type == 'checkbox'}[]{/if}"
+                                   name="{$widget->getName()}{if $type == 'checkbox'}[]{/if}"
                                    value="{$option}"
                                    {if (!is_array($value) && strcmp($value, $option) == 0) || (is_array($value) && isset($value[$option]))}checked="checked"{/if}
                                    {foreach $attributes as $name => $attribute}
