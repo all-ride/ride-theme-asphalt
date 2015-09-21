@@ -110,9 +110,9 @@
                     {/if}
                 </div>
             {/if}
+        {else}
+            <div style="clear:both; font-size:1.2em;">{translate key="label.result.notfound"}</div>
         {/if}
         </div>
     </form>
-{else}
-    <p>No rows</p>
 {/if}

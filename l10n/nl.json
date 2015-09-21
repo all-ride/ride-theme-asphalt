@@ -29,6 +29,7 @@
     "label.name.native": "Naam",
     "label.options": "Opties",
     "label.or": "Of",
+    "label.result.notfound" : "Geen resultaten gevonden",
     "label.table.confirm.delete": "Ben je zeker dat je de geselecteerde items wenst te verwijderen?",
     "label.table.export": "Exporen naar",
     "label.table.order": "Sorteren op",
