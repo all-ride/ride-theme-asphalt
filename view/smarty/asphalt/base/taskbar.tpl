@@ -9,7 +9,7 @@
         {elseif $class}
             <li class="{$class}">
                 <a href="#" tabindex="-1" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="icon icon--{$item->__toString()|replace:'.','-'}"></i>
+                    <i class="icon icon--{$item->__toString()|replace:'.':'-'}"></i>
                     {$item->getLabel()}
                     <i class="icon icon--angle-down"></i>
                 </a>
