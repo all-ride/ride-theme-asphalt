@@ -1542,3 +1542,14 @@
   content: "\f20c";
 }
 
+.#{$fonts-icon-class}--content-menu:before {
+  content: "\f1c0";
+}
+
+.#{$fonts-icon-class}--sites-menu:before {
+  content: "\f0c5";
+}
+
+.#{$fonts-icon-class}--themes-menu:before {
+  content: "\f1fc";
+}

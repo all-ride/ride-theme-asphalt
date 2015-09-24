@@ -8,7 +8,11 @@
             <li><a href="{$item->getUrl()}">{$item->getLabel()}</a></li>
         {elseif $class}
             <li class="{$class}">
-                <a href="#" tabindex="-1" class="dropdown-toggle" data-toggle="dropdown">{$item->getLabel()} <i class="icon icon--angle-down"></i></a>
+                <a href="#" tabindex="-1" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="icon icon--{$item->__toString()|replace:'.','-'}"></i>
+                    {$item->getLabel()}
+                    <i class="icon icon--angle-down"></i>
+                </a>
                 <ul class="dropdown__menu">
                 {call taskbarMenuItems items=$item->getItems() class="dropdown-submenu"}
                 </ul>
