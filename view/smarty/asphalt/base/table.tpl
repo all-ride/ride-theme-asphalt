@@ -1,4 +1,5 @@
-{if $table->hasRows() || $table->hasSearch()}
+{$hasActions = isset($tableActions) && $tableActions}
+{if $table->hasRows() || $table->hasSearch() || $hasActions}
     {tableVars}
     {include file="base/form.prototype"}
     {include file="base/helper.prototype"}
@@ -9,10 +10,10 @@
 
         <div class="form__group">
 
-        {if $table->hasOrderMethods() || $table->hasSearch()}
+        {if $hasActions || $table->hasOrderMethods() || $table->hasSearch()}
             <div class="grid table-header clearfix">
                 <div class="grid--bp-med__4">
-                    {if isset($tableActions) && $tableActions}
+                    {if $hasActions}
                         <div class="btn-group">
                             {foreach $tableActions as $url => $dataAction}
                                 {if $dataAction@first}

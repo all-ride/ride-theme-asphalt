@@ -1,10 +1,10 @@
 {extends file="base/index"}
 
-{block name="head_title" prepend}{translate key="title.roles"} - {/block}
+{block name="head_title" prepend}{translate key="title.permissions"} - {/block}
 
 {block name="content_title"}
     <div class="page-header">
-        <h1>{translate key="title.roles"}</h1>
+        <h1>{translate key="title.permissions"}</h1>
     </div>
 {/block}
 
@@ -12,19 +12,19 @@
     {$tableActions = []}
     {$referer = $app.url.request|escape}
 
-    {url id="system.security.role.add" var="urlRoleAdd"}
     {url id="system.security.user" var="urlUsers"}
-    {url id="system.security.permission" var="urlPermissions"}
+    {url id="system.security.role" var="urlRoles"}
+    {url id="system.security.permission.add" var="urlPermissionAdd"}
 
-    {isGranted url=$urlRoleAdd}
-        {$urlRoleAdd = "`$urlRoleAdd`?referer=`$referer`"}
-        {$tableActions.$urlRoleAdd = "button.role.add"|translate}
+    {isGranted url=$urlPermissionAdd}
+        {$urlPermissionAdd = "`$urlPermissionAdd`?referer=`$referer`"}
+        {$tableActions.$urlPermissionAdd = "button.permission.add"|translate}
     {/isGranted}
     {isGranted url=$urlUsers}
         {$tableActions.$urlUsers = "button.users.manage"|translate}
     {/isGranted}
-    {isGranted url=$urlPermissions}
-        {$tableActions.$urlPermissions = "button.permissions.manage"|translate}
+    {isGranted url=$urlRoles}
+        {$tableActions.$urlRoles = "button.roles.manage"|translate}
     {/isGranted}
     
     {include file="base/table" table=$table tableForm=$form tableActions=$tableActions}

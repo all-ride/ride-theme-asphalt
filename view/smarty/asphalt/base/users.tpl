@@ -13,6 +13,7 @@
     {$referer = $app.url.request|escape}
 
     {url id="system.security.role" var="urlRoles"}
+    {url id="system.security.permission" var="urlPermissions"}
     {url id="system.security.user.add" var="urlUserAdd"}
 
     {isGranted url=$urlUserAdd}
@@ -21,6 +22,9 @@
     {/isGranted}
     {isGranted url=$urlRoles}
         {$tableActions.$urlRoles = "button.roles.manage"|translate}
+    {/isGranted}
+    {isGranted url=$urlPermissions}
+        {$tableActions.$urlPermissions = "button.permissions.manage"|translate}
     {/isGranted}
 
     {include file="base/table" table=$table tableForm=$form tableActions=$tableActions}

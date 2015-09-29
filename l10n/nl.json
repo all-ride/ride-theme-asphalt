@@ -3,6 +3,8 @@
     "button.back.to.overview": "Terug naar het overzicht",
     "button.done": "Klaar",
     "button.password.reset": "Wachtwoord vergeten?",
+    "button.permission.add": "Recht toevoegen",
+    "button.permissions.manage": "Beheer de rechten",
     "button.properties.toggle": "Bekijk eigenschappen",
     "button.role.add": "Rol toevoegen",
     "button.roles.manage": "Beheer de rollen",
