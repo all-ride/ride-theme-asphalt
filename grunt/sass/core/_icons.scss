@@ -2,11 +2,8 @@
 //
 @font-face {
   font-family: 'FontAwesome';
-  src: url('#{$fonts-path}/fontawesome-webfont.eot');
-  src: url('#{$fonts-path}/fontawesome-webfont.eot?#iefix') format('embedded-opentype'),
-    url('#{$fonts-path}/fontawesome-webfont.woff') format('woff'),
-    url('#{$fonts-path}/fontawesome-webfont.ttf') format('truetype'),
-    url('#{$fonts-path}/fontawesome-webfont.svg#fontawesomeregular') format('svg');
+  src: url('#{$fonts-path}/fontawesome-webfont.woff') format('woff'),
+    url('#{$fonts-path}/fontawesome-webfont.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
 }
