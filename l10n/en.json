@@ -3,6 +3,8 @@
     "button.back.to.overview": "Back to the overview",
     "button.done": "Done",
     "button.password.reset": "Forgot your password?",
+    "button.permission.add": "Add a new permission",
+    "button.permissions.manage": "Manage the permissions",
     "button.properties.toggle": "Toggle properties",
     "button.role.add": "Add a new role",
     "button.roles.manage": "Manage the roles",
