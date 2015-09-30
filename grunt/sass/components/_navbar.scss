@@ -34,7 +34,8 @@
       padding: $rh-sml;
       color: $gray-0;
       text-decoration: none;
-      &:hover {
+      &:hover,
+      &:focus {
         color: $white;
         background: $gray-75;
       }
