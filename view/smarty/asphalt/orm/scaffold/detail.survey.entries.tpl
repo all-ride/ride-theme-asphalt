@@ -20,17 +20,15 @@
 
     <div class="tabbable">
         <ul class="tabs">
-            <li class="tabs__tab active">
-                <a href="#tabquestions" data-toggle="tab">{translate key="title.questions"}</a>
-            </li>
             <li class="tabs__tab">
-                <a href="{url id="survey.entry" parameters=["survey" => $entry->getId(), "locale" => $locale]}">{translate key="title.entries"}</a>
+                <a href="{url id="survey.detail" parameters=["id" => $entry->getId(), "locale" => $locale]}">{translate key="title.questions"}</a>
+            </li>
+            <li class="tabs__tab active">
+                <a href="#tabentries" data-toggle="tab">{translate key="title.entries"}</a>
             </li>
         </ul>
         <div class="tabs__content">
-            <div id="tabquestions" class="tabs__pane active">
-                {$tableActions = [$addQuestionUrl => {translate key="button.add"}]}
-
+            <div id="tabentries" class="tabs__pane active">
                 {include file="base/table" table=$table tableForm=$form}
             </div>
         </div>
