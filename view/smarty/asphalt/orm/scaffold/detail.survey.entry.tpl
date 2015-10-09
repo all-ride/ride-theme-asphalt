@@ -31,12 +31,7 @@
         </ul>
         <div class="tabs__content">
             <div id="tabgeneral" class="tabs__pane active">
-                <dl>
-                    <dt>{translate key="label.name"}</dt>
-                    <dd>{$entry->getName()}</dd>
-                    <dt>{translate key="label.date.added"}</dt>
-                    <dd>{$entry->getDateAdded()|date_format:"Y-m-d H:i:s"}</dd>
-                </dl>
+                {include file="orm/scaffold/detail.survey.entry.detail"}
             </div>
             <div id="tabquestions" class="tabs__pane">
             {foreach $survey->getQuestions() as $question}
