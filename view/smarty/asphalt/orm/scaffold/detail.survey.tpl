@@ -24,6 +24,9 @@
                 <a href="#tabquestions" data-toggle="tab">{translate key="title.questions"}</a>
             </li>
             <li class="tabs__tab">
+                <a href="{url id="survey.evaluation" parameters=["survey" => $entry->getId(), "locale" => $locale]}">{translate key="title.evaluations"}</a>
+            </li>
+            <li class="tabs__tab">
                 <a href="{url id="survey.entry" parameters=["survey" => $entry->getId(), "locale" => $locale]}">{translate key="title.entries"}</a>
             </li>
         </ul>

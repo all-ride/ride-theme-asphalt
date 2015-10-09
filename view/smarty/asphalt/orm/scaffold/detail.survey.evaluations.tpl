@@ -23,15 +23,17 @@
             <li class="tabs__tab">
                 <a href="{url id="survey.detail" parameters=["id" => $entry->getId(), "locale" => $locale]}">{translate key="title.questions"}</a>
             </li>
-            <li class="tabs__tab">
-                <a href="{url id="survey.evaluation" parameters=["survey" => $entry->getId(), "locale" => $locale]}">{translate key="title.evaluations"}</a>
-            </li>
             <li class="tabs__tab active">
-                <a href="#tabentries" data-toggle="tab">{translate key="title.entries"}</a>
+                <a href="#tabevaluations" data-toggle="tab">{translate key="title.evaluations"}</a>
+            </li>
+            <li class="tabs__tab">
+                <a href="{url id="survey.entry" parameters=["survey" => $entry->getId(), "locale" => $locale]}">{translate key="title.entries"}</a>
             </li>
         </ul>
         <div class="tabs__content">
             <div id="tabentries" class="tabs__pane active">
+                {$tableActions = [$addEvaluationUrl => {translate key="button.add"}]}
+
                 {include file="base/table" table=$table tableForm=$form}
             </div>
         </div>
