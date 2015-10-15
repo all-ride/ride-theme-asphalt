@@ -78,8 +78,8 @@ rideApp.form = (function($, undefined) {
       e.preventDefault();
       if (confirm('Are you sure you want to remove this item?')) {
         var parent = $(this).closest('.collection-control');
-        parent.remove();
         parent.trigger('collectionRemoved');
+        parent.remove();
       }
     });
   };
@@ -118,10 +118,10 @@ rideApp.form = (function($, undefined) {
         $label.text('Recommended length' + ': ' + count + '/' + max);
       } else {
         var count = (maxChars - length) >= 0 ? (maxChars - length) : 0;
-        $label.text(count + '/' + max); 
+        $label.text(count + '/' + max);
       }
       console.log(rideApp);
-      
+
       if(count <= 0 && !recommended) return false;
     }
   };
@@ -130,7 +130,7 @@ rideApp.form = (function($, undefined) {
     if (jQuery.fn.selectize) {
       var $form = $('.form--selectize'),
           selectizeOption = {
-            plugins: ['drag_drop']
+            plugins: ['drag_drop', 'remove_button']
           };
       $('.form--selectize select:visible:not(.selectized)').selectize(selectizeOption).addClass('selectized');
       $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {

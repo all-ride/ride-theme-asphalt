@@ -198,7 +198,7 @@
 {*
     Renders a single control of the form
 *}
-{function name="formWidget" form=null row=null part=null type=null}
+{function name="formWidget" form=null row=null part=null type=null class=null}
     {if !$form && isset($block_form)}
         {$form = $block_form}
     {/if}
@@ -218,7 +218,7 @@
             <div class="error">No type provided for row {$row->getName()}</div>
         {else}
             {$function = "formWidget`$type`"}
-            {call $function form=$form row=$row part=$part}
+            {call $function form=$form row=$row part=$part class=$class}
 
             {$row->setIsRendered(true)}
         {/if}
@@ -786,7 +786,7 @@
     {/if}
 {/function}
 
-{function name="formWidgetSelect" form=null row=null part=null}
+{function name="formWidgetSelect" form=null row=null part=null class=null}
     {if !$form && isset($block_form)}
         {$form = $block_form}
     {/if}
@@ -798,10 +798,14 @@
     {$widget = $row->getWidget()}
     {if $widget}
         {$attributes = $widget->getAttributes()}
+        {$defaultClass = 'form__select'}
+        {if $class}
+            {$defaultClass = "`$defaultClass` `$class`"}
+        {/if}
         {if isset($attributes.class)}
-            {$attributes.class = "`$attributes.class` form__select"}
+            {$attributes.class = "`$attributes.class` `$defaultClass`"}
         {else}
-            {$attributes.class = 'form__select'}
+            {$attributes.class = "`$defaultClass`"}
         {/if}
 
         {$value = $widget->getValue()}
@@ -1003,7 +1007,7 @@
         {if !$label}
             {$label = "button.add"|translate}
         {/if}
-        <a href="#" class="btn btn--brand prototype-add{if $row->isDisabled() || $row->isReadOnly()} disabled{/if}"><i class="icon icon--plus"></i> {$label}</a>
+        <a href="#" class="btn btn--default prototype-add{if $row->isDisabled() || $row->isReadOnly()} disabled{/if}"><i class="icon icon--plus"></i> {$label}</a>
     {/if}
 {/function}
 
@@ -1040,7 +1044,7 @@
 *}
 {function name="formActions" referer=null submit="button.save"}
     <div class="form__actions">
-        <button type="submit" class="btn btn--default">{translate key=$submit}</button>
+        <button type="submit" class="btn btn--brand">{translate key=$submit}</button>
         {if $referer}
             <a href="{$referer}" class="btn btn--link">{translate key="button.cancel"}</a>
         {/if}
