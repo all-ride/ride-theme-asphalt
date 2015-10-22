@@ -223,13 +223,16 @@ p.form__label {
 .form__select-item {
   @extend %ext-input-style;
   .form__select {
-    -webkit-appearance: textfield;
-    -moz-appearance: textfield;
-    appearance: textfield;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     border: none;
     border-radius: 0;
     &:focus {
       outline: none;
+    }
+    &::-ms-expand {
+      display: none;
     }
   }
 }

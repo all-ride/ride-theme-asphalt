@@ -92,23 +92,35 @@
         {/block}
         </div>
         <div class="ajax-overlay">
-            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
-                <rect x="0" y="5.39037" width="4" height="19.2193" fill="#333" opacity="0.2">
-                  <animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0s" dur="0.6s" repeatCount="indefinite"></animate>
-                  <animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0s" dur="0.6s" repeatCount="indefinite"></animate>
-                  <animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0s" dur="0.6s" repeatCount="indefinite"></animate>
-                </rect>
-                <rect x="8" y="7.10963" width="4" height="15.7807" fill="#333" opacity="0.2">
-                  <animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0.15s" dur="0.6s" repeatCount="indefinite"></animate>
-                  <animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0.15s" dur="0.6s" repeatCount="indefinite"></animate>
-                  <animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0.15s" dur="0.6s" repeatCount="indefinite"></animate>
-                </rect>
-                <rect x="16" y="9.60963" width="4" height="10.7807" fill="#333" opacity="0.2">
-                  <animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0.3s" dur="0.6s" repeatCount="indefinite"></animate>
-                  <animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0.3s" dur="0.6s" repeatCount="indefinite"></animate>
-                  <animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0.3s" dur="0.6s" repeatCount="indefinite"></animate>
-                </rect>
-              </svg>
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                 width="25px" height="25px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve" class="anim--spin">
+                <g>
+                    <path opacity="0.5" fill="#010101" d="M27.6,9.9c0,1.4-1.1,2.5-2.5,2.5l0,0c-1.4,0-2.5-1.1-2.5-2.5V2.5c0-1.4,1.1-2.5,2.5-2.5l0,0
+                        c1.4,0,2.5,1.1,2.5,2.5V9.9z"/>
+                    <path fill="#010101" d="M27.6,47c0,1.4-1.1,2.5-2.5,2.5l0,0c-1.4,0-2.5-1.1-2.5-2.5v-7.4c0-1.4,1.1-2.5,2.5-2.5l0,0
+                        c1.4,0,2.5,1.1,2.5,2.5V47z"/>
+                    <path opacity="0.25" fill="#010101" d="M10.3,22.3c1.4,0,2.5,1.1,2.5,2.5l0,0c0,1.4-1.1,2.5-2.5,2.5H2.8c-1.4,0-2.5-1.1-2.5-2.5
+                        l0,0c0-1.4,1.1-2.5,2.5-2.5H10.3z"/>
+                    <path opacity="0.65" fill="#010101" d="M47.4,22.3c1.4,0,2.5,1.1,2.5,2.5l0,0c0,1.4-1.1,2.5-2.5,2.5H40c-1.4,0-2.5-1.1-2.5-2.5l0,0
+                        c0-1.4,1.1-2.5,2.5-2.5H47.4z"/>
+                    <path opacity="0.2" fill="#010101" d="M11,30c1.2-0.7,2.7-0.3,3.4,0.9l0,0c0.7,1.2,0.3,2.7-0.9,3.4l-6.4,3.7
+                        c-1.2,0.7-2.7,0.3-3.4-0.9l0,0C3,36,3.4,34.4,4.6,33.8L11,30z"/>
+                    <path opacity="0.6" fill="#010101" d="M43.2,11.5c1.2-0.7,2.7-0.3,3.4,0.9l0,0c0.7,1.2,0.3,2.7-0.9,3.4l-6.4,3.7
+                        c-1.2,0.7-2.7,0.3-3.4-0.9l0,0c-0.7-1.2-0.3-2.7,0.9-3.4L43.2,11.5z"/>
+                    <path opacity="0.8" fill="#010101" d="M30.4,38.9c-0.7-1.2-0.3-2.7,0.9-3.4l0,0c1.2-0.7,2.7-0.3,3.4,0.9l3.7,6.4
+                        c0.7,1.2,0.3,2.7-0.9,3.4l0,0c-1.2,0.7-2.7,0.3-3.4-0.9L30.4,38.9z"/>
+                    <path opacity="0.45" fill="#010101" d="M11.8,6.7c-0.7-1.2-0.3-2.7,0.9-3.4l0,0c1.2-0.7,2.7-0.3,3.4,0.9l3.7,6.4
+                        c0.7,1.2,0.3,2.7-0.9,3.4l0,0c-1.2,0.7-2.7,0.3-3.4-0.9L11.8,6.7z"/>
+                    <path opacity="0.15" fill="#010101" d="M15.6,36.4c0.7-1.2,2.2-1.6,3.4-0.9l0,0c1.2,0.7,1.6,2.2,0.9,3.4l-3.7,6.4
+                        c-0.7,1.2-2.2,1.6-3.4,0.9l0,0c-1.2-0.7-1.6-2.2-0.9-3.4L15.6,36.4z"/>
+                    <path opacity="0.55" fill="#010101" d="M34.1,4.2c0.7-1.2,2.2-1.6,3.4-0.9l0,0c1.2,0.7,1.6,2.2,0.9,3.4l-3.7,6.4
+                        c-0.7,1.2-2.2,1.6-3.4,0.9l0,0c-1.2-0.7-1.6-2.2-0.9-3.4L34.1,4.2z"/>
+                    <path opacity="0.7" fill="#010101" d="M36.7,34.3c-1.2-0.7-1.6-2.2-0.9-3.4l0,0c0.7-1.2,2.2-1.6,3.4-0.9l6.4,3.7
+                        c1.2,0.7,1.6,2.2,0.9,3.4l0,0c-0.7,1.2-2.2,1.6-3.4,0.9L36.7,34.3z"/>
+                    <path opacity="0.35" fill="#010101" d="M4.6,15.8c-1.2-0.7-1.6-2.2-0.9-3.4l0,0c0.7-1.2,2.2-1.6,3.4-0.9l6.4,3.7
+                        c1.2,0.7,1.6,2.2,0.9,3.4l0,0c-0.7,1.2-2.2,1.6-3.4,0.9L4.6,15.8z"/>
+                </g>
+            </svg>
         </div>
     {/block}
     {block name="scripts"}
