@@ -45,7 +45,7 @@ rideApp.form = (function($, undefined) {
       e.preventDefault();
       var $anchor = $(this);
       if (confirm($anchor.data('message'))) {
-        $anchor.parents('.form__item').find('input[type=hidden]').val('');
+        $anchor.closest('.form__item').find('input[type=hidden]').val('');
         $anchor.parent('div').remove();
       }
     });
