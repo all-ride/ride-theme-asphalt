@@ -25,6 +25,9 @@
 
             <h3>{translate key="title.security"}</h3>
             {call formRow form=$form row="active"}
+            {if $form->hasRow('superuser')}
+                {call formRow form=$form row="superuser"}
+            {/if}
             {call formRow form=$form row="roles"}
 
             {call formRows form=$form}
