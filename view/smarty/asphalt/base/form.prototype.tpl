@@ -884,6 +884,7 @@
                {foreach $attributes as $name => $attribute}
                    {$name}="{$attribute|escape}"
                {/foreach}
+            {if $maxSize}data-parsley-maxsize="{$maxSize}"{/if}
              />
          </div>
 
