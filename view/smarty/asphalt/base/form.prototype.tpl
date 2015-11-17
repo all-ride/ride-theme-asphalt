@@ -605,8 +605,6 @@
             {/foreach}
         {/foreach}
 
-        {$validators|k}
-
         <textarea name="{$widget->getName()}{if $part}[{$part}]{/if}"
            {foreach $attributes as $name => $attribute}
                {$name}="{$attribute|escape}"
