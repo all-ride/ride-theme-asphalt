@@ -54,7 +54,7 @@
                         </tr>
                     {foreach $permissions as $permission}
                         <tr>
-                            <th>{translate key="`$permission`"}<br/><small>{$permission}</small></th>
+                            <th>{translate key="permission.`$permission`"}<br/><small>{$permission}</small></th>
                             {foreach $roles as $role}
                                 <td>{call formWidget form=$form row="role_`$role->getId()`" part=$permission->getCode()}</td>
                             {/foreach}
