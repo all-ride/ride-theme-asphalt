@@ -106,9 +106,9 @@ h4 {
   @each $type, $color in $notice-colors {
     &--#{$type} {
       @if $type == warning {
-        color: $notice-color-warning;
+        color: $notice-color-warning !important;
       } @else {
-        color: $color;
+        color: $color !important;
       }
     }
   }
