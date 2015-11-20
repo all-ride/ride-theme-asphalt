@@ -41,11 +41,11 @@
                 <td><a href="{url id="varnish.server.edit" parameters=["server" => (string) $server]}">{$server}</a></td>
                 <td>
                     {if $server->isRunning()}
-                        <span class="label label-success">{translate key="label.running"}</span>
+                        <span class="label label--success">{translate key="label.running"}</span>
                     {elseif $server->isConnected()}
-                        <span class="label label-warning">{translate key="label.running.not"}</span>
+                        <span class="label label--warning">{translate key="label.running.not"}</span>
                     {else}
-                        <span class="label label-danger">{translate key="label.connect.unable"}</span>
+                        <span class="label label--danger">{translate key="label.connect.unable"}</span>
                     {/if}
                 </td>
             </tr>
