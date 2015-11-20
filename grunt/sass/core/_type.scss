@@ -102,6 +102,18 @@ h4 {
   text-transform: capitalize;
 }
 
+.text {
+  @each $type, $color in $notice-colors {
+    &--#{$type} {
+      @if $type == warning {
+        color: $notice-color-warning;
+      } @else {
+        color: $color;
+      }
+    }
+  }
+}
+
 .text--overflow {
   display: inline-block;
   overflow: hidden;
