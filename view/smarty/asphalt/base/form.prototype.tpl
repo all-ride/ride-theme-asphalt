@@ -64,7 +64,7 @@
             {$errors = $form->getValidationErrors($row->getName())}
 
             <div class="form__item row-{$row->getName()|replace:'[':''|replace:']':''}{if $row->isRequired()} required{/if}{if $row->isDisabled()} disabled{/if}{if $row->isReadOnly()} readonly{/if} clearfix{if $errors} form__error{/if}{if $class} {$class}{/if}"{if $row->getOption('order')} data-order="true"{/if}>
-                <h2 class="heading--3">{$row->getLabel()}</h2>
+                <label class="form__label">{$row->getLabel()}</label>
 
                 {$description = $row->getDescription()}
                 {if $description}
@@ -593,17 +593,6 @@
         {else}
             {$attributes.class = 'form__text'}
         {/if}
-
-        {$validators = $row->getValidators()}
-        {foreach $validators as $validator}
-            {foreach $validator->getOptions() as $option => $value}
-                {if $option == 'minimum'}
-                    {$attributes.minlength = $value}
-                {else if $option == 'maximum'}
-                    {$attributes.maxlength = $value}
-                {/if}
-            {/foreach}
-        {/foreach}
 
         {$validators = $row->getValidators()}
         {foreach $validators as $validator}

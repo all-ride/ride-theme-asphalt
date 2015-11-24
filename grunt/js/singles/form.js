@@ -38,6 +38,8 @@ rideApp.form = (function($, undefined) {
     }).each(function() {
         toggleDependantRows($(this));
     });
+
+    rideApp.translator.submitTranslationKeys();
   };
 
   var formFile = function() {
@@ -100,9 +102,12 @@ rideApp.form = (function($, undefined) {
       if(!$field.length) return false;
       if(recommended) {
         var maxChars = $field.attr('data-recommended-maxlength');
+      } else {
+        var maxChars = $field.attr('maxlength');
       }
-      else var maxChars = $field.attr('maxlength');
-      if(!maxChars) return false;
+      if (!maxChars) {
+        return false;
+      }
       var $countDown = $('<div class="form__countdown" />').insertAfter($field);
       rideApp.form.checkLength.updateCount($field, $countDown, maxChars, recommended);
 
@@ -115,12 +120,16 @@ rideApp.form = (function($, undefined) {
           maxChars = parseInt(max, 10);
       if(recommended){
         var count = (maxChars - length);
-        $label.text('Recommended length' + ': ' + count + '/' + max);
+        $label.text(rideApp.translator.translate('label.length.recommended') + ': ' + count + '/' + max);
+        if (count < 0) {
+          $label.addClass('text--warning');
+        } else {
+          $label.removeClass('text--warning');
+        }
       } else {
         var count = (maxChars - length) >= 0 ? (maxChars - length) : 0;
         $label.text(count + '/' + max);
       }
-      console.log(rideApp);
 
       if(count <= 0 && !recommended) return false;
     }
@@ -288,7 +297,9 @@ rideApp.form = (function($, undefined) {
 })(jQuery);
 
 // Run the initializer
-rideApp.form.initialize();
+$(document).ready(function() {
+  rideApp.form.initialize();
+});
 
 
 

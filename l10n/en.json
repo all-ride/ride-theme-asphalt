@@ -29,6 +29,7 @@
     "label.confirm.file.delete": "Are you sure you want to remove this file?",
     "label.forced": "Forced",
     "label.images": "Images",
+    "label.length.recommended": "Recommended length",
     "label.locales.information": "You can use drag and drop to change the priority of the languages.",
     "label.name.native": "Native name",
     "label.options": "Options",
