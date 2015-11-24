@@ -31,7 +31,7 @@ $.fn.honeyPot = function(options) {
             submitValue += (submitValue === '' ? '' : ',') + value;
         });
 
-        $('input[name*="[honeypot-submit]"]', $this).val(submitValue);
+        $(options.submit, $this).val(submitValue);
     });
 };
 
