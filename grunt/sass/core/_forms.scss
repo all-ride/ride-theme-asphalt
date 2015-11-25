@@ -386,3 +386,12 @@ p.form__label {
     border: 1px solid $gray-25;
   }
 }
+
+.form__item--rich-content {
+  .form__label {
+    display: none;
+  }
+  .form__text {
+    visibility: hidden;
+  }
+}
