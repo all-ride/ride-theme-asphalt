@@ -38,7 +38,12 @@
 {function name="taskbarPanelLocales" url=null locale=null locales=null}
     <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            {$locale|upper}
+            {if strpos($locale, '_')}
+                {$localeTokens = explode('_', $locale|upper)}
+                {$localeTokens[0]} ({$localeTokens[1]})
+            {else}
+                {$locale|upper}
+            {/if}
             <i class="icon icon--angle-down"></i>
         </a>
         <ul class="dropdown__menu">
