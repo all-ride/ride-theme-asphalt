@@ -613,6 +613,9 @@
     {/if}
 {/function}
 
+{function name="formWidgetRichcontent" form=null row=null part=null}
+    {call formWidgetWysiwyg form=$form row=$row part=$part}
+{/function}
 
 {function name="formWidgetAssets" form=null row=null part=null}
     {if !$form && isset($block_form)}
