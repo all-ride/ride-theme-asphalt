@@ -53,6 +53,7 @@
         {/block}
     </head>
     <body data-translation-url="{url id="api.locales.translations.exposed" parameters=["locale" => $app.locale]}" {block name="body_attributes"}{/block}>
+    {literal}
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -63,6 +64,7 @@
       ga('send', 'pageview');
 
     </script>
+    {/literal}
 {block name="body"}
     {block name="taskbar"}
         {if isset($app.taskbar)}
