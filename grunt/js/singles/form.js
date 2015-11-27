@@ -23,6 +23,7 @@ rideApp.form = (function($, undefined) {
     }
 
     _selectize();
+    _autocomplete();
     this.assets.init();
 
     $('[maxlength]').each(function() {
@@ -148,6 +149,45 @@ rideApp.form = (function($, undefined) {
       $document.on('collectionAdded', function() {
         $('.form--selectize select:visible:not(.selectized)').selectize(selectizeOption).addClass('selectized');
       });
+    }
+  };
+
+  var _autocomplete = function() {
+    if (jQuery.fn.selectize) {
+      var $fields = $('[data-autocomplete-url]');
+      $fields.each(function() {
+        makeFieldAutocomplete($(this));
+      });
+
+      function makeFieldAutocomplete($field) {
+        var url = $field.data('autocomplete-url');
+        var type = $field.data('autocomplete-type');
+        var autocompleteSettings = {
+          valueField: 'name',
+          labelField: 'name',
+          searchField: 'name',
+          create: $field.hasClass('js-tags') ? true : false,
+          load: function(query, callback) {
+              if (!query.length) return callback();
+              var fetchUrl = url.replace("%term%", query);
+              $.get(
+                  fetchUrl,
+                  function(data) {
+                    if (type === 'jsonapi') {
+                      res = data.meta.list;
+                    } else {
+                      res = data;
+                    }
+                    var map = $.map(res, function(value) {
+                      return {name: value};
+                    })
+                    callback(map);
+                  }
+              );
+          }
+        }
+        $field.selectize(autocompleteSettings);
+      }
     }
   };
 
