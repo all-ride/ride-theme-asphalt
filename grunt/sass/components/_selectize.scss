@@ -383,3 +383,8 @@
 .selectize-dropdown .optgroup:first-child {
   border-top: 0 none;
 }
+
+.selectize-control.form__text {
+  padding: 0;
+  border: 0;
+}
