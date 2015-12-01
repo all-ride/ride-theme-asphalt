@@ -11,7 +11,7 @@ app.content = (function($, undefined) {
         var redactorOptions = $element.data('redactor-properties');
 
         options = $.extend(options, {
-          "blockTypes": ["Wysiwyg", "Text"],
+          "blockTypes": ["Wysiwyg", "Text", "Asset"],
           "el": $element
         });
 
@@ -42,34 +42,18 @@ app.content = (function($, undefined) {
         title: function() { return 'Wysiwyg'; },
         editorHTML: textAreaTemplate,
         icon_name: 'text',
-        // setTextBlockHTML: function(a) {
-        //   return '<p>Test</p>';
-        // },
         loadData: function(data){
           var $editor = $(this.$editor);
           $editor.html(data.text);
-
-          // console.log(data.text);
         },
-        // beforeBlockRender: function(data){
-        // },
-        // save: function(data){
-        //   // console.log(data);
-        //   // console.log(this);
+        save: function() {
+          var dataObj = {};
+          dataObj.text = this.$editor.val();
 
-        //   var data = this.$editor.val();
-        //   console.log(data);
-
-        //   // if (!_.isEmpty(data)) {
-        //   //   this.setData(data);
-        //   // }
-        //   // var data = this._serializeData();
-        //   // data = htmlEscape(data);
-        //   // TODO: set content as HTML content of textarea in the DOM
-        // },
-        // validateAndSaveBlock: function(block, shouldValidate) {
-        //   console.log(block);
-        // },
+          if (!_.isEmpty(dataObj)) {
+            this.setData(dataObj);
+          }
+        },
         onBlockRender: function(data){
           var textarea = this.$editor;
           $(textarea).initRedactor();
