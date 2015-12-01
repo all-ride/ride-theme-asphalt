@@ -24,7 +24,8 @@ app.content = (function($, undefined) {
 
   var _initWysiwyg = function(options) {
     var options = htmlEscape(JSON.stringify(options));
-    var textAreaTemplate = '<textarea class="wysiwyg form__text" data-redactor-properties="' + options + '"></textarea>';
+    var textAreaTemplate = '<textarea class="st-text-block wysiwyg form__text" data-redactor-properties="' + options + '"></textarea>';
+    // st-text-block class needed for save
 
     // Set options for new blocks
     SirTrevor.setBlockOptions("Wysiwyg", {
@@ -42,7 +43,15 @@ app.content = (function($, undefined) {
         icon_name: 'text',
         loadData: function(data){
           var $editor = $(this.$editor);
-          $editor.html(data.body);
+          $editor.html(data.text);
+        },
+        save: function() {
+          var dataObj = {};
+          dataObj.text = this.$editor.val();
+
+          if (!_.isEmpty(dataObj)) {
+            this.setData(dataObj);
+          }
         },
         onBlockRender: function(data){
           var textarea = this.$editor;
@@ -53,6 +62,7 @@ app.content = (function($, undefined) {
   };
 
   function htmlEscape(str) {
+    // http://stackoverflow.com/questions/1219860/html-encoding-in-javascript-jquery
     return String(str)
       .replace(/&/g, '&amp;')
       .replace(/"/g, '&quot;')
@@ -60,6 +70,15 @@ app.content = (function($, undefined) {
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;');
   }
+
+  // function htmlUnescape(value){
+  //   return String(value)
+  //       .replace(/&quot;/g, '"')
+  //       .replace(/&#39;/g, "'")
+  //       .replace(/&lt;/g, '<')
+  //       .replace(/&gt;/g, '>')
+  //       .replace(/&amp;/g, '&');
+  // }
 
   var ext_heading_block = (function() {
 
@@ -216,5 +235,4 @@ app.content = (function($, undefined) {
     init: _initialize,
     initWysiwyg: _initWysiwyg
   }
-
 })(jQuery);
