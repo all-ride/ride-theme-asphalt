@@ -142,7 +142,7 @@ app.content = (function($, undefined) {
         '</div>',
         '<hr>',
         '<div class="st-asset-block">',
-        '<img src="" alt="">',
+        '<img src alt="">',
         '</div>'
       ].join('\n'),
 
@@ -165,14 +165,16 @@ app.content = (function($, undefined) {
           this.ready();
         }).bind(this));
         this.getAssetBlock().on('error', (function() {
-          this.getAssetBlock().attr('src', '');
           this.ready();
-          this.setError('id', 'Could not find asset with ID ' + this.getData().data.id);
+          if(this.getAssetBlock().attr('src')) {
+            this.setError(this.getIdInput(), 'Could not find asset with ID ' + this.getData().data.id);
+          }
         }).bind(this));
       },
 
       loadAsset: function() {
         this.save();
+        this.resetErrors();
         this.loading();
         var id = this.getData().data.id;
         this.getAssetBlock().attr('src', window.location.origin + '/assets/' + id);
