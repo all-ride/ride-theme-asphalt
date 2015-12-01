@@ -17,10 +17,13 @@ img {
     margin-left: $rh-sml;
     margin-bottom: $rh-xsm;
   }
+  &--center {
+    display: block;
+    margin: 0 auto;
+  }
   &--left {
     float: left;
     margin-right: $rh-sml;
     margin-bottom: $rh-xsm;
   }
 }
-
