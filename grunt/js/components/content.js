@@ -11,7 +11,6 @@ app.content = (function($, undefined) {
         var redactorOptions = $element.data('redactor-properties');
 
         options = $.extend(options, {
-          "blockTypes": ["Wysiwyg", "Text", "Asset"],
           "el": $element
         });
 
@@ -234,5 +233,4 @@ app.content = (function($, undefined) {
     init: _initialize,
     initWysiwyg: _initWysiwyg
   }
-
 })(jQuery);
