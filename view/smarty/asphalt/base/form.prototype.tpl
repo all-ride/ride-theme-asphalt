@@ -78,8 +78,8 @@
 
                    {if $errors}
                         <ul class="form__error-list">
-                        {foreach $errors as $error => $null}
-                            <li>{$error}</li>
+                        {foreach $errors as $error}
+                            <li>{$error->getCode()|translate:$error->getParameters()}</li>
                         {/foreach}
                         </ul>
                     {/if}
