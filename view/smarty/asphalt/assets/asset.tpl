@@ -48,7 +48,7 @@
             </div>
             {if $asset->getId()}
                 <div class="grid__item grid--bp-med__6">
-                    {* <dl>
+                   {* <dl>
                         <dt>{translate key="label.url"}</dt>
                         <dd>
                             {url id="assets.value" parameters=["asset" => $asset->getId()] var="valueUrl"}
@@ -60,19 +60,19 @@
                             <dt>{translate key="label.dimension"}</dt>
                             <dd>{$dimension->getWidth()} x {$dimension->getHeight()}</dd>
                         {/if}
-                        <dt>{translate key="label.date.added"}<dt>
+                        <dt>{translate key="label.date.added"}</dt>
                         <dd>{$asset->getDateAdded()|date_format : "%d-%m-%Y %T"}</dd>
                         <dt>{translate key="label.date.modified"}</dt>
                         <dd>{$asset->getDateModified()|date_format : "%d-%m-%Y %T"}</dd>
-                    </dl>
+                    </dl>*}
 
-                    {if $media}
+                  {*  {if $media}
                         <iframe width="560" height="315" src="{$media->getEmbedUrl()}" frameborder="0" allowfullscreen></iframe>
                     {elseif $asset->isImage()}
                         <img class="img-responsive" src="{image src=$asset->getValue()}" />
                     {else}
                         <img class="img-responsive" src="{image src=$asset->getThumbnail()}"/>
-                    {/if} *}
+                    {/if}*}
 
                     <div class="tabbable">
                         <ul class="tabs">
