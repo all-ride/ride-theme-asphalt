@@ -11,7 +11,6 @@ app.content = (function($, undefined) {
         var redactorOptions = $element.data('redactor-properties');
 
         options = $.extend(options, {
-          "blockTypes": ["Wysiwyg", "Text"],
           "el": $element
         });
 
@@ -42,34 +41,18 @@ app.content = (function($, undefined) {
         title: function() { return 'Wysiwyg'; },
         editorHTML: textAreaTemplate,
         icon_name: 'text',
-        // setTextBlockHTML: function(a) {
-        //   return '<p>Test</p>';
-        // },
         loadData: function(data){
           var $editor = $(this.$editor);
           $editor.html(data.text);
-
-          // console.log(data.text);
         },
-        // beforeBlockRender: function(data){
-        // },
-        // save: function(data){
-        //   // console.log(data);
-        //   // console.log(this);
+        save: function() {
+          var dataObj = {};
+          dataObj.text = this.$editor.val();
 
-        //   var data = this.$editor.val();
-        //   console.log(data);
-
-        //   // if (!_.isEmpty(data)) {
-        //   //   this.setData(data);
-        //   // }
-        //   // var data = this._serializeData();
-        //   // data = htmlEscape(data);
-        //   // TODO: set content as HTML content of textarea in the DOM
-        // },
-        // validateAndSaveBlock: function(block, shouldValidate) {
-        //   console.log(block);
-        // },
+          if (!_.isEmpty(dataObj)) {
+            this.setData(dataObj);
+          }
+        },
         onBlockRender: function(data){
           var textarea = this.$editor;
           $(textarea).initRedactor();
@@ -169,16 +152,16 @@ app.content = (function($, undefined) {
         '<div class="grid__6">',
         '<label for="assetClass" class="form__label">Position</label>',
         '<select name="className" id="assetClass" class="st-className-input">',
-        '<option value="image--left">Left</option>',
-        '<option value="image--center">Center</option>',
-        '<option value="image--right">Right</option>',
-        '<option value="image--full-width">Stretch</option>',
+        '<option value="left">Left</option>',
+        '<option value="center">Center</option>',
+        '<option value="right">Right</option>',
+        '<option value="stretch">Stretch</option>',
         '</select>',
         '</div>',
         '</div>',
         '<hr>',
         '<div class="st-asset-block">',
-        '<img src="" alt="">',
+        '<img src alt="">',
         '</div>'
       ].join('\n'),
 
@@ -201,14 +184,16 @@ app.content = (function($, undefined) {
           this.ready();
         }).bind(this));
         this.getAssetBlock().on('error', (function() {
-          this.getAssetBlock().attr('src', '');
           this.ready();
-          this.setError('id', 'Could not find asset with ID ' + this.getData().data.id);
+          if(this.getAssetBlock().attr('src')) {
+            this.setError(this.getIdInput(), 'Could not find asset with ID ' + this.getData().data.id);
+          }
         }).bind(this));
       },
 
       loadAsset: function() {
         this.save();
+        this.resetErrors();
         this.loading();
         var id = this.getData().data.id;
         this.getAssetBlock().attr('src', window.location.origin + '/assets/' + id);
@@ -250,5 +235,4 @@ app.content = (function($, undefined) {
     init: _initialize,
     initWysiwyg: _initWysiwyg
   }
-
 })(jQuery);

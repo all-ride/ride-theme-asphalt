@@ -1,5 +1,16 @@
-{$hasActions = isset($tableActions) && $tableActions}
-{if $table->hasRows() || $table->hasSearch() || $hasActions}
+{if !isset($tableActions)}
+    {$tableActions = []}
+{/if}
+{$tmpTableActions = []}
+{foreach $tableActions as $tableActionUrl => $tableActionLabel}
+    {isGranted url=$tableActionUrl var="isGranted"}{/isGranted}
+    {if $isGranted}
+        {$tmpTableActions[$tableActionUrl] = $tableActionLabel}
+    {/if}
+{/foreach}
+{$tableActions = $tmpTableActions}
+
+{if $table->hasRows() || $table->hasSearch() || $tableActions}
     {tableVars}
     {include file="base/form.prototype"}
     {include file="base/helper.prototype"}
@@ -10,10 +21,10 @@
 
         <div class="form__group">
 
-        {if $hasActions || $table->hasOrderMethods() || $table->hasSearch()}
+        {if $tableActions || $table->hasOrderMethods() || $table->hasSearch()}
             <div class="grid table-header clearfix">
                 <div class="grid--bp-med__4">
-                    {if $hasActions}
+                    {if $tableActions}
                         <div class="btn-group">
                             {foreach $tableActions as $url => $dataAction}
                                 {if $dataAction@first}
