@@ -80,7 +80,6 @@
 
 .st-text-block, .st-text-block:active, .st-text-block:focus, .st-block [contenteditable="true"], .st-block [contenteditable="true"]:active, .st-block [contenteditable="true"]:focus, .st-block input[type="text"], .st-block input[type="text"]:active, .st-block input[type="text"]:focus, .st-block textarea, .st-block textarea:hover, .st-block textarea:active {
   outline: none;
-  border: none;
 }
 
 .st-block input[type="text"], .st-block input[type="text"]:active, .st-block input[type="text"]:focus {
@@ -113,30 +112,29 @@
 }
 
 .st-icon--add:after,
-.st-block-controls__top:before {
-  cursor: pointer;
+.st-block-controls__top:before,
+.st-block-controls {
   width: 100%;
   display: block;
   margin: 10px 0;
   padding: 7px;
   border: 1px dashed #ccc;
-  content: '\f067';
-  font-family: $font-family-icons;
   text-align: center;
 }
 
-.st-block-controls__top:hover:before {
-  background: #f5f6f7;
+.st-icon--add:after,
+.st-block-controls__top:before {
+  cursor: pointer;
+  content: '\f067';
+  font-family: $font-family-icons;
+  &:hover,
+  &:focus {
+    background: #f5f6f7;
+  }
 }
 
 .st-block-controls {
   display: none;
-  background-color: #f3f3f3;
-  border-radius: 0.2em;
-  color: #42474b;
-  width: 100%;
-  text-align: center;
-  padding: 1.2em 0;
 }
 
 .st-block-controls--active {
@@ -144,20 +142,16 @@
 }
 
 .st-block-control {
-  font-size: 1.125em;
   display: inline-block;
   cursor: pointer;
-  margin: 0 1em 0 0;
+  margin: 0 10px;
+  @include link-variant($color-link, $color-link-hover);
 }
 
 .st-block-control .st-icon {
   font-size: 2.25em;
   margin: 0 0 .2em 0;
   display: block;
-}
-
-.st-block-control:hover {
-  color: $color-brand-primary;
 }
 
 .st-block {

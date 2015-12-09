@@ -83,7 +83,6 @@ app.content = (function($, undefined) {
   var ext_heading_block = (function() {
 
     var _template = _.template('<<%- tagName %> class="st-required st-text-block st-text-block--heading" contenteditable="true"><%= text %></<%- tagName %>>');
-
     var _setHeading = function(tag) {
       return function() {
         this.$('.st-block-control-ui-btn--active').removeClass('st-block-control-ui-btn--active');
@@ -140,28 +139,28 @@ app.content = (function($, undefined) {
     return SirTrevor.Block.extend({
 
       type: 'asset',
-
       icon_name: 'image',
-
       editorHTML: [
         '<div class="grid">',
-        '<div class="grid__6">',
-        '<label for="assetId" class="form__label">Asset ID</label>',
-        '<input id="assetId" type="text" name="id" class="st-id-input"/>',
-        '</div>',
-        '<div class="grid__6">',
-        '<label for="assetClass" class="form__label">Position</label>',
-        '<select name="className" id="assetClass" class="st-className-input">',
-        '<option value="left">Left</option>',
-        '<option value="center">Center</option>',
-        '<option value="right">Right</option>',
-        '<option value="stretch">Stretch</option>',
-        '</select>',
-        '</div>',
+          '<div class="grid__4 grid--bp-xsm__3 grid--bp-sml__2">',
+            '<div class="form__item">',
+              '<label for="assetId" class="form__label">Asset ID</label>',
+              '<input id="assetId" type="text" name="id" class="st-id-input form__text"/>',
+            '</div>',
+          '</div>',
+          '<div class="grid__8 grid--bp-xsm__7 grid--bp-sml__6">',
+            '<label for="assetClass" class="form__label">Position</label>',
+            '<select name="className" id="assetClass" class="st-className-input form__select">',
+            '<option value="left">Left</option>',
+            '<option value="center">Center</option>',
+            '<option value="right">Right</option>',
+            '<option value="stretch">Stretch</option>',
+            '</select>',
+          '</div>',
         '</div>',
         '<hr>',
         '<div class="st-asset-block">',
-        '<img src alt="">',
+          '<img src alt="">',
         '</div>'
       ].join('\n'),
 
@@ -179,7 +178,9 @@ app.content = (function($, undefined) {
 
       onBlockRender: function() {
         this.getIdInput().on('change', this.loadAsset.bind(this));
+
         this.getClassNameInput().on('change', this.loadClass.bind(this));
+
         this.getAssetBlock().on('load', (function() {
           this.ready();
         }).bind(this));
