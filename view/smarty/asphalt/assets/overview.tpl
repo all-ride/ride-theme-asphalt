@@ -40,7 +40,8 @@
     <form action="{url id="assets.asset.add" parameters=["locale" => $locale]}?folder={$folder->id}&embed={$embed}"
         class="dropzone"
         id="asset-dropzone"
-        data-error-filesize="{translate key="error.filesize"}">
+        data-error-filesize="{translate key="error.filesize"}"
+        data-max-filesize={$maxFileSize}>
 
         <div class="fallback">
             <input name="file" type="file" multiple />
