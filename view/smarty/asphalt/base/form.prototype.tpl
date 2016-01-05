@@ -334,6 +334,10 @@
             {/foreach}
         {/foreach}
 
+        {if $widget->isMultiple()}
+            {$attributes["data-multiple"] = "true"}
+        {/if}
+
         {$value = $widget->getValue($part)}
         {if is_array($value)}
             {foreach $value as $part => $val}
