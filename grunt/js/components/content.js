@@ -16,6 +16,7 @@ app.content = (function($, undefined) {
 
         SirTrevor.Blocks.Heading = ext_heading_block;
         SirTrevor.Blocks.Asset = asset_block;
+        SirTrevor.Blocks.Tweet = tweet_block;
 
         app.content.initWysiwyg(redactorOptions);
         new SirTrevor.Editor(options);
@@ -226,6 +227,56 @@ app.content = (function($, undefined) {
         dataObj.this.getClassNameInput().val();
 
         this.setData(dataObj);
+      }
+
+    });
+
+  })();
+
+  var tweet_block = (function () {
+
+    return SirTrevor.Block.extend({
+
+      type: 'tweet',
+
+      icon_name: "tweet",
+
+      title: function () {
+        return i18n.t('blocks:tweet:title');
+      },
+
+      editorHTML: [
+        '<div>',
+          '<div class="form__item">',
+            '<div>',
+              '<label for="st-tweet-embed" class="form__label">Twitter Embed Code</label>',
+            '</div>',
+            '<textarea name="st-tweet-embed" id="st-tweet-embed" cols="90" rows="4"></textarea>',
+          '</div>',
+          '<div class="st-tweet-preview"></div>',
+        '</div>'
+      ].join('\n'),
+
+      getEmbedInput: function () {
+        return this.$('textarea');
+      },
+
+      getPreviewElement: function () {
+        return this.$('.st-tweet-preview');
+      },
+
+      loadData: function (data) {
+        this.getPreviewElement().html(data.embedCode);
+      },
+
+      onBlockRender: function () {
+        var self = this;
+        this.getEmbedInput().text(this.getData().data.embedCode);
+        this.getEmbedInput().on('keyup', function (e) {
+          self.setAndLoadData({
+            embedCode: e.target.value
+          });
+        });
       }
 
     });
