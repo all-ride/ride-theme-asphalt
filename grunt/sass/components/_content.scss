@@ -82,10 +82,15 @@
   outline: none;
 }
 
-.st-block input[type="text"], .st-block input[type="text"]:active, .st-block input[type="text"]:focus {
+.st-block input[type="text"], .st-block input[type="text"]:active, .st-block input[type="text"]:focus,
+.st-block textarea, .st-block textarea:active, .st-block textarea:focus {
   color: #42474b;
   border: 0.1em solid #d4d4d4;
   padding: .6em;
+}
+
+.st-block textarea {
+  font-family: $font-family-monospace;
 }
 
 .st-errors {
@@ -586,4 +591,13 @@ ul.st-text-block {
   @include clearfix;
   color: $gray-25;
   font-style: italic;
+}
+
+.st-tweet-embed {
+  width: 100%;
+  color: $gray-25;
+}
+
+blockquote.st-text-block {
+  padding-left: $rh-sml;
 }
