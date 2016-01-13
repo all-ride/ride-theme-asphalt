@@ -161,15 +161,24 @@ rideApp.form = (function($, undefined) {
 
       function makeFieldAutocomplete($field) {
         var url = $field.data('autocomplete-url');
+        var multiple = $field.data('autocomplete-multiple');
         var type = $field.data('autocomplete-type');
+        var plugins = [];
+        if (multiple) {
+            plugins.push('drag_drop', 'remove_button');
+        }
         var autocompleteSettings = {
           valueField: 'name',
           labelField: 'name',
           searchField: 'name',
+          maxItems: multiple ? null : 1,
+          plugins: plugins,
           create: $field.hasClass('js-tags') ? true : false,
           load: function(query, callback) {
               if (!query.length) return callback();
-              var fetchUrl = url.replace("%term%", query);
+              var fetchUrl = url;
+              fetchUrl = fetchUrl.replace(/%25term%25/g, query);
+              fetchUrl = fetchUrl.replace(/%term%/g, query);
               $.get(
                   fetchUrl,
                   function(data) {
