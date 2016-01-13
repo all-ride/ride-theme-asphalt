@@ -14,9 +14,10 @@ app.content = (function($, undefined) {
           "el": $element
         });
 
-        SirTrevor.Blocks.Heading = ext_heading_block;
+        SirTrevor.Blocks.Heading = heading_block;
         SirTrevor.Blocks.Asset = asset_block;
         SirTrevor.Blocks.Tweet = tweet_block;
+        SirTrevor.Blocks.Quote = quote_block;
 
         app.content.initWysiwyg(redactorOptions);
         new SirTrevor.Editor(options);
@@ -81,7 +82,7 @@ app.content = (function($, undefined) {
   //       .replace(/&amp;/g, '&');
   // }
 
-  var ext_heading_block = (function() {
+  var heading_block = (function() {
 
     var _template = _.template('<<%- tagName %> class="st-required st-text-block st-text-block--heading" contenteditable="true"><%= text %></<%- tagName %>>');
     var _setHeading = function(tag) {
@@ -136,17 +137,16 @@ app.content = (function($, undefined) {
   })();
 
   var asset_block = (function() {
-
     return SirTrevor.Block.extend({
-
       type: 'asset',
       icon_name: 'image',
       editorHTML: [
         '<div class="grid">',
           '<div class="grid__4 grid--bp-xsm__3 grid--bp-sml__2">',
-            '<div class="form__item">',
+            '<div class="form__item form__assets">',
               '<label for="assetId" class="form__label">Asset ID</label>',
               '<input id="assetId" type="text" name="id" class="st-id-input form__text"/>',
+              '<a href="#modalAssetsAdd" class="form__add-assets btn btn--default"><i class="icon icon--plus"></i></a>',
             '</div>',
           '</div>',
           '<div class="grid__8 grid--bp-xsm__7 grid--bp-sml__6">',
@@ -185,12 +185,15 @@ app.content = (function($, undefined) {
         this.getAssetBlock().on('load', (function() {
           this.ready();
         }).bind(this));
+
         this.getAssetBlock().on('error', (function() {
           this.ready();
           if(this.getAssetBlock().attr('src')) {
             this.setError(this.getIdInput(), 'Could not find asset with ID ' + this.getData().data.id);
           }
         }).bind(this));
+
+        rideApp.form.assets.init();
       },
 
       loadAsset: function() {
@@ -239,7 +242,7 @@ app.content = (function($, undefined) {
 
       type: 'tweet',
 
-      icon_name: "tweet",
+      icon_name: 'twitter',
 
       title: function () {
         return i18n.t('blocks:tweet:title');
@@ -251,7 +254,7 @@ app.content = (function($, undefined) {
             '<div>',
               '<label for="st-tweet-embed" class="form__label">Twitter Embed Code</label>',
             '</div>',
-            '<textarea name="st-tweet-embed" id="st-tweet-embed" cols="90" rows="4"></textarea>',
+            '<textarea name="st-tweet-embed" cols="90" rows="4"></textarea>',
           '</div>',
           '<div class="st-tweet-preview"></div>',
         '</div>'
@@ -267,11 +270,11 @@ app.content = (function($, undefined) {
 
       loadData: function (data) {
         this.getPreviewElement().html(data.embedCode);
+        this.getEmbedInput().text(data.embedCode);
       },
 
       onBlockRender: function () {
         var self = this;
-        this.getEmbedInput().text(this.getData().data.embedCode);
         this.getEmbedInput().on('keyup', function (e) {
           self.setAndLoadData({
             embedCode: e.target.value
@@ -281,6 +284,42 @@ app.content = (function($, undefined) {
 
     });
 
+  })();
+
+  var quote_block = (function () {
+
+    return SirTrevor.Block.extend({
+
+      type: 'quote',
+
+      title: function () {
+        return i18n.t('blocks:quote:title');
+      },
+
+      icon_name: 'quote',
+
+      editorHTML: [
+        '<div><label class="form__label">Quote</label></div>',
+        '<textarea name="text" class="st-required" cols="90" rows="4"></textarea>',
+        '<hr/>',
+        '<div><label class="form__label">Credit</label></div>',
+        '<input type="text" name="cite" class="st-cite-input"/>',
+      ].join('\n'),
+
+      getCreditBlock: function () {
+        return this.$('.st-cite-input');
+      },
+
+      loadData: function (data) {
+
+        this.setTextBlockHTML(data.text);
+
+        if (data.cite) {
+          this.getCreditBlock().html(data.cite);
+        }
+      }
+
+    });
   })();
 
   return {
