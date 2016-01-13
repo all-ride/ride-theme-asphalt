@@ -40,13 +40,18 @@ app.content = (function($, undefined) {
     SirTrevor.Blocks.Wysiwyg = (function(){
       return SirTrevor.Block.extend({
         type: "Wysiwyg",
+
         title: function() { return 'Wysiwyg'; },
+
         editorHTML: textAreaTemplate,
+
         icon_name: 'text',
+
         loadData: function(data){
           var $editor = $(this.$editor);
           $editor.html(data.text);
         },
+
         save: function() {
           var dataObj = {};
           dataObj.text = this.$editor.val();
@@ -55,6 +60,7 @@ app.content = (function($, undefined) {
             this.setData(dataObj);
           }
         },
+
         onBlockRender: function(data){
           var textarea = this.$editor;
           $(textarea).initRedactor();
@@ -97,7 +103,6 @@ app.content = (function($, undefined) {
         }));
 
         this.$('.st-block-control-ui-btn--setHeading' + tag[1]).addClass('st-block-control-ui-btn--active');
-
       };
     };
 
@@ -237,7 +242,6 @@ app.content = (function($, undefined) {
   })();
 
   var tweet_block = (function () {
-
     return SirTrevor.Block.extend({
 
       type: 'tweet',
@@ -287,9 +291,7 @@ app.content = (function($, undefined) {
   })();
 
   var quote_block = (function () {
-
     return SirTrevor.Block.extend({
-
       type: 'quote',
 
       title: function () {
@@ -300,25 +302,19 @@ app.content = (function($, undefined) {
 
       editorHTML: [
         '<div><label class="form__label">Quote</label></div>',
-        '<textarea name="text" class="st-required" cols="90" rows="2"></textarea>',
+        '<textarea name="text" class="st-required st-quote-text" cols="90" rows="4"></textarea>',
         '<hr/>',
         '<div><label class="form__label">Credit</label></div>',
-        '<input type="text" name="cite" size="55" class="st-cite-input"/>',
+        '<input type="text" name="cite" class="st-cite-input"/>',
       ].join('\n'),
 
-      getCreditBlock: function () {
-        return this.$('.st-cite-input');
-      },
-
       loadData: function (data) {
-
-        this.setTextBlockHTML(data.text);
+        this.$('.st-quote-text').html(data.text);
 
         if (data.cite) {
-          this.getCreditBlock().html(data.cite);
+          this.$('.st-cite-input').val(data.cite);
         }
       }
-
     });
   })();
 
