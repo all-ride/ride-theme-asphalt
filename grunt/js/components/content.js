@@ -135,17 +135,16 @@ app.content = (function($, undefined) {
   })();
 
   var asset_block = (function() {
-
     return SirTrevor.Block.extend({
-
       type: 'asset',
       icon_name: 'image',
       editorHTML: [
         '<div class="grid">',
           '<div class="grid__4 grid--bp-xsm__3 grid--bp-sml__2">',
-            '<div class="form__item">',
+            '<div class="form__item form__assets">',
               '<label for="assetId" class="form__label">Asset ID</label>',
               '<input id="assetId" type="text" name="id" class="st-id-input form__text"/>',
+              '<a href="#modalAssetsAdd" class="form__add-assets btn btn--default"><i class="icon icon--plus"></i></a>',
             '</div>',
           '</div>',
           '<div class="grid__8 grid--bp-xsm__7 grid--bp-sml__6">',
@@ -184,12 +183,15 @@ app.content = (function($, undefined) {
         this.getAssetBlock().on('load', (function() {
           this.ready();
         }).bind(this));
+
         this.getAssetBlock().on('error', (function() {
           this.ready();
           if(this.getAssetBlock().attr('src')) {
             this.setError(this.getIdInput(), 'Could not find asset with ID ' + this.getData().data.id);
           }
         }).bind(this));
+
+        rideApp.form.assets.init();
       },
 
       loadAsset: function() {
