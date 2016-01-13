@@ -300,10 +300,10 @@ app.content = (function($, undefined) {
 
       editorHTML: [
         '<div><label class="form__label">Quote</label></div>',
-        '<textarea name="text" class="st-required" cols="90" rows="4"></textarea>',
+        '<textarea name="text" class="st-required" cols="90" rows="2"></textarea>',
         '<hr/>',
         '<div><label class="form__label">Credit</label></div>',
-        '<input type="text" name="cite" class="st-cite-input"/>',
+        '<input type="text" name="cite" size="55" class="st-cite-input"/>',
       ].join('\n'),
 
       getCreditBlock: function () {
