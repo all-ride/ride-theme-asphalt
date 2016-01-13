@@ -1,1 +1,1 @@
-var $document=$(document),$overlay=$(".ajax-overlay");$(document).ajaxStart(function(){$overlay.show()}),$(document).ajaxStop(function(){$overlay.hide()});
+function getAjaxOverlay(){return null!==window.overlaySelector?$(window.overlaySelector):$defaultOverlay}var $document=$(document),$defaultOverlay=$(".ajax-overlay");$(document).ajaxStart(function(a){getAjaxOverlay().show()}),$(document).ajaxStop(function(){getAjaxOverlay().hide(),window.overlaySelector=null});
