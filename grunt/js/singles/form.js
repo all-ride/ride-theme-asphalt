@@ -201,10 +201,20 @@ rideApp.form = (function($, undefined) {
   };
 
   var _assets = {
-    allAssets: $('.form__assets'),
+    allAssets: function(){
+      return $document.find('.form__assets');
+    },
+    modalTriggers: function(){
+      return $document.find('.form__add-assets');
+    },
+    removeTriggers: function(){
+      return $document.find('.form__remove-assets');
+    },
     iframes: [],
     init: function() {
-      var $assets = rideApp.form.assets.allAssets;
+      var $assets = rideApp.form.assets.allAssets();
+      var $modalTriggers = rideApp.form.assets.modalTriggers();
+      var $removeTriggers = rideApp.form.assets.removeTriggers();
 
       $assets.each(function() {
         var $this = $(this),
@@ -223,28 +233,28 @@ rideApp.form = (function($, undefined) {
           .on('sortstop', function(event, ui) {
             rideApp.form.assets.setAssetsOrder($this);
           }).disableSelection();
+      });
 
-        $document.on('click', '.form__add-assets', function(e) {
-          e.preventDefault();
-          var attr = $(this).attr('disabled');
-          if (attr === 'disabled') {
-            return;
-          }
-          var assetsModal = $(this).attr('href'),
-              $modal = $(assetsModal),
-              $iframe = $modal.find('iframe');
+      $modalTriggers.on('click', function(e) {
+        e.preventDefault();
+        var attr = $(this).attr('disabled');
+        if (attr === 'disabled') {
+          return;
+        }
+        var assetsModal = $(this).attr('href'),
+            $modal = $(assetsModal),
+            $iframe = $modal.find('iframe');
 
-          // check if there is an other iframe with this source on the page
-          if($iframe.attr('src') === undefined) {
-            $iframe.attr('src', $iframe.data('src'));
-          }
-          $modal.modal('show');
-        });
+        // check if there is an other iframe with this source on the page
+        if($iframe.attr('src') === undefined) {
+          $iframe.attr('src', $iframe.data('src'));
+        }
+        $modal.modal('show');
+      });
 
-        $document.on('click', '.form__remove-asset', function(e) {
-          e.preventDefault();
-          rideApp.form.assets.removeAsset(this);
-        });
+      $removeTriggers.on('click', function(e) {
+        e.preventDefault();
+        rideApp.form.assets.removeAsset(this);
       });
     },
     setAssetsOrder: function($item) {
@@ -253,15 +263,9 @@ rideApp.form = (function($, undefined) {
             $field = $('#' + field);
         $field[0].value = order.join(',');
 
-        // Find iframe url and update query parameter
-        // var $iframe = $field.next().find('iframe');
-        // var parsed = queryString.parse($iframe.data('src'));
-
-        // parsed.selected = order.join(',');
-        // console.log(queryString.stringify(parsed));
-
         // find grouped assets and reorder them...
-        var $linked = rideApp.form.assets.allAssets.filter('[data-field="' + field + '"] ').not($item);
+        var $assets = rideApp.form.assets.allAssets();
+        var $linked = $assets.filter('[data-field="' + field + '"] ').not($item);
         $linked.find('.form__asset').detach();
         $linked.prepend($item.find('.form__asset').clone());
     },
@@ -306,9 +310,12 @@ rideApp.form = (function($, undefined) {
           $items = $assets.find('.form__asset'),
           max = $assetsField.data('max');
 
+      var $assets = rideApp.form.assets.allAssets();
+
       // check if the image is already added or the limit is exceded
       if($assets.find('[data-id="' + id + '"]').length || $items.length >= max) {
-        $assets.find('[data-id="' + id + '"]').find('.form__remove-asset').click();
+        var $item = $assets.find('[data-id="' + id + '"]').find('.form__remove-asset');
+        rideApp.form.assets.removeAsset($item);
         return;
       }
 

@@ -8,6 +8,7 @@ rideApp.assets = (function($, undefined) {
 
   var _initialize = function() {
     parent.rideApp.form.assets.resizeIframe(parent, $document.height());
+
     $document.on('click', '.preview.is-addable', function(e) {
       e.preventDefault();
       var $this = $(this),

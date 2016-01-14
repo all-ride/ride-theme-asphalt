@@ -79,17 +79,7 @@ app.content = (function($, undefined) {
       .replace(/>/g, '&gt;');
   }
 
-  // function htmlUnescape(value){
-  //   return String(value)
-  //       .replace(/&quot;/g, '"')
-  //       .replace(/&#39;/g, "'")
-  //       .replace(/&lt;/g, '<')
-  //       .replace(/&gt;/g, '>')
-  //       .replace(/&amp;/g, '&');
-  // }
-
   var heading_block = (function() {
-
     var _template = _.template('<<%- tagName %> class="st-required st-text-block st-text-block--heading" contenteditable="true"><%= text %></<%- tagName %>>');
     var _setHeading = function(tag) {
       return function() {
@@ -107,7 +97,6 @@ app.content = (function($, undefined) {
     };
 
     return SirTrevor.Blocks.Heading.extend({
-
       editorHTML: function() {
         return _template({
           tagName: 'h2',
@@ -142,19 +131,31 @@ app.content = (function($, undefined) {
   })();
 
   var asset_block = (function() {
+    var $attributes = {
+      id: "azer__123",
+      safename: "modalAssetsAdd-assets--123"
+    };
+
     return SirTrevor.Block.extend({
       type: 'asset',
       icon_name: 'image',
       editorHTML: [
         '<div class="grid">',
-          '<div class="grid__4 grid--bp-xsm__3 grid--bp-sml__2">',
-            '<div class="form__item form__assets">',
-              '<label for="assetId" class="form__label">Asset ID</label>',
-              '<input id="assetId" type="text" name="id" class="st-id-input form__text"/>',
-              '<a href="#modalAssetsAdd" class="form__add-assets btn btn--default"><i class="icon icon--plus"></i></a>',
+          '<div class="grid__4">',
+            '<label for="' + $attributes.id + '" class="form__label">Asset</label>',
+            '<div class="form__item form__assets" data-field="' + $attributes.id + '" data-max="999">',
+              '<div class="form__assets" data-id="' + $attributes.id + '">',
+                '<a href="#' + $attributes.safename + '" class="form__add-assets btn btn--default"><i class="icon icon--plus"></i> Toevoegen</a>',
+              '</div>',
             '</div>',
+            '<input type="text" name="' + $attributes.id + '" id="' + $attributes.id + '" data-name="' + $attributes.safename + '" />',
+            // '<div class="form__item form__assets" data-field="' + $attributes.id + '" data-max="999">',
+            //   '<label for="assetId-123" class="form__label">Asset</label>',
+            //   '<div><a href="#modalAssetsAdd-assets-123" class="form__add-assets btn btn--default"><i class="icon icon--plus"></i> Toevoegen</a></div>',
+            //   '<input id="assetId-123" type="text" name="id" class="st-id-input form__text" data-name="assets-123" />',
+            // '</div>',
           '</div>',
-          '<div class="grid__8 grid--bp-xsm__7 grid--bp-sml__6">',
+          '<div class="grid__8">',
             '<label for="assetClass" class="form__label">Position</label>',
             '<select name="className" id="assetClass" class="st-className-input form__select">',
             '<option value="left">Left</option>',
@@ -164,9 +165,31 @@ app.content = (function($, undefined) {
             '</select>',
           '</div>',
         '</div>',
-        '<hr>',
         '<div class="st-asset-block">',
           '<img src alt="">',
+        '</div>',
+        '<div class="modal modal--large fade" id="' + $attributes.safename + '" tabindex="-1" role="dialog" aria-labelledby="myModalAssetsAdd" aria-hidden="true">',
+            '<div class="modal-dialog">',
+                '<div class="modal-content">',
+                    '<div class="modal-body">',
+                        '<iframe data-src="http://vetweb.local.statik.be/admin/assets/nl?embed=1&amp;selected=" frameborder="0" width="100%" height="500"></iframe>',
+                    '</div>',
+                    '<div class="modal-footer">',
+                        '<div class="grid">',
+                            '<div class="grid--bp-xsm__9">',
+                                '<div class="form__assets form__assets--sml" data-field="' + $attributes.id + '" data-max="999"></div>',
+                                // '<div class="form__asset" data-id="{$asset->getId()}">',
+                                //     '<img src="#" width="40" height="40" />',
+                                //     '<a href="#" class="form__remove-asset">&times;</a>',
+                                // '</div>',
+                            '</div>',
+                            '<div class="grid--bp-xsm__3 text--right">',
+                                '<button type="button" class="btn btn--default" data-dismiss="modal">Klaar</button>',
+                            '</div>',
+                        '</div>',
+                    '</div>',
+                '</div>',
+            '</div>',
         '</div>'
       ].join('\n'),
 
@@ -243,7 +266,6 @@ app.content = (function($, undefined) {
 
   var tweet_block = (function () {
     return SirTrevor.Block.extend({
-
       type: 'tweet',
 
       icon_name: 'twitter',
