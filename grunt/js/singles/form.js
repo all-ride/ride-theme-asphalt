@@ -271,12 +271,18 @@ rideApp.form = (function($, undefined) {
         $linked.prepend($item.find('.form__asset').clone());
     },
     checkAssetsLimit: function() {
-      var $assets = $('.form__assets');
+      // var $assets = $('.form__assets');
+      var $assets = rideApp.form.assets.allAssets();
 
       $assets.each(function() {
         var $this = $(this),
             max = $this.data('max'),
             $add = $this.find('.form__add-assets');
+
+        // console.log('blaa');
+        // console.log($this);
+        // console.log($this.find('.form__asset').length);
+        // console.log($add);
 
         if ($this.find('.form__asset').length >= max) {
           $add.attr('disabled', true);
