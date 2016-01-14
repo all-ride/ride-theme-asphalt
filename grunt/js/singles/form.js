@@ -208,13 +208,13 @@ rideApp.form = (function($, undefined) {
       return $document.find('.form__add-assets');
     },
     removeTriggers: function(){
-      return $document.find('.form__remove-assets');
+      return $document.find('.form__remove-asset');
     },
     iframes: [],
     init: function() {
-      var $assets = rideApp.form.assets.allAssets();
-      var $modalTriggers = rideApp.form.assets.modalTriggers();
-      var $removeTriggers = rideApp.form.assets.removeTriggers();
+      var $assets = rideApp.form.assets.allAssets(),
+          $modalTriggers = rideApp.form.assets.modalTriggers(),
+          $removeTriggers = rideApp.form.assets.removeTriggers();
 
       $assets.each(function() {
         var $this = $(this),
@@ -252,6 +252,7 @@ rideApp.form = (function($, undefined) {
         $modal.modal('show');
       });
 
+      // console.log($removeTriggers);
       $removeTriggers.on('click', function(e) {
         e.preventDefault();
         rideApp.form.assets.removeAsset(this);
@@ -309,12 +310,13 @@ rideApp.form = (function($, undefined) {
           $assets = $('[data-field="' + assetsFieldId + '"]'),
           $items = $assets.find('.form__asset'),
           max = $assetsField.data('max');
-
-      var $assets = rideApp.form.assets.allAssets();
+      // var $assets = rideApp.form.assets.allAssets();
 
       // check if the image is already added or the limit is exceded
       if($assets.find('[data-id="' + id + '"]').length || $items.length >= max) {
         var $item = $assets.find('[data-id="' + id + '"]').find('.form__remove-asset');
+        // console.log($item);
+
         rideApp.form.assets.removeAsset($item);
         return;
       }
@@ -328,6 +330,9 @@ rideApp.form = (function($, undefined) {
       $assets.sortable('refresh');
       rideApp.form.assets.checkAssetsLimit();
       rideApp.form.assets.setAssetsOrder($assetsField);
+
+      // Reinit to 'scan' for new elements
+      rideApp.form.assets.init();
     },
     resizeIframe: function(doc, height) {
       $('iframe', doc.document).height(height);
