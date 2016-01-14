@@ -131,128 +131,107 @@ app.content = (function($, undefined) {
   })();
 
   var asset_block = (function() {
-    var $attributes = {
-      id: "azer__123",
-      safename: "modalAssetsAdd-assets--123"
-    };
+    var assetCounter = 0;
+
+    var asset_template = [
+      '<div class="grid">',
+        '<div class="grid__6">',
+          '<label for="<%- assetID %>" class="form__label">Asset</label>',
+          '<div class="form__item form__assets st-assets-block" data-field="<%- assetID %>" data-max="1">',
+            '<a href="#<%- assetName %>" class="form__add-assets btn btn--default"><i class="icon icon--plus"></i> Toevoegen</a>',
+          '</div>',
+          '<input type="text" name="<%- assetID %>" id="<%- assetID %>" data-name="<%- assetName %>" class="st-id-input" />',
+        '</div>',
+        '<div class="grid__6">',
+          '<label for="assetClass" class="form__label">Position</label>',
+          '<select name="className" id="assetClass" class="st-className-input form__select">',
+          '<option value="left">Left</option>',
+          '<option value="center">Center</option>',
+          '<option value="right">Right</option>',
+          '<option value="stretch">Stretch</option>',
+          '</select>',
+        '</div>',
+      '</div>',
+      '<div class="modal modal--large fade" id="<%- assetName %>" tabindex="-1" role="dialog" aria-labelledby="myModalAssetsAdd" aria-hidden="true">',
+          '<div class="modal-dialog">',
+              '<div class="modal-content">',
+                  '<div class="modal-body">',
+                      '<iframe data-src="http://vetweb.local.statik.be/admin/assets/nl?embed=1&amp;selected=" frameborder="0" width="100%" height="500"></iframe>',
+                  '</div>',
+                  '<div class="modal-footer">',
+                      '<div class="grid">',
+                          '<div class="grid--bp-xsm__9">',
+                              '<div class="form__assets form__assets--sml" data-field="<%- assetID %>" data-max="1"></div>',
+                          '</div>',
+                          '<div class="grid--bp-xsm__3 text--right">',
+                              '<button type="button" class="btn btn--default" data-dismiss="modal">Klaar</button>',
+                          '</div>',
+                      '</div>',
+                  '</div>',
+              '</div>',
+          '</div>',
+      '</div>'
+    ].join('\n');
+    asset_template = _.template(asset_template);
 
     return SirTrevor.Block.extend({
       type: 'asset',
       icon_name: 'image',
-      editorHTML: [
-        '<div class="grid">',
-          '<div class="grid__6">',
-            '<label for="' + $attributes.id + '" class="form__label">Asset</label>',
-            '<div class="form__item form__assets" data-field="' + $attributes.id + '" data-max="1">',
-              // '<div class="form__assets" data-id="' + $attributes.id + '">',
-              // '</div>',
-              '<a href="#' + $attributes.safename + '" class="form__add-assets btn btn--default"><i class="icon icon--plus"></i> Toevoegen</a>',
-            '</div>',
-            '<input type="text" name="' + $attributes.id + '" id="' + $attributes.id + '" data-name="' + $attributes.safename + '" />',
-          '</div>',
-          '<div class="grid__6">',
-            '<label for="assetClass" class="form__label">Position</label>',
-            '<select name="className" id="assetClass" class="st-className-input form__select">',
-            '<option value="left">Left</option>',
-            '<option value="center">Center</option>',
-            '<option value="right">Right</option>',
-            '<option value="stretch">Stretch</option>',
-            '</select>',
-          '</div>',
-        '</div>',
-        '<div class="st-asset-block">',
-          '<img src alt="">',
-        '</div>',
-        '<div class="modal modal--large fade" id="' + $attributes.safename + '" tabindex="-1" role="dialog" aria-labelledby="myModalAssetsAdd" aria-hidden="true">',
-            '<div class="modal-dialog">',
-                '<div class="modal-content">',
-                    '<div class="modal-body">',
-                        '<iframe data-src="http://vetweb.local.statik.be/admin/assets/nl?embed=1&amp;selected=" frameborder="0" width="100%" height="500"></iframe>',
-                    '</div>',
-                    '<div class="modal-footer">',
-                        '<div class="grid">',
-                            '<div class="grid--bp-xsm__9">',
-                                '<div class="form__assets form__assets--sml" data-field="' + $attributes.id + '" data-max="1"></div>',
-                            '</div>',
-                            '<div class="grid--bp-xsm__3 text--right">',
-                                '<button type="button" class="btn btn--default" data-dismiss="modal">Klaar</button>',
-                            '</div>',
-                        '</div>',
-                    '</div>',
-                '</div>',
-            '</div>',
-        '</div>'
-      ].join('\n'),
+      editorHTML: function() {
+        var assetID = 'rich-content-asset-' + assetCounter;
+        var assetName = 'modalAssetsAdd-assets-' + assetCounter;
+        assetCounter ++;
 
+        // console.log(assetCounter);
+
+        return asset_template({
+          assetID: assetID,
+          assetName: assetName
+        });
+      },
       getIdInput: function() {
         return this.$('.st-id-input');
       },
-
       getClassNameInput: function() {
         return this.$('.st-className-input');
       },
-
       getAssetBlock: function() {
-        return this.$('.st-asset-block').find('img');
+        return this.$('.st-assets-block');
       },
-
       onBlockRender: function() {
-        this.getIdInput().on('change', this.loadAsset.bind(this));
-
-        this.getClassNameInput().on('change', this.loadClass.bind(this));
-
-        this.getAssetBlock().on('load', (function() {
-          this.ready();
-        }).bind(this));
-
-        this.getAssetBlock().on('error', (function() {
-          this.ready();
-          if(this.getAssetBlock().attr('src')) {
-            this.setError(this.getIdInput(), 'Could not find asset with ID ' + this.getData().data.id);
-          }
-        }).bind(this));
-
+        console.log('block rendered');
         rideApp.form.assets.init();
       },
-
-      loadAsset: function() {
-        this.save();
-        this.resetErrors();
-        this.loading();
-        var id = this.getData().data.id;
-        this.getAssetBlock().attr('src', window.location.origin + '/assets/' + id);
-      },
-
-      loadClass: function() {
-        this.save();
-        var className = this.getData().data.className;
-        this.getAssetBlock().attr('class', className);
-      },
-
       loadData: function(data) {
-        this.loading();
+        if (data.assetThumbURL) {
+          var $assetBlock = this.getAssetBlock();
+          var $input = this.getIdInput();
+          var $thumbWrapper = $('<div>').attr({
+            'class': 'form__asset',
+            'data-id': data.assetID
+          });
 
-        this.getClassNameInput().children().filter(function() {
-          return $(this).val() == data.className;
-        }).prop('selected', true);
+          $thumbWrapper.append('<img src="' + data.assetThumbURL + '" width="100" height="100">');
+          $thumbWrapper.append('<a href="#" class="form__remove-asset">×</a>');
 
-        this.getIdInput().val(data.id);
-
-        this.loadAsset();
-        this.loadClass();
+          $assetBlock.append($thumbWrapper);
+          $input.val(data.assetID);
+        }
       },
-
-      toData: function() {
+      save: function() {
         var dataObj = {};
+        var $assetThumb = this.getAssetBlock().find('img');
 
-        dataObj.this.getIdInput().val();
-        dataObj.this.getClassNameInput().val();
+        dataObj.assetID = this.getIdInput().val();
+        dataObj.assetThumbURL = $assetThumb.attr('src');
+        dataObj.className = this.getClassNameInput().val();
 
-        this.setData(dataObj);
+        this.toData(dataObj);
+      },
+      toData: function(data) {
+        this.setData(data);
       }
-
     });
-
   })();
 
   var tweet_block = (function () {
