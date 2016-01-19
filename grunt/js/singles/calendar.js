@@ -2,8 +2,8 @@ $.fn.performanceForm = function() {
     var $this = $(this);
 
     var handleDateFields = function() {
-        var isDay = $('input[name=isDay]', $this).is(':checked');
-        var isPeriod = $('input[name=isPeriod]', $this).is(':checked');
+        var isDay = $('input[name="date[isDay]"]', $this).is(':checked');
+        var isPeriod = $('input[name="date[isPeriod]"]', $this).is(':checked');
 
         if (isDay) {
             $('.time', $this).hide();
@@ -12,9 +12,9 @@ $.fn.performanceForm = function() {
         }
 
         if (isPeriod) {
-            $('input[name=dateStop]', $this).show();
+            $('input[name="date[dateStop]"]', $this).show();
         } else {
-            $('input[name=dateStop]', $this).hide();
+            $('input[name="date[dateStop]"]', $this).hide();
         }
 
         if (!isPeriod && isDay) {
@@ -25,12 +25,12 @@ $.fn.performanceForm = function() {
     };
 
     var handleRepeater = function() {
-        var isRepeat = $('input[name=isRepeat]', $this).is(':checked');
+        var isRepeat = $('input[name="date[isRepeat]"]', $this).is(':checked');
 
         if (isRepeat) {
             $('.repeater', $this).show();
 
-            var mode = $('select[name=mode]', $this).val();
+            var mode = $('select[name="date[mode]"]', $this).val();
             $('.step', $this).hide();
             $('.step-' + mode, $this).show();
 
@@ -49,10 +49,10 @@ $.fn.performanceForm = function() {
         }
     };
 
-    $this.on('change', 'input[name=isDay]', handleDateFields);
-    $this.on('change', 'input[name=isPeriod]', handleDateFields);
-    $this.on('change', 'input[name=isRepeat]', handleRepeater);
-    $this.on('change', 'select[name=mode]', handleRepeater);
+    $this.on('change', 'input[name="date[isDay]"]', handleDateFields);
+    $this.on('change', 'input[name="date[isPeriod]"]', handleDateFields);
+    $this.on('change', 'input[name="date[isRepeat]"]', handleRepeater);
+    $this.on('change', 'select[name="date[mode]"]', handleRepeater);
 
     handleDateFields();
     handleRepeater();
