@@ -14,8 +14,10 @@ app.content = (function($, undefined) {
           "el": $element
         });
 
-        SirTrevor.Blocks.Heading = ext_heading_block;
+        SirTrevor.Blocks.Heading = heading_block;
         SirTrevor.Blocks.Asset = asset_block;
+        SirTrevor.Blocks.Tweet = tweet_block;
+        SirTrevor.Blocks.Quote = quote_block;
 
         app.content.initWysiwyg(redactorOptions);
         new SirTrevor.Editor(options);
@@ -38,13 +40,18 @@ app.content = (function($, undefined) {
     SirTrevor.Blocks.Wysiwyg = (function(){
       return SirTrevor.Block.extend({
         type: "Wysiwyg",
+
         title: function() { return 'Wysiwyg'; },
+
         editorHTML: textAreaTemplate,
+
         icon_name: 'text',
+
         loadData: function(data){
           var $editor = $(this.$editor);
           $editor.html(data.text);
         },
+
         save: function() {
           var dataObj = {};
           dataObj.text = this.$editor.val();
@@ -53,6 +60,7 @@ app.content = (function($, undefined) {
             this.setData(dataObj);
           }
         },
+
         onBlockRender: function(data){
           var textarea = this.$editor;
           $(textarea).initRedactor();
@@ -80,10 +88,9 @@ app.content = (function($, undefined) {
   //       .replace(/&amp;/g, '&');
   // }
 
-  var ext_heading_block = (function() {
+  var heading_block = (function() {
 
     var _template = _.template('<<%- tagName %> class="st-required st-text-block st-text-block--heading" contenteditable="true"><%= text %></<%- tagName %>>');
-
     var _setHeading = function(tag) {
       return function() {
         this.$('.st-block-control-ui-btn--active').removeClass('st-block-control-ui-btn--active');
@@ -96,7 +103,6 @@ app.content = (function($, undefined) {
         }));
 
         this.$('.st-block-control-ui-btn--setHeading' + tag[1]).addClass('st-block-control-ui-btn--active');
-
       };
     };
 
@@ -136,32 +142,31 @@ app.content = (function($, undefined) {
   })();
 
   var asset_block = (function() {
-
     return SirTrevor.Block.extend({
-
       type: 'asset',
-
       icon_name: 'image',
-
       editorHTML: [
         '<div class="grid">',
-        '<div class="grid__6">',
-        '<label for="assetId" class="form__label">Asset ID</label>',
-        '<input id="assetId" type="text" name="id" class="st-id-input"/>',
-        '</div>',
-        '<div class="grid__6">',
-        '<label for="assetClass" class="form__label">Position</label>',
-        '<select name="className" id="assetClass" class="st-className-input">',
-        '<option value="left">Left</option>',
-        '<option value="center">Center</option>',
-        '<option value="right">Right</option>',
-        '<option value="stretch">Stretch</option>',
-        '</select>',
-        '</div>',
+          '<div class="grid__4 grid--bp-xsm__3 grid--bp-sml__2">',
+            '<div class="form__item form__assets">',
+              '<label for="assetId" class="form__label">Asset ID</label>',
+              '<input id="assetId" type="text" name="id" class="st-id-input form__text"/>',
+              '<a href="#modalAssetsAdd" class="form__add-assets btn btn--default"><i class="icon icon--plus"></i></a>',
+            '</div>',
+          '</div>',
+          '<div class="grid__8 grid--bp-xsm__7 grid--bp-sml__6">',
+            '<label for="assetClass" class="form__label">Position</label>',
+            '<select name="className" id="assetClass" class="st-className-input form__select">',
+            '<option value="left">Left</option>',
+            '<option value="center">Center</option>',
+            '<option value="right">Right</option>',
+            '<option value="stretch">Stretch</option>',
+            '</select>',
+          '</div>',
         '</div>',
         '<hr>',
         '<div class="st-asset-block">',
-        '<img src alt="">',
+          '<img src alt="">',
         '</div>'
       ].join('\n'),
 
@@ -179,16 +184,21 @@ app.content = (function($, undefined) {
 
       onBlockRender: function() {
         this.getIdInput().on('change', this.loadAsset.bind(this));
+
         this.getClassNameInput().on('change', this.loadClass.bind(this));
+
         this.getAssetBlock().on('load', (function() {
           this.ready();
         }).bind(this));
+
         this.getAssetBlock().on('error', (function() {
           this.ready();
           if(this.getAssetBlock().attr('src')) {
             this.setError(this.getIdInput(), 'Could not find asset with ID ' + this.getData().data.id);
           }
         }).bind(this));
+
+        rideApp.form.assets.init();
       },
 
       loadAsset: function() {
@@ -229,6 +239,83 @@ app.content = (function($, undefined) {
 
     });
 
+  })();
+
+  var tweet_block = (function () {
+    return SirTrevor.Block.extend({
+
+      type: 'tweet',
+
+      icon_name: 'twitter',
+
+      title: function () {
+        return i18n.t('blocks:tweet:title');
+      },
+
+      editorHTML: [
+        '<div>',
+          '<div class="form__item">',
+            '<div>',
+              '<label for="st-tweet-embed" class="form__label">Twitter Embed Code</label>',
+            '</div>',
+            '<textarea name="st-tweet-embed" cols="90" rows="4"></textarea>',
+          '</div>',
+          '<div class="st-tweet-preview"></div>',
+        '</div>'
+      ].join('\n'),
+
+      getEmbedInput: function () {
+        return this.$('textarea');
+      },
+
+      getPreviewElement: function () {
+        return this.$('.st-tweet-preview');
+      },
+
+      loadData: function (data) {
+        this.getPreviewElement().html(data.embedCode);
+        this.getEmbedInput().text(data.embedCode);
+      },
+
+      onBlockRender: function () {
+        var self = this;
+        this.getEmbedInput().on('keyup', function (e) {
+          self.setAndLoadData({
+            embedCode: e.target.value
+          });
+        });
+      }
+
+    });
+
+  })();
+
+  var quote_block = (function () {
+    return SirTrevor.Block.extend({
+      type: 'quote',
+
+      title: function () {
+        return i18n.t('blocks:quote:title');
+      },
+
+      icon_name: 'quote',
+
+      editorHTML: [
+        '<div><label class="form__label">Quote</label></div>',
+        '<textarea name="text" class="st-required st-quote-text" cols="90" rows="4"></textarea>',
+        '<hr/>',
+        '<div><label class="form__label">Credit</label></div>',
+        '<input type="text" name="cite" class="st-cite-input"/>',
+      ].join('\n'),
+
+      loadData: function (data) {
+        this.$('.st-quote-text').html(data.text);
+
+        if (data.cite) {
+          this.$('.st-cite-input').val(data.cite);
+        }
+      }
+    });
   })();
 
   return {

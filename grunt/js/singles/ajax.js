@@ -1,10 +1,19 @@
 var $document = $(document),
-    $overlay = $('.ajax-overlay');
+    $defaultOverlay = $('.ajax-overlay');
 
-$(document).ajaxStart(function() {
-  $overlay.show();
+function getAjaxOverlay() {
+    if (window.overlaySelector !== null) {
+        return $(window.overlaySelector);
+    }
+
+    return $defaultOverlay;
+}
+
+$(document).ajaxStart(function(e) {
+    getAjaxOverlay().show();
 });
 
 $(document).ajaxStop(function() {
-    $overlay.hide();
+    getAjaxOverlay().hide();
+    window.overlaySelector = null;
 });

@@ -78,8 +78,8 @@
 
                    {if $errors}
                         <ul class="form__error-list">
-                        {foreach $errors as $error => $null}
-                            <li>{$error}</li>
+                        {foreach $errors as $error}
+                            <li>{$error->getCode()|translate:$error->getParameters()}</li>
                         {/foreach}
                         </ul>
                     {/if}
@@ -333,6 +333,10 @@
                 {/if}
             {/foreach}
         {/foreach}
+
+        {if $widget->isMultiple()}
+            {$attributes["data-multiple"] = "true"}
+        {/if}
 
         {$value = $widget->getValue($part)}
         {if is_array($value)}
