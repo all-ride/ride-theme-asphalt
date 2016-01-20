@@ -56,8 +56,6 @@
 
 .st-outer {
   position: relative;
-  border: 1px solid #ccc;
-  padding: 0 10px;
   margin-bottom: 20px;
 }
 
@@ -82,7 +80,8 @@
   outline: none;
 }
 
-.st-block input[type="text"], .st-block input[type="text"]:active, .st-block input[type="text"]:focus {
+.st-block input[type="text"], .st-block input[type="text"]:active, .st-block input[type="text"]:focus,
+.st-block textarea, .st-block textarea:active, .st-block textarea:focus {
   color: #42474b;
   border: 0.1em solid #d4d4d4;
   padding: .6em;
@@ -122,7 +121,7 @@
   text-align: center;
 }
 
-.st-icon--add:hover:after,
+// .st-icon--add:hover:after,
 .st-block-controls__top:hover:before {
   background: #f5f6f7;
 }
@@ -162,15 +161,15 @@
 
 .st-block__inner {
   position: relative;
-  padding: 10px;
-  border: 1px solid #f5f6f7;
+  padding: $rh-med;
+  border: 1px solid $gray-25;
   .redactor-box {
     margin: 0;
   }
 }
 
 .st-block__inner:hover {
-  border-color: $color-brand-primary;
+  background: $gray-0;
 }
 
 .st-block--with-errors .st-block__inner, .st-block--delete-active .st-block__inner {
@@ -457,25 +456,23 @@ ul.st-text-block {
   opacity: 0;
 }
 
-.st-block__inner:hover .st-block__ui, .st-block__inner:hover .st-block__control-ui {
+.st-block__inner:hover .st-block__ui,
+.st-block__inner:hover .st-block__control-ui {
   opacity: 1;
 }
 
 .st-block-ui-btn, .st-block-control-ui-btn {
   display: block;
   float: left;
-  width: 3em;
+  width: 2.5em;
   height: 2.5em;
   line-height: 2.5em;
   font-size: 1.4em;
-  color: $color-brand-primary;
-  background: #fff;
+  color: $white;
+  background: $gray-25;
   text-align: center;
-  border: 1px solid $color-brand-primary;
-  border-right: 0;
-  border-bottom: 0;
-  margin-bottom: 0;
   cursor: pointer;
+  margin: 0 4px 4px 0;
 }
 .st-block-ui-btn:hover, .st-block-control-ui-btn:hover, .st-block-ui-btn.active, .active.st-block-control-ui-btn {
   color: #fff;
@@ -508,13 +505,19 @@ ul.st-text-block {
 
 .st-block__delete-label {
   display: block;
-  border: 1px solid #d70014;
-  border-bottom: none;
-  border-right: none;
   text-align: center;
-  background: #fff;
-  color: #d70014;
+  background: map-get($notice-colors, danger);
+  color: $white;
   padding: 0.4em 0;
+  margin: 0 4px 4px 0;
+}
+
+.st-block-ui-btn--confirm-delete,
+.st-block-ui-btn--deny-delete {
+  background: $white;
+  &:hover {
+    background: map-get($notice-colors, danger);
+  }
 }
 
 .st-format-bar {
@@ -586,4 +589,23 @@ ul.st-text-block {
   @include clearfix;
   color: $gray-25;
   font-style: italic;
+}
+
+.st-tweet-embed {
+  width: 100%;
+  color: $gray-25;
+  font-family: $font-family-monospace;
+}
+
+.st-tweet-preview > * {
+  margin: 0 auto;
+}
+
+.st-block textarea {
+  display: block;
+  width: 100%;
+}
+
+label[for="form-content"] {
+  display: none;
 }
