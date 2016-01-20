@@ -163,10 +163,17 @@ rideApp.form = (function($, undefined) {
         var url = $field.data('autocomplete-url');
         var multiple = $field.data('autocomplete-multiple');
         var type = $field.data('autocomplete-type');
+        var locale = $field.data('autocomplete-locale');
+        var headers = {};
         var plugins = [];
+
+        if (locale) {
+            headers['Accept-Language'] = locale;
+        }
         if (multiple) {
             plugins.push('drag_drop', 'remove_button');
         }
+
         var autocompleteSettings = {
           valueField: 'name',
           labelField: 'name',
@@ -179,9 +186,11 @@ rideApp.form = (function($, undefined) {
               var fetchUrl = url;
               fetchUrl = fetchUrl.replace(/%25term%25/g, query);
               fetchUrl = fetchUrl.replace(/%term%/g, query);
-              $.get(
-                  fetchUrl,
-                  function(data) {
+
+              $.ajax({
+                  url: fetchUrl,
+                  headers: headers,
+                  success: function(data) {
                     if (type === 'jsonapi') {
                       res = data.meta.list;
                     } else {
@@ -192,7 +201,7 @@ rideApp.form = (function($, undefined) {
                     })
                     callback(map);
                   }
-              );
+              });
           }
         }
         $field.selectize(autocompleteSettings);
