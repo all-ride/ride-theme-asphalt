@@ -154,58 +154,57 @@ rideApp.form = (function($, undefined) {
 
   var _autocomplete = function() {
     if (jQuery.fn.selectize) {
-      var $fields = $('[data-autocomplete-url]');
-      $fields.each(function() {
-        makeFieldAutocomplete($(this));
+      ready('[data-autocomplete-url]', function(element) {
+        makeFieldAutocomplete($(element));
       });
+    }
 
-      function makeFieldAutocomplete($field) {
-        var url = $field.data('autocomplete-url');
-        var multiple = $field.data('autocomplete-multiple');
-        var type = $field.data('autocomplete-type');
-        var locale = $field.data('autocomplete-locale');
-        var headers = {};
-        var plugins = [];
+    function makeFieldAutocomplete($field) {
+      var url = $field.data('autocomplete-url');
+      var multiple = $field.data('autocomplete-multiple');
+      var type = $field.data('autocomplete-type');
+      var locale = $field.data('autocomplete-locale');
+      var headers = {};
+      var plugins = [];
 
-        if (locale) {
-            headers['Accept-Language'] = locale;
-        }
-        if (multiple) {
-            plugins.push('drag_drop', 'remove_button');
-        }
-
-        var autocompleteSettings = {
-          valueField: 'name',
-          labelField: 'name',
-          searchField: 'name',
-          maxItems: multiple ? null : 1,
-          plugins: plugins,
-          create: $field.hasClass('js-tags') ? true : false,
-          load: function(query, callback) {
-              if (!query.length) return callback();
-              var fetchUrl = url;
-              fetchUrl = fetchUrl.replace(/%25term%25/g, query);
-              fetchUrl = fetchUrl.replace(/%term%/g, query);
-
-              $.ajax({
-                  url: fetchUrl,
-                  headers: headers,
-                  success: function(data) {
-                    if (type === 'jsonapi') {
-                      res = data.meta.list;
-                    } else {
-                      res = data;
-                    }
-                    var map = $.map(res, function(value) {
-                      return {name: value};
-                    })
-                    callback(map);
-                  }
-              });
-          }
-        }
-        $field.selectize(autocompleteSettings);
+      if (locale) {
+          headers['Accept-Language'] = locale;
       }
+      if (multiple) {
+          plugins.push('drag_drop', 'remove_button');
+      }
+
+      var autocompleteSettings = {
+        valueField: 'name',
+        labelField: 'name',
+        searchField: 'name',
+        maxItems: multiple ? null : 1,
+        plugins: plugins,
+        create: $field.hasClass('js-tags') ? true : false,
+        load: function(query, callback) {
+            if (!query.length) return callback();
+            var fetchUrl = url;
+            fetchUrl = fetchUrl.replace(/%25term%25/g, query);
+            fetchUrl = fetchUrl.replace(/%term%/g, query);
+
+            $.ajax({
+                url: fetchUrl,
+                headers: headers,
+                success: function(data) {
+                  if (type === 'jsonapi') {
+                    res = data.meta.list;
+                  } else {
+                    res = data;
+                  }
+                  var map = $.map(res, function(value) {
+                    return {name: value};
+                  })
+                  callback(map);
+                }
+            });
+        }
+      }
+      $field.selectize(autocompleteSettings);
     }
   };
 
