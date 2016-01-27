@@ -640,7 +640,7 @@
             {$attributes.class = 'form__assets-input'}
         {/if}
 
-        <div class="form__assets" data-field="{$attributes.id}"{if $widget->isMultiple()} data-max="999"{else} data-max="1"{/if}>
+        <div class="form__assets js-rc-assets-block" data-field="{$attributes.id}"{if $widget->isMultiple()} data-max="999"{else} data-max="1"{/if}>
             {$assets = $widget->getAssets()}
             {foreach $assets as $asset}
                 <div class="form__asset" data-id="{$asset->getId()}">
@@ -658,7 +658,7 @@
                data-name="{$safeName}"
                value="{$value|escape}"
            {foreach $attributes as $name => $attribute}
-               {$name}="{$attribute|escape}"
+               {$name}="{$attribute}"
            {/foreach}
          />
 

@@ -217,9 +217,14 @@ rideApp.form = (function($, undefined) {
           $removeTriggers = rideApp.form.assets.removeTriggers();
 
       $assets.each(function() {
+        // Escape ID's (needed for underscore templates)
+        function escapeID(myid) {
+          return "#" + myid.replace( /(:|\.|\[|\]|\%|\<|\>|,)/g, "\\$1" );
+        }
+
         var $this = $(this),
             fieldId = $this.data('field'),
-            $field = $('#' + fieldId),
+            $field = $(escapeID(fieldId)),
             $edit = $this.find('.form__edit-assets'),
             editText = $edit.text(),
             $add = $this.find('.form__add-assets'),
@@ -252,7 +257,6 @@ rideApp.form = (function($, undefined) {
         $modal.modal('show');
       });
 
-      // console.log($removeTriggers);
       $removeTriggers.on('click', function(e) {
         e.preventDefault();
         rideApp.form.assets.removeAsset(this);
@@ -278,11 +282,6 @@ rideApp.form = (function($, undefined) {
         var $this = $(this),
             max = $this.data('max'),
             $add = $this.find('.form__add-assets');
-
-        // console.log('blaa');
-        // console.log($this);
-        // console.log($this.find('.form__asset').length);
-        // console.log($add);
 
         if ($this.find('.form__asset').length >= max) {
           $add.attr('disabled', true);
@@ -321,7 +320,6 @@ rideApp.form = (function($, undefined) {
       // check if the image is already added or the limit is exceded
       if($assets.find('[data-id="' + id + '"]').length || $items.length >= max) {
         var $item = $assets.find('[data-id="' + id + '"]').find('.form__remove-asset');
-        // console.log($item);
 
         rideApp.form.assets.removeAsset($item);
         return;
@@ -367,8 +365,6 @@ rideApp.form = (function($, undefined) {
 $(document).ready(function() {
   rideApp.form.initialize();
 });
-
-
 
 $.fn.formDependantRows = function() {
     var toggleDependantRows = function($input) {

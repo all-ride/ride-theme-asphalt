@@ -40,18 +40,13 @@ app.content = (function($, undefined) {
     SirTrevor.Blocks.Wysiwyg = (function(){
       return SirTrevor.Block.extend({
         type: "Wysiwyg",
-
         title: function() { return 'Wysiwyg'; },
-
         editorHTML: textAreaTemplate,
-
         icon_name: 'text',
-
         loadData: function(data){
           var $editor = $(this.$editor);
           $editor.html(data.text);
         },
-
         save: function() {
           var dataObj = {};
           dataObj.text = this.$editor.val();
@@ -60,7 +55,6 @@ app.content = (function($, undefined) {
             this.setData(dataObj);
           }
         },
-
         onBlockRender: function(data){
           var textarea = this.$editor;
           $(textarea).initRedactor();
@@ -103,20 +97,16 @@ app.content = (function($, undefined) {
           text: ''
         });
       },
-
       controllable: true,
-
       controls: {
         setHeading2: _setHeading('h2'),
         setHeading3: _setHeading('h3'),
         setHeading4: _setHeading('h4')
       },
-
       loadData: function(data) {
         _setHeading(data.tagName);
         this.$('.st-text-block').html(data.text);
       },
-
       toData: function() {
         var dataObj = {};
 
@@ -125,106 +115,80 @@ app.content = (function($, undefined) {
 
         this.setData(dataObj);
       }
-
     });
-
   })();
 
   var asset_block = (function() {
     var assetCounter = 0;
 
-    var asset_template = [
-      '<div class="grid">',
-        '<div class="grid__6">',
-          '<label for="<%- assetID %>" class="form__label">Asset</label>',
-          '<div class="form__item form__assets st-assets-block" data-field="<%- assetID %>" data-max="1">',
-            '<a href="#<%- assetName %>" class="form__add-assets btn btn--default"><i class="icon icon--plus"></i> Toevoegen</a>',
-          '</div>',
-          '<input type="text" name="<%- assetID %>" id="<%- assetID %>" data-name="<%- assetName %>" class="st-id-input" />',
-        '</div>',
-        '<div class="grid__6">',
-          '<label for="assetClass" class="form__label">Position</label>',
-          '<select name="className" id="assetClass" class="st-className-input form__select">',
-          '<option value="left">Left</option>',
-          '<option value="center">Center</option>',
-          '<option value="right">Right</option>',
-          '<option value="stretch">Stretch</option>',
-          '</select>',
-        '</div>',
-      '</div>',
-      '<div class="modal modal--large fade" id="<%- assetName %>" tabindex="-1" role="dialog" aria-labelledby="myModalAssetsAdd" aria-hidden="true">',
-          '<div class="modal-dialog">',
-              '<div class="modal-content">',
-                  '<div class="modal-body">',
-                      '<iframe data-src="http://vetweb.local.statik.be/admin/assets/nl?embed=1&amp;selected=" frameborder="0" width="100%" height="500"></iframe>',
-                  '</div>',
-                  '<div class="modal-footer">',
-                      '<div class="grid">',
-                          '<div class="grid--bp-xsm__9">',
-                              '<div class="form__assets form__assets--sml" data-field="<%- assetID %>" data-max="1"></div>',
-                          '</div>',
-                          '<div class="grid--bp-xsm__3 text--right">',
-                              '<button type="button" class="btn btn--default" data-dismiss="modal">Klaar</button>',
-                          '</div>',
-                      '</div>',
-                  '</div>',
-              '</div>',
-          '</div>',
-      '</div>'
-    ].join('\n');
-    asset_template = _.template(asset_template);
-
     return SirTrevor.Block.extend({
       type: 'asset',
       icon_name: 'image',
       editorHTML: function() {
+        // console.log('html');
+
+        var assetTemplate = $('.js-asset-template').html();
         var assetID = 'rich-content-asset-' + assetCounter;
-        var assetName = 'modalAssetsAdd-assets-' + assetCounter;
+        // var assetName = 'modalAssetsAdd-assets-' + assetID + assetCounter;
         assetCounter ++;
 
-        // console.log(assetCounter);
+        assetTemplate = _.template(assetTemplate);
 
-        return asset_template({
-          assetID: assetID,
-          assetName: assetName
+        return assetTemplate({
+          assetID: assetID
         });
       },
       getIdInput: function() {
-        return this.$('.st-id-input');
+        return this.$('.js-rc-assets-input');
       },
       getClassNameInput: function() {
-        return this.$('.st-className-input');
+        return this.$('.js-rc-assets-options');
       },
       getAssetBlock: function() {
-        return this.$('.st-assets-block');
+        // return this.$('.st-assets-block');
+        return this.$('.js-rc-assets-block');
+      },
+      beforeBlockRender: function() {
+        // console.log(this);
+        // var $instance = $document.find(this.instanceID);
+        // console.log($instance);
       },
       onBlockRender: function() {
-        console.log('block rendered');
+        // console.log('block rendered');
+        // console.log(this.getAssetBlock());
+
         rideApp.form.assets.init();
       },
       loadData: function(data) {
-        if (data.assetThumbURL) {
+        // console.log('data loaded');
+
+        if (data.thumbnailURL) {
           var $assetBlock = this.getAssetBlock();
           var $input = this.getIdInput();
           var $thumbWrapper = $('<div>').attr({
             'class': 'form__asset',
-            'data-id': data.assetID
+            'data-id': data.id
           });
 
-          $thumbWrapper.append('<img src="' + data.assetThumbURL + '" width="100" height="100">');
+          $thumbWrapper.append('<img src="' + data.thumbnailURL + '" width="100" height="100">');
           $thumbWrapper.append('<a href="#" class="form__remove-asset">×</a>');
 
           $assetBlock.append($thumbWrapper);
-          $input.val(data.assetID);
+          $input.val(data.id);
         }
       },
       save: function() {
         var dataObj = {};
         var $assetThumb = this.getAssetBlock().find('img');
 
-        dataObj.assetID = this.getIdInput().val();
-        dataObj.assetThumbURL = $assetThumb.attr('src');
+        dataObj.id = this.getIdInput().val();
+        dataObj.thumbnailURL = $assetThumb.attr('src');
         dataObj.className = this.getClassNameInput().val();
+
+        // console.log(this.getClassNameInput());
+        // console.log(this.getClassNameInput().val());
+        // console.log(this.getIdInput());
+        // return false;
 
         this.toData(dataObj);
       },
@@ -237,13 +201,10 @@ app.content = (function($, undefined) {
   var tweet_block = (function () {
     return SirTrevor.Block.extend({
       type: 'tweet',
-
       icon_name: 'twitter',
-
       title: function () {
         return i18n.t('blocks:tweet:title');
       },
-
       editorHTML: [
         '<div>',
           '<div class="form__item">',
@@ -255,20 +216,16 @@ app.content = (function($, undefined) {
           '<div class="st-tweet-preview"></div>',
         '</div>'
       ].join('\n'),
-
       getEmbedInput: function () {
         return this.$('textarea');
       },
-
       getPreviewElement: function () {
         return this.$('.st-tweet-preview');
       },
-
       loadData: function (data) {
         this.getPreviewElement().html(data.embedCode);
         this.getEmbedInput().text(data.embedCode);
       },
-
       onBlockRender: function () {
         var self = this;
         this.getEmbedInput().on('keyup', function (e) {
@@ -277,29 +234,26 @@ app.content = (function($, undefined) {
           });
         });
       }
-
     });
-
   })();
 
   var quote_block = (function () {
     return SirTrevor.Block.extend({
       type: 'quote',
-
       title: function () {
         return i18n.t('blocks:quote:title');
       },
-
       icon_name: 'quote',
-
-      editorHTML: [
-        '<div><label class="form__label">Quote</label></div>',
-        '<textarea name="text" class="st-required st-quote-text" cols="90" rows="4"></textarea>',
-        '<hr/>',
-        '<div><label class="form__label">Credit</label></div>',
-        '<input type="text" name="cite" class="st-cite-input"/>',
+      editorHTML:   [
+        '<div class="st-block__section">',
+          '<div><label class="form__label">Quote</label></div>',
+          '<textarea name="text" class="st-required st-quote-text" cols="90" rows="4"></textarea>',
+        '</div>',
+        '<div class="st-block__section">',
+          '<div><label class="form__label">Credit</label></div>',
+          '<input type="text" name="cite" class="st-cite-input"/>',
+        '</div>',
       ].join('\n'),
-
       loadData: function (data) {
         this.$('.st-quote-text').html(data.text);
 
