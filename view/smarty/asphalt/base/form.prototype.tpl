@@ -619,6 +619,18 @@
 
 {function name="formWidgetRichcontent" form=null row=null part=null}
     {call formWidgetWysiwyg form=$form row=$row part=$part}
+
+    {$widgetArray = array()}
+    {$widgetArray.assets = array()}
+    {$widgetArray.attributes.class = "js-rc-assets-input"}
+    {$widgetArray.attributes.id = "<%- assetID %>"}
+    {$widgetArray.name = $widgetArray.attributes.id}
+    {$widgetArray.isMultiple = false}
+    {$widgetArray.value = ""}
+
+    <script type="html/template" class="js-asset-template">
+        {call formAssets widget=$widgetArray}
+    </script>
 {/function}
 
 {function name="formWidgetAssets" form=null row=null part=null}
@@ -631,77 +643,90 @@
     {/if}
 
     {$widget = $row->getWidget()}
-    {if $widget}
-        {$attributes = $widget->getAttributes()}
-        {$safeName = $widget->getName()|replace:"[":"_"|replace:"]":"_"}
-        {if isset($attributes.class)}
-            {$attributes.class = "`$attributes.class` form__assets-input"}
-        {else}
-            {$attributes.class = 'form__assets-input'}
-        {/if}
 
-        <div class="form__assets js-rc-assets-block" data-field="{$attributes.id}"{if $widget->isMultiple()} data-max="999"{else} data-max="1"{/if}>
-            {$assets = $widget->getAssets()}
-            {foreach $assets as $asset}
-                <div class="form__asset" data-id="{$asset->getId()}">
-                    <img src="{image src=$asset->getThumbnail() transformation="crop" width=100 height=100}" width="100" height="100">
-                    <a href="#" class="form__remove-asset">&times;</a>
-                </div>
-            {/foreach}
-            <a href="#modalAssetsAdd-{$safeName}" class="form__add-assets btn btn--default"><i class="icon icon--plus"></i> {'button.add'|translate}</a>
-        </div>
+    {$widgetArray = array()}
+    {$widgetArray.attributes = $widget->getAttributes()}
+    {$widgetArray.assets = $widget->getAssets()}
+    {$widgetArray.name = $widget->getName()}
+    {$widgetArray.isMultiple = $widget->isMultiple()}
+    {$widgetArray.value = $widget->getValue($part)}
 
-        {$value = $widget->getValue($part)}
+    {if $widget->getFolderId()}
+        {$widgetArray.folderId = $widget->getFolderId()}
+    {/if}
 
-        <input type="hidden"
-               name="{$widget->getName()}"
-               data-name="{$safeName}"
-               value="{$value|escape}"
-           {foreach $attributes as $name => $attribute}
-               {$name}="{$attribute}"
-           {/foreach}
-         />
+    {call formAssets widget=$widgetArray}
+{/function}
 
-        <div class="modal modal--large fade" id="modalAssetsAdd-{$safeName}" tabindex="-1" role="dialog" aria-labelledby="myModalAssetsAdd" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        {if !isset($locale)}
-                            {$locale = null}
-                        {/if}
-                        {if $widget->getFolderId()}
-                            {url id="assets.folder.overview" parameters=["folder" => $widget->getFolderId(), "locale" => $locale] var="assetsUrl"}
+{function name="formAssets" widget=null}
+    {$assets = $widget.assets}
+    {$attributes = $widget.attributes}
+    {$safeName = $widget.name|replace:"[":"_"|replace:"]":"_"}
+
+    {if isset($attributes.class)}
+        {$attributes.class = "`$attributes.class` form__assets-input"}
+    {else}
+        {$attributes.class = 'form__assets-input'}
+    {/if}
+
+    <div class="form__assets js-rc-assets-block" data-field="{$attributes.id}"{if $widget.isMultiple} data-max="999"{else} data-max="1"{/if}>
+        {foreach $assets as $asset}
+            <div class="form__asset" data-id="{$asset->getId()}">
+                <img src="{image src=$asset->getThumbnail() transformation="crop" width=100 height=100}" width="100" height="100">
+                <a href="#" class="form__remove-asset">&times;</a>
+            </div>
+        {/foreach}
+        <a href="#modalAssetsAdd-{$safeName}" class="form__add-assets btn btn--default"><i class="icon icon--plus"></i> {'button.add'|translate}</a>
+    </div>
+
+    <input
+        type="hidden"
+        name="{$widget.name}"
+        data-name="{$safeName}"
+        value="{$widget.value|escape}"
+        {foreach $attributes as $name => $attribute}
+            {$name}="{$attribute}"
+        {/foreach}
+    />
+
+    <div class="modal modal--large fade" id="modalAssetsAdd-{$safeName}" tabindex="-1" role="dialog" aria-labelledby="myModalAssetsAdd" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    {if !isset($locale)}
+                        {$locale = null}
+                    {/if}
+                    {if isset($widget.folderId)}
+                        {url id="assets.folder.overview" parameters=["folder" => $widget.folderId, "locale" => $locale] var="assetsUrl"}
+                    {else}
+                        {if $locale}
+                            {url id="assets.overview.locale" parameters=["locale" => $locale] var="assetsUrl"}
                         {else}
-                            {if $locale}
-                                {url id="assets.overview.locale" parameters=["locale" => $locale] var="assetsUrl"}
-                            {else}
-                                {url id="assets.overview.locale" parameters=["locale" => $app.locale] var="assetsUrl"}
-                            {/if}
+                            {url id="assets.overview.locale" parameters=["locale" => $app.locale] var="assetsUrl"}
                         {/if}
-                        <iframe data-src="{$assetsUrl}?embed=1&amp;selected={$value|escape}" frameborder="0" width="100%" height="500"></iframe>
-                    </div>
-                    <div class="modal-footer">
-                        <div class="grid">
-                            <div class="grid--bp-xsm__9">
-                                <div class="form__assets form__assets--sml" data-field="{$attributes.id}"{if $widget->isMultiple()} data-max="999"{else} data-max="1"{/if}>
-                                    {$assets = $widget->getAssets()}
-                                    {foreach $assets as $asset}
-                                        <div class="form__asset" data-id="{$asset->getId()}">
-                                            <img src="{image src=$asset->getThumbnail() transformation="crop" width=40 height=40}" width="40" height="40">
-                                            <a href="#" class="form__remove-asset">&times;</a>
-                                        </div>
-                                    {/foreach}
-                                </div>
+                    {/if}
+                    <iframe data-src="{$assetsUrl}?embed=1&amp;selected={$widget.value|escape}" frameborder="0" width="100%" height="500"></iframe>
+                </div>
+                <div class="modal-footer">
+                    <div class="grid">
+                        <div class="grid--bp-xsm__9">
+                            <div class="form__assets form__assets--sml" data-field="{$attributes.id}"{if $widget.isMultiple} data-max="999"{else} data-max="1"{/if}>
+                                {foreach $assets as $asset}
+                                    <div class="form__asset" data-id="{$asset->getId()}">
+                                        <img src="{image src=$asset->getThumbnail() transformation="crop" width=40 height=40}" width="40" height="40">
+                                        <a href="#" class="form__remove-asset">&times;</a>
+                                    </div>
+                                {/foreach}
                             </div>
-                            <div class="grid--bp-xsm__3 text--right">
-                                <button type="button" class="btn btn--default" data-dismiss="modal">{translate key="button.done"}</button>
-                            </div>
+                        </div>
+                        <div class="grid--bp-xsm__3 text--right">
+                            <button type="button" class="btn btn--default" data-dismiss="modal">{translate key="button.done"}</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    {/if}
+    </div>
 {/function}
 
 {function name="formWidgetOption" form=null row=null part=null}
@@ -807,51 +832,46 @@
         {$value = $widget->getValue()}
         {$options = $widget->getOptions()}
 
-        {* <div class="form__select-item"> *}
-            <select name="{$widget->getName()}{if $part}[{$part}]{elseif $widget->isMultiple()}[]{/if}"
-               {if $widget->isMultiple()} multiple="multiple"{/if}
-               {foreach $attributes as $name => $attribute}
-                   {$name}="{$attribute|escape}"
-               {/foreach}
+        <select name="{$widget->getName()}{if $part}[{$part}]{elseif $widget->isMultiple()}[]{/if}"
+           {if $widget->isMultiple()} multiple="multiple"{/if}
+           {foreach $attributes as $name => $attribute}
+               {$name}="{$attribute|escape}"
+           {/foreach}
 
-               {if $value}
-                  {if is_array($value)}
-                     data-value="{foreach $value as $k => $v}{$k}{if !$v@last},{/if}{/foreach}"
-                  {else}
-                     data-value="{$value}"
-                  {/if}
+           {if $value}
+              {if is_array($value)}
+                 data-value="{foreach $value as $k => $v}{$k}{if !$v@last},{/if}{/foreach}"
+              {else}
+                 data-value="{$value}"
               {/if}
-            >
-                {* Print selected items first *}
-                {if !is_array($value) && isset($value)}
-                    {if !is_object($value) && isset($options.$value)}
-                        <option value="{$value|escape}" selected="selected">{$options[$value]}</option>
-                    {/if}
-                {else}
-                    {foreach $value as $option}
-                        <option value="{$option|escape}" selected="selected">{$options[$option]}</option>
-                    {/foreach}
+          {/if}
+        >
+            {* Print selected items first *}
+            {if !is_array($value) && isset($value)}
+                {if !is_object($value) && isset($options.$value)}
+                    <option value="{$value|escape}" selected="selected">{$options[$value]}</option>
                 {/if}
-
-                {* Print other items *}
-                {foreach $options as $option => $label}
-                    {if !isset($value) || (!is_array($value) && !strcmp($option, $value) == 0) || (is_array($value) && !isset($value[$option]))}
-                        {if is_array($label)}
-                            <optgroup label="{$option|escape}">
-                                {foreach $label as $o => $l}
-                                    <option value="{$o|escape}"{if (!is_array($value) && strcmp($o, $value) == 0) || (is_array($value) && isset($value[$o]))} selected="selected"{/if}>{$l}</option>
-                                {/foreach}
-                            </optgroup>
-                        {else}
-                            <option value="{$option|escape}">{$label}</option>
-                        {/if}
-                    {/if}
+            {else}
+                {foreach $value as $option}
+                    <option value="{$option|escape}" selected="selected">{$options[$option]}</option>
                 {/foreach}
-            </select>
-            {* <label for="{$attributes.id}"><i class="icon icon--chevron-down"></i></label>
-        </div> *}
+            {/if}
 
-
+            {* Print other items *}
+            {foreach $options as $option => $label}
+                {if !isset($value) || (!is_array($value) && !strcmp($option, $value) == 0) || (is_array($value) && !isset($value[$option]))}
+                    {if is_array($label)}
+                        <optgroup label="{$option|escape}">
+                            {foreach $label as $o => $l}
+                                <option value="{$o|escape}"{if (!is_array($value) && strcmp($o, $value) == 0) || (is_array($value) && isset($value[$o]))} selected="selected"{/if}>{$l}</option>
+                            {/foreach}
+                        </optgroup>
+                    {else}
+                        <option value="{$option|escape}">{$label}</option>
+                    {/if}
+                {/if}
+            {/foreach}
+        </select>
     {/if}
 {/function}
 
