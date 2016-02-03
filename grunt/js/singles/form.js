@@ -161,7 +161,7 @@ rideApp.form = (function($, undefined) {
 
     function makeFieldAutocomplete($field) {
       var url = $field.data('autocomplete-url');
-      var multiple = $field.data('autocomplete-multiple');
+      var multiple = $field.is('[data-autocomplete-multiple]');
       var type = $field.data('autocomplete-type');
       var locale = $field.data('autocomplete-locale');
       var headers = {};
@@ -170,6 +170,7 @@ rideApp.form = (function($, undefined) {
       if (locale) {
           headers['Accept-Language'] = locale;
       }
+
       if (multiple) {
           plugins.push('drag_drop', 'remove_button');
       }
