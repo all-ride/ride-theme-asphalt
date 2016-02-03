@@ -106,16 +106,24 @@
                             </div>
 
                             {foreach $styles as $style}
+                            {$isCroppable = false}
                             <div id="tab-{$style->getSlug()}" class="tabs__pane">
                                 <ul>
                                 {foreach $style->getTransformations() as $transformation}
                                     <li>{$transformation->getName()}</li>
+                                    {if $transformation->getTransformation() == 'crop'}
+                                        {$isCroppable = true}
+                                    {/if}
                                 {/foreach}
                                 </ul>
 
                                 <div class="form__group">
                                     {call formWidget form=$form row="style-`$style->slug`"}
                                     {call formWidgetErrors form=$form row="style-`$style->slug`"}
+                                    {if $isCroppable}
+                                        <img class="img-responsive js-enable-cropper" src="{image src=$asset->getImage()}" />
+                                        <a href="#" class="btn js-crop-image">Resize</a>
+                                    {/if}
                                 </div>
                             </div>
                             {/foreach}

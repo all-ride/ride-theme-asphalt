@@ -40,7 +40,19 @@ rideApp.form = (function($, undefined) {
         toggleDependantRows($(this));
     });
 
+    _cropper();
     rideApp.translator.submitTranslationKeys();
+  };
+
+  var _cropper = function() {
+    $('.js-enable-cropper').each(function() {
+      new Cropper(this, {
+          ratio: {
+            width:  16,
+            height: 9
+          }
+      });
+    });
   };
 
   var formFile = function() {
