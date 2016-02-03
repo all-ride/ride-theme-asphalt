@@ -13,6 +13,7 @@ function updateQueryStringParameter(uri, key, value) {
 
 rideApp.form = (function($, undefined) {
   var $document = $(document);
+  var client = new JsonApiClient('/api/v1');
 
   var _initialize = function() {
     formFile();
@@ -45,14 +46,96 @@ rideApp.form = (function($, undefined) {
   };
 
   var _cropper = function() {
-    $('.js-enable-cropper').each(function() {
-      new Cropper(this, {
-          ratio: {
-            width:  16,
-            height: 9
-          }
+    var asset = null;
+    var style = null;
+    $('.asset__crop').each(function() {
+      var cropper;
+      var $crop = $(this);
+      var assetId = $crop.data('asset');
+      var styleId = $crop.data('style');
+      var ratio = $crop.data('ratio');
+
+      $crop.find('.js-crop-toggle').on('click', function(e) {
+        e.preventDefault();
+
+        $crop.find('.js-crop-preview').addClass('superhidden');
+        var $cropperRegion = $(this).addClass('superhidden').next('.js-crop-image').removeClass('superhidden');
+        var image = $cropperRegion[0].querySelector('.js-enable-cropper');
+        cropper = new Cropper($cropperRegion.find('.js-enable-cropper')[0], {
+          aspectRatio: ratio,
+          zoomOnWheel: false,
+          movable: false
+        });
+      });
+
+      $crop.find('.js-crop-save').on('click', function(e) {
+        e.preventDefault();
+        $crop.addClass('is-loading');
+        var dataUrl = cropper.getCroppedCanvas().toDataURL();
+
+        if (!asset) {
+          client.load('assets', assetId, function(data) {
+            asset = data;
+            loadImageStyle(styleId, dataUrl, $crop);
+          });
+        } else {
+          loadImageStyle(styleId, dataUrl, $crop);
+        }
       });
     });
+
+    function loadImageStyle(id, dataUrl, $container) {
+      client.load('image-styles', id, function(data) {
+        saveImageForImageStyle(asset, data, dataUrl, $container);
+      });
+    }
+
+    function saveImageForImageStyle(asset, imageStyle, dataUrl, $container) {
+      var url = client.url + '/asset-image-styles?filter[exact][asset]=' + asset.id + '&filter[exact][style]=' + imageStyle.id + '&fields[asset-image-styles]=id';
+      client.sendRequest('GET', url, null, function(data) {
+        if (data.length) {
+          data[0].setAttribute('image', dataUrl);
+          client.save(data[0], function(data) {
+            $container.removeClass('is-loading');
+            $container.find('.js-crop-toggle').removeClass('superhidden').next('.js-crop-image').addClass('superhidden');
+            $container.find('.js-crop-preview').removeClass('superhidden').attr('src', dataUrl);
+          });
+        } else {
+          var assetImageStyle = new JsonApiDataStoreModel('asset-image-styles');
+
+          assetImageStyle.setRelationship('asset', asset);
+          assetImageStyle.setRelationship('style', imageStyle);
+          assetImageStyle.setAttribute('image', dataUrl);
+
+          client.save(assetImageStyle, function(data) {
+            $container.removeClass('is-loading');
+            $container.find('.js-crop-toggle').removeClass('superhidden').next('.js-crop-image').addClass('superhidden');
+            $container.find('.js-crop-preview').removeClass('superhidden').attr('src', dataUrl);
+          });
+        }
+
+      });
+    }
+
+    // $('.js-crop-toggle').on('click', function(e) {
+    //   e.preventDefault();
+    //   var $cropperRegion = $(this).next('.js-crop-image');
+    //   $cropperRegion.removeClass('superhidden');
+    //   var cropper = new Cropper($cropperRegion.find('.js-enable-cropper')[0], {
+    //     aspectRatio: 16 / 9,
+    //     zoomOnWheel: false,
+    //     movable: false,
+    //     crop: function(data) {
+    //       console.log(data.x);
+    //       console.log(data.y);
+    //       console.log(data.width);
+    //       console.log(data.height);
+    //       console.log(data.rotate);
+    //       console.log(data.scaleX);
+    //       console.log(data.scaleY);
+    //     }
+    //   });
+    // });
   };
 
   var formFile = function() {

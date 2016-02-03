@@ -119,6 +119,36 @@
   }
 }
 
+.asset__crop {
+  .spacer + .spacer {
+    margin-top: 16px;
+  }
+  .tree-spinner {
+    display: none;
+  }
+  &.is-loading {
+    position: relative;
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba(#fff, .75);
+    }
+    .tree-spinner {
+      position: absolute;
+      z-index: 2;
+      top: 45%;
+      right: 0;
+      left: 0;
+      display: block;
+    }
+  }
+}
+
 // .assets-grid {
 //   a {
 //     color: #fff;
