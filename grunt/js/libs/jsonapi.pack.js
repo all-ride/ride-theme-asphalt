@@ -361,7 +361,7 @@ JsonApiClient.prototype.save = function(model, onsuccess, onerror) {
 JsonApiClient.prototype.saveBulk = function(models, type, onsuccess, onerror) {
     var body = {'data': []};
 
-    for (index in models) {
+    for (var index in models) {
       var model = models[index].serialize();
       if (!model.data || !model.data.type || model.data.type != type) {
           throw new Exception('Invalid data provided');
@@ -386,12 +386,12 @@ JsonApiClient.prototype.sendRequest = function(method, url, body, onsuccess, one
     }
 
     request.onsuccess = function(data, status, xhr) {
-        data = self.store.sync(JSON.parse(data));
-
+        if (data) {
+          data = self.store.sync(JSON.parse(data));
+        }
         onsuccess(data);
     };
     request.onerror = onerror;
 
     this.client.sendRequest(request);
 };
-

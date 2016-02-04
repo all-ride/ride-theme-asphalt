@@ -131,14 +131,14 @@
 
 
                                 <div class="form__group asset__crop" data-asset="{$asset->getId()}" data-style="{$style->getId()}"{if $cropRatio} data-ratio="{$cropRatio['width'] / $cropRatio['height']}"{/if}>
-                                    <img alt="" class="superhidden js-crop-preview img-responsive">
-                                    <a href="#" class="js-crop-toggle">Crop this image</a>
+                                    <div class="superhidden js-crop-preview"></div>
+                                    <a href="#" class="js-crop-toggle">{translate key="button.crop.image"}</a>
                                     <div class="js-crop-image superhidden">
                                         <div class="spacer">
                                             <img class="img-responsive js-enable-cropper" src="{image src=$asset->getImage()}" />
                                         </div>
                                         <div class="spacer">
-                                            <a href="#" class="btn js-crop-save">Save crop</a>
+                                            <a href="#" class="btn js-crop-save">{translate key="button.crop.save"}</a>
                                         </div>
                                     </div>
                                     <div class="loading tree-spinner"></div>
@@ -153,6 +153,15 @@
             {/if}
         </div>
     </form>
+    <script type="text/template" id="form-image-preview-template">
+        <div class="form__image-preview">
+            <img src="<%- dataUrl %>" width="100"><br>
+            <a href="#" class="js-file-delete" data-id="<%- id %>" data-message="{translate key="label.confirm.file.delete"}">
+                <i class="glyphicon glyphicon-remove"></i>
+                {translate key="button.detele"}
+            </a>
+        </div>
+    </script>
 {/block}
 
 {block name="scripts" append}
