@@ -314,7 +314,7 @@ rideApp.form = (function($, undefined) {
     init: function() {
       var $assets = rideApp.form.assets.allAssets;
 
-      $assets.each(function() {
+      ready('.form__assets', function() {
         var $this = $(this),
             fieldId = $this.data('field'),
             $field = $('#' + fieldId),
@@ -426,7 +426,7 @@ rideApp.form = (function($, undefined) {
       } else {
         $newItem.prependTo($assets);
       }
-      $assets.sortable('refresh');
+      // $assets.sortable('refresh');
       rideApp.form.assets.checkAssetsLimit();
       rideApp.form.assets.setAssetsOrder($assetsField);
     },
