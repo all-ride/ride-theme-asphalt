@@ -41,13 +41,14 @@ rideApp.form = (function($, undefined) {
         toggleDependantRows($(this));
     });
 
-    _cropper();
+    _assetImageStyleHandler();
     rideApp.translator.submitTranslationKeys();
   };
 
-  var _cropper = function() {
+  var _assetImageStyleHandler = function() {
     var asset = null;
     var style = null;
+    var formImagePreviewTemplate = _.template($('#form-image-preview-template').html());
     $('.asset__crop').each(function() {
       var cropper;
       var $crop = $(this);
@@ -96,9 +97,7 @@ rideApp.form = (function($, undefined) {
         if (data.length) {
           data[0].setAttribute('image', dataUrl);
           client.save(data[0], function(data) {
-            $container.removeClass('is-loading');
-            $container.find('.js-crop-toggle').removeClass('superhidden').next('.js-crop-image').addClass('superhidden');
-            $container.find('.js-crop-preview').removeClass('superhidden').attr('src', dataUrl);
+            finishUpdate($container, dataUrl, data.id);
           });
         } else {
           var assetImageStyle = new JsonApiDataStoreModel('asset-image-styles');
@@ -108,34 +107,39 @@ rideApp.form = (function($, undefined) {
           assetImageStyle.setAttribute('image', dataUrl);
 
           client.save(assetImageStyle, function(data) {
-            $container.removeClass('is-loading');
-            $container.find('.js-crop-toggle').removeClass('superhidden').next('.js-crop-image').addClass('superhidden');
-            $container.find('.js-crop-preview').removeClass('superhidden').attr('src', dataUrl);
+            finishUpdate($container, dataUrl, data.id);
           });
         }
 
       });
     }
 
-    // $('.js-crop-toggle').on('click', function(e) {
-    //   e.preventDefault();
-    //   var $cropperRegion = $(this).next('.js-crop-image');
-    //   $cropperRegion.removeClass('superhidden');
-    //   var cropper = new Cropper($cropperRegion.find('.js-enable-cropper')[0], {
-    //     aspectRatio: 16 / 9,
-    //     zoomOnWheel: false,
-    //     movable: false,
-    //     crop: function(data) {
-    //       console.log(data.x);
-    //       console.log(data.y);
-    //       console.log(data.width);
-    //       console.log(data.height);
-    //       console.log(data.rotate);
-    //       console.log(data.scaleX);
-    //       console.log(data.scaleY);
-    //     }
-    //   });
-    // });
+    function finishUpdate($container, dataUrl, id) {
+      var $preview = $container.find('.js-crop-preview');
+
+      $container.removeClass('is-loading');
+      $container.find('.js-crop-toggle').removeClass('superhidden').next('.js-crop-image').addClass('superhidden');
+
+      $preview.html(formImagePreviewTemplate({dataUrl: dataUrl, id: id})).removeClass('superhidden');
+    }
+
+    $document.on('click', '.js-file-delete:not(.btn-file-delete)', function(e) {
+      e.preventDefault();
+
+      var $link = $(this);
+      if (confirm($link.data('message'))) {
+        var id = $link.data('id');
+        var $cropPreview = $link.closest('.js-crop-preview');
+        var $formImagePreview = $link.closest('.form__image-preview');
+
+        var url = client.url + '/asset-image-styles/' + id;
+
+        client.sendRequest('DELETE', url, null, function() {
+          $formImagePreview.remove();
+          $cropPreview.addClass('superhidden');
+        });
+      }
+    });
   };
 
   var formFile = function() {
