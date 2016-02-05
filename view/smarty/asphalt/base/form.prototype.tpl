@@ -924,10 +924,11 @@
          </div>
 
         {if $value}
+
         <div class="form__help">
             <div class="form__image-preview">
                 <img src="{image src=$value transformation="crop" width=100 height=100}" title="{$value}" /><br>
-                <a href="#" class="btn-file-delete" data-message="{translate key="label.confirm.file.delete"}">
+                <a href="#" class="btn-file-delete js-file-delete" data-message="{translate key="label.confirm.file.delete"}"{if $attributes && $attributes['data-id']} data-id="{$attributes['data-id']}"{/if}>
                     <i class="glyphicon glyphicon-remove"></i>
                     {translate key="button.delete"}
                 </a>

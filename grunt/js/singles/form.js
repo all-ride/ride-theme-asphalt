@@ -13,6 +13,7 @@ function updateQueryStringParameter(uri, key, value) {
 
 rideApp.form = (function($, undefined) {
   var $document = $(document);
+  var client = new JsonApiClient('/api/v1');
 
   var _initialize = function() {
     formFile();
@@ -40,7 +41,105 @@ rideApp.form = (function($, undefined) {
         toggleDependantRows($(this));
     });
 
+    _assetImageStyleHandler();
     rideApp.translator.submitTranslationKeys();
+  };
+
+  var _assetImageStyleHandler = function() {
+    var asset = null;
+    var style = null;
+    var formImagePreviewTemplate = _.template($('#form-image-preview-template').html());
+    $('.asset__crop').each(function() {
+      var cropper;
+      var $crop = $(this);
+      var assetId = $crop.data('asset');
+      var styleId = $crop.data('style');
+      var ratio = $crop.data('ratio');
+
+      $crop.find('.js-crop-toggle').on('click', function(e) {
+        e.preventDefault();
+
+        $crop.find('.js-crop-preview').addClass('superhidden');
+        var $cropperRegion = $(this).addClass('superhidden').next('.js-crop-image').removeClass('superhidden');
+        var image = $cropperRegion[0].querySelector('.js-enable-cropper');
+        cropper = new Cropper($cropperRegion.find('.js-enable-cropper')[0], {
+          aspectRatio: ratio,
+          zoomOnWheel: false,
+          movable: false
+        });
+      });
+
+      $crop.find('.js-crop-save').on('click', function(e) {
+        e.preventDefault();
+        $crop.addClass('is-loading');
+        var dataUrl = cropper.getCroppedCanvas().toDataURL();
+
+        if (!asset) {
+          client.load('assets', assetId, function(data) {
+            asset = data;
+            loadImageStyle(styleId, dataUrl, $crop);
+          });
+        } else {
+          loadImageStyle(styleId, dataUrl, $crop);
+        }
+      });
+    });
+
+    function loadImageStyle(id, dataUrl, $container) {
+      client.load('image-styles', id, function(data) {
+        saveImageForImageStyle(asset, data, dataUrl, $container);
+      });
+    }
+
+    function saveImageForImageStyle(asset, imageStyle, dataUrl, $container) {
+      var url = client.url + '/asset-image-styles?filter[exact][asset]=' + asset.id + '&filter[exact][style]=' + imageStyle.id + '&fields[asset-image-styles]=id';
+      client.sendRequest('GET', url, null, function(data) {
+        if (data.length) {
+          data[0].setAttribute('image', dataUrl);
+          client.save(data[0], function(data) {
+            finishUpdate($container, dataUrl, data.id);
+          });
+        } else {
+          var assetImageStyle = new JsonApiDataStoreModel('asset-image-styles');
+
+          assetImageStyle.setRelationship('asset', asset);
+          assetImageStyle.setRelationship('style', imageStyle);
+          assetImageStyle.setAttribute('image', dataUrl);
+
+          client.save(assetImageStyle, function(data) {
+            finishUpdate($container, dataUrl, data.id);
+          });
+        }
+
+      });
+    }
+
+    function finishUpdate($container, dataUrl, id) {
+      var $preview = $container.find('.js-crop-preview');
+
+      $container.removeClass('is-loading');
+      $container.find('.js-crop-toggle').removeClass('superhidden').next('.js-crop-image').addClass('superhidden');
+
+      $preview.html(formImagePreviewTemplate({dataUrl: dataUrl, id: id})).removeClass('superhidden');
+    }
+
+    $document.on('click', '.js-file-delete:not(.btn-file-delete)', function(e) {
+      e.preventDefault();
+
+      var $link = $(this);
+      if (confirm($link.data('message'))) {
+        var id = $link.data('id');
+        var $cropPreview = $link.closest('.js-crop-preview');
+        var $formImagePreview = $link.closest('.form__image-preview');
+
+        var url = client.url + '/asset-image-styles/' + id;
+
+        client.sendRequest('DELETE', url, null, function() {
+          $formImagePreview.remove();
+          $cropPreview.addClass('superhidden');
+        });
+      }
+    });
   };
 
   var formFile = function() {
@@ -215,7 +314,7 @@ rideApp.form = (function($, undefined) {
     init: function() {
       var $assets = rideApp.form.assets.allAssets;
 
-      $assets.each(function() {
+      ready('.form__assets', function() {
         var $this = $(this),
             fieldId = $this.data('field'),
             $field = $('#' + fieldId),
@@ -327,7 +426,7 @@ rideApp.form = (function($, undefined) {
       } else {
         $newItem.prependTo($assets);
       }
-      $assets.sortable('refresh');
+      // $assets.sortable('refresh');
       rideApp.form.assets.checkAssetsLimit();
       rideApp.form.assets.setAssetsOrder($assetsField);
     },

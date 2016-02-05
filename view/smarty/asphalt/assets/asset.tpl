@@ -106,16 +106,42 @@
                             </div>
 
                             {foreach $styles as $style}
+                            {$cropRatio = null}
                             <div id="tab-{$style->getSlug()}" class="tabs__pane">
                                 <ul>
                                 {foreach $style->getTransformations() as $transformation}
                                     <li>{$transformation->getName()}</li>
+                                    {if $transformation->getTransformation() == 'crop'}
+                                        {foreach $transformation->getOptions() as $option}
+                                            {if $option->getKey() == 'width'}
+                                                {$cropRatio['width'] = $option->getValue()}
+                                            {/if}
+                                            {if $option->getKey() == 'height'}
+                                                {$cropRatio['height'] = $option->getValue()}
+                                            {/if}
+                                        {/foreach}
+                                    {/if}
                                 {/foreach}
                                 </ul>
 
                                 <div class="form__group">
                                     {call formWidget form=$form row="style-`$style->slug`"}
                                     {call formWidgetErrors form=$form row="style-`$style->slug`"}
+                                </div>
+
+
+                                <div class="form__group asset__crop" data-asset="{$asset->getId()}" data-style="{$style->getId()}"{if $cropRatio} data-ratio="{$cropRatio['width'] / $cropRatio['height']}"{/if}>
+                                    <div class="superhidden js-crop-preview"></div>
+                                    <a href="#" class="js-crop-toggle">{translate key="button.crop.image"}</a>
+                                    <div class="js-crop-image superhidden">
+                                        <div class="spacer">
+                                            <img class="img-responsive js-enable-cropper" src="{image src=$asset->getImage()}" />
+                                        </div>
+                                        <div class="spacer">
+                                            <a href="#" class="btn js-crop-save">{translate key="button.crop.save"}</a>
+                                        </div>
+                                    </div>
+                                    <div class="loading tree-spinner"></div>
                                 </div>
                             </div>
                             {/foreach}
@@ -127,6 +153,15 @@
             {/if}
         </div>
     </form>
+    <script type="text/template" id="form-image-preview-template">
+        <div class="form__image-preview">
+            <img src="<%- dataUrl %>" width="100"><br>
+            <a href="#" class="js-file-delete" data-id="<%- id %>" data-message="{translate key="label.confirm.file.delete"}">
+                <i class="glyphicon glyphicon-remove"></i>
+                {translate key="button.detele"}
+            </a>
+        </div>
+    </script>
 {/block}
 
 {block name="scripts" append}
