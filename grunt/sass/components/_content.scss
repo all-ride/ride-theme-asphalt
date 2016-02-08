@@ -366,13 +366,9 @@ ul.st-text-block {
 .st-block__messages {
   display: none;
   position: relative;
-  top: -1.9em;
-  left: -1.9em;
-  padding: .3em .5em;
+  padding: 7px;
+  margin-bottom: 10px;
   border: 1px solid $color-brand-primary;
-  border-left: none;
-  border-top: none;
-  max-width: 80%;
 }
 
 .st-block__messages--is-visible {
