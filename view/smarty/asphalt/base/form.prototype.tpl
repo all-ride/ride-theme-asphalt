@@ -644,7 +644,16 @@
             {$assets = $widget->getAssets()}
             {foreach $assets as $asset}
                 <div class="form__asset" data-id="{$asset->getId()}">
-                    <img src="{image src=$asset->getThumbnail() transformation="crop" width=100 height=100}" width="100" height="100">
+                    {if $asset->getThumbnail()}
+                        {$imgSource = $asset->getThumbnail()}
+                    {elseif !$asset->getThumbnail() && $asset->getType() == 'audio'}
+                        {$imgSource = "asphalt/img/audio.svg"}
+                    {elseif !$asset->getThumbnail() && $asset->getType() == 'pdf'}
+                        {$imgSource = "asphalt/img/pdf.svg"}
+                    {else}
+                        {$imgSource = "asphalt/img/unknown.png"}
+                    {/if}
+                    <img src="{image src=$imgSource width=160 height=125 transformation="crop"}" class="image image--full-width" title="{$asset->getName()}" />
                     <a href="#" class="form__remove-asset">&times;</a>
                 </div>
             {/foreach}
@@ -928,7 +937,7 @@
         <div class="form__help">
             <div class="form__image-preview">
                 <img src="{image src=$value transformation="crop" width=100 height=100}" title="{$value}" /><br>
-                <a href="#" class="btn-file-delete js-file-delete" data-message="{translate key="label.confirm.file.delete"}"{if $attributes && $attributes['data-id']} data-id="{$attributes['data-id']}"{/if}>
+                <a href="#" class="btn-file-delete js-file-delete" data-message="{translate key="label.confirm.file.delete"}"{if $attributes && array_key_exists('data-id', $attributes) && $attributes['data-id']} data-id="{$attributes['data-id']}"{/if}>
                     <i class="glyphicon glyphicon-remove"></i>
                     {translate key="button.delete"}
                 </a>
