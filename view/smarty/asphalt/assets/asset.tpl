@@ -131,8 +131,8 @@
 
 
                                 <div class="form__group asset__crop" data-asset="{$asset->getId()}" data-style="{$style->getId()}"{if $cropRatio} data-ratio="{$cropRatio['width'] / $cropRatio['height']}"{/if}>
-                                    <div class="superhidden js-crop-preview"></div>
-                                    <a href="#" class="js-crop-toggle">{translate key="button.crop.image"}</a>
+                                    <div class="superhidden js-crop-preview spacer"></div>
+                                    <a href="#" class="js-crop-toggle spacer">{translate key="button.crop.image"}</a>
                                     <div class="js-crop-image superhidden">
                                         <div class="spacer">
                                             <img class="img-responsive js-enable-cropper" src="{image src=$asset->getImage()}" />
