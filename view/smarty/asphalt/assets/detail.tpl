@@ -6,7 +6,7 @@
                 <input type="checkbox" name="assets[]" value="{$item->getId()}" />
             </label>
         {/if}
-        <div class="preivew__image-container">
+        <div class="preview__image-container">
             <div class="preview__image">
                 {if $item->getThumbnail()}
                     <img src="{image src=$item->getThumbnail() width=160 height=125 transformation="crop"}" class="image" />
