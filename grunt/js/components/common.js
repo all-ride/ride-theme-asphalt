@@ -1,6 +1,6 @@
-window.app = window.app || {};
+window.rideApp = window.rideApp || {};
 
-app.common = (function($, undefined) {
+rideApp.common = (function($, undefined) {
   var $document = $(document),
       $window = $(window),
       $html = $('html'),
@@ -9,7 +9,7 @@ app.common = (function($, undefined) {
   var _initialize = function() {
     // First set window size
     this.windowResize();
-    $window.on('resize', debounce(app.common.windowResize, 250, false));
+    $window.on('resize', debounce(rideApp.common.windowResize, 250, false));
 
     this.svgFallback();
 
@@ -27,7 +27,7 @@ app.common = (function($, undefined) {
   };
 
   var _windowResize = function() {
-    $.extend(app.variables, {
+    $.extend(rideApp.variables, {
       windowWidth: $window.width(),
       windowHeight: $window.height()
     });
@@ -91,11 +91,30 @@ app.common = (function($, undefined) {
     window.setTimeout(delayedJS, 4000);
   };
 
+  /**
+   * handle the XHR callbacks
+   */
+  var _handleXHRCallback = function(jqxhr, successMsg, errorMsg) {
+    if (alertify !== undefined) {
+      jqxhr.done(function() {
+        alertify
+          .logPosition("bottom right")
+          .success(successMsg);
+      });
+      jqxhr.fail(function() {
+        alertify
+          .logPosition("bottom right")
+          .error(errorMsg);
+      });
+    }
+  };
+
   return {
     init: _initialize,
     windowResize: _windowResize,
     toggleSubmenu: _toggleSubmenu,
     svgFallback: _svgFallback,
+    handleXHRCallback: _handleXHRCallback,
     finalize: _finalize
   };
 

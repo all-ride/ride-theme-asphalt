@@ -1,6 +1,6 @@
-window.app = window.app || {};
+window.rideApp = window.rideApp || {};
 
-app.content = (function($, undefined) {
+rideApp.content = (function($, undefined) {
 
   var _initialize = function() {
     var $richContent = $('.js-rich-content');
@@ -19,9 +19,9 @@ app.content = (function($, undefined) {
         SirTrevor.Blocks.Tweet = tweet_block;
         SirTrevor.Blocks.Quote = quote_block;
 
-        app.content.initWysiwyg(redactorOptions);
+        rideApp.content.initWysiwyg(redactorOptions);
         new SirTrevor.Editor(options);
-    })
+    });
   };
 
   var _initWysiwyg = function(options) {
