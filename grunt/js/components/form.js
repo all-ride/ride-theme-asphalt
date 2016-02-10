@@ -1,4 +1,4 @@
-window.app = window.app || {};
+window.rideApp = window.rideApp || {};
 
 window.ParsleyConfig = window.ParsleyConfig || {};
 window.ParsleyConfig = {
@@ -12,7 +12,7 @@ window.ParsleyConfig = {
 };
 window.ParsleyValidator.setLocale('nl');
 
-app.form = (function($, undefined) {
+rideApp.form = (function($, undefined) {
   var $forms = $('form');
 
   var _initialize = function() {

@@ -1,6 +1,6 @@
-window.app = window.app || {};
+window.rideApp = window.rideApp || {};
 
-app.dropzone = (function($, undefined) {
+rideApp.dropzone = (function($, undefined) {
   var $dropzone = $("#asset-dropzone");
   var maxFilesize = $dropzone.data('maxFilesize') || 16;
   var errorFilesize = $dropzone.data('errorFilesize') || "This file is too big.";

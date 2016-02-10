@@ -1,14 +1,13 @@
-window.app = window.app || {};
-app.variables = app.variables || {};
+window.rideApp = window.rideApp || {};
+rideApp.variables = rideApp.variables || {};
 
-app.main = (function($, undefined) {
+rideApp.main = (function($, undefined) {
 
   var _fire = function(func, funcname, args){
     funcname = (funcname === undefined) ? 'init' : funcname;
 
-
-    if (func !== '' && app[func] && typeof app[func][funcname] == 'function') {
-      app[func][funcname](args);
+    if (func !== '' && rideApp[func] && typeof rideApp[func][funcname] == 'function') {
+      rideApp[func][funcname](args);
     }
   };
 
@@ -41,7 +40,7 @@ app.main = (function($, undefined) {
 
 
 $(document).ready(function() {
-  app.main.init();
+  rideApp.main.init();
 });
 
 //! DONT ADD ANYTHING IN THIS FILE, USE COMMON.JS PLEASE.
