@@ -74,32 +74,33 @@ rideApp.form = (function($, undefined) {
       $crop.find('.js-crop-save').on('click', function(e) {
         e.preventDefault();
         $crop.addClass('is-loading');
-        var dataUrl = cropper.getCroppedCanvas().toDataURL();
 
         if (!asset) {
           client.load('assets', assetId, function(data) {
             asset = data;
-            loadImageStyle(styleId, dataUrl, $crop);
+            loadImageStyle(styleId, cropper, $crop);
           });
         } else {
-          loadImageStyle(styleId, dataUrl, $crop);
+          loadImageStyle(styleId, cropper, $crop);
         }
       });
     });
 
-    function loadImageStyle(id, dataUrl, $container) {
+    function loadImageStyle(id, cropper, $container) {
       client.load('image-styles', id, function(data) {
-        saveImageForImageStyle(asset, data, dataUrl, $container);
+        saveImageForImageStyle(asset, data, cropper, $container);
       });
     }
 
-    function saveImageForImageStyle(asset, imageStyle, dataUrl, $container) {
+    function saveImageForImageStyle(asset, imageStyle, cropper, $container) {
       var url = client.url + '/asset-image-styles?filter[exact][asset]=' + asset.id + '&filter[exact][style]=' + imageStyle.id + '&fields[asset-image-styles]=id';
+      var dataUrl = cropper.getCroppedCanvas().toDataURL();
+
       client.sendRequest('GET', url, null, function(data) {
         if (data.length) {
           data[0].setAttribute('image', dataUrl);
           client.save(data[0], function(data) {
-            finishUpdate($container, dataUrl, data.id);
+            finishUpdate($container, cropper, dataUrl, data.id);
           });
         } else {
           var assetImageStyle = new JsonApiDataStoreModel('asset-image-styles');
@@ -109,20 +110,23 @@ rideApp.form = (function($, undefined) {
           assetImageStyle.setAttribute('image', dataUrl);
 
           client.save(assetImageStyle, function(data) {
-            finishUpdate($container, dataUrl, data.id);
+            finishUpdate($container, cropper, dataUrl, data.id);
           });
         }
 
       });
     }
 
-    function finishUpdate($container, dataUrl, id) {
+    function finishUpdate($container, cropper, dataUrl, id) {
       var $preview = $container.find('.js-crop-preview');
 
       $container.removeClass('is-loading');
       $container.find('.js-crop-toggle').removeClass('superhidden').next('.js-crop-image').addClass('superhidden');
 
       $preview.html(formImagePreviewTemplate({dataUrl: dataUrl, id: id})).removeClass('superhidden');
+
+      cropper.destroy();
+      $container.prev('.form__group').find('.form__image-preview').addClass('superhidden');
 
       alertify
         .logPosition("bottom right")
