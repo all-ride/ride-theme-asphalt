@@ -1,8 +1,11 @@
 window.app = window.app || {};
 
 app.dropzone = (function($, undefined) {
-  var maxFilesize = $("#asset-dropzone").data('maxFilesize') || 16,
-      errorFilesize = $("#asset-dropzone").data('errorFilesize') || "This file is too big.";
+  var $dropzone = $("#asset-dropzone");
+  var maxFilesize = $dropzone.data('maxFilesize') || 16;
+  var errorFilesize = $dropzone.data('errorFilesize') || "This file is too big.";
+  var successUploadMsg = $dropzone.data('upload-success') || "File added.";
+
   errorFilesize = errorFilesize.replace("%size%", "" + maxFilesize);
 
   Dropzone.options.assetDropzone = {
@@ -18,9 +21,13 @@ app.dropzone = (function($, undefined) {
     },
 
     success : function(file, html) {
-        var elem = $(html);
-        $('.gridOverview').append(elem);
-        this.removeFile(file);
+      var thisSuccessUploadMsg = successUploadMsg.replace("%file%", "" + file.name);
+      alertify.logPosition("bottom right");
+      alertify.success(thisSuccessUploadMsg);
+
+      var elem = $(html);
+      $('.gridOverview').append(elem);
+      this.removeFile(file);
     },
   };
 

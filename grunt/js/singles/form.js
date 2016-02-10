@@ -48,6 +48,8 @@ rideApp.form = (function($, undefined) {
   var _assetImageStyleHandler = function() {
     var asset = null;
     var style = null;
+    var imageStyleAdded = rideApp.translator.translate('label.image.style.added');
+    var imageStyleRemoved = rideApp.translator.translate('label.image.style.removed');
     var formImagePreviewTemplate = _.template($('#form-image-preview-template').html());
     $('.asset__crop').each(function() {
       var cropper;
@@ -121,9 +123,13 @@ rideApp.form = (function($, undefined) {
       $container.find('.js-crop-toggle').removeClass('superhidden').next('.js-crop-image').addClass('superhidden');
 
       $preview.html(formImagePreviewTemplate({dataUrl: dataUrl, id: id})).removeClass('superhidden');
+
+      alertify
+        .logPosition("bottom right")
+        .success(imageStyleAdded);
     }
 
-    $document.on('click', '.js-file-delete:not(.btn-file-delete)', function(e) {
+    $document.on('click', '.assets__image-styles .js-file-delete', function(e) {
       e.preventDefault();
 
       var $link = $(this);
@@ -137,13 +143,17 @@ rideApp.form = (function($, undefined) {
         client.sendRequest('DELETE', url, null, function() {
           $formImagePreview.remove();
           $cropPreview.addClass('superhidden');
+
+          alertify
+            .logPosition("bottom right")
+            .success(imageStyleRemoved);
         });
       }
     });
   };
 
   var formFile = function() {
-    $document.on('click', '.btn-file-delete', function(e) {
+    $document.on('click', '.btn-file-delete:not(.assets__image-styles .btn-file-delete)', function(e) {
       e.preventDefault();
       var $anchor = $(this);
       if (confirm($anchor.data('message'))) {

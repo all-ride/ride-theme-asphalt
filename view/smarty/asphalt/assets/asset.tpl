@@ -107,7 +107,7 @@
 
                             {foreach $styles as $style}
                             {$cropRatio = null}
-                            <div id="tab-{$style->getSlug()}" class="tabs__pane">
+                            <div id="tab-{$style->getSlug()}" class="tabs__pane assets__image-styles">
                                 <ul>
                                 {foreach $style->getTransformations() as $transformation}
                                     <li>{$transformation->getName()}</li>
