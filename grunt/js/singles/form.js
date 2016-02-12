@@ -312,12 +312,12 @@ rideApp.form = (function($, undefined) {
                   }
                   var map = $.map(res, function(value) {
                     return {name: value};
-                  })
+                  });
                   callback(map);
                 }
             });
         }
-      }
+      };
       $field.selectize(autocompleteSettings);
     }
   };
