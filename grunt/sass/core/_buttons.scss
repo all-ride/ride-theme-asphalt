@@ -4,7 +4,7 @@
   display: inline-block;
   padding: 10px 20px;
   border-style: solid;
-  border-width: 0 2px 2px 0;
+  border-width: 0 0 2px 0;
   border-radius: $border-radius-base;
   color: $white;
   line-height: 1;
@@ -49,6 +49,9 @@
       @include button-variant($white, hsl(hue($color), 50%, 60%), hsl(hue($color), 50%, 50%));
     }
   }
+  &--secondary {
+    @include button-variant($white, $blue-75, darken($blue-75, 10%));
+  }
 
   &--link {
     @include fsRem($font-size-base);
@@ -61,7 +64,9 @@
     &:visited {
       color: $color-link-visited;
     }
-    &:hover {
+    &:hover,
+    &:active,
+    &:focus {
       color: $color-link-hover;
       background: none;
     }

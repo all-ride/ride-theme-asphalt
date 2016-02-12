@@ -12,6 +12,7 @@
     &:active,
     &.active {
       z-index: 2;
+      border-right-color: transparent;
     }
     &:focus {
       outline: 0;
@@ -19,6 +20,8 @@
     &:first-of-type {
       border-top-left-radius: $border-radius-base;
       border-bottom-left-radius: $border-radius-base;
+    }
+    &:not(:last-of-type) {
       border-right-width: 1px;
     }
     &:last-of-type {
