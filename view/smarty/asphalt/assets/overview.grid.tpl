@@ -40,10 +40,11 @@
 </div>
 <div class="gridOverview grid grid--2-col grid--bp-xsm-4-col grid--bp-sml-8-col asset-items-assets" data-order="true">
     {if $assets}
+        {$selectedAssets = explode(',', $app.request->getQueryParameter('selected'))}
         {foreach $assets as $item}
             <div class="grid__item order-item" data-type="{$item->getType()}" data-id="{$item->getId()}">
 
-                {$selected = ($app.request->getQueryParameter('selected') && strpos($app.request->getQueryParameter('selected'), $item->getId()) !== false)}
+                {$selected = in_array($item->getId(), $selectedAssets)}
                 <div class="preview preview--asset{if $embed} is-addable{/if}{if $selected} is-selected{/if}">
                     {if !$embed}
                         <label class="preview__checkbox checkbox">

@@ -27,6 +27,8 @@ rideApp.form = (function($, undefined) {
     _autocomplete();
     this.assets.init();
 
+    // rideApp.assets.init();
+
     $('[maxlength]').each(function() {
       rideApp.form.checkLength.init($(this), false);
     });
@@ -352,15 +354,28 @@ rideApp.form = (function($, undefined) {
           if (attr === 'disabled') {
             return;
           }
-          var assetsModal = $(this).attr('href'),
-              $modal = $(assetsModal),
-              $iframe = $modal.find('iframe');
+          var $button = $(this);
+          var assetsModal = $(this).attr('href');
+          var $modal = $(assetsModal);
+          var $iframe = $modal.find('iframe');
+          var $formAsset = $button.closest('.form__assets');
 
-          // check if there is an other iframe with this source on the page
-          if($iframe.attr('src') === undefined) {
-            $iframe.attr('src', $iframe.data('src'));
+          var selected = rideApp.form.assets.getSelected($formAsset);
+
+          var iframeUrl = $iframe.data('url');
+          var searchIndex = iframeUrl.indexOf('?');
+          var iframeQuery = {};
+          if (searchIndex >= 0) {
+            iframeQuery = queryString.parse(iframeUrl.slice(searchIndex));
+            iframeUrl = iframeUrl.slice(0, (searchIndex + 1));
           }
-          $modal.modal('show');
+          iframeQuery.selected = selected;
+
+          $iframe.attr('src', iframeUrl + queryString.stringify(iframeQuery));
+
+          $modal.modal('show').on('hidden.bs.modal', function () {
+            $iframe.attr('src','');
+          });
         });
 
         $document.on('click', '.form__remove-asset', function(e) {
@@ -368,6 +383,12 @@ rideApp.form = (function($, undefined) {
           rideApp.form.assets.removeAsset(this);
         });
       });
+    },
+    getSelected: function($formAsset) {
+      var field = $formAsset.data('field');
+      var $field = $('#' + field);
+
+      return $field.val();
     },
     setAssetsOrder: function($item) {
         var order = $item.sortable('toArray', {attribute: 'data-id'}),
