@@ -1,7 +1,7 @@
 .tree-spinner,
 .tree-spinner:before,
 .tree-spinner:after {
-  background: #2980b9;
+  background: $color-brand-primary;
   -webkit-animation: load1 1s infinite ease-in-out;
   animation: load1 1s infinite ease-in-out;
   width: 1em;
@@ -36,11 +36,11 @@
   0%,
   80%,
   100% {
-    box-shadow: 0 0 #2980b9;
+    box-shadow: 0 0 $color-brand-primary;
     height: 4em;
   }
   40% {
-    box-shadow: 0 -2em #2980b9;
+    box-shadow: 0 -2em $color-brand-primary;
     height: 5em;
   }
 }
@@ -48,11 +48,11 @@
   0%,
   80%,
   100% {
-    box-shadow: 0 0 #2980b9;
+    box-shadow: 0 0 $color-brand-primary;
     height: 4em;
   }
   40% {
-    box-shadow: 0 -2em #2980b9;
+    box-shadow: 0 -2em $color-brand-primary;
     height: 5em;
   }
 }
