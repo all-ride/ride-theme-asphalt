@@ -50,7 +50,7 @@
     </form>
 
     <form id="{$form->getId()}" class="form form-filter{*  form--selectize *}" action="{$app.url.request}" method="POST" role="form">
-        <div class="actions clearfix">
+        <div class="actions clearfix spacer">
             <div class="btn-group">
                 <a href="{url id="assets.asset.add" parameters=["locale" => $locale]}?folder={$folder->id}&embed={$embed}&referer={$app.url.request|urlencode}" class="btn btn--default btn--small">
                    {translate key="button.add.asset"}
@@ -78,10 +78,10 @@
         </div>
 
         {if $folder->description}
-            <div class="description">{$folder->description}</div>
+            <div class="description spacer">{$folder->description}</div>
         {/if}
 
-        <div class="assets assets-{$view}">
+        <div class="assets assets-{$view} spacer">
             <div class="asset-items clearfix">
                 {if $embed}
                     {include file="assets/overview.grid"}
