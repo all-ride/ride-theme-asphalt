@@ -687,7 +687,7 @@
                                 {url id="assets.overview.locale" parameters=["locale" => $app.locale] var="assetsUrl"}
                             {/if}
                         {/if}
-                        <iframe data-src="{$assetsUrl}?embed=1&amp;selected={$value|escape}" frameborder="0" width="100%" height="500"></iframe>
+                        <iframe {* data-src="{$assetsUrl}?embed=1&amp;selected={$value|escape}" *} data-url="{$assetsUrl}?embed=1" frameborder="0" width="100%" height="500"></iframe>
                     </div>
                     <div class="modal-footer">
                         <div class="grid">
