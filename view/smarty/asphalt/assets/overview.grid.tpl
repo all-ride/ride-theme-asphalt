@@ -1,5 +1,3 @@
-
-
 <div class="grid grid--2-col grid--bp-xsm-4-col grid--bp-sml-8-col asset-items-folders" data-order="true">
     {if $folders}
         {foreach $folders as $item}
@@ -13,7 +11,7 @@
                     {/if}
                     <div class="preview__image-container">
                         <div class="preview__image">
-                            <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $item->id]}{$urlSuffix}&selected={$app.request->getQueryParameter('selected')}">
+                            <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $item->id]}{$urlSuffix}&page=&selected={$app.request->getQueryParameter('selected')}">
                                 <img src="{$app.url.base}/asphalt/img/folder.svg" width="160" height="125" class="image image--full-width" />
                             </a>
                         </div>
