@@ -27,8 +27,6 @@ rideApp.form = (function($, undefined) {
     _autocomplete();
     this.assets.init();
 
-    // rideApp.assets.init();
-
     ready('[maxlength]', function() {
       rideApp.form.checkLength.init($(this), false);
     });
