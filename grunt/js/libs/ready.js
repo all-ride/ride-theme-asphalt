@@ -1,5 +1,6 @@
 /*
  * ready
+ * https://github.com/ryanmorr/ready
  * Watch for when an element becomes available in the DOM
  * @param {String} selector
  * @param {Function} fn

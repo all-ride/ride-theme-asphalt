@@ -31,7 +31,6 @@
                         {/if}
                     </div>
                 </div>
-
             </div>
         {/foreach}
     {/if}

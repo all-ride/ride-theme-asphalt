@@ -27,13 +27,10 @@ rideApp.form = (function($, undefined) {
     _autocomplete();
     this.assets.init();
 
-    // rideApp.assets.init();
-
-    $('[maxlength]').each(function() {
+    ready('[maxlength]', function() {
       rideApp.form.checkLength.init($(this), false);
     });
-
-    $('[data-recommended-maxlength]').each(function() {
+    ready('[data-recommended-maxlength]', function() {
       rideApp.form.checkLength.init($(this), true);
     });
 
