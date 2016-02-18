@@ -56,10 +56,12 @@
                                 {$imgSource = "asphalt/img/audio.svg"}
                             {elseif !$item->getThumbnail() && $item->getType() == 'pdf'}
                                 {$imgSource = "asphalt/img/pdf.svg"}
+                            {elseif !$item->getThumbnail() && $item->getType() == 'document'}
+                                {$imgSource = "asphalt/img/document.svg"}
                             {else}
                                 {$imgSource = "asphalt/img/unknown.png"}
                             {/if}
-                            <img src="{image src=$imgSource width=160 height=125 transformation="crop"}" class="image image--full-width" />
+                            <img src="{image src=$imgSource width=160 height=125 transformation="crop"}" class="image image--full-width" title="{$item->getName()}" />
                         </div>
                     </div>
                     <div class="preview__name-container">

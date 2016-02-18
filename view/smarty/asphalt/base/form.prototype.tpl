@@ -650,6 +650,8 @@
                         {$imgSource = "asphalt/img/audio.svg"}
                     {elseif !$asset->getThumbnail() && $asset->getType() == 'pdf'}
                         {$imgSource = "asphalt/img/pdf.svg"}
+                    {elseif !$asset->getThumbnail() && $asset->getType() == 'document'}
+                        {$imgSource = "asphalt/img/document.svg"}
                     {else}
                         {$imgSource = "asphalt/img/unknown.png"}
                     {/if}
