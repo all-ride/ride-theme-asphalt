@@ -18,8 +18,8 @@
     {url id="taxonomy.vocabulary.list" var="urlVocabularies"}
 
     {$tableActions = []}
-    {$tableActions.$urlTermAdd = "button.term.add"|translate}
-    {$tableActions.$urlVocabularies = "button.vocabulary.manage"|translate}
+    {$tableActions[(string) $urlTermAdd] = "button.term.add"|translate}
+    {$tableActions[(string) $urlVocabularies] = "button.vocabulary.manage"|translate}
 
     {include file="base/table" table=$table tableForm=$form tableActions=$tableActions}
 {/block}
