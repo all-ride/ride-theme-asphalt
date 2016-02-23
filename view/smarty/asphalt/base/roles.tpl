@@ -18,13 +18,13 @@
 
     {isGranted url=$urlRoleAdd}
         {$urlRoleAdd = "`$urlRoleAdd`?referer=`$referer`"}
-        {$tableActions[(string) $urlRoleAdd] = "button.role.add"|translate}
+        {$tableActions[$urlRoleAdd] = "button.role.add"|translate}
     {/isGranted}
     {isGranted url=$urlUsers}
-        {$tableActions[(string) $urlUsers] = "button.users.manage"|translate}
+        {$tableActions[$urlUsers] = "button.users.manage"|translate}
     {/isGranted}
     {isGranted url=$urlPermissions}
-        {$tableActions[(string) $urlPermissions] = "button.permissions.manage"|translate}
+        {$tableActions[$urlPermissions] = "button.permissions.manage"|translate}
     {/isGranted}
 
     {include file="base/table" table=$table tableForm=$form tableActions=$tableActions}
