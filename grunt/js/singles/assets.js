@@ -16,8 +16,13 @@ rideApp.assets = (function($, undefined) {
           name = $.trim($photo.find('.name').text()),
           thumb = $photo.find('.image').attr('src');
 
-      $this.toggleClass('is-selected');
-      parent.rideApp.form.assets.addAsset(id, name, thumb);
+      // $this.toggleClass('is-selected');
+      var assetIsAdded = parent.rideApp.form.assets.addAsset(id, name, thumb);
+      if (!assetIsAdded) {
+        $this.removeClass('is-selected');
+      } else {
+        $this.addClass('is-selected');
+      }
     });
   };
 

@@ -11,6 +11,11 @@ function updateQueryStringParameter(uri, key, value) {
   }
 }
 
+// Escape ID's (needed for underscore templates)
+function escapeID(myid) {
+  return "#" + myid.replace(/(:|\.|\[|\]|\%|\<|\>|,)/g, "\\$1" );
+}
+
 rideApp.form = (function($, undefined) {
   var $document = $(document);
   var client = new JsonApiClient('/api/v1');
@@ -322,15 +327,26 @@ rideApp.form = (function($, undefined) {
   };
 
   var _assets = {
-    allAssets: $('.form__assets'),
+    // check if needed..
+    allAssets: function(){
+      return $document.find('.form__assets');
+    },
+    modalTriggers: function(){
+      return $document.find('.form__add-assets');
+    },
+    removeTriggers: function(){
+      return $document.find('.form__remove-asset');
+    },
     iframes: [],
     init: function() {
-      var $assets = rideApp.form.assets.allAssets;
+      // var $assets = rideApp.form.assets.allAssets;
+      var $modalTriggers = rideApp.form.assets.modalTriggers();
+      var $removeTriggers = rideApp.form.assets.removeTriggers();
 
       ready('.form__assets', function() {
         var $this = $(this),
             fieldId = $this.data('field'),
-            $field = $('#' + fieldId),
+            $field = $(escapeID(fieldId)),
             $edit = $this.find('.form__edit-assets'),
             editText = $edit.text(),
             $add = $this.find('.form__add-assets'),
@@ -345,7 +361,8 @@ rideApp.form = (function($, undefined) {
             rideApp.form.assets.setAssetsOrder($this);
           }).disableSelection();
 
-        $document.on('click', '.form__add-assets', function(e) {
+        // $document.on('click', '.form__add-assets', function(e) {
+        $modalTriggers.on('click', function(e) {
           e.preventDefault();
           var attr = $(this).attr('disabled');
           if (attr === 'disabled') {
@@ -375,7 +392,16 @@ rideApp.form = (function($, undefined) {
           });
         });
 
-        $document.on('click', '.form__remove-asset', function(e) {
+        // Moved to ready function..
+        // $document.on('click', '.form__remove-asset', function(e) {
+        // // $removeTriggers.on('click', function(e) {
+        //   e.preventDefault();
+        //   rideApp.form.assets.removeAsset(this);
+        // });
+      });
+
+      ready('.form__remove-asset', function() {
+        this.addEventListener('click', function(e) {
           e.preventDefault();
           rideApp.form.assets.removeAsset(this);
         });
@@ -401,7 +427,7 @@ rideApp.form = (function($, undefined) {
         // console.log(queryString.stringify(parsed));
 
         // find grouped assets and reorder them...
-        var $linked = rideApp.form.assets.allAssets.filter('[data-field="' + field + '"] ').not($item);
+        var $linked = rideApp.form.assets.allAssets().filter('[data-field="' + field + '"] ').not($item);
         $linked.find('.form__asset').detach();
         $linked.prepend($item.find('.form__asset').clone());
     },
@@ -447,9 +473,12 @@ rideApp.form = (function($, undefined) {
           max = $assetsField.data('max');
 
       // check if the image is already added or the limit is exceded
-      if($assets.find('[data-id="' + id + '"]').length || $items.length >= max) {
-        $assets.find('[data-id="' + id + '"]').find('.form__remove-asset').click();
-        return;
+      var $currentAsset = $assets.find('[data-id="' + id + '"]');
+      if($currentAsset.length || $items.length >= max) {
+        $currentAsset.find('.form__remove-asset').each(function() {
+          rideApp.form.assets.removeAsset(this);
+        });
+        return false;
       }
 
       var $newItem = $('<div class="form__asset" data-id="' + id + '"><img src="' + thumb + '" alt="' + name + '"><a href="#" class="form__remove-asset">×</a></div>');
@@ -461,6 +490,11 @@ rideApp.form = (function($, undefined) {
       // $assets.sortable('refresh');
       rideApp.form.assets.checkAssetsLimit();
       rideApp.form.assets.setAssetsOrder($assetsField);
+
+      // Reinit to 'scan' for new elements
+      rideApp.form.assets.init();
+
+      return true;
     },
     resizeIframe: function(doc, height) {
       $('iframe', doc.document).height(height);

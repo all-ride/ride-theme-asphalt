@@ -1,6 +1,8 @@
 window.rideApp = window.rideApp || {};
 
 rideApp.content = (function($, undefined) {
+  var locale = document.documentElement.lang;
+  var apiClient = new JsonApiClient('/api/v1');
 
   var _initialize = function() {
     var $richContent = $('.js-rich-content');
@@ -25,7 +27,7 @@ rideApp.content = (function($, undefined) {
   };
 
   var _initWysiwyg = function(options) {
-    var options = htmlEscape(JSON.stringify(options));
+    options = htmlEscape(JSON.stringify(options));
     var textAreaTemplate = '<textarea class="st-text-block wysiwyg form__text" data-redactor-properties="' + options + '"></textarea>';
     // st-text-block class needed for save
 
@@ -69,27 +71,7 @@ rideApp.content = (function($, undefined) {
     })();
   };
 
-  function htmlEscape(str) {
-    // http://stackoverflow.com/questions/1219860/html-encoding-in-javascript-jquery
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#39;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;');
-  }
-
-  // function htmlUnescape(value){
-  //   return String(value)
-  //       .replace(/&quot;/g, '"')
-  //       .replace(/&#39;/g, "'")
-  //       .replace(/&lt;/g, '<')
-  //       .replace(/&gt;/g, '>')
-  //       .replace(/&amp;/g, '&');
-  // }
-
   var heading_block = (function() {
-
     var _template = _.template('<<%- tagName %> class="st-required st-text-block st-text-block--heading" contenteditable="true"><%= text %></<%- tagName %>>');
     var _setHeading = function(tag) {
       return function() {
@@ -107,7 +89,6 @@ rideApp.content = (function($, undefined) {
     };
 
     return SirTrevor.Blocks.Heading.extend({
-
       editorHTML: function() {
         return _template({
           tagName: 'h2',
@@ -138,112 +119,140 @@ rideApp.content = (function($, undefined) {
       }
 
     });
-
   })();
 
   var asset_block = (function() {
+    var assetCounter = 0;
+    var origin = window.location.origin;
+
+    var asset_template = [
+      '<div class="grid">',
+        '<div class="grid__6">',
+          '<label for="<%- assetID %>" class="form__label">Asset</label>',
+          '<div class="form__item form__assets st-assets-block" data-field="<%- assetID %>" data-max="1">',
+            '<a href="#<%- assetName %>" class="form__add-assets btn btn--default"><i class="icon icon--plus"></i> Toevoegen</a>',
+          '</div>',
+          '<input type="hidden" name="<%- assetID %>" id="<%- assetID %>" data-name="<%- assetName %>" class="st-id-input" />',
+        '</div>',
+        '<div class="grid__6">',
+          '<label for="assetClass" class="form__label">Position</label>',
+          '<select name="className" id="assetClass" class="st-className-input form__select selectized">',
+          '<option value="left">Left</option>',
+          '<option value="center">Center</option>',
+          '<option value="right">Right</option>',
+          '<option value="stretch" selected>Stretch</option>',
+          '</select>',
+        '</div>',
+      '</div>',
+      '<div class="modal modal--large fade" id="<%- assetName %>" tabindex="-1" role="dialog" aria-labelledby="myModalAssetsAdd" aria-hidden="true">',
+          '<div class="modal-dialog">',
+              '<div class="modal-content">',
+                  '<div class="modal-body">',
+                      '<iframe data-url="' + origin + '/admin/assets/' + locale + '?embed=1&amp;selected=" frameborder="0" width="100%" height="500"></iframe>',
+                  '</div>',
+                  '<div class="modal-footer">',
+                      '<div class="grid">',
+                          '<div class="grid--bp-xsm__9">',
+                              '<div class="form__assets form__assets--sml" data-field="<%- assetID %>" data-max="1"></div>',
+                          '</div>',
+                          '<div class="grid--bp-xsm__3 text--right">',
+                              '<button type="button" class="btn btn--default" data-dismiss="modal">Klaar</button>',
+                          '</div>',
+                      '</div>',
+                  '</div>',
+              '</div>',
+          '</div>',
+      '</div>'
+    ].join('\n');
+    asset_template = _.template(asset_template);
+
     return SirTrevor.Block.extend({
       type: 'asset',
       icon_name: 'image',
-      editorHTML: [
-        '<div class="grid">',
-          '<div class="grid__4 grid--bp-xsm__3 grid--bp-sml__2">',
-            '<div class="form__item form__assets">',
-              '<label for="assetId" class="form__label">Asset ID</label>',
-              '<input id="assetId" type="text" name="id" class="st-id-input form__text"/>',
-              '<a href="#modalAssetsAdd" class="form__add-assets btn btn--default"><i class="icon icon--plus"></i></a>',
-            '</div>',
-          '</div>',
-          '<div class="grid__8 grid--bp-xsm__7 grid--bp-sml__6">',
-            '<label for="assetClass" class="form__label">Position</label>',
-            '<select name="className" id="assetClass" class="st-className-input form__select">',
-            '<option value="left">Left</option>',
-            '<option value="center">Center</option>',
-            '<option value="right">Right</option>',
-            '<option value="stretch">Stretch</option>',
-            '</select>',
-          '</div>',
-        '</div>',
-        '<hr>',
-        '<div class="st-asset-block">',
-          '<img src alt="">',
-        '</div>'
-      ].join('\n'),
+      editorHTML: function() {
+        var assetID = 'rich-content-asset-' + assetCounter;
+        var assetName = 'modalAssetsAdd-assets-' + assetCounter;
+        assetCounter ++;
 
+        return asset_template({
+          assetID: assetID,
+          assetName: assetName
+        });
+      },
       getIdInput: function() {
         return this.$('.st-id-input');
       },
-
       getClassNameInput: function() {
         return this.$('.st-className-input');
       },
-
       getAssetBlock: function() {
-        return this.$('.st-asset-block').find('img');
+        return this.$('.st-assets-block');
       },
-
       onBlockRender: function() {
-        this.getIdInput().on('change', this.loadAsset.bind(this));
-
-        this.getClassNameInput().on('change', this.loadClass.bind(this));
-
-        this.getAssetBlock().on('load', (function() {
-          this.ready();
-        }).bind(this));
-
-        this.getAssetBlock().on('error', (function() {
-          this.ready();
-          if(this.getAssetBlock().attr('src')) {
-            this.setError(this.getIdInput(), 'Could not find asset with ID ' + this.getData().data.id);
-          }
-        }).bind(this));
-
         rideApp.form.assets.init();
+        this.getClassNameInput().selectize();
       },
+      renderAndAddThumbnailWrapper: function($element, data) {
+        var $thumbWrapper = $('<div>').attr({
+          'class': 'form__asset',
+          'data-id': data.id
+        });
 
-      loadAsset: function() {
-        this.save();
-        this.resetErrors();
-        this.loading();
-        var id = this.getData().data.id;
-        this.getAssetBlock().attr('src', window.location.origin + '/assets/' + id);
+        $thumbWrapper.append('<img src="' + data.assetThumbURL + '" width="100" height="100">');
+        $thumbWrapper.append('<a href="#" class="form__remove-asset">×</a>');
+
+        $element.append($thumbWrapper);
       },
-
-      loadClass: function() {
-        this.save();
-        var className = this.getData().data.className;
-        this.getAssetBlock().attr('class', className);
-      },
-
       loadData: function(data) {
-        this.loading();
+        if (!data.id) {
+          return;
+        }
+        var self = this;
 
-        this.getClassNameInput().children().filter(function() {
-          return $(this).val() == data.className;
-        }).prop('selected', true);
+        self.getIdInput().val(data.id);
+        var $assetBlock = self.getAssetBlock();
 
-        this.getIdInput().val(data.id);
+        if (!data.assetThumbURL) {
+          var url = apiClient.url + '/assets/' + data.id + '?fields[assets]=&url=true';
+          apiClient.sendRequest('GET', url, null, function(apiData) {
+            data.assetThumbURL = apiData._meta.url;
+            self.renderAndAddThumbnailWrapper($assetBlock, data);
+          });
+        } else {
+          self.renderAndAddThumbnailWrapper($assetBlock, data);
+        }
 
-        this.loadAsset();
-        this.loadClass();
+        if (data.className) {
+          self.getClassNameInput().find('option[value=' + data.className + ']').prop('selected', 'selected');
+        }
       },
-
-      toData: function() {
+      save: function() {
+        var self = this;
         var dataObj = {};
+        var $assetThumb = self.getAssetBlock().find('img');
 
-        dataObj.this.getIdInput().val();
-        dataObj.this.getClassNameInput().val();
+        dataObj.id = self.getIdInput().val();
+        dataObj.assetThumbURL = $assetThumb.attr('src');
+        dataObj.className = self.getClassNameInput().val();
 
-        this.setData(dataObj);
+        // if (dataObj.id !== '' && dataObj.assetEntry === undefined) {
+        //   var url = apiClient.url + '/assets/' + dataObj.id + '?fields[assets]=id,name,alt,copyright,embedUrl,mime&url=true&images=true';
+        //   apiClient.sendRequest('GET', url, null, function(data) {
+        //     dataObj.assetEntry = data;
+        //     self.toData(dataObj);
+        //   });
+        // } else {
+          self.toData(dataObj);
+        // }
+      },
+      toData: function(data) {
+        this.setData(data);
       }
-
     });
-
   })();
 
   var tweet_block = (function () {
     return SirTrevor.Block.extend({
-
       type: 'tweet',
 
       icon_name: 'twitter',
@@ -295,13 +304,13 @@ rideApp.content = (function($, undefined) {
       type: 'quote',
 
       title: function () {
-        return i18n.t('blocks:quote:title');
+        return 'highlight';
       },
 
       icon_name: 'quote',
 
       editorHTML: [
-        '<div><label class="form__label">Quote</label></div>',
+        '<div><label class="form__label">Highlight</label></div>',
         '<textarea name="text" class="st-required st-quote-text" cols="90" rows="4"></textarea>',
         '<hr/>',
         '<div><label class="form__label">Credit</label></div>',
@@ -321,5 +330,15 @@ rideApp.content = (function($, undefined) {
   return {
     init: _initialize,
     initWysiwyg: _initWysiwyg
-  }
+  };
 })(jQuery);
+
+function htmlEscape(str) {
+  // http://stackoverflow.com/questions/1219860/html-encoding-in-javascript-jquery
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}

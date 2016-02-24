@@ -605,3 +605,12 @@ ul.st-text-block {
 label[for="form-content"] {
   display: none;
 }
+
+// CUSTOM CSS
+.st-block__section {
+  & + & {
+    margin-top: $rh-med;
+    padding-top: $rh-med;
+    border-top: 1px solid $gray-25;
+  }
+}
