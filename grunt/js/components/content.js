@@ -192,26 +192,38 @@ rideApp.content = (function($, undefined) {
         rideApp.form.assets.init();
         this.getClassNameInput().selectize();
       },
+      renderAndAddThumbnailWrapper: function($element, data) {
+        var $thumbWrapper = $('<div>').attr({
+          'class': 'form__asset',
+          'data-id': data.id
+        });
+
+        $thumbWrapper.append('<img src="' + data.assetThumbURL + '" width="100" height="100">');
+        $thumbWrapper.append('<a href="#" class="form__remove-asset">×</a>');
+
+        $element.append($thumbWrapper);
+      },
       loadData: function(data) {
-        if (data.id) {
-          this.getIdInput().val(data.id);
+        if (!data.id) {
+          return;
         }
+        var self = this;
 
-        if (data.assetThumbURL) {
-          var $assetBlock = this.getAssetBlock();
-          var $thumbWrapper = $('<div>').attr({
-            'class': 'form__asset',
-            'data-id': data.id
+        self.getIdInput().val(data.id);
+        var $assetBlock = self.getAssetBlock();
+
+        if (!data.assetThumbURL) {
+          var url = apiClient.url + '/assets/' + data.id + '?fields[assets]=&url=true';
+          apiClient.sendRequest('GET', url, null, function(apiData) {
+            data.assetThumbURL = apiData._meta.url;
+            self.renderAndAddThumbnailWrapper($assetBlock, data);
           });
-
-          $thumbWrapper.append('<img src="' + data.assetThumbURL + '" width="100" height="100">');
-          $thumbWrapper.append('<a href="#" class="form__remove-asset">×</a>');
-
-          $assetBlock.append($thumbWrapper);
+        } else {
+          self.renderAndAddThumbnailWrapper($assetBlock, data);
         }
 
         if (data.className) {
-          this.getClassNameInput().find('option[value=' + data.className + ']').prop('selected', 'selected');
+          self.getClassNameInput().find('option[value=' + data.className + ']').prop('selected', 'selected');
         }
       },
       save: function() {
