@@ -321,11 +321,14 @@ p.form__label {
   @extend .clearfix;
   overflow: hidden;
   margin-bottom: $rh-sml;
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 .form__asset {
   float: left;
   margin-right: 10px;
-  margin-bottom: 10px;
+  // margin-bottom: 10px;
   transition: transform 250ms;
   cursor: move;
   position: relative;
@@ -390,11 +393,11 @@ p.form__label {
   }
 }
 
-.form__item--rich-content {
-  .form__label {
-    display: none;
-  }
-  .form__text {
-    visibility: hidden;
-  }
-}
+// .form__item--rich-content {
+//   .form__label {
+//     display: none;
+//   }
+//   .form__text {
+//     visibility: hidden;
+//   }
+// }

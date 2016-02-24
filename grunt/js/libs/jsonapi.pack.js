@@ -41,6 +41,7 @@ HttpClient.prototype.sendRequest = function(request) {
 
     var xhr = new XMLHttpRequest();
     xhr.open(request.method, request.url, true);
+    xhr.setRequestHeader('Content-Type', 'application/vnd.api+json');
 
     for (var prop in request.headers) {
         if (request.headers.hasOwnProperty(prop)) {
@@ -51,7 +52,7 @@ HttpClient.prototype.sendRequest = function(request) {
     if (request.onload) {
         xhr.onload = function() {
             request.onload(xhr);
-        }
+        };
     } else if (request.onsuccess || request.onerror) {
         request.onsuccess = request.onsuccess || function() {};
         request.onerror = request.onerror || function() {};
@@ -62,34 +63,18 @@ HttpClient.prototype.sendRequest = function(request) {
             } else {
                 request.onerror(xhr.responseText, xhr.status, xhr);
             }
-        }
-    };
+        };
+    }
 
     if (!request.headers['Accept-Language']) {
         xhr.setRequestHeader('Accept-Language', document.documentElement.lang);
     }
 
     if (request.body) {
-        request.type = request.type || 'form';
-
-        var body = null;
-
-        if (request.type == 'form') {
-            if (!request.headers['Content-Type']) {
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            }
-
-            body = this.encodeParameters(request.body);
-        } else if (request.type == 'json') {
-            if (!request.headers['Content-Type']) {
-                xhr.setRequestHeader('Content-Type', 'application/json');
-            }
-
-            if (typeof(request.body) == 'string') {
-                body = request.body;
-            } else {
-                body = JSON.stringify(request.body);
-            }
+        if (typeof(request.body) == 'string') {
+            body = request.body;
+        } else {
+            body = JSON.stringify(request.body);
         }
 
         xhr.send(body);
@@ -105,7 +90,7 @@ HttpClient.prototype.get = function(url, headers, callback) {
     request.async = false;
 
     xhr = this.sendRequest(request);
-}
+};
 
 /**
  * @class JsonApiDataStoreModel
@@ -120,6 +105,7 @@ function JsonApiDataStoreModel(type, id) {
   this._type = type;
   this._attributes = [];
   this._relationships = [];
+  this._meta = [];
 }
 
 /**
@@ -143,6 +129,7 @@ JsonApiDataStoreModel.prototype.serialize = function(opts) {
   if (this.id !== undefined) res.data.id = this.id;
   if (opts.attributes.length !== 0) res.data.attributes = {};
   if (opts.relationships.length !== 0) res.data.relationships = {};
+  if (opts.meta.length !== 0) res.data.meta = opts.meta;
 
   opts.attributes.forEach(function(key) {
     res.data.attributes[key] = self[key];
@@ -284,6 +271,10 @@ JsonApiDataStore.prototype.syncRecord = function(rec) {
         // console.log("Warning: Links not implemented yet.");
       }
     }
+  }
+
+  if (rec.meta) {
+    model._meta = rec.meta;
   }
 
   return model;
