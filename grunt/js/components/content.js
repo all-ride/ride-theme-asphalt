@@ -1,6 +1,7 @@
 window.rideApp = window.rideApp || {};
 
 rideApp.content = (function($, undefined) {
+  var apiClient = new JsonApiClient('/api/v1');
 
   var _initialize = function() {
     var $richContent = $('.js-rich-content');
@@ -215,6 +216,18 @@ rideApp.content = (function($, undefined) {
         this.getAssetBlock().attr('class', className);
       },
 
+      save: function() {
+        var data = this._serializeData();
+
+        apiClient.load('assets', data.id, function(data) {
+          console.log(data);
+        });
+
+        if (!_.isEmpty(data)) {
+          this.setData(data);
+        }
+      },
+
       loadData: function(data) {
         this.loading();
 
@@ -226,19 +239,19 @@ rideApp.content = (function($, undefined) {
 
         this.loadAsset();
         this.loadClass();
-      },
-
-      toData: function() {
-        var dataObj = {};
-
-        dataObj.this.getIdInput().val();
-        dataObj.this.getClassNameInput().val();
-
-        this.setData(dataObj);
       }
 
-    });
+      // toData: function() {
+      //   var dataObj = {};
+      //   var assetId = this.getIdInput().val();
 
+      //   dataObj.this.getIdInput().val();
+      //   dataObj.this.getClassNameInput().val();
+
+      //   this.setData(dataObj);
+      // }
+
+    });
   })();
 
   var tweet_block = (function () {
