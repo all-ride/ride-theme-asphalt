@@ -473,9 +473,12 @@ rideApp.form = (function($, undefined) {
           max = $assetsField.data('max');
 
       // check if the image is already added or the limit is exceded
-      if($assets.find('[data-id="' + id + '"]').length || $items.length >= max) {
-        $assets.find('[data-id="' + id + '"]').find('.form__remove-asset').click();
-        return;
+      var $currentAsset = $assets.find('[data-id="' + id + '"]');
+      if($currentAsset.length || $items.length >= max) {
+        $currentAsset.find('.form__remove-asset').each(function() {
+          rideApp.form.assets.removeAsset(this);
+        });
+        return false;
       }
 
       var $newItem = $('<div class="form__asset" data-id="' + id + '"><img src="' + thumb + '" alt="' + name + '"><a href="#" class="form__remove-asset">×</a></div>');
@@ -490,6 +493,8 @@ rideApp.form = (function($, undefined) {
 
       // Reinit to 'scan' for new elements
       rideApp.form.assets.init();
+
+      return true;
     },
     resizeIframe: function(doc, height) {
       $('iframe', doc.document).height(height);
