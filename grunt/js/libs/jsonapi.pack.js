@@ -129,7 +129,7 @@ JsonApiDataStoreModel.prototype.serialize = function(opts) {
   if (this.id !== undefined) res.data.id = this.id;
   if (opts.attributes.length !== 0) res.data.attributes = {};
   if (opts.relationships.length !== 0) res.data.relationships = {};
-  if (opts.meta.length !== 0) res.data.meta = opts.meta;
+  if (opts.meta !== undefined) res.data.meta = opts.meta;
 
   opts.attributes.forEach(function(key) {
     res.data.attributes[key] = self[key];
