@@ -138,7 +138,7 @@
                                             <img class="img-responsive js-enable-cropper" src="{image src=$asset->getImage()}" />
                                         </div>
                                         <div class="spacer">
-                                            <a href="#" class="btn js-crop-save">{translate key="button.crop.save"}</a>
+                                            <a href="#" class="btn js-crop-save">{translate key="button.crop.save"}</a> <span class="form__help">{translate key="label.crop.save.warning"}</span>
                                         </div>
                                     </div>
                                     <div class="loading tree-spinner"></div>
