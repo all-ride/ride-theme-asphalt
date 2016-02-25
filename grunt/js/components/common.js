@@ -13,7 +13,6 @@ rideApp.common = (function($, undefined) {
 
     this.svgFallback();
 
-    _flyoutNavigation();
     _animations();
   };
 
@@ -30,14 +29,6 @@ rideApp.common = (function($, undefined) {
     $.extend(rideApp.variables, {
       windowWidth: $window.width(),
       windowHeight: $window.height()
-    });
-  };
-
-  var _flyoutNavigation = function() {
-    $('#toggle-flyout-nav').flyoutNav({
-      back: function() {
-        return '<span class="icon -previous"></span> Terug';
-      }
     });
   };
 
