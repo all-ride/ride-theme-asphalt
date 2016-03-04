@@ -65,7 +65,9 @@ rideApp.content = (function($, undefined) {
 
         onBlockRender: function(data){
           var textarea = this.$editor;
-          $(textarea).initRedactor();
+
+          // Re-queue initRedactor (Firefox fix)
+          setTimeout(function(){ $(textarea).initRedactor(); }, 0);
         }
       });
     })();
