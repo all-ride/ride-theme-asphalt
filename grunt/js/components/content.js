@@ -15,6 +15,7 @@ rideApp.content = (function($, undefined) {
   }
 
   var _initialize = function() {
+
     var $richContent = $('.js-rich-content'),
     $element, options, redactorOptions;
     // translator = rideApp.translator;
@@ -35,6 +36,7 @@ rideApp.content = (function($, undefined) {
       });
 
       new SirTrevor.Editor(options);
+
     });
   };
 

@@ -442,7 +442,7 @@ ul.st-text-block {
   bottom: 0;
   right: 0;
   opacity: 0;
-  z-index: 20;
+  z-index: 3;
 }
 
 .st-block__control-ui {
@@ -496,7 +496,7 @@ ul.st-text-block {
 
 .st-block--with-errors .st-block__ui-delete-controls, .st-block--delete-active .st-block__ui-delete-controls {
   opacity: 1;
-  z-index: 2;
+  z-index: 4;
 }
 
 .st-block__delete-label {
