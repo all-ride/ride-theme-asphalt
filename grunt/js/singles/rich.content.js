@@ -352,3 +352,5 @@ rideApp.content = (function($, undefined) {
     init: _initialize
   };
 })(jQuery);
+
+rideApp.content.init();
