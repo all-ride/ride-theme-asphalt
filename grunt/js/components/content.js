@@ -5,21 +5,22 @@ rideApp.content = (function($, undefined) {
   var apiClient = new JsonApiClient('/api/v1');
 
   var _initialize = function() {
-    var $richContent = $('.js-rich-content');
+    var $richContent = $('.js-rich-content'),
+    $element, options, redactorOptions;
+
+    SirTrevor.Blocks.Heading = heading_block;
+    SirTrevor.Blocks.Asset = asset_block;
+    SirTrevor.Blocks.Tweet = tweet_block;
+    SirTrevor.Blocks.Quote = quote_block;
 
     $richContent.each(function() {
-        var $element = $(this);
-        var options = $element.data('rich-content-properties');
-        var redactorOptions = $element.data('redactor-properties');
+        $element = $(this);
+        options = $element.data('rich-content-properties');
+        redactorOptions = $element.data('redactor-properties');
 
         options = $.extend(options, {
           "el": $element
         });
-
-        SirTrevor.Blocks.Heading = heading_block;
-        SirTrevor.Blocks.Asset = asset_block;
-        SirTrevor.Blocks.Tweet = tweet_block;
-        SirTrevor.Blocks.Quote = quote_block;
 
         rideApp.content.initWysiwyg(redactorOptions);
         new SirTrevor.Editor(options);
@@ -130,19 +131,19 @@ rideApp.content = (function($, undefined) {
     var asset_template = [
       '<div class="grid">',
         '<div class="grid__6">',
-          '<label for="<%- assetID %>" class="form__label">Asset</label>',
+          '<label for="<%- assetID %>" class="form__label">Bestand</label>',
           '<div class="form__item form__assets st-assets-block" data-field="<%- assetID %>" data-max="1">',
             '<a href="#<%- assetName %>" class="form__add-assets btn btn--brand"><i class="icon icon--plus"></i> Toevoegen</a>',
           '</div>',
           '<input type="hidden" name="<%- assetID %>" id="<%- assetID %>" data-name="<%- assetName %>" class="st-id-input" />',
         '</div>',
         '<div class="grid__4">',
-          '<label for="assetClass" class="form__label">Position</label>',
+          '<label for="assetClass" class="form__label">Positie</label>',
           '<select name="className" id="assetClass" class="st-className-input form__select selectized">',
-          '<option value="left">Left</option>',
-          '<option value="center">Center</option>',
-          '<option value="right">Right</option>',
-          '<option value="stretch" selected>Stretch</option>',
+            '<option value="left">Links</option>',
+            '<option value="center">Gecentreerd</option>',
+            '<option value="right">Rechts</option>',
+            '<option value="stretch" selected>Volledige breedte</option>',
           '</select>',
         '</div>',
       '</div>',
@@ -306,13 +307,13 @@ rideApp.content = (function($, undefined) {
       type: 'quote',
 
       title: function () {
-        return 'highlight';
+        return 'Quote';
       },
 
       icon_name: 'quote',
 
       editorHTML: [
-        '<div><label class="form__label">Highlight</label></div>',
+        '<div><label class="form__label">Quote</label></div>',
         '<textarea name="text" class="st-required st-quote-text" cols="90" rows="4"></textarea>',
         '<hr/>',
         '<div><label class="form__label">Credit</label></div>',
