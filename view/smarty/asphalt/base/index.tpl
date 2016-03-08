@@ -148,13 +148,19 @@
     {/block}
     {block name="scripts_app"}
     {if isset($app.javascripts)}
+        {$translatorUrl = "`$app.url.base`/js/translator.js"}
+        {if in_array($translatorUrl, $app.javascripts)}
+            <script src="{$translatorUrl}"></script>
+        {/if}
         {foreach $app.javascripts as $script => $null}
-            {if substr($script, 0, 7) == 'http://' || substr($script, 0, 8) == 'https://' || substr($script, 0, 2) == '//'}
-        <script src="{$script}"></script>
-            {elseif substr($script, 0, 7) == '<script'}
-        {$script}
-            {elseif $script != 'js/jquery.min.js' && $script != 'js/bootstrap.min.js'}
-        <script src="{$app.url.base}/asphalt/{$script}"></script>
+            {if $script != $translatorUrl}
+                {if substr($script, 0, 7) == 'http://' || substr($script, 0, 8) == 'https://' || substr($script, 0, 2) == '//'}
+            <script src="{$script}"></script>
+                {elseif substr($script, 0, 7) == '<script'}
+            {$script}
+                {elseif $script != 'js/jquery.min.js' && $script != 'js/bootstrap.min.js'}
+            <script src="{$app.url.base}/asphalt/{$script}"></script>
+                {/if}
             {/if}
         {/foreach}
     {/if}

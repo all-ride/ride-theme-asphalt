@@ -18,7 +18,6 @@ rideApp.content = (function($, undefined) {
 
     var $richContent = $('.js-rich-content'),
     $element, options, redactorOptions;
-    // translator = rideApp.translator;
 
     SirTrevor.Blocks.Heading  = customBlocks.heading;
     SirTrevor.Blocks.Asset    = customBlocks.asset;
@@ -38,6 +37,8 @@ rideApp.content = (function($, undefined) {
       new SirTrevor.Editor(options);
 
     });
+
+    rideApp.translator.submitTranslationKeys();
   };
 
   var customBlocks = {
@@ -142,19 +143,19 @@ rideApp.content = (function($, undefined) {
       var asset_template = [
         '<div class="grid">',
           '<div class="grid__6">',
-            '<label for="<%- assetID %>" class="form__label">Bestand</label>',
+            '<label for="<%- assetID %>" class="form__label">' + rideApp.translator.translate('label.file') + '</label>',
             '<div class="form__item form__assets st-assets-block" data-field="<%- assetID %>" data-max="1">',
-              '<a href="#<%- assetName %>" class="form__add-assets btn btn--brand"><i class="icon icon--plus"></i> Toevoegen</a>',
+              '<a href="#<%- assetName %>" class="form__add-assets btn btn--brand"><i class="icon icon--plus"></i>' + rideApp.translator.translate('button.add') + '</a>',
             '</div>',
             '<input type="hidden" name="<%- assetID %>" id="<%- assetID %>" data-name="<%- assetName %>" class="st-id-input" />',
           '</div>',
           '<div class="grid__4">',
-            '<label for="assetClass" class="form__label">Positie</label>',
+            '<label for="assetClass" class="form__label">' + rideApp.translator.translate('label.image.position') + '</label>',
             '<select name="className" id="assetClass" class="st-className-input form__select selectized">',
-              '<option value="left">Links</option>',
-              '<option value="center">Gecentreerd</option>',
-              '<option value="right">Rechts</option>',
-              '<option value="stretch" selected>Volledige breedte</option>',
+              '<option value="left">' + rideApp.translator.translate('label.image.left') + '</option>',
+              '<option value="center">' + rideApp.translator.translate('label.image.center') + '</option>',
+              '<option value="right">' + rideApp.translator.translate('label.image.right') + '</option>',
+              '<option value="stretch" selected>' + rideApp.translator.translate('label.image.stretch') + '</option>',
             '</select>',
           '</div>',
         '</div>',
@@ -170,7 +171,7 @@ rideApp.content = (function($, undefined) {
                                 '<div class="form__assets form__assets--sml" data-field="<%- assetID %>" data-max="1"></div>',
                             '</div>',
                             '<div class="grid--bp-xsm__3 text--right">',
-                                '<button type="button" class="btn btn--default" data-dismiss="modal">Klaar</button>',
+                                '<button type="button" class="btn btn--default" data-dismiss="modal">' + rideApp.translator.translate('button.done') + '</button>',
                             '</div>',
                         '</div>',
                     '</div>',
@@ -281,7 +282,7 @@ rideApp.content = (function($, undefined) {
           '<div>',
             '<div class="form__item">',
               '<div>',
-                '<label for="st-tweet-embed" class="form__label">Twitter Embed Code</label>',
+                '<label for="st-tweet-embed" class="form__label">' + rideApp.translator.translate('label.embedCode') + '</label>',
               '</div>',
               '<textarea name="st-tweet-embed" cols="90" rows="4"></textarea>',
             '</div>',
@@ -328,10 +329,10 @@ rideApp.content = (function($, undefined) {
         icon_name: 'quote',
 
         editorHTML: [
-          '<div><label class="form__label">Quote</label></div>',
+          '<div><label class="form__label">' + rideApp.translator.translate('label.quote') + '</label></div>',
           '<textarea name="text" class="st-required st-quote-text" cols="90" rows="4"></textarea>',
           '<hr/>',
-          '<div><label class="form__label">Credit</label></div>',
+          '<div><label class="form__label">' + rideApp.translator.translate('label.credit') + '</label></div>',
           '<input type="text" name="cite" class="st-cite-input"/>',
         ].join('\n'),
 
