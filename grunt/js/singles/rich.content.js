@@ -19,11 +19,11 @@ rideApp.content = (function($, undefined) {
     var $richContent = $('.js-rich-content'),
     $element, options, redactorOptions;
 
-    SirTrevor.Blocks.Heading  = customBlocks.heading;
-    SirTrevor.Blocks.Asset    = customBlocks.asset;
-    SirTrevor.Blocks.Tweet    = customBlocks.tweet;
-    SirTrevor.Blocks.Quote    = customBlocks.quote;
-    SirTrevor.Blocks.Wysiwyg  = customBlocks.wysiwyg;
+    SirTrevor.Blocks.Heading  = customBlocks.heading();
+    SirTrevor.Blocks.Asset    = customBlocks.asset();
+    SirTrevor.Blocks.Tweet    = customBlocks.tweet();
+    SirTrevor.Blocks.Quote    = customBlocks.quote();
+    SirTrevor.Blocks.Wysiwyg  = customBlocks.wysiwyg();
 
     $richContent.each(function() {
       $element = $(this);
@@ -44,7 +44,7 @@ rideApp.content = (function($, undefined) {
   var customBlocks = {
 
     //  START WYSIWYG
-    wysiwyg: (function(){
+    wysiwyg: function () {
       return SirTrevor.Block.extend({
         type: "Wysiwyg",
 
@@ -80,11 +80,11 @@ rideApp.content = (function($, undefined) {
           $(document).trigger('collectionAdded');
         }
       });
-    })(),
+    },
     //  END WYSIWYG
 
     //  START HEADING
-    heading: (function() {
+    heading: function () {
       var _template = _.template('<<%- tagName %> class="st-required st-text-block st-text-block--heading" contenteditable="true"><%= text %></<%- tagName %>>');
       var _setHeading = function(tag) {
         return function() {
@@ -132,11 +132,11 @@ rideApp.content = (function($, undefined) {
         }
 
       });
-    })(),
+    },
     // END HEADING
 
     //  START ASSET
-    asset: (function() {
+    asset: function () {
       var assetCounter = 0;
       var origin = window.location.origin;
 
@@ -264,11 +264,11 @@ rideApp.content = (function($, undefined) {
           this.setData(data);
         }
       });
-    })(),
+    },
     //  END ASSET
 
     //  START TWEET
-    tweet: (function () {
+    tweet: function () {
       return SirTrevor.Block.extend({
         type: 'tweet',
 
@@ -314,11 +314,11 @@ rideApp.content = (function($, undefined) {
 
       });
 
-    })(),
+    },
     //  END TWEET
 
     //  START QUOTE
-    quote: (function () {
+    quote: function () {
       return SirTrevor.Block.extend({
         type: 'quote',
 
@@ -329,10 +329,10 @@ rideApp.content = (function($, undefined) {
         icon_name: 'quote',
 
         editorHTML: [
-          '<div><label class="form__label">' + rideApp.translator.translate('label.quote') + '</label></div>',
+          '<div><label class="form__label">' + rideApp.translator.translate('label.quote.text') + '</label></div>',
           '<textarea name="text" class="st-required st-quote-text" cols="90" rows="4"></textarea>',
           '<hr/>',
-          '<div><label class="form__label">' + rideApp.translator.translate('label.credit') + '</label></div>',
+          '<div><label class="form__label">' + rideApp.translator.translate('label.quote.credit') + '</label></div>',
           '<input type="text" name="cite" class="st-cite-input"/>',
         ].join('\n'),
 
@@ -344,7 +344,7 @@ rideApp.content = (function($, undefined) {
           }
         }
       });
-    })()
+    }
     //  END QUOTE
 
   };
@@ -354,6 +354,6 @@ rideApp.content = (function($, undefined) {
   };
 })(jQuery);
 
-$(document).ready(function () {
+$(window).load(function () {
   rideApp.content.init();
 });
