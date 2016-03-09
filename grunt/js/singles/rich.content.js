@@ -354,4 +354,6 @@ rideApp.content = (function($, undefined) {
   };
 })(jQuery);
 
-rideApp.content.init();
+$(document).ready(function () {
+  rideApp.content.init();
+});
