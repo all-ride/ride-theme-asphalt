@@ -18,7 +18,6 @@ rideApp.main = (function($, undefined) {
     this.fire('common');
     this.fire('dropzone');
     this.fire('form');
-    this.fire('content');
 
     // Hit up the page component
     if(dataComponents) {
