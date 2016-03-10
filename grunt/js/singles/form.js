@@ -174,24 +174,23 @@ rideApp.form = (function($, undefined) {
   var formCollection = function() {
     $document.on('click', '.prototype-add:not(.disabled)', function(e) {
       e.preventDefault();
-      var parent = $(this).parent('.collection-controls');
-      var prototype = parent.attr('data-prototype');
-      var index = parent.attr('data-index');
+      var collection = $(this).closest('.collection-controls');
+      var prototype = collection.attr('data-prototype');
+      var index = collection.attr('data-index');
       if (!index) {
-        index = $('.collection-control', parent).length;
+        index = $('.collection-control', collection).length;
       }
 
       prototype = prototype.replace(/%prototype%/g, 'prototype-' + index);
 
       // add prototype to the container
-      $('.collection-control-group', parent).first().append(prototype);
+      $('.collection-control-group', collection).first().append(prototype);
 
       // increase the index for the next addition
       index++;
 
-      parent.attr('data-index', index);
-
-      parent.trigger('collectionAdded');
+      collection.attr('data-index', index);
+      collection.trigger('collectionAdded');
     });
 
     $document.on('click', '.prototype-remove:not(.disabled)', function(e) {
