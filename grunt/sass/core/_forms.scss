@@ -328,7 +328,6 @@ p.form__label {
 .form__asset {
   float: left;
   margin-right: 10px;
-  // margin-bottom: 10px;
   transition: transform 250ms;
   cursor: move;
   position: relative;
@@ -348,27 +347,48 @@ p.form__label {
       height: 50px;
     }
   }
-  &:hover {
-    img {
-      opacity: .5;
-    }
-    .form__remove-asset {
-      opacity: 1;
-    }
-  }
+}
+
+
+.form__asset-actions {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.form__edit-asset {
+  @include link-variant($gray-75);
 }
 .form__remove-asset {
-  position: absolute;
-  top: 0;
-  right: 5px;
-  @include fsRem(30px);
-  line-height: 1;
   @include link-variant(map-get($notice-colors, danger), lighten(map-get($notice-colors, danger), 10%));
-  text-decoration: none;
-  font-weight: $font-weight-bold;
-  opacity: 0;
-  transition: opacity 250ms;
 }
+
+// .form__asset-actions {
+//   transition: opacity 250ms;
+//   opacity: 0;
+//   position: absolute;
+//   top: 5px;
+//   right: 5px;
+//   @include fsRem(18px);
+//   line-height: 1;
+// }
+
+// .form__asset-action {
+//   float: left;
+//   clear: both;
+//   text-decoration: none;
+//   &--remove {
+//     @include link-variant(map-get($notice-colors, danger), lighten(map-get($notice-colors, danger), 10%));
+//   }
+//   &--edit {
+//    @include link-variant($gray-75);
+//    font-size: 80%;
+//   }
+//   & + & {
+//     margin-top: 5px;
+//   }
+// }
+
 .form__add-assets {
   .is-removable & {
     display: none;

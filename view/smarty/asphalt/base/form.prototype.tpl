@@ -640,9 +640,20 @@
             {$attributes.class = 'form__assets-input'}
         {/if}
 
+        {$request = $app.url.request}
+        {$referer = $request|regex_replace:'/\?referer.*/':''}
+        {$referer = $referer|escape:'url'}
+
+        {if !$locale}
+            {$locale = $app.locale}
+        {/if}
+
         <div class="form__assets" data-field="{$attributes.id}"{if $widget->isMultiple()} data-max="999"{else} data-max="1"{/if}>
             {$assets = $widget->getAssets()}
             {foreach $assets as $asset}
+                {url id="assets.asset.edit" parameters=["locale" => $locale, "asset" => $asset->getId()] var="assetsEditUrl"}
+                {$assetsEditUrl = "$assetsEditUrl?referer=$referer"}
+
                 <div class="form__asset" data-id="{$asset->getId()}">
                     {if $asset->getThumbnail()}
                         {$imgSource = $asset->getThumbnail()}
@@ -656,7 +667,23 @@
                         {$imgSource = "asphalt/img/unknown.png"}
                     {/if}
                     <img src="{image src=$imgSource width=160 height=125 transformation="crop"}" class="image image--full-width" title="{$asset->getName()}" />
-                    <a href="#" class="form__remove-asset">&times;</a>
+
+                    <div class="form__asset-actions">
+                        <a href="#" class="dropdown form__edit-asset" data-toggle="dropdown"><i class="icon icon--cog"></i></a>
+                        <ul class="dropdown__menu">
+                            <li>
+                                <a href="#" class="js-remove-asset">{"button.delete"|translate}</a>
+                            </li>
+                            <li>
+                                <a href="{$assetsEditUrl}">{"button.edit"|translate}</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    {* <div class="form__asset-actions">
+                        <a href="#" class="form__asset-action form__asset-action--remove"><span class="icon icon--remove"></a>
+                        <a href="{$assetsEditUrl}" class="form__asset-action form__asset-action--edit"><span class="icon icon--pencil"></span> </a>
+                    </div> *}
                 </div>
             {/foreach}
             <a href="#modalAssetsAdd-{$safeName}" class="form__add-assets btn btn--default"><i class="icon icon--plus"></i> {'button.add'|translate}</a>
@@ -677,7 +704,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-body">
-                        {if !isset($locale)}
+                        {if !   isset($locale)}
                             {$locale = null}
                         {/if}
                         {if $widget->getFolderId()}
@@ -694,12 +721,16 @@
                     <div class="modal-footer">
                         <div class="grid">
                             <div class="grid--bp-xsm__9">
-                                <div class="form__assets form__assets--sml" data-field="{$attributes.id}"{if $widget->isMultiple()} data-max="999"{else} data-max="1"{/if}>
+                                <div class="form__assets form__assets--sml" data-field="{$attributes.id}"{if $widget->isMultiple()} data-max="999"{{else}
+                                    } data-max="1"{/if}>
                                     {$assets = $widget->getAssets()}
                                     {foreach $assets as $asset}
                                         <div class="form__asset" data-id="{$asset->getId()}">
                                             <img src="{image src=$asset->getThumbnail() transformation="crop" width=40 height=40}" width="40" height="40">
-                                            <a href="#" class="form__remove-asset">&times;</a>
+                                            <div class="form__asset-actions">
+                                                <a href="#" class="js-remove-asset form__remove-asset"><span class="icon icon--remove"></a>
+                                                test
+                                            </div>
                                         </div>
                                     {/foreach}
                                 </div>

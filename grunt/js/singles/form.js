@@ -334,7 +334,7 @@ rideApp.form = (function($, undefined) {
       return $document.find('.form__add-assets');
     },
     removeTriggers: function(){
-      return $document.find('.form__remove-asset');
+      return $document.find('.js-remove-asset');
     },
     iframes: [],
     init: function() {
@@ -392,14 +392,14 @@ rideApp.form = (function($, undefined) {
         });
 
         // Moved to ready function..
-        // $document.on('click', '.form__remove-asset', function(e) {
+        // $document.on('click', '.js-remove-asset', function(e) {
         // // $removeTriggers.on('click', function(e) {
         //   e.preventDefault();
         //   rideApp.form.assets.removeAsset(this);
         // });
       });
 
-      ready('.form__remove-asset', function() {
+      ready('.js-remove-asset', function() {
         this.addEventListener('click', function(e) {
           e.preventDefault();
           rideApp.form.assets.removeAsset(this);
@@ -474,13 +474,13 @@ rideApp.form = (function($, undefined) {
       // check if the image is already added or the limit is exceded
       var $currentAsset = $assets.find('[data-id="' + id + '"]');
       if($currentAsset.length || $items.length >= max) {
-        $currentAsset.find('.form__remove-asset').each(function() {
+        $currentAsset.find('.js-remove-asset').each(function() {
           rideApp.form.assets.removeAsset(this);
         });
         return false;
       }
 
-      var $newItem = $('<div class="form__asset" data-id="' + id + '"><img src="' + thumb + '" alt="' + name + '"><a href="#" class="form__remove-asset">×</a></div>');
+      var $newItem = $('<div class="form__asset" data-id="' + id + '"><img src="' + thumb + '" alt="' + name + '"><div class="form__asset-actions"><a href="#" class="form__remove-asset js-remove-asset"><span class="icon icon--remove"></span></a></div>');
       if($items.last().length) {
         $newItem.insertAfter($items.last());
       } else {
