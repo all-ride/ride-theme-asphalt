@@ -25,6 +25,8 @@ rideApp.content = (function($, undefined) {
     SirTrevor.Blocks.Quote    = customBlocks.quote();
     SirTrevor.Blocks.Wysiwyg  = customBlocks.wysiwyg();
 
+    rideApp.translator.submitTranslationKeys();
+
     $richContent.each(function() {
       $element = $(this);
       options = $element.data('rich-content-properties');
@@ -36,9 +38,20 @@ rideApp.content = (function($, undefined) {
 
       new SirTrevor.Editor(options);
 
+      $(this.form).find('[type="submit"]').on('click', function (e) {
+        var editor = SirTrevor.getInstance($(e.target.form).find('.js-rich-content').closest('[id^="st-editor-"]').attr('id'));
+        $.each(editor.block_manager.blocks, function () {
+          if (!this.valid()) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            return false;
+          }
+        });
+      });
+
     });
 
-    rideApp.translator.submitTranslationKeys();
   };
 
   var customBlocks = {
@@ -147,7 +160,7 @@ rideApp.content = (function($, undefined) {
             '<div class="form__item form__assets st-assets-block" data-field="<%- assetID %>" data-max="1">',
               '<a href="#<%- assetName %>" class="form__add-assets btn btn--brand"><i class="icon icon--plus"></i>' + rideApp.translator.translate('button.add') + '</a>',
             '</div>',
-            '<input type="hidden" name="<%- assetID %>" id="<%- assetID %>" data-name="<%- assetName %>" class="st-id-input" />',
+            '<input type="hidden" name="<%- assetID %>" id="<%- assetID %>" data-name="<%- assetName %>" class="st-id-input st-required" />',
           '</div>',
           '<div class="grid__4">',
             '<label for="assetClass" class="form__label">' + rideApp.translator.translate('label.image.position') + '</label>',
@@ -263,6 +276,7 @@ rideApp.content = (function($, undefined) {
         toData: function(data) {
           this.setData(data);
         }
+
       });
     },
     //  END ASSET
@@ -284,7 +298,7 @@ rideApp.content = (function($, undefined) {
               '<div>',
                 '<label for="st-tweet-embed" class="form__label">' + rideApp.translator.translate('label.embedCode') + '</label>',
               '</div>',
-              '<textarea name="st-tweet-embed" cols="90" rows="4"></textarea>',
+              '<textarea name="st-tweet-embed" class="st-required" cols="90" rows="4"></textarea>',
             '</div>',
             '<div class="st-tweet-preview"></div>',
           '</div>'
