@@ -70,7 +70,7 @@
   margin-bottom: 5px;
 }
 
-.st-text-block, .st-block input[type="text"], .st-block textarea {
+.st-text-block, .st-block input[type="text"] {
   font-size: inherit;
   margin: 0;
   padding: 10px 0;
@@ -80,8 +80,7 @@
   outline: none;
 }
 
-.st-block input[type="text"], .st-block input[type="text"]:active, .st-block input[type="text"]:focus,
-.st-block textarea, .st-block textarea:active, .st-block textarea:focus {
+.st-block input[type="text"], .st-block input[type="text"]:active, .st-block input[type="text"]:focus {
   color: #42474b;
   border: 0.1em solid #d4d4d4;
   padding: .6em;
@@ -443,6 +442,7 @@ ul.st-text-block {
   bottom: 0;
   right: 0;
   opacity: 0;
+  z-index: 3;
 }
 
 .st-block__control-ui {
@@ -496,7 +496,7 @@ ul.st-text-block {
 
 .st-block--with-errors .st-block__ui-delete-controls, .st-block--delete-active .st-block__ui-delete-controls {
   opacity: 1;
-  z-index: 2;
+  z-index: 4;
 }
 
 .st-block__delete-label {
@@ -604,13 +604,4 @@ ul.st-text-block {
 
 label[for="form-content"] {
   display: none;
-}
-
-// CUSTOM CSS
-.st-block__section {
-  & + & {
-    margin-top: $rh-med;
-    padding-top: $rh-med;
-    border-top: 1px solid $gray-25;
-  }
 }

@@ -1,0 +1,20 @@
+.spacer {
+  & + & {
+    margin-top: $rh-sml;
+  }
+  &--divider {
+    padding-top: $rh-sml;
+    border-top: 1px solid $gray-25;
+  }
+
+  @each $rh, $px in $rhythm {
+    &--#{$rh} {
+      [class*="spacer"] + & {
+        margin-top: $px;
+        &.spacer--divider {
+          padding-top: $px;
+        }
+      }
+    }
+  }
+}

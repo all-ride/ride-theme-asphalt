@@ -116,6 +116,14 @@ $rh-med: $line-height-base;
 $rh-lrg: ceil($line-height-base * 2);
 $rh-xlr: ceil($line-height-base * 4);
 
+$rhythm: (
+  xsm: $rh-xsm,
+  sml: $rh-sml,
+  med: $rh-med,
+  lrg: $rh-lrg,
+  xlr: $rh-xlr
+);
+
 // Transitions
 // -----------
 //
