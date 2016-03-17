@@ -136,7 +136,8 @@
                                         <a href="#" class="js-crop-toggle spacer">{translate key="button.crop.image"}</a>
                                         <div class="js-crop-image superhidden">
                                             <div class="spacer">
-                                                <img class="img-responsive js-enable-cropper" src="{image src=$asset->getImage()}" />
+                                                {* Use a scaled image to 2500px width for performance... *}
+                                                <img class="img-responsive js-enable-cropper" src="{image src=$asset->getImage() width=2500 transformation='resize'}" />
                                             </div>
                                             <div class="spacer">
                                                 <a href="#" class="btn js-crop-save">{translate key="button.crop.save"}</a> <span class="form__help">{translate key="label.crop.save.warning"}</span>
