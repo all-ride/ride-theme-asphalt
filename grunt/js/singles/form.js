@@ -343,6 +343,8 @@ rideApp.form = (function($, undefined) {
       var $removeTriggers = rideApp.form.assets.removeTriggers();
 
       ready('.form__assets', function() {
+        $modalTriggers = rideApp.form.assets.modalTriggers();
+        $removeTriggers = rideApp.form.assets.removeTriggers();
         var $this = $(this),
             fieldId = $this.data('field'),
             $field = $(escapeID(fieldId)),
