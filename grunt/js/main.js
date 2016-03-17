@@ -17,7 +17,7 @@ rideApp.main = (function($, undefined) {
     // hit up common first.
     this.fire('common');
     this.fire('dropzone');
-    this.fire('form');
+    this.fire('formComponent');
 
     // Hit up the page component
     if(dataComponents) {
