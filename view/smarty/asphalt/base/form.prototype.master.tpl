@@ -648,9 +648,9 @@
                         {$imgSource = $asset->getThumbnail()}
                     {elseif !$asset->getThumbnail() && $asset->getType() == 'audio'}
                         {$imgSource = "asphalt/img/audio.svg"}
-                    {elseif !$asset->getThumbnail() && $asset->getType() == 'pdf'}
+                    {elseif !$asset->getThumbnail() && $asset->getMime() == 'application/pdf'}
                         {$imgSource = "asphalt/img/pdf.svg"}
-                    {elseif !$asset->getThumbnail() && $asset->getType() == 'document'}
+                    {elseif !$asset->getThumbnail() && substr_count($asset->getMime(), 'application') > 0}
                         {$imgSource = "asphalt/img/document.svg"}
                     {else}
                         {$imgSource = "asphalt/img/unknown.png"}
