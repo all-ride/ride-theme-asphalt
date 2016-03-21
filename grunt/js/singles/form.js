@@ -55,9 +55,12 @@ rideApp.form = (function($, undefined) {
     var imageStyleAdded = rideApp.translator.translate('label.image.style.added');
     var imageStyleRemoved = rideApp.translator.translate('label.image.style.removed');
     var formImagePreviewTemplate = _.template($('#form-image-preview-template').html());
-    $('.asset__crop').each(function() {
+
+    $('.js-image-style').each(function() {
       var cropper;
-      var $crop = $(this);
+      var $imageStyle = $(this);
+      var $crop = $imageStyle.find('.js-image-style-crop');
+      var $file = $imageStyle.find('.js-image-style-file');
       var assetId = $crop.data('asset');
       var styleId = $crop.data('style');
       var ratio = $crop.data('ratio');
@@ -65,7 +68,7 @@ rideApp.form = (function($, undefined) {
       $crop.find('.js-crop-toggle').on('click', function(e) {
         e.preventDefault();
 
-        $crop.find('.js-crop-preview').addClass('superhidden');
+        $file.addClass('superhidden');
         var $cropperRegion = $(this).addClass('superhidden').next('.js-crop-image').removeClass('superhidden');
         var image = $cropperRegion[0].querySelector('.js-enable-cropper');
         cropper = new Cropper($cropperRegion.find('.js-enable-cropper')[0], {
@@ -82,10 +85,10 @@ rideApp.form = (function($, undefined) {
         if (!asset) {
           client.load('assets', assetId, function(data) {
             asset = data;
-            loadImageStyle(styleId, cropper, $crop);
+            loadImageStyle(styleId, cropper, $imageStyle);
           });
         } else {
-          loadImageStyle(styleId, cropper, $crop);
+          loadImageStyle(styleId, cropper, $imageStyle);
         }
       });
     });
@@ -123,14 +126,19 @@ rideApp.form = (function($, undefined) {
 
     function finishUpdate($container, cropper, dataUrl, id) {
       var $preview = $container.find('.js-crop-preview');
+      var $crop = $container.find('.js-image-style-crop');
+      var $file = $container.find('.js-image-style-file');
 
-      $container.removeClass('is-loading');
-      $container.find('.js-crop-toggle').removeClass('superhidden').next('.js-crop-image').addClass('superhidden');
+      $crop.removeClass('is-loading');
+      $crop.find('.js-crop-toggle').removeClass('superhidden').next('.js-crop-image').addClass('superhidden');
 
       $preview.html(formImagePreviewTemplate({dataUrl: dataUrl, id: id})).removeClass('superhidden');
 
       cropper.destroy();
-      $container.prev('.form__group').find('.form__image-preview').addClass('superhidden');
+      $file
+        .removeClass('superhidden')
+        .find('.form__image-preview')
+          .addClass('superhidden');
 
       alertify
         .logPosition("bottom right")
