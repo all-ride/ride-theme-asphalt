@@ -46,7 +46,6 @@ rideApp.form = (function($, undefined) {
     });
 
     _assetImageStyleHandler();
-    rideApp.translator.submitTranslationKeys();
   };
 
   var _assetImageStyleHandler = function() {
