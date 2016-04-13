@@ -95,6 +95,7 @@
                         <input type="checkbox" name="all" class="select-all" />
                         <select name="action" class="form-control form-action form__select form__select--inline">
                             <option value="">- {translate key="label.actions.bulk"} -</option>
+                            <option value="move">{translate key="button.move"}</option>
                             <option value="delete">{translate key="button.delete"}</option>
                         </select>
                         <button class="btn btn--default btn--small" name="submit" value="bulk-action" type="submit">{translate key="button.apply"}</button>
