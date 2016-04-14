@@ -32,133 +32,161 @@
     {include file="base/form.prototype"}
 
     <form id="{$form->getId()}" class="form" action="{$app.url.request}" method="POST" role="form" enctype="multipart/form-data">
-
+        {if $asset->getId()}
         <div class="grid">
-            <div class="grid__item grid--bp-med__{if $asset->getId()}6{else}12{/if}">
+            <div class="grid__12 grid--bp-med__6">
                 <div class="form__group">
-                    {call formRow form=$form row="asset"}
-
-                    <div class="form__actions">
-                        <button type="submit" class="btn btn--default">{translate key="button.save"}</button>
-                        {if $referer}
-                            <a href="{$referer}" class="btn btn--link">{translate key="button.cancel"}</a>
-                        {/if}
-                    </div>
+                    {call formRows form=$form row='asset'}
                 </div>
-            </div>
-            {if $asset->getId()}
-                <div class="grid__item grid--bp-med__6">
-                   {* <dl>
-                        <dt>{translate key="label.url"}</dt>
-                        <dd>
-                            {url id="assets.value" parameters=["asset" => $asset->getId()] var="valueUrl"}
-                            <a href="{$valueUrl}">{$valueUrl}</a>
-                        </dd>
-                        <dt>{translate key="label.type"}</dt>
-                        <dd>{$asset->getType()}</dd>
-                        {if $dimension}
-                            <dt>{translate key="label.dimension"}</dt>
-                            <dd>{$dimension->getWidth()} x {$dimension->getHeight()}</dd>
-                        {/if}
-                        <dt>{translate key="label.date.added"}</dt>
-                        <dd>{$asset->getDateAdded()|date_format : "%d-%m-%Y %T"}</dd>
-                        <dt>{translate key="label.date.modified"}</dt>
-                        <dd>{$asset->getDateModified()|date_format : "%d-%m-%Y %T"}</dd>
-                    </dl>*}
-
-                  {*  {if $media}
-                        <iframe width="560" height="315" src="{$media->getEmbedUrl()}" frameborder="0" allowfullscreen></iframe>
-                    {elseif $asset->isImage()}
-                        <img class="img-responsive" src="{image src=$asset->getValue()}" />
-                    {else}
-                        <img class="img-responsive" src="{image src=$asset->getThumbnail()}"/>
-                    {/if}*}
-
-                    <div class="tabbable">
-                        <ul class="tabs">
-                            <li class="tabs__tab active"><a href="#tab-original" data-toggle="tab">{translate key="label.original"}</a></li>
-                            {foreach $styles as $style}
-                                <li class="tabs__tab"><a href="#tab-{$style->getSlug()}" data-toggle="tab">{$style->getName()}</a></li>
-                            {/foreach}
-                        </ul>
-
-                        <div class="tabs__content">
-                            <div id="tab-original" class="tabs__pane active">
-                                <dl>
-                                    <dt>{translate key="label.url"}</dt>
-                                    <dd>
-                                        {url id="assets.value" parameters=["asset" => $asset->getId()] var="valueUrl"}
-                                        <a href="{$valueUrl}">{$valueUrl}</a>
-                                    </dd>
-                                    <dt>{translate key="label.type"}</dt>
-                                    <dd>{$asset->getType()}</dd>
-                                    {if $dimension}
-                                        <dt>{translate key="label.dimension"}</dt>
-                                        <dd>{$dimension->getWidth()} x {$dimension->getHeight()}</dd>
-                                    {/if}
-                                </dl>
-
-                                {if $media}
-                                    <iframe width="560" height="315" src="{$media->getEmbedUrl()}" frameborder="0" allowfullscreen></iframe>
-                                {else}
-                                    <img class="img-responsive" src="{image src=$asset->getImage()}" />
-                                {/if}
-                            </div>
-
-                            {foreach $styles as $style}
-                                {$cropRatio = null}
-                                {$transformations = $style->getTransformations()}
-
-                                <div id="tab-{$style->getSlug()}" class="tabs__pane assets__image-styles js-image-style">
-                                    {if $transformations}
-                                        <div class="spacer--med">
-                                            {translate key="label.image.style.transformations.applied"}:
-                                            <ul>
-                                            {foreach $transformations as $transformation}
-                                                <li>{$transformation->getName()}</li>
-                                                {if $transformation->getTransformation() == 'crop'}
-                                                    {foreach $transformation->getOptions() as $option}
-                                                        {if $option->getKey() == 'width'}
-                                                            {$cropRatio['width'] = $option->getValue()}
-                                                        {/if}
-                                                        {if $option->getKey() == 'height'}
-                                                            {$cropRatio['height'] = $option->getValue()}
-                                                        {/if}
-                                                    {/foreach}
-                                                {/if}
-                                            {/foreach}
-                                            </ul>
-                                        </div>
-                                    {/if}
-
-                                    <div class="spacer--med form__group asset__crop js-image-style-crop" data-asset="{$asset->getId()}" data-style="{$style->getId()}"{if $cropRatio} data-ratio="{$cropRatio['width'] / $cropRatio['height']}"{/if}>
-                                        <h4>{translate key="label.image.style.crop"}</h4>
-                                        <a href="#" class="js-crop-toggle spacer">{translate key="button.crop.image"}</a>
-                                        <div class="js-crop-image superhidden">
-                                            <div class="spacer">
-                                                {* Use a scaled image to 2500px width for performance... *}
-                                                <img class="img-responsive js-enable-cropper" src="{image src=$asset->getImage() width=2500 transformation='resize'}" />
-                                            </div>
-                                            <div class="spacer">
-                                                <a href="#" class="btn js-crop-save">{translate key="button.crop.save"}</a> <span class="form__help">{translate key="label.crop.save.warning"}</span>
-                                            </div>
-                                        </div>
-                                        <div class="loading tree-spinner"></div>
-                                    </div>
-
-                                    <div class="spacer--med form__group js-image-style-file">
-                                        <h4>{translate key="label.image.style.upload"}</h4>
-                                        {call formWidget form=$form row="style-`$style->slug`"}
-                                        {call formWidgetErrors form=$form row="style-`$style->slug`"}
-                                    </div>
-
-                                    <div class="superhidden js-crop-preview spacer"></div>
-                                </div>
-                            {/foreach}
+        {else}
+                <div class="form__group">
+                    <div class="grid">
+                        {$rows = $form->getRows()}
+                        {$assetRows = $rows['asset']->getRows()}
+                        <div class="grid__12 grid--bp-med__2">
+                            {call formRow form=$form row=$assetRows['resource']}
+                        </div>
+                        <div class="grid__12 grid--bp-med__4">
+                            <div>{call formRow form=$form row=$assetRows['file']}</div>
+                            <div>{call formRow form=$form row=$assetRows['url']}</div>
+                        </div>
+                        <div class="grid__12 grid--bp-med__6">
+                            {call formRow form=$form row=$assetRows['name']}
                         </div>
                     </div>
-
                 </div>
+                <div class="form__group">
+                    <div class="grid">
+                        <div class="grid__12 grid--bp-med__6">
+                            {call formRow form=$form row=$assetRows['description']}
+                        </div>
+                        <div class="grid__12 grid--bp-med__6">
+                            {call formRow form=$form row=$assetRows['alt']}
+                            {call formRow form=$form row=$assetRows['copyright']}
+                        </div>
+                    </div>
+                </div>
+        {/if}
+                <div class="form__actions">
+                    <button type="submit" class="btn btn--default">{translate key="button.save"}</button>
+                    {if $referer}
+                        <a href="{$referer}" class="btn btn--link">{translate key="button.cancel"}</a>
+                    {/if}
+                </div>
+        {if $asset->getId()}
+            </div>
+            <div class="grid__item grid--bp-med__6">
+               {* <dl>
+                    <dt>{translate key="label.url"}</dt>
+                    <dd>
+                        {url id="assets.value" parameters=["asset" => $asset->getId()] var="valueUrl"}
+                        <a href="{$valueUrl}">{$valueUrl}</a>
+                    </dd>
+                    <dt>{translate key="label.type"}</dt>
+                    <dd>{$asset->getType()}</dd>
+                    {if $dimension}
+                        <dt>{translate key="label.dimension"}</dt>
+                        <dd>{$dimension->getWidth()} x {$dimension->getHeight()}</dd>
+                    {/if}
+                    <dt>{translate key="label.date.added"}</dt>
+                    <dd>{$asset->getDateAdded()|date_format : "%d-%m-%Y %T"}</dd>
+                    <dt>{translate key="label.date.modified"}</dt>
+                    <dd>{$asset->getDateModified()|date_format : "%d-%m-%Y %T"}</dd>
+                </dl>*}
+
+              {*  {if $media}
+                    <iframe width="560" height="315" src="{$media->getEmbedUrl()}" frameborder="0" allowfullscreen></iframe>
+                {elseif $asset->isImage()}
+                    <img class="img-responsive" src="{image src=$asset->getValue()}" />
+                {else}
+                    <img class="img-responsive" src="{image src=$asset->getThumbnail()}"/>
+                {/if}*}
+
+                <div class="tabbable">
+                    <ul class="tabs">
+                        <li class="tabs__tab active"><a href="#tab-original" data-toggle="tab">{translate key="label.original"}</a></li>
+                        {foreach $styles as $style}
+                            <li class="tabs__tab"><a href="#tab-{$style->getSlug()}" data-toggle="tab">{$style->getName()}</a></li>
+                        {/foreach}
+                    </ul>
+
+                    <div class="tabs__content">
+                        <div id="tab-original" class="tabs__pane active">
+                            <dl>
+                                <dt>{translate key="label.url"}</dt>
+                                <dd>
+                                    {url id="assets.value" parameters=["asset" => $asset->getId()] var="valueUrl"}
+                                    <a href="{$valueUrl}">{$valueUrl}</a>
+                                </dd>
+                                <dt>{translate key="label.type"}</dt>
+                                <dd>{$asset->getType()}</dd>
+                                {if $dimension}
+                                    <dt>{translate key="label.dimension"}</dt>
+                                    <dd>{$dimension->getWidth()} x {$dimension->getHeight()}</dd>
+                                {/if}
+                            </dl>
+
+                            {if $media}
+                                <iframe width="560" height="315" src="{$media->getEmbedUrl()}" frameborder="0" allowfullscreen></iframe>
+                            {else}
+                                <img class="img-responsive" src="{image src=$asset->getImage()}" />
+                            {/if}
+                        </div>
+
+                        {foreach $styles as $style}
+                            {$cropRatio = null}
+                            {$transformations = $style->getTransformations()}
+
+                            <div id="tab-{$style->getSlug()}" class="tabs__pane assets__image-styles js-image-style">
+                                {if $transformations}
+                                    <div class="spacer--med">
+                                        {translate key="label.image.style.transformations.applied"}:
+                                        <ul>
+                                        {foreach $transformations as $transformation}
+                                            <li>{$transformation->getName()}</li>
+                                            {if $transformation->getTransformation() == 'crop'}
+                                                {foreach $transformation->getOptions() as $option}
+                                                    {if $option->getKey() == 'width'}
+                                                        {$cropRatio['width'] = $option->getValue()}
+                                                    {/if}
+                                                    {if $option->getKey() == 'height'}
+                                                        {$cropRatio['height'] = $option->getValue()}
+                                                    {/if}
+                                                {/foreach}
+                                            {/if}
+                                        {/foreach}
+                                        </ul>
+                                    </div>
+                                {/if}
+
+                                <div class="spacer--med form__group asset__crop js-image-style-crop" data-asset="{$asset->getId()}" data-style="{$style->getId()}"{if $cropRatio} data-ratio="{$cropRatio['width'] / $cropRatio['height']}"{/if}>
+                                    <h4>{translate key="label.image.style.crop"}</h4>
+                                    <a href="#" class="js-crop-toggle spacer">{translate key="button.crop.image"}</a>
+                                    <div class="js-crop-image superhidden">
+                                        <div class="spacer">
+                                            {* Use a scaled image to 2500px width for performance... *}
+                                            <img class="img-responsive js-enable-cropper" src="{image src=$asset->getImage() width=2500 transformation='resize'}" />
+                                        </div>
+                                        <div class="spacer">
+                                            <a href="#" class="btn js-crop-save">{translate key="button.crop.save"}</a> <span class="form__help">{translate key="label.crop.save.warning"}</span>
+                                        </div>
+                                    </div>
+                                    <div class="loading tree-spinner"></div>
+                                </div>
+
+                                <div class="spacer--med form__group js-image-style-file">
+                                    <h4>{translate key="label.image.style.upload"}</h4>
+                                    {call formWidget form=$form row="style-`$style->slug`"}
+                                    {call formWidgetErrors form=$form row="style-`$style->slug`"}
+                                </div>
+
+                                <div class="superhidden js-crop-preview spacer"></div>
+                            </div>
+                        {/foreach}
+                    </div>
+                </div>
+
+            </div>
             {/if}
         </div>
     </form>
