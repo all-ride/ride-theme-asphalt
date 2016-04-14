@@ -303,7 +303,6 @@ rideApp.form = (function($, undefined) {
         valueField: 'name',
         labelField: 'name',
         searchField: 'name',
-        maxItems: maxItems,
         plugins: plugins,
         create: $field.hasClass('js-tags') ? true : false,
         load: function(query, callback) {
@@ -329,6 +328,11 @@ rideApp.form = (function($, undefined) {
             });
         }
       };
+
+      if (maxItems != 0) {
+        autocompleteSettings.maxItems = maxItems;
+      }
+
       $field.selectize(autocompleteSettings);
     }
   };
