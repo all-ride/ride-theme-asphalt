@@ -284,7 +284,8 @@ rideApp.form = (function($, undefined) {
 
     function makeFieldAutocomplete($field) {
       var url = $field.data('autocomplete-url');
-      var multiple = $field.is('[data-autocomplete-multiple]');
+      var maxItems = $field.data('autocomplete-max-items');
+      var minLength = $field.data('autocomplete-min-length');
       var type = $field.data('autocomplete-type');
       var locale = $field.data('autocomplete-locale');
       var headers = {};
@@ -294,7 +295,7 @@ rideApp.form = (function($, undefined) {
           headers['Accept-Language'] = locale;
       }
 
-      if (multiple) {
+      if (maxItems != 1) {
           plugins.push('drag_drop', 'remove_button');
       }
 
@@ -302,11 +303,11 @@ rideApp.form = (function($, undefined) {
         valueField: 'name',
         labelField: 'name',
         searchField: 'name',
-        maxItems: multiple ? null : 1,
+        maxItems: maxItems,
         plugins: plugins,
         create: $field.hasClass('js-tags') ? true : false,
         load: function(query, callback) {
-            if (!query.length) return callback();
+            if (!query.length || (minLength && query.length < minLength)) return callback();
             var fetchUrl = url;
             fetchUrl = fetchUrl.replace(/%25term%25/g, query);
             fetchUrl = fetchUrl.replace(/%term%/g, query);
