@@ -106,48 +106,57 @@
                             </div>
 
                             {foreach $styles as $style}
-                            {$cropRatio = null}
-                            <div id="tab-{$style->getSlug()}" class="tabs__pane assets__image-styles">
-                                <ul>
-                                {foreach $style->getTransformations() as $transformation}
-                                    <li>{$transformation->getName()}</li>
-                                    {if $transformation->getTransformation() == 'crop'}
-                                        {foreach $transformation->getOptions() as $option}
-                                            {if $option->getKey() == 'width'}
-                                                {$cropRatio['width'] = $option->getValue()}
-                                            {/if}
-                                            {if $option->getKey() == 'height'}
-                                                {$cropRatio['height'] = $option->getValue()}
-                                            {/if}
-                                        {/foreach}
+                                {$cropRatio = null}
+                                {$transformations = $style->getTransformations()}
+
+                                <div id="tab-{$style->getSlug()}" class="tabs__pane assets__image-styles js-image-style">
+                                    {if $transformations}
+                                        <div class="spacer--med">
+                                            {translate key="label.image.style.transformations.applied"}:
+                                            <ul>
+                                            {foreach $transformations as $transformation}
+                                                <li>{$transformation->getName()}</li>
+                                                {if $transformation->getTransformation() == 'crop'}
+                                                    {foreach $transformation->getOptions() as $option}
+                                                        {if $option->getKey() == 'width'}
+                                                            {$cropRatio['width'] = $option->getValue()}
+                                                        {/if}
+                                                        {if $option->getKey() == 'height'}
+                                                            {$cropRatio['height'] = $option->getValue()}
+                                                        {/if}
+                                                    {/foreach}
+                                                {/if}
+                                            {/foreach}
+                                            </ul>
+                                        </div>
                                     {/if}
-                                {/foreach}
-                                </ul>
 
-                                <div class="form__group">
-                                    {call formWidget form=$form row="style-`$style->slug`"}
-                                    {call formWidgetErrors form=$form row="style-`$style->slug`"}
-                                </div>
-
-
-                                <div class="form__group asset__crop" data-asset="{$asset->getId()}" data-style="{$style->getId()}"{if $cropRatio} data-ratio="{$cropRatio['width'] / $cropRatio['height']}"{/if}>
-                                    <div class="superhidden js-crop-preview spacer"></div>
-                                    <a href="#" class="js-crop-toggle spacer">{translate key="button.crop.image"}</a>
-                                    <div class="js-crop-image superhidden">
-                                        <div class="spacer">
-                                            <img class="img-responsive js-enable-cropper" src="{image src=$asset->getImage()}" />
+                                    <div class="spacer--med form__group asset__crop js-image-style-crop" data-asset="{$asset->getId()}" data-style="{$style->getId()}"{if $cropRatio} data-ratio="{$cropRatio['width'] / $cropRatio['height']}"{/if}>
+                                        <h4>{translate key="label.image.style.crop"}</h4>
+                                        <a href="#" class="js-crop-toggle spacer">{translate key="button.crop.image"}</a>
+                                        <div class="js-crop-image superhidden">
+                                            <div class="spacer">
+                                                {* Use a scaled image to 2500px width for performance... *}
+                                                <img class="img-responsive js-enable-cropper" src="{image src=$asset->getImage() width=2500 transformation='resize'}" />
+                                            </div>
+                                            <div class="spacer">
+                                                <a href="#" class="btn js-crop-save">{translate key="button.crop.save"}</a> <span class="form__help">{translate key="label.crop.save.warning"}</span>
+                                            </div>
                                         </div>
-                                        <div class="spacer">
-                                            <a href="#" class="btn js-crop-save">{translate key="button.crop.save"}</a> <span class="form__help">{translate key="label.crop.save.warning"}</span>
-                                        </div>
+                                        <div class="loading tree-spinner"></div>
                                     </div>
-                                    <div class="loading tree-spinner"></div>
+
+                                    <div class="spacer--med form__group js-image-style-file">
+                                        <h4>{translate key="label.image.style.upload"}</h4>
+                                        {call formWidget form=$form row="style-`$style->slug`"}
+                                        {call formWidgetErrors form=$form row="style-`$style->slug`"}
+                                    </div>
+
+                                    <div class="superhidden js-crop-preview spacer"></div>
                                 </div>
-                            </div>
                             {/foreach}
                         </div>
                     </div>
-
 
                 </div>
             {/if}
@@ -158,7 +167,7 @@
             <img src="<%- dataUrl %>" width="100"><br>
             <a href="#" class="js-file-delete" data-id="<%- id %>" data-message="{translate key="label.confirm.file.delete"}">
                 <i class="glyphicon glyphicon-remove"></i>
-                {translate key="button.detele"}
+                {translate key="button.delete"}
             </a>
         </div>
     </script>

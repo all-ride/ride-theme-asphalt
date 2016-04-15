@@ -16,7 +16,7 @@
     {include file="base/helper.prototype"}
 
     {$tableMessages = json_encode($table->getActionConfirmationMessages())}
-    <form id="{$tableForm->getId()}" action="{if isset($tableAction)}{$tableAction}{else}{$table->getFormUrl()}{/if}" method="POST" class="table" role="form" data-confirm-messages="{$tableMessages|escape}">
+    <form id="{$tableForm->getId()}" action="{if isset($tableAction)}{$tableAction}{else}{$table->getFormUrl()}{/if}" method="POST" class="table spacer" role="form" data-confirm-messages="{$tableMessages|escape}">
         {formWidget form=$tableForm row=$tableNameField}
 
         <div class="form__group">

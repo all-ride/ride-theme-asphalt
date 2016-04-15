@@ -25,8 +25,6 @@ rideApp.content = (function($, undefined) {
     SirTrevor.Blocks.Quote    = customBlocks.quote();
     SirTrevor.Blocks.Wysiwyg  = customBlocks.wysiwyg();
 
-    rideApp.translator.submitTranslationKeys();
-
     $richContent.each(function() {
       $element = $(this);
       options = $element.data('rich-content-properties');

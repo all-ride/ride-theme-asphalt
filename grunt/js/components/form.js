@@ -12,7 +12,7 @@ window.ParsleyConfig = {
 };
 window.ParsleyValidator.setLocale('nl');
 
-rideApp.form = (function($, undefined) {
+rideApp.formComponent = (function($, undefined) {
   var $forms = $('form');
 
   var _initialize = function() {

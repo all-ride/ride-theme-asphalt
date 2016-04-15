@@ -45,7 +45,7 @@ HttpClient.prototype.sendRequest = function(request) {
 
     for (var prop in request.headers) {
         if (request.headers.hasOwnProperty(prop)) {
-            xhr.setRequestHeader(prop, request.headers.propr);
+            xhr.setRequestHeader(prop, request.headers[prop]);
         }
     }
 

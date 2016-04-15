@@ -54,9 +54,9 @@
                                 {$imgSource = $item->getThumbnail()}
                             {elseif !$item->getThumbnail() && $item->getType() == 'audio'}
                                 {$imgSource = "asphalt/img/audio.svg"}
-                            {elseif !$item->getThumbnail() && $item->getType() == 'pdf'}
+                            {elseif !$item->getThumbnail() && $item->getMime() == 'application/pdf'}
                                 {$imgSource = "asphalt/img/pdf.svg"}
-                            {elseif !$item->getThumbnail() && $item->getType() == 'document'}
+                            {elseif !$item->getThumbnail() && substr_count($item->getMime(), 'application') > 0}
                                 {$imgSource = "asphalt/img/document.svg"}
                             {else}
                                 {$imgSource = "asphalt/img/unknown.png"}
