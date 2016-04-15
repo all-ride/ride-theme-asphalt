@@ -840,7 +840,9 @@
                     {/if}
                 {else}
                     {foreach $value as $option}
-                        <option value="{$option|escape}" selected="selected">{$options[$option]}</option>
+                        {if $option|array_key_exists:$options}
+                            <option value="{$option|escape}" selected="selected">{$options[$option]}</option>
+                        {/if}
                     {/foreach}
                 {/if}
 
