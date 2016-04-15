@@ -1,0 +1,2 @@
+theme.custom.css          Define custom css file location. Base path is {$app.url.base}
+theme.custom.js           Define custom js file location. Base path is {$app.url.base}
