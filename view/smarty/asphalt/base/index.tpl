@@ -19,6 +19,8 @@
             {/block}
 
             {block name="styles_app"}
+                {$customCSS = $app.system->getConfig()->get('theme.custom.css')}
+
                 {if isset($app.styles)}
                     {foreach $app.styles as $style => $null}
                         {if substr($style, 0, 7) == 'http://' || substr(style, 0, 8) == 'https://' || substr($style, 0, 2) == '//'}
@@ -27,6 +29,9 @@
                             <link href="{$app.url.base}/asphalt/{$style}" rel="stylesheet" media="screen">
                         {/if}
                     {/foreach}
+                {/if}
+                {if $customCSS}
+                    <link href="{$app.url.base}/{$customCSS}" rel="stylesheet" media="screen">
                 {/if}
             {/block}
 
@@ -147,6 +152,8 @@
         <script type="text/javascript" src="{$app.url.base}/asphalt/js/ajax.js"></script>
     {/block}
     {block name="scripts_app"}
+    {$customJS = $app.system->getConfig()->get('theme.custom.js')}
+
     {if isset($app.javascripts)}
         {foreach $app.javascripts as $script => $null}
             {if substr($script, 0, 7) == 'http://' || substr($script, 0, 8) == 'https://' || substr($script, 0, 2) == '//'}
@@ -166,6 +173,9 @@
             {/foreach}
             });
         </script>
+    {/if}
+    {if $customJS}
+        <script src="{$app.url.base}/{$customJS}"></script>
     {/if}
     {/block}
 {/block}
