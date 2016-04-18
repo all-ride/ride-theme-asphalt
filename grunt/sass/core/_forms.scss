@@ -264,7 +264,7 @@ p.form__label {
 
 .form__actions {
   clear: both;
-  margin-top: $rh-sml;
+  margin-top: $rh-med;
   .btn + .btn {
     margin-left: 5px;
   }
@@ -390,6 +390,9 @@ p.form__label {
   }
   .redactor-editor {
     border: 1px solid $gray-25;
+  }
+  .form__item & {
+    margin-bottom: 0;
   }
 }
 

@@ -380,7 +380,9 @@ rideApp.form = (function($, undefined) {
           var $button = $(this);
           var assetsModal = $(this).attr('href');
           var $modal = $(assetsModal);
+          var $modalFooter = $modal.find('.modal-footer');
           var $iframe = $modal.find('iframe');
+          var iframeHeight = 500;
           var $formAsset = $button.closest('.form__assets');
 
           var selected = rideApp.form.assets.getSelected($formAsset);
@@ -395,10 +397,47 @@ rideApp.form = (function($, undefined) {
           iframeQuery.selected = selected;
 
           $iframe.attr('src', iframeUrl + queryString.stringify(iframeQuery));
+          
+          $iframe.on('load', function (e) {
+            var $this = $(this);
+            var $contents = $this.contents();
+            var $iframeWindow = $(this.contentWindow);
+            var framePath = this.contentWindow.location.pathname;
 
-          $modal.modal('show').on('hidden.bs.modal', function () {
-            $iframe.attr('src','');
+            //  Dynamically set height of iframe to accommodate for its contents.
+            var targetHeight = $contents.find('body').height();
+
+            if (targetHeight) {
+              $this.animate({'height': targetHeight}, Math.abs($this.height() - targetHeight), 'linear', function () {
+                //  Hide the modal footer when adding an asset or folder.
+                $modalFooter.toggle(framePath.split('/').pop() != 'add');
+                $modal.removeClass('is-loading');
+              });
+            } else {
+              console.log('no target height');
+            }
+
+            //  When navigating inside the iframe, reset its height and add loading class.
+            $iframeWindow.on('beforeunload', function () {
+              $modalFooter.hide();
+              $modal.addClass('is-loading');
+              $this.css({'height': ''});
+            });
           });
+
+          $modal.on('show.bs.modal', function () {
+            $modalFooter.hide();
+            $(this).addClass('is-loading');
+          });
+
+          $modal.on('hidden.bs.modal', function () {
+            $iframe.removeAttr('src style');
+            $modalFooter.removeAttr('style');
+            $(this).removeClass('is-loading');
+          });
+
+          $modal.modal('show');
+
         });
 
         // Moved to ready function..
