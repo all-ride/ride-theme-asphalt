@@ -22,7 +22,7 @@
         <div class="form__group">
 
         {if $tableActions || $table->hasOrderMethods() || $table->hasSearch()}
-            <div class="grid table-header clearfix">
+            <div class="grid clearfix">
                 <div class="grid--bp-med__4">
                     {if $tableActions}
                         <div class="btn-group">
