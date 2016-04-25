@@ -24,13 +24,9 @@
 
   > .icon {
     &:first-child {
-      margin: 0 5px;
+      margin-right: 5px;
     }
   }
-
-  // + .btn {
-  //   margin-left: $rh-xsm;
-  // }
 
   // Modifiers
   &--default {
