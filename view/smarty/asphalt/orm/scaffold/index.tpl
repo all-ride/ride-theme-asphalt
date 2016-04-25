@@ -9,23 +9,34 @@
 {/block}
 
 {block name="content_title"}
-<div class="page-header">
-    <h1>{$title}</h1>
-</div>
+    <div class="page-header">
+        <h1>{$title}</h1>
+    </div>
 {/block}
 
 {block name="content_body" append}
+    {function renderExportButton}
+        {if $exports}
+            <div class="spacer clearfix">
+                <div class="pull--right">
+                    {foreach $exports as $extension => $url}
+                        {strip}
+                        <a href="{$url}" title="{translate key="label.export.to" format=$extension}">
+                            <i class="icon icon--share-square-o icon--before icon--center"></i>
+                            {translate key="label.export"} ({$extension})
+                        </a>
+                        {/strip}
+                    {/foreach}
+                </div>
+            </div>
+        {/if}
+    {/function}
+
+    {call renderExportButton}
+
     {include file="base/table" table=$table tableForm=$form tableActions=$actions}
 
-    {if $exports}
-        {translate key="label.export"}
-
-        {foreach $exports as $extension => $url}
-            <a href="{$url}" title="{translate key="label.export.to" format=$extension}">
-                <img src="{image src="asphalt/img/export/`$extension`.png" transformation="resize" width=16 height=16}" />
-            </a>
-        {/foreach}
-    {/if}
+    {call renderExportButton}
 {/block}
 
 {block name="scripts" append}
