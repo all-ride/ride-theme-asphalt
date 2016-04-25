@@ -36,7 +36,7 @@
 
     {include file="base/table" table=$table tableForm=$form tableActions=$actions}
 
-    {call renderExportButton}
+    {call renderExportButton spacerClass="spacer--last"}
 {/block}
 
 {block name="scripts" append}
