@@ -369,15 +369,19 @@ rideApp.content = (function ($, undefined) {
           return 'Embed';
         },
 
-        icon_name: 'embed',
+        icon_name: 'iframe',
 
         editorHTML: [
-          '<div><label class="form__label">Embed</label></div>',
-          '<textarea name="embed" class="st-required st-embed" cols="90" rows="4"></textarea>'
+          '<div><label class="form__label">' + rideApp.translator.translate('label.embedCode') + '</label></div>',
+          '<textarea name="embed" class="st-required st-embed" cols="90" rows="2"></textarea>',
+          '<div class="embed-preview"></div>'
         ].join('\n'),
 
         loadData: function (data) {
-          this.$('st-embed').html(data.embed);
+          if (data.embed) {
+            this.$('.st-embed').val(data.embed);
+            this.$('.embed-preview').html(data.embed).addClass('is-active');
+          }
         }
       });
     }
