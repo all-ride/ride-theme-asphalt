@@ -1,6 +1,6 @@
 window.rideApp = window.rideApp || {};
 
-rideApp.content = (function($, undefined) {
+rideApp.content = (function ($, undefined) {
   var locale = document.documentElement.lang;
   var apiClient = new JsonApiClient('/api/v1');
 
@@ -14,18 +14,18 @@ rideApp.content = (function($, undefined) {
       .replace(/>/g, '&gt;');
   }
 
-  var _initialize = function() {
+  var _initialize = function () {
 
     var $richContent = $('.js-rich-content'),
     $element, options, redactorOptions;
 
-    SirTrevor.Blocks.Heading  = customBlocks.heading();
-    SirTrevor.Blocks.Asset    = customBlocks.asset();
-    SirTrevor.Blocks.Tweet    = customBlocks.tweet();
-    SirTrevor.Blocks.Quote    = customBlocks.quote();
-    SirTrevor.Blocks.Wysiwyg  = customBlocks.wysiwyg();
+    SirTrevor.Blocks.Heading = customBlocks.heading();
+    SirTrevor.Blocks.Asset = customBlocks.asset();
+    SirTrevor.Blocks.Tweet = customBlocks.tweet();
+    SirTrevor.Blocks.Quote = customBlocks.quote();
+    SirTrevor.Blocks.Wysiwyg = customBlocks.wysiwyg();
 
-    $richContent.each(function() {
+    $richContent.each(function () {
       $element = $(this);
       options = $element.data('rich-content-properties');
       redactorOptions = $element.data('redactor-properties');
@@ -356,8 +356,31 @@ rideApp.content = (function($, undefined) {
           }
         }
       });
-    }
+    },
     //  END QUOTE
+
+    //  START EMBED
+    embed: function () {
+      return SirTrevor.Block.extend({
+        type: 'embed',
+
+        title: function () {
+          return 'Embed';
+        },
+
+        icon_name: 'embed',
+
+        editorHTML: [
+          '<div><label class="form__label">Embed</label></div>',
+          '<textarea name="embed" class="st-required st-embed" cols="90" rows="4"></textarea>'
+        ].join('\n'),
+
+        loadData: function (data) {
+          this.$('st-embed').html(data.embed);
+        }
+      });
+    }
+    //  END EMBED
 
   };
 
