@@ -24,6 +24,7 @@ rideApp.content = (function ($, undefined) {
     SirTrevor.Blocks.Tweet = customBlocks.tweet();
     SirTrevor.Blocks.Quote = customBlocks.quote();
     SirTrevor.Blocks.Wysiwyg = customBlocks.wysiwyg();
+    SirTrevor.Blocks.Embed = customBlocks.embed();
 
     $richContent.each(function () {
       $element = $(this);
