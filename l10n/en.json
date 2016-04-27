@@ -31,6 +31,8 @@
     "label.code": "Code",
     "label.confirm.file.delete": "Are you sure you want to remove this file?",
     "label.crop.save.warning": "Cropping large image may take a lot of time.",
+    "label.embedCode": "Embed code",
+    "label.embedCode.twitter": "Twitter embed code",
     "label.error.size": "File is too large",
     "label.forced": "Forced",
     "label.image.style.added": "Image style added",

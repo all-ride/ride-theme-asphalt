@@ -602,6 +602,13 @@ ul.st-text-block {
   width: 100%;
 }
 
+.st-block .embed-preview.is-active {
+  margin-top: $rh-med;
+  .issuuembed {
+    margin: 0 auto;
+  }
+}
+
 label[for="form-content"] {
   display: none;
 }
