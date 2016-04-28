@@ -1,5 +1,11 @@
 .modal-open {
   overflow: hidden;
+  .ajax-overlay {
+    display: block;
+    svg {
+      display: none;
+    }
+  }
 }
 .modal {
   position: fixed;
@@ -12,6 +18,21 @@
   overflow: hidden;
   -webkit-overflow-scrolling: touch;
   outline: 0;
+  &.is-loading {
+    .modal-content {
+      @include spinner();
+    }
+    .modal-body {
+      visibility: hidden;
+    }
+    .modal-footer {
+      display: none;
+    }
+  }
+  iframe {
+    width: 100%;
+    height: 500px;
+  }
 }
 .modal.fade .modal-dialog {
   -webkit-transition: -webkit-transform .3s ease-out;
@@ -109,6 +130,7 @@
     margin: 30px auto;
     .modal--large & {
       width: 90%;
+      max-width: $grid-container-width;
     }
   }
   .modal-content {
@@ -122,5 +144,14 @@
 @media (min-width: 992px) {
   .modal--lg {
     width: 900px;
+  }
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

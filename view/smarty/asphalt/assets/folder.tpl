@@ -28,14 +28,17 @@
     {include file="base/form.prototype"}
 
     <form id="{$form->getId()}" class="form" action="{$app.url.request}" method="POST" role="form">
-        <div class="form__group">
-            {call formRows form=$form}
-
-            <div class="form__actions">
-                <button type="submit" class="btn btn--default">{translate key="button.save"}</button>
-                {if $referer}
-                    <a href="{$referer}" class="btn btn--link">{translate key="button.cancel"}</a>
-                {/if}
+        <div class="grid">
+            <div class="grid__12 grid--bp-med__6">
+                <div class="form__group">
+                    {call formRows form=$form}
+                </div>
+                <div class="form__actions">
+                    <button type="submit" class="btn btn--default">{translate key="button.save"}</button>
+                    {if $referer}
+                        <a href="{$referer}" class="btn btn--link">{translate key="button.cancel"}</a>
+                    {/if}
+                </div>
             </div>
         </div>
     </form>
