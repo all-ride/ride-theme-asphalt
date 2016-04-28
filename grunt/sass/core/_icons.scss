@@ -23,6 +23,15 @@
   &:after {
     text-transform: none;
   }
+  &--before {
+    margin-right: 5px;
+  }
+  &--after {
+    margin-left: 5px;
+  }
+  &--center {
+    vertical-align: middle;
+  }
 }
 
 // Spinning icons

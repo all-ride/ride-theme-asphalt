@@ -94,6 +94,9 @@
                                     <dt>{translate key="label.dimension"}</dt>
                                     <dd>{$dimension->getWidth()} x {$dimension->getHeight()}</dd>
                                 {/if}
+                                <dt>{translate key="label.size"}</dt>
+                                {$file = $asset->getValue()|decorate:'file'}
+                                <dd>{$file->getSize()|decorate:"storage.size"}</dd>
                             </dl>
 
                             {if $media}
