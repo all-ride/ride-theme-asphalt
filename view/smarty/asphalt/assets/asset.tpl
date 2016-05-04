@@ -35,7 +35,7 @@
         <div class="grid">
             <div class="grid__12 grid--bp-med__6">
                 <div class="form__group">
-                    {call formRows form=$form row='asset'}
+                    {call formRow form=$form row='asset'}
                 </div>
                 <div class="form__actions">
                     <button type="submit" class="btn btn--default">{translate key="button.save"}</button>
@@ -161,6 +161,8 @@
 
             </div>
             {/if}
+
+            {call formRows form=$form}
         </div>
     </form>
     <script type="text/template" id="form-image-preview-template">
