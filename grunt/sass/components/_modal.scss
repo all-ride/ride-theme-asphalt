@@ -19,6 +19,9 @@
   -webkit-overflow-scrolling: touch;
   outline: 0;
   &.is-loading {
+    .modal-dialog {
+      overflow: hidden;
+    }
     .modal-content {
       @include spinner();
     }
@@ -57,14 +60,17 @@
   position: relative;
   width: auto;
   margin: 10px;
+  max-height: 85%;
+  max-height: calc(100% - 20px);
+  overflow-y: auto;
+  border: 1px solid #999;
+  border: 1px solid rgba(0, 0, 0, .2);
 }
 .modal-content {
   position: relative;
   background-color: #fff;
   -webkit-background-clip: padding-box;
           background-clip: padding-box;
-  border: 1px solid #999;
-  border: 1px solid rgba(0, 0, 0, .2);
   outline: 0;
 }
 .modal-backdrop {
@@ -128,6 +134,7 @@
   .modal-dialog {
     width: 600px;
     margin: 30px auto;
+    max-height: calc(100% - 60px);
     .modal--large & {
       width: 90%;
       max-width: $grid-container-width;

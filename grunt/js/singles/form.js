@@ -417,8 +417,6 @@ rideApp.form = (function($, undefined) {
                 $modalFooter.toggle(framePath.split('/').pop() != 'add');
                 $modal.removeClass('is-loading');
               });
-            } else {
-              console.log('no target height');
             }
 
             //  When navigating inside the iframe, reset its height and add loading class.
