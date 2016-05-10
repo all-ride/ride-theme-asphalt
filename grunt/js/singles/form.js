@@ -306,26 +306,29 @@ rideApp.form = (function($, undefined) {
         plugins: plugins,
         create: $field.hasClass('js-tags') ? true : false,
         load: function(query, callback) {
-            if (!query.length || (minLength && query.length < minLength)) return callback();
-            var fetchUrl = url;
-            fetchUrl = fetchUrl.replace(/%25term%25/g, query);
-            fetchUrl = fetchUrl.replace(/%term%/g, query);
+          if (!query.length || (minLength && query.length < minLength)) return callback();
+          var fetchUrl = url;
+          fetchUrl = fetchUrl.replace(/%25term%25/g, query);
+          fetchUrl = fetchUrl.replace(/%term%/g, query);
 
-            $.ajax({
-                url: fetchUrl,
-                headers: headers,
-                success: function(data) {
-                  if (type === 'jsonapi') {
-                    res = data.meta.list;
-                  } else {
-                    res = data;
-                  }
-                  var map = $.map(res, function(value) {
-                    return {name: value};
-                  });
-                  callback(map);
-                }
-            });
+          // Don't show ajax overlay
+          window.overlaySelector = undefined;
+
+          $.ajax({
+            url: fetchUrl,
+            headers: headers,
+            success: function(data) {
+              if (type === 'jsonapi') {
+                res = data.meta.list;
+              } else {
+                res = data;
+              }
+              var map = $.map(res, function(value) {
+                return {name: value};
+              });
+              callback(map);
+            }
+          });
         }
       };
 
@@ -401,7 +404,7 @@ rideApp.form = (function($, undefined) {
           iframeQuery.selected = selected;
 
           $iframe.attr('src', iframeUrl + queryString.stringify(iframeQuery));
-          
+
           $iframe.on('load', function (e) {
             var $this = $(this);
             var $contents = $this.contents();
