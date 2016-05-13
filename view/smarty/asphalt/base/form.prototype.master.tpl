@@ -325,16 +325,16 @@
         {/if}
 
         {foreach $validators as $validator}
-            {foreach $validator->getOptions() as $option => $value}
+            {foreach $validator->getOptions() as $option => $optionValue}
                 {* Don't set min/max length attribute on autocomplete fields *}
                 {if isset($attributes["data-autocomplete-max-items"])}
                     {continue}
                 {/if}
 
                 {if $option == 'minimum'}
-                    {$attributes.minlength = $value}
+                    {$attributes.minlength = $optionValue}
                 {else if $option == 'maximum'}
-                    {$attributes.maxlength = $value}
+                    {$attributes.maxlength = $optionValue}
                 {/if}
             {/foreach}
         {/foreach}
