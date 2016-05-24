@@ -8,7 +8,7 @@
                         <input type="checkbox" name="folders[]" value="{$item->getId()}" />
                     </td>
                     <td>
-                        <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $item->id]}{$urlSuffix}">
+                        <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $item->id]}{$urlSuffix|replace:"&page=`$page`":""}">
                             <img src="{$app.url.base}/asphalt/img/folder.svg" width="50" height="50" class="data img-responsive" />
                         </a>
                         <a href="{url id="assets.folder.edit" parameters=["locale" => $locale, "folder" => $item->getId()]}?embed={$embed}&referer={$app.url.request|urlencode}">
