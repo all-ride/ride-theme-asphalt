@@ -25,6 +25,7 @@ rideApp.content = (function ($, undefined) {
     SirTrevor.Blocks.Quote = customBlocks.quote();
     SirTrevor.Blocks.Wysiwyg = customBlocks.wysiwyg();
     SirTrevor.Blocks.Embed = customBlocks.embed();
+    SirTrevor.Blocks.Code = customBlocks.code();
 
     $richContent.each(function () {
       $element = $(this);
@@ -384,8 +385,34 @@ rideApp.content = (function ($, undefined) {
           }
         }
       });
-    }
+    },
     //  END EMBED
+
+    //  START CODE
+    code: function () {
+      return SirTrevor.Block.extend({
+        type: 'code',
+
+        title: function () {
+          return 'Code';
+        },
+
+        icon_name: 'iframe',
+
+        editorHTML: [
+          '<div><label class="form__label">' + rideApp.translator.translate('label.code') + '</label></div>',
+          '<textarea name="code" class="st-required st-code" cols="80" rows="10"></textarea>',
+        ].join('\n'),
+
+        loadData: function (data) {
+          if (data.code) {
+            this.$('.st-code').val(data.code);
+          }
+        }
+      })
+
+    }
+    //  END CODE
 
   };
 
