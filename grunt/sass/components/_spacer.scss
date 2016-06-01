@@ -6,6 +6,14 @@
     padding-top: $rh-sml;
     border-top: 1px solid $gray-25;
   }
+  &--last {
+    margin-bottom: $rh-sml;
+    @each $rh, $px in $rhythm {
+      &-#{$rh} {
+        margin-bottom: $px;
+      }
+    }
+  }
 
   @each $rh, $px in $rhythm {
     &--#{$rh} {

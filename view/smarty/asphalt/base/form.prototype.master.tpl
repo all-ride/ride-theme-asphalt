@@ -315,21 +315,26 @@
     {$widget = $row->getWidget()}
     {if $widget}
         {$attributes = $widget->getAttributes()}
+        {$validators = $row->getValidators()}
+        {$value = $widget->getValue($part)}
+
         {if isset($attributes.class)}
             {$attributes.class = "`$attributes.class` form__text"}
         {else}
             {$attributes.class = 'form__text'}
         {/if}
 
-        {$validators = $row->getValidators()}
         {foreach $validators as $validator}
-            {foreach $validator->getOptions() as $option => $value}
+            {foreach $validator->getOptions() as $option => $optionValue}
+                {* Don't set min/max length attribute on autocomplete fields *}
+                {if isset($attributes["data-autocomplete-max-items"])}
+                    {continue}
+                {/if}
+
                 {if $option == 'minimum'}
-                    {$attributes.minlength = $value}
+                    {$attributes.minlength = $optionValue}
                 {else if $option == 'maximum'}
-                    {$attributes.maxlength = $value}
-                {* {else if $option == 'regex'}
-                    {$attributes.pattern = $value} *}
+                    {$attributes.maxlength = $optionValue}
                 {/if}
             {/foreach}
         {/foreach}
@@ -338,7 +343,6 @@
             {$attributes["data-multiple"] = "true"}
         {/if}
 
-        {$value = $widget->getValue($part)}
         {if is_array($value)}
             {foreach $value as $part => $val}
             <input type="text"
@@ -689,7 +693,7 @@
                                 {url id="assets.overview.locale" parameters=["locale" => $app.locale] var="assetsUrl"}
                             {/if}
                         {/if}
-                        <iframe {* data-src="{$assetsUrl}?embed=1&amp;selected={$value|escape}" *} data-url="{$assetsUrl}?embed=1" frameborder="0" width="100%" height="500"></iframe>
+                        <iframe {* data-src="{$assetsUrl}?embed=1&amp;selected={$value|escape}" *} data-url="{$assetsUrl}?embed=1" frameborder="0" scrolling="no"></iframe>
                     </div>
                     <div class="modal-footer">
                         <div class="grid">
@@ -840,7 +844,9 @@
                     {/if}
                 {else}
                     {foreach $value as $option}
-                        <option value="{$option|escape}" selected="selected">{$options[$option]}</option>
+                        {if $option|array_key_exists:$options}
+                            <option value="{$option|escape}" selected="selected">{$options[$option]}</option>
+                        {/if}
                     {/foreach}
                 {/if}
 

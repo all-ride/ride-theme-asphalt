@@ -1,6 +1,6 @@
 window.rideApp = window.rideApp || {};
 
-rideApp.content = (function($, undefined) {
+rideApp.content = (function ($, undefined) {
   var locale = document.documentElement.lang;
   var apiClient = new JsonApiClient('/api/v1');
 
@@ -14,18 +14,20 @@ rideApp.content = (function($, undefined) {
       .replace(/>/g, '&gt;');
   }
 
-  var _initialize = function() {
+  var _initialize = function () {
 
     var $richContent = $('.js-rich-content'),
     $element, options, redactorOptions;
 
-    SirTrevor.Blocks.Heading  = customBlocks.heading();
-    SirTrevor.Blocks.Asset    = customBlocks.asset();
-    SirTrevor.Blocks.Tweet    = customBlocks.tweet();
-    SirTrevor.Blocks.Quote    = customBlocks.quote();
-    SirTrevor.Blocks.Wysiwyg  = customBlocks.wysiwyg();
+    SirTrevor.Blocks.Heading = customBlocks.heading();
+    SirTrevor.Blocks.Asset = customBlocks.asset();
+    SirTrevor.Blocks.Tweet = customBlocks.tweet();
+    SirTrevor.Blocks.Quote = customBlocks.quote();
+    SirTrevor.Blocks.Wysiwyg = customBlocks.wysiwyg();
+    SirTrevor.Blocks.Embed = customBlocks.embed();
+    SirTrevor.Blocks.Code = customBlocks.code();
 
-    $richContent.each(function() {
+    $richContent.each(function () {
       $element = $(this);
       options = $element.data('rich-content-properties');
       redactorOptions = $element.data('redactor-properties');
@@ -356,8 +358,61 @@ rideApp.content = (function($, undefined) {
           }
         }
       });
-    }
+    },
     //  END QUOTE
+
+    //  START EMBED
+    embed: function () {
+      return SirTrevor.Block.extend({
+        type: 'embed',
+
+        title: function () {
+          return 'Embed';
+        },
+
+        icon_name: 'iframe',
+
+        editorHTML: [
+          '<div><label class="form__label">' + rideApp.translator.translate('label.embedCode') + '</label></div>',
+          '<textarea name="embed" class="st-required st-embed" cols="90" rows="2"></textarea>',
+          '<div class="embed-preview"></div>'
+        ].join('\n'),
+
+        loadData: function (data) {
+          if (data.embed) {
+            this.$('.st-embed').val(data.embed);
+            this.$('.embed-preview').html(data.embed).addClass('is-active');
+          }
+        }
+      });
+    },
+    //  END EMBED
+
+    //  START CODE
+    code: function () {
+      return SirTrevor.Block.extend({
+        type: 'code',
+
+        title: function () {
+          return 'Code';
+        },
+
+        icon_name: 'iframe',
+
+        editorHTML: [
+          '<div><label class="form__label">' + rideApp.translator.translate('label.code') + '</label></div>',
+          '<textarea name="code" class="st-required st-code" cols="80" rows="10"></textarea>',
+        ].join('\n'),
+
+        loadData: function (data) {
+          if (data.code) {
+            this.$('.st-code').val(data.code);
+          }
+        }
+      })
+
+    }
+    //  END CODE
 
   };
 

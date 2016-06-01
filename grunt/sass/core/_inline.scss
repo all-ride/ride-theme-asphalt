@@ -1,0 +1,22 @@
+.inline {
+  display: flex;
+  align-items: center;
+  &__item {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  @each $rh, $px in $rhythm {
+    &--#{$rh} {
+      margin-right: -$px;
+      margin-left: -$px;
+      margin-top: -$px;
+      .inline__item {
+        margin-top: $px;
+        margin-right: $px;
+        margin-left: $px;
+      }
+    }
+  }
+
+  @extend .inline--sml;
+}

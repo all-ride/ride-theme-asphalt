@@ -19,6 +19,8 @@
             {/block}
 
             {block name="styles_app"}
+                {$customCSS = $app.system->getConfig()->get('theme.custom.css')}
+
                 {if isset($app.styles)}
                     {foreach $app.styles as $style => $null}
                         {if substr($style, 0, 7) == 'http://' || substr(style, 0, 8) == 'https://' || substr($style, 0, 2) == '//'}
@@ -27,6 +29,9 @@
                             <link href="{$app.url.base}/asphalt/{$style}" rel="stylesheet" media="screen">
                         {/if}
                     {/foreach}
+                {/if}
+                {if $customCSS}
+                    <link href="{$app.url.base}/{$customCSS}" rel="stylesheet" media="screen">
                 {/if}
             {/block}
 
@@ -54,16 +59,15 @@
     </head>
     <body data-translation-url="{url id="api.locales.translations.exposed" parameters=["locale" => $app.locale]}" {block name="body_attributes"}{/block}>
     {literal}
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-70680296-1', 'auto');
-      ga('send', 'pageview');
-
-    </script>
+    <!-- Google Tag Manager -->
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TGMGRX"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TGMGRX');</script>
+    <!-- End Google Tag Manager -->
     {/literal}
 {block name="body"}
     {block name="taskbar"}
@@ -147,6 +151,8 @@
         <script type="text/javascript" src="{$app.url.base}/asphalt/js/ajax.js"></script>
     {/block}
     {block name="scripts_app"}
+    {$customJS = $app.system->getConfig()->get('theme.custom.js')}
+
     {if isset($app.javascripts)}
         {foreach $app.javascripts as $script => $null}
             {if substr($script, 0, 7) == 'http://' || substr($script, 0, 8) == 'https://' || substr($script, 0, 2) == '//'}
@@ -166,6 +172,9 @@
             {/foreach}
             });
         </script>
+    {/if}
+    {if $customJS}
+        <script src="{$app.url.base}/{$customJS}"></script>
     {/if}
     {/block}
 {/block}

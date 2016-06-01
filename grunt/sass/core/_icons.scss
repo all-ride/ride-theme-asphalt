@@ -23,6 +23,15 @@
   &:after {
     text-transform: none;
   }
+  &--before {
+    margin-right: 5px;
+  }
+  &--after {
+    margin-left: 5px;
+  }
+  &--center {
+    vertical-align: middle;
+  }
 }
 
 // Spinning icons
@@ -1553,4 +1562,8 @@
 
 .#{$fonts-icon-class}--tools-menu:before {
   content: "\f0ad";
+}
+
+.#{$fonts-icon-class}--submissions-menu:before {
+  content: "\f01c";
 }

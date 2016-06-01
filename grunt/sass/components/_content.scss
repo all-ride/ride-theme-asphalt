@@ -50,10 +50,6 @@
   cursor: pointer;
 }
 
-[data-icon=bin]:hover:before {
-  content: "binopen";
-}
-
 .st-outer {
   position: relative;
   margin-bottom: 20px;
@@ -587,9 +583,9 @@ ul.st-text-block {
   font-style: italic;
 }
 
-.st-tweet-embed {
+.st-tweet-embed,
+.st-code {
   width: 100%;
-  color: $gray-25;
   font-family: $font-family-monospace;
 }
 
@@ -600,6 +596,13 @@ ul.st-text-block {
 .st-block textarea {
   display: block;
   width: 100%;
+}
+
+.st-block .embed-preview.is-active {
+  margin-top: $rh-med;
+  .issuuembed {
+    margin: 0 auto;
+  }
 }
 
 label[for="form-content"] {
