@@ -170,7 +170,7 @@
         {if $widget}
             {$errors = $form->getValidationErrors()}
             {$errorsName = $widget->getName()}
-            {if $widget->isMultiple() && $part}
+            {if $widget->isMultiple() && $part !== null}
                 {$errorsName = "`$errorsName`[`$part`]"}
             {/if}
 
@@ -239,7 +239,7 @@
     {$widget = $row->getWidget()}
     {if $widget}
         <input type="hidden"
-               name="{$widget->getName()}{if $part}[{$part}]{/if}"
+               name="{$widget->getName()}{if $part !== null}[{$part}]{/if}"
                value="{$widget->getValue($part)|escape}"
            {foreach $widget->getAttributes() as $name => $attribute}
                {$name}="{$attribute|escape}"
@@ -384,7 +384,7 @@
         {/if}
 
         <input type="text" inputmode="number"
-               name="{$widget->getName()}{if $part}[{$part}]{/if}"
+               name="{$widget->getName()}{if $part !== null}[{$part}]{/if}"
                value="{$widget->getValue($part)|escape}"
            {foreach $attributes as $name => $attribute}
                {$name}="{$attribute|escape}"
@@ -423,7 +423,7 @@
         {/foreach}
 
         <input type="email"
-               name="{$widget->getName()}{if $part}[{$part}]{/if}"
+               name="{$widget->getName()}{if $part !== null}[{$part}]{/if}"
                value="{$widget->getValue($part)|escape}"
            {foreach $attributes as $name => $attribute}
                {$name}="{$attribute|escape}"
@@ -451,7 +451,7 @@
         {/if}
 
         <input type="date"
-               name="{$widget->getName()}{if $part}[{$part}]{/if}"
+               name="{$widget->getName()}{if $part !== null}[{$part}]{/if}"
                value="{$widget->getValue($part)|escape}"
            {foreach $attributes as $name => $attribute}
                {$name}="{$attribute|escape}"
@@ -490,7 +490,7 @@
         {/foreach}
 
         <input type="website"
-               name="{$widget->getName()}{if $part}[{$part}]{/if}"
+               name="{$widget->getName()}{if $part !== null}[{$part}]{/if}"
                value="{$widget->getValue($part)|escape}"
            {foreach $attributes as $name => $attribute}
                {$name}="{$attribute|escape}"
@@ -529,7 +529,7 @@
         {/foreach}
 
         <input type="password"
-               name="{$widget->getName()}{if $part}[{$part}]{/if}"
+               name="{$widget->getName()}{if $part !== null}[{$part}]{/if}"
            {foreach $attributes as $name => $attribute}
                {$name}="{$attribute|escape}"
            {/foreach}
@@ -613,7 +613,7 @@
             {/foreach}
         {/foreach}
 
-        <textarea name="{$widget->getName()}{if $part}[{$part}]{/if}"
+        <textarea name="{$widget->getName()}{if $part !== null}[{$part}]{/if}"
            {foreach $attributes as $name => $attribute}
                {$name}="{$attribute|escape}"
            {/foreach}
@@ -823,7 +823,7 @@
         {$options = $widget->getOptions()}
 
         {* <div class="form__select-item"> *}
-            <select name="{$widget->getName()}{if $part}[{$part}]{elseif $widget->isMultiple()}[]{/if}"
+            <select name="{$widget->getName()}{if $part !== null}[{$part}]{elseif $widget->isMultiple()}[]{/if}"
                {if $widget->isMultiple()} multiple="multiple"{/if}
                {foreach $attributes as $name => $attribute}
                    {$name}="{$attribute|escape}"
