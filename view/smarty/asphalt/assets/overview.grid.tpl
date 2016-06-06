@@ -11,7 +11,7 @@
                     {/if}
                     <div class="preview__image-container">
                         <div class="preview__image">
-                            <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $item->id]}{$urlSuffix}&page=&selected={$app.request->getQueryParameter('selected')}">
+                            <a href="{url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $item->id]}{$urlSuffix|replace:"&page=`$page`":""}&selected={$app.request->getQueryParameter('selected')}">
                                 <img src="{$app.url.base}/asphalt/img/folder.svg" width="160" height="125" class="image image--full-width" />
                             </a>
                         </div>
