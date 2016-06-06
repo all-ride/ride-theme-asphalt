@@ -151,7 +151,7 @@
 }
 .selectize-input {
   border: 1px solid #d0d0d0;
-  padding: 8px 36px 8px 8px;
+  padding: 8px;
   display: inline-block;
   width: 100%;
   overflow: hidden;
@@ -292,7 +292,10 @@
 .selectize-control.single .selectize-input.input-active input {
   cursor: text;
 }
-.selectize-control.single .selectize-input:after {
+.selectize-control.single .selectize-input.has-options {
+  padding-right: 36px;
+}
+.selectize-control.single .selectize-input.has-options:after {
   content: ' ';
   display: block;
   position: absolute;
