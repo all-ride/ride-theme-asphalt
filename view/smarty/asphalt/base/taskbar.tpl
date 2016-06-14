@@ -9,8 +9,8 @@
         {elseif $class}
             <li class="{$class}">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="icon icon--{$item->__toString()|replace:'.':'-'}"></i>
-                    {$item->getLabel()}
+                    <i class="icon icon--before icon--{$item->__toString()|replace:'.':'-'}"></i>
+                    <span>{$item->getLabel()}</span>
                     <i class="icon icon--angle-down"></i>
                 </a>
                 <ul class="dropdown__menu">
@@ -62,35 +62,35 @@
     <div class="container">
         {block name="taskbar_title"}<a class="navbar__brand" href="{$app.url.base}">{$title}</a>{/block}
 
-        <ul class="navbar__nav nav">
-        {block name="taskbar_applications"}
-            {if $applicationsMenu->hasItems()}
-                {call taskbarMenuItems items=$applicationsMenu->getItems() class="dropdown"}
-            {/if}
-        {/block}
+        <ul class="navbar__nav nav pull--left">
+            {block name="taskbar_applications"}
+                {if $applicationsMenu->hasItems()}
+                    {call taskbarMenuItems items=$applicationsMenu->getItems() class="dropdown"}
+                {/if}
+            {/block}
         </ul>
-        <ul class="navbar__nav navbar__right nav">
+        <ul class="navbar__nav nav pull--right">
             {block name="taskbar_panels"}
             {/block}
             {block name="taskbar_menu"}
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    {if $app.user}
-                        <i class="icon icon--user"></i>
-                        {$app.user->getDisplayName()}
-                    {else}
-                        {translate key="label.user.anonymous"}
-                    {/if}
-                    <i class="icon icon--angle-down"></i>
-                </a>
-                <ul class="dropdown__menu dropdown__menu--right">
-                    {block name="taskbar_settings"}
-                        {if $settingsMenu->hasItems()}
-                            {call taskbarMenuItems items=$settingsMenu->getItems()}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        {if $app.user}
+                            <i class="icon icon--before icon--user"></i>
+                            {$app.user->getDisplayName()}
+                        {else}
+                            {translate key="label.user.anonymous"}
                         {/if}
-                    {/block}
-                </ul>
-            </li>
+                        <i class="icon icon--angle-down"></i>
+                    </a>
+                    <ul class="dropdown__menu dropdown__menu--right">
+                        {block name="taskbar_settings"}
+                            {if $settingsMenu->hasItems()}
+                                {call taskbarMenuItems items=$settingsMenu->getItems()}
+                            {/if}
+                        {/block}
+                    </ul>
+                </li>
             {/block}
         </ul>
     </div>
