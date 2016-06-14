@@ -36,7 +36,7 @@
                         <div class="login__or"><span>{translate key="label.or"}</span></div>
                         <ul class="list--unstyled">
                             {foreach $urls as $service => $url}
-                                <li><a href="{$url}" class="btn btn--secondary">{translate key="button.login.`$service`"}</a></li>
+                                <li><a href="{$url}" class="btn">{translate key="button.login.`$service`"}</a></li>
                             {/foreach}
                         </ul>
                     {/if}
