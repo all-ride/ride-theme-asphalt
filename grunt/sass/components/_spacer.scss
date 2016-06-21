@@ -1,25 +1,18 @@
 .spacer {
   & + & {
-    margin-top: $rh-sml;
+    margin-top: $rh-med;
   }
-  &--divider {
-    padding-top: $rh-sml;
+
+  &--border {
+    padding-top: $rh-med;
     border-top: 1px solid $gray-25;
-  }
-  &--last {
-    margin-bottom: $rh-sml;
-    @each $rh, $px in $rhythm {
-      &-#{$rh} {
-        margin-bottom: $px;
-      }
-    }
   }
 
   @each $rh, $px in $rhythm {
     &--#{$rh} {
       [class*="spacer"] + & {
         margin-top: $px;
-        &.spacer--divider {
+        &.spacer--border {
           padding-top: $px;
         }
       }

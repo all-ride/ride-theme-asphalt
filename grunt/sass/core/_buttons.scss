@@ -1,3 +1,6 @@
+// DEPRECATED:
+// .btn--secdondary
+
 .btn {
   @include button-variant($white, $gray-75, $gray-75);
   @include transitions((background, border));
@@ -44,9 +47,6 @@
     &--#{$type} {
       @include button-variant($white, hsl(hue($color), 50%, 60%), hsl(hue($color), 50%, 50%));
     }
-  }
-  &--secondary {
-    @include button-variant($white, $blue-75, darken($blue-75, 10%));
   }
 
   &--link {
