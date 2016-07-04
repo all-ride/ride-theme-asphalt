@@ -1,8 +1,7 @@
-{$documentLang = {$app.locale|replace:'_':'-'}}
 <!doctype html>
-<!--[if IE 8]> <html class="no-js lt-ie9 lt-ie10" lang="{$documentLang}"> <![endif]-->
-<!--[if IE 9]> <html class="no-js lt-ie10" lang="{$documentLang}"> <![endif]-->
-<!--[if gt IE 9]><!--> <html class="no-js" lang="{$documentLang}"> <!--<![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9 lt-ie10" lang="{$app.locale}"> <![endif]-->
+<!--[if IE 9]> <html class="no-js lt-ie10" lang="{$app.locale}"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="{$app.locale}"> <!--<![endif]-->
     <head>
         {block name="head"}
             <meta charset="utf-8">
@@ -57,7 +56,7 @@
             {/block}
         {/block}
     </head>
-    <body data-translation-url="{url id="api.locales.translations.exposed" parameters=["locale" => $documentLang]}" {block name="body_attributes"}{/block}>
+    <body data-translation-url="{url id="api.locales.translations.exposed" parameters=["locale" => $app.locale]}" {block name="body_attributes"}{/block}>
     {literal}
     <!-- Google Tag Manager -->
     <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TGMGRX"
