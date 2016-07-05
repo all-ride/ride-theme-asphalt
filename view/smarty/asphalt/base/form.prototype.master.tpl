@@ -648,11 +648,11 @@
             {$assets = $widget->getAssets()}
             {foreach $assets as $asset}
                 <div class="form__asset" data-id="{$asset->getId()}">
-                    {if $item->getThumbnail()}
-                        <img src="{image src=$item->getThumbnail() width=160 height=125 transformation='crop'}" alt="" class="image image--full-width" title="{$item->getName()}"/>
+                    {if $asset->getThumbnail()}
+                        <img src="{image src=$asset->getThumbnail() width=160 height=125 transformation='crop'}" alt="" class="image image--full-width" title="{$asset->getName()}"/>
                     {else}
-                        {$imgSource = "asphalt/img/preview/`$item->getType()`.png"}
-                        <img src="{image src=$imgSource}" alt="" class="image" title="{$item->getName()}"/>
+                        {$imgSource = "asphalt/img/preview/`$asset->getType()`.png"}
+                        <img src="{image src=$imgSource}" alt="" class="image" title="{$asset->getName()}"/>
                     {/if}
                     <a href="#" class="form__remove-asset">&times;</a>
                 </div>
