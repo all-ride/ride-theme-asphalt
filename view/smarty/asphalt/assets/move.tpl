@@ -52,17 +52,11 @@
                         <div class="preview__image-container">
                             <div class="preview__image">
                                 {if $item->getThumbnail()}
-                                    {$imgSource = $item->getThumbnail()}
-                                {elseif !$item->getThumbnail() && $item->getType() == 'audio'}
-                                    {$imgSource = "asphalt/img/audio.svg"}
-                                {elseif !$item->getThumbnail() && $item->getMime() == 'application/pdf'}
-                                    {$imgSource = "asphalt/img/pdf.svg"}
-                                {elseif !$item->getThumbnail() && substr_count($item->getMime(), 'application') > 0}
-                                    {$imgSource = "asphalt/img/document.svg"}
+                                    <img src="{image src=$item->getThumbnail() width=160 height=125 transformation='crop'}" alt="" class="image image--full-width" title="{$item->getName()}"/>
                                 {else}
-                                    {$imgSource = "asphalt/img/unknown.png"}
+                                    {$imgSource = "asphalt/img/preview/`$item->getType()`.png"}
+                                    <img src="{image src=$imgSource}" alt="" class="image" title="{$item->getName()}"/>
                                 {/if}
-                                <img src="{image src=$imgSource width=160 height=125 transformation="crop"}" class="image image--full-width" title="{$item->getName()}" />
                             </div>
                         </div>
                         <div class="preview__name-container">
