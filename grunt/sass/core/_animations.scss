@@ -1,3 +1,4 @@
+// Form submit animation
 @keyframes move {
   0% {
     left: -100%;
@@ -7,26 +8,12 @@
   }
 }
 
+// Icons
 @keyframes spin {
   0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+    transform: rotate(0deg);
   }
   100% {
-    -webkit-transform: rotate(359deg);
-            transform: rotate(359deg);
+    transform: rotate(359deg);
   }
-}
-
-
-.roll-in {
-  @include transitions((opacity, transform));
-}
-.roll-in--pre {
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-.anim--spin {
-  animation: spin 2s infinite linear;
 }

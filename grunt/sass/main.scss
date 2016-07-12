@@ -1,6 +1,3 @@
-//! ==  Setupfiles ==
-// @import 'compass/css3', 'compass/utilities';
-
 // Core variables and mixins
 @import "core/normalize";
 
@@ -19,6 +16,9 @@
 @import "core/forms";
 @import "core/images";
 @import 'core/lists';
+
+@import 'core/spinner';
+@import 'core/ajax';
 
 // Components
 @import 'components/main';
@@ -45,7 +45,6 @@
 @import 'components/label';
 @import 'components/selectize';
 @import 'components/cookiemonster';
-@import 'components/tree-spinner';
 @import 'components/cropper';
 @import 'components/alertify';
 @import 'components/spacer';

@@ -10,19 +10,6 @@ rideApp.common = (function($, undefined) {
     // First set window size
     this.windowResize();
     $window.on('resize', debounce(rideApp.common.windowResize, 250, false));
-
-    this.svgFallback();
-
-    _animations();
-  };
-
-  var _animations = function() {
-    $('.roll-in--pre').each(function() {
-      var el = this;
-      setTimeout(function() {
-        el.classList.remove('roll-in--pre');
-      }, 500);
-    });
   };
 
   var _windowResize = function() {
@@ -30,26 +17,6 @@ rideApp.common = (function($, undefined) {
       windowWidth: $window.width(),
       windowHeight: $window.height()
     });
-  };
-
-  var _svgFallback = function() {
-    if (!Modernizr.svg) {
-      var $html = $('html'),
-          $imgs = $('img[src$=".svg"]');
-
-      $imgs.each(function(k,v){
-        var $img = $(v),
-            fallback = $img.attr('data-url'),
-            width = $img.attr('width'),
-            height = $img.attr('height');
-
-        $img.attr('src', fallback);
-        // IE8 fix
-        if ($html.hasClass('lt-ie9')) {
-          $img.parent('a').css({ 'width' : width , 'height' : height });
-        }
-      });
-    }
   };
 
   var _toggleSubmenu = function() {
@@ -104,7 +71,6 @@ rideApp.common = (function($, undefined) {
     init: _initialize,
     windowResize: _windowResize,
     toggleSubmenu: _toggleSubmenu,
-    svgFallback: _svgFallback,
     handleXHRCallback: _handleXHRCallback,
     finalize: _finalize
   };
