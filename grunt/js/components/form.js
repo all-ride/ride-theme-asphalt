@@ -15,12 +15,18 @@ rideApp.formComponent = (function($, undefined) {
   var _initialize = function() {
     $forms.on('click', 'button[type=submit]', this.submit);
 
-    if ($forms.length && $forms.parsley().on !== undefined) {
-      $forms.parsley().on('form:error', function() {
-        _checkValidation(this.$element);
-      });
-      $forms.parsley().on('field:success', function() {
-        _checkValidation(this.$element.parents('form'));
+    if ($forms.length) {
+      if ($forms.parsley().on !== undefined) {
+        $forms.parsley().on('form:error', function() {
+          _checkValidation(this.$element);
+        });
+        $forms.parsley().on('field:success', function() {
+          _checkValidation(this.$element.parents('form'));
+        });
+      }
+
+      $forms.each(function() {
+        _checkValidation($(this));
       });
     }
   };
@@ -34,7 +40,7 @@ rideApp.formComponent = (function($, undefined) {
       $tabs.each(function() {
         var $tab = $(this),
             panelID = $tab.find('a').attr('href'),
-            $errors = $(panelID).find('.parsley-error');
+            $errors = $(panelID).find('.parsley-error,.form__error');
         if ($errors.length) {
           $tab.addClass('error');
         }
