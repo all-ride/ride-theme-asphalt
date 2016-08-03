@@ -816,52 +816,58 @@
         {$value = $widget->getValue()}
         {$options = $widget->getOptions()}
 
-        {* <div class="form__select-item"> *}
-            <select name="{$widget->getName()}{if $part !== null}[{$part}]{elseif $widget->isMultiple()}[]{/if}"
-               {if $widget->isMultiple()} multiple="multiple"{/if}
-               {foreach $attributes as $name => $attribute}
-                   {$name}="{$attribute|escape}"
-               {/foreach}
+        {*
+            We don't want to break old sites so we check for false
+            Old value is null
+        *}
+        {if $row->getOption('order') === false}
+            {$attributes['data-order'] = 'false'}
+        {else}
+            {$attributes['data-order'] = 'true'}
+        {/if}
 
-               {if $value}
-                  {if is_array($value)}
-                     data-value="{foreach $value as $k => $v}{$k}{if !$v@last},{/if}{/foreach}"
-                  {else}
-                     data-value="{$value}"
-                  {/if}
+        <select name="{$widget->getName()}{if $part !== null}[{$part}]{elseif $widget->isMultiple()}[]{/if}"
+           {if $widget->isMultiple()} multiple="multiple"{/if}
+           {foreach $attributes as $name => $attribute}
+               {$name}="{$attribute|escape}"
+           {/foreach}
+
+           {if $value}
+              {if is_array($value)}
+                 data-value="{foreach $value as $k => $v}{$k}{if !$v@last},{/if}{/foreach}"
+              {else}
+                 data-value="{$value}"
               {/if}
-            >
-                {* Print selected items first *}
-                {if !is_array($value) && isset($value)}
-                    {if !is_object($value) && isset($options.$value)}
-                        <option value="{$value|escape}" selected="selected">{$options[$value]}</option>
-                    {/if}
-                {else}
-                    {foreach $value as $option}
-                        {if $option|array_key_exists:$options}
-                            <option value="{$option|escape}" selected="selected">{$options[$option]}</option>
-                        {/if}
-                    {/foreach}
+          {/if}
+        >
+            {* Print selected items first *}
+            {if !is_array($value) && isset($value)}
+                {if !is_object($value) && isset($options.$value)}
+                    <option value="{$value|escape}" selected="selected">{$options[$value]}</option>
                 {/if}
-
-                {* Print other items *}
-                {foreach $options as $option => $label}
-                    {if !isset($value) || (!is_array($value) && !strcmp($option, $value) == 0) || (is_array($value) && !isset($value[$option]))}
-                        {if is_array($label)}
-                            <optgroup label="{$option|escape}">
-                                {foreach $label as $o => $l}
-                                    <option value="{$o|escape}"{if (!is_array($value) && strcmp($o, $value) == 0) || (is_array($value) && isset($value[$o]))} selected="selected"{/if}>{$l}</option>
-                                {/foreach}
-                            </optgroup>
-                        {else}
-                            <option value="{$option|escape}">{$label}</option>
-                        {/if}
+            {else}
+                {foreach $value as $option}
+                    {if $option|array_key_exists:$options}
+                        <option value="{$option|escape}" selected="selected">{$options[$option]}</option>
                     {/if}
                 {/foreach}
-            </select>
-            {* <label for="{$attributes.id}"><i class="icon icon--chevron-down"></i></label>
-        </div> *}
+            {/if}
 
+            {* Print other items *}
+            {foreach $options as $option => $label}
+                {if !isset($value) || (!is_array($value) && !strcmp($option, $value) == 0) || (is_array($value) && !isset($value[$option]))}
+                    {if is_array($label)}
+                        <optgroup label="{$option|escape}">
+                            {foreach $label as $o => $l}
+                                <option value="{$o|escape}"{if (!is_array($value) && strcmp($o, $value) == 0) || (is_array($value) && isset($value[$o]))} selected="selected"{/if}>{$l}</option>
+                            {/foreach}
+                        </optgroup>
+                    {else}
+                        <option value="{$option|escape}">{$label}</option>
+                    {/if}
+                {/if}
+            {/foreach}
+        </select>
 
     {/if}
 {/function}

@@ -261,17 +261,34 @@ rideApp.form = (function($, undefined) {
 
   var _selectize = function() {
     if (jQuery.fn.selectize) {
-      var $form = $('.form--selectize'),
-          selectizeOption = {
-            plugins: ['drag_drop', 'remove_button']
+      var $form = $('.form--selectize');
+      var defaultSelectizeOptions = {
+            plugins: ['remove_button']
           };
-      $('.form--selectize select:visible:not(.selectized)').selectize(selectizeOption).addClass('selectized');
+
+      initSelectize();
+
       $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-          $('.form--selectize select:visible').selectize(selectizeOption);
+        initSelectize();
       });
+
       $document.on('collectionAdded', function() {
-        $('.form--selectize select:visible:not(.selectized)').selectize(selectizeOption).addClass('selectized');
+        initSelectize();
       });
+
+      function initSelectize() {
+        var $selects = $form.find('select:visible:not(.selectized)');
+
+        $selects.each(function(i, select){
+          var selectizeOptions = $.extend(true, {}, defaultSelectizeOptions);
+
+          if (select.dataset.order === 'true') {
+            selectizeOptions.plugins.push('drag_drop');
+          }
+
+          $(select).selectize(selectizeOptions).addClass('selectized');
+        });
+      }
     }
   };
 
