@@ -340,6 +340,9 @@
 .selectize-control.multi .selectize-input.disabled [data-value] .remove {
   background: none;
 }
+.selectize-control.multi .selectize-input.ui-sortable [data-value] {
+  cursor: move;
+}
 .selectize-control.multi .selectize-input [data-value] {
   text-shadow: 0 1px 0 rgba(0, 51, 83, 0.3);
   background-color: #1b9dec;

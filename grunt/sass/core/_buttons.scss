@@ -33,7 +33,7 @@
 
   // Modifiers
   &--default {
-    @include button-variant($color-text, $gray-0, $gray-25);
+    @include button-variant($color-text, $gray-0, $gray-10);
     &:active,
     &.active,
     .open > &.dropdown-toggle {
