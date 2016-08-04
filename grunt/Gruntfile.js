@@ -6,11 +6,13 @@ module.exports = function(grunt) {
         main: {},
         polyfill: {},
         jquery: {},
-        modernizr: {}
+        richContent: {}
     };
+
     uglifyTargets['main'][target + '/js/main.min.js'] = ['build/js/main.js'];
     uglifyTargets['polyfill'][target + '/js/polyfill.min.js'] = ['build/js/polyfill.js'];
     uglifyTargets['jquery'][target + '/js/jquery.min.js'] = ['build/js/jquery.js'];
+    uglifyTargets['richContent'][target + '/js/rich.content.js'] = ['build/js/rich.content.js'];
 
     // All configuration goes here
     grunt.initConfig({
@@ -22,6 +24,7 @@ module.exports = function(grunt) {
             main: {
                 src: [
                     'js/libs/*.js', // All JS in the libs folder
+                    '!js/libs/sir-trevor.js',
                     'js/libs/bootstrap/*.js', // All JS in the bootstrap folder
                     '!js/bootstrap/excludes/*', // Exclude some of the bootstrap files
                     'js/components/*.js', // All JS in the components folder
@@ -41,6 +44,13 @@ module.exports = function(grunt) {
                     'js/jquery-ui.js'
                 ],
                 dest: 'build/js/jquery.js'
+            },
+            richContent: {
+                src: [
+                    'js/libs/sir-trevor.js',
+                    'js/singles/rich.content.js'
+                ],
+                dest: 'build/js/rich.content.js'
             }
         },
 
@@ -55,12 +65,18 @@ module.exports = function(grunt) {
             jquery: {
                 files: uglifyTargets['jquery']
             },
+            richContent: {
+                files: uglifyTargets['richContent']
+            },
             singles: {
                 files: [{
-                  expand: true,
-                  cwd: 'js/singles',
-                  src: '**/*.js',
-                  dest: target + '/js'
+                    expand: true,
+                    cwd: 'js/singles',
+                    src: [
+                        '**/*.js',
+                        '!rich.content.js'
+                    ],
+                    dest: target + '/js'
               }]
             }
         },
