@@ -445,12 +445,12 @@
     {if $widget}
         {$attributes = $widget->getAttributes()}
         {if isset($attributes.class)}
-            {$attributes.class = "`$attributes.class` form__text"}
+            {$attributes.class = "`$attributes.class` form__text js-datepicker"}
         {else}
-            {$attributes.class = 'form__text'}
+            {$attributes.class = 'form__text js-datepicker'}
         {/if}
 
-        <input type="date"
+        <input type="text"
                name="{$widget->getName()}{if $part !== null}[{$part}]{/if}"
                value="{$widget->getValue($part)|escape}"
            {foreach $attributes as $name => $attribute}

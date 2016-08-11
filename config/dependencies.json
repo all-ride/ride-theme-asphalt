@@ -4,6 +4,11 @@
             "interfaces": "ride\\library\\template\\theme\\Theme",
             "class": "ride\\library\\template\\theme\\AsphaltTheme",
             "id": "asphalt"
+        },
+        {
+            "interfaces": "ride\\library\\form\\row\\Row",
+            "class": "ride\\library\\form\\row\\AsphaltDateRow",
+            "id": "date"
         }
     ]
 }

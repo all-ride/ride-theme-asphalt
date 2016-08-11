@@ -10,9 +10,24 @@ $.extend(window.Parsley.options, {
 window.ParsleyValidator.setLocale('nl');
 
 rideApp.formComponent = (function($, undefined) {
+
   var $forms = $('form');
+  var $dateFields = $('.js-datepicker');
 
   var _initialize = function() {
+
+    if (Pikaday) {
+
+      $dateFields.each(function (index, field) {
+
+        new Pikaday($.extend({
+          field: field,
+          firstDay: 1
+        }, $(this).data()));
+
+      });
+    }
+
     $forms.on('click', 'button[type=submit]', this.submit);
 
     if ($forms.length) {
