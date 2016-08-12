@@ -16,7 +16,7 @@ rideApp.formComponent = (function($, undefined) {
 
   var _initialize = function() {
 
-    if (Pikaday) {
+    if (Pikaday !== undefined) {
 
       $dateFields.each(function (index, field) {
 
