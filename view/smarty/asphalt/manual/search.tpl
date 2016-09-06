@@ -2,8 +2,8 @@
 
 {block name="manual_content" append}
     {if $query}
-        <h2>{translate key="search.title.query" query=$searchQuery|escape}</h2>
-        
+        <h2>{translate key="search.title.query" query=$searchQuery}</h2>
+
         {if $searchResult}
             <ul>
                 {foreach $searchResult as $name => $page}

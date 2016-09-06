@@ -39,7 +39,7 @@
     {foreach $parameters as $key => $value}
             <tr>
                 <td><a href="{url id="system.parameters.edit" parameters=["key" => $key]}">{$key}</a></td>
-                <td>{$value|escape}</td>
+                <td>{$value}</td>
             </tr>
     {/foreach}
         </tbody>

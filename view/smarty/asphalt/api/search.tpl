@@ -10,8 +10,8 @@
     <div id="api">
         <div class="detail">
         {if $searchQuery}
-            <p>{translate key="label.api.search.query" query=$searchQuery|escape}</p>
-            
+            <p>{translate key="label.api.search.query" query=$searchQuery}</p>
+
             {if $searchClasses || $searchNamespaces}
                 {if $searchClasses}
                 <h3>{translate key="title.classes"}</h3>
@@ -21,7 +21,7 @@
                     {/foreach}
                 </ul>
                 {/if}
-                
+
                 {if $searchNamespaces}
                 <h3>{translate key="title.namespaces"}</h3>
                 <ul>

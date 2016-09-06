@@ -30,7 +30,7 @@
     {/if}
     <li>
         <form action="{$url}" class="navbar__form" role="search" method="{$method}">
-            <input type="text" name="query" class="form__text" placeholder="{translate key="label.search"}" value="{$query|escape}" />
+            <input type="text" name="query" class="form__text" placeholder="{translate key="label.search"}" value="{$query}" />
         </form>
     </li>
 {/function}

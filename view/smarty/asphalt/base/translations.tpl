@@ -12,7 +12,7 @@
     <div class="page-header">
         {if $query}
         <h1>
-            {translate key="title.translations.query" query=$query|escape}
+            {translate key="title.translations.query" query=$query}
             <small>{translate key="language.`$locale`"}</small>
         </h1>
         {else}
@@ -53,7 +53,7 @@
                 <th>
                     <form id="{$form->getId()}_search" class="form__search" action="{$app.url.request}" role="search" method="GET">
                         <label class="form__label">{translate key="label.search"}</label>
-                        <input type="text" name="query" class="form__text" value="{$query|escape}" />
+                        <input type="text" name="query" class="form__text" value="{$query}" />
                     </form>
                 </th>
             </tr>
@@ -65,8 +65,8 @@
         <tbody>
         {foreach $translations as $key => $value}
             <tr>
-                <td><a href="{url id="system.translations.edit" parameters=["locale" => $locale, "key" => $key]}{if $referer}?referer={$referer|escape}{/if}">{$key}</a></td>
-                <td>{$value|escape}</td>
+                <td><a href="{url id="system.translations.edit" parameters=["locale" => $locale, "key" => $key]}{if $referer}?referer={$referer}{/if}">{$key}</a></td>
+                <td>{$value}</td>
             </tr>
         {/foreach}
         </tbody>

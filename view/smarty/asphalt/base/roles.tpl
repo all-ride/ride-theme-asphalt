@@ -10,7 +10,7 @@
 
 {block name="content" append}
     {$tableActions = []}
-    {$referer = $app.url.request|escape}
+    {$referer = $app.url.request}
 
     {url id="system.security.role.add" var="urlRoleAdd"}
     {url id="system.security.user" var="urlUsers"}

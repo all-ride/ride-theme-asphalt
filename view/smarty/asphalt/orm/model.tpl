@@ -62,7 +62,7 @@
             {foreach $options as $name => $value}
                 <tr>
                     <td>{$name}</td>
-                    <td>{$value|escape}</td>
+                    <td>{$value}</td>
                 </tr>
             {/foreach}
         </tbody>

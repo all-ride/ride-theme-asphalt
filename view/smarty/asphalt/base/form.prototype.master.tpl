@@ -73,7 +73,7 @@
 
                 {call formCollectionPrototype assign="prototype" form=$form row=$row part='%prototype%'}
 
-                <div class="collection-controls form__collection" data-prototype="{$prototype|escape:"html"|trim|replace:"\n":''}">
+                <div class="collection-controls form__collection" data-prototype="{$prototype|trim|replace:"\n":''}">
                     {call formWidgetCollection form=$form row=$row part=$part}
 
                    {if $errors}
@@ -104,7 +104,7 @@
                 {$attributes = $widget->getAttributes()}
                 <div
                 {foreach $attributes as $name => $attribute}
-                    {$name}="{$attribute|escape}"
+                    {$name}="{$attribute}"
                 {/foreach}
                 >
             {/if}
@@ -240,9 +240,9 @@
     {if $widget}
         <input type="hidden"
                name="{$widget->getName()}{if $part !== null}[{$part}]{/if}"
-               value="{$widget->getValue($part)|escape}"
+               value="{$widget->getValue($part)}"
            {foreach $widget->getAttributes() as $name => $attribute}
-               {$name}="{$attribute|escape}"
+               {$name}="{$attribute}"
            {/foreach}
          />
     {/if}
@@ -269,9 +269,9 @@
         {$value = $widget->getValue($part)}
         <p
            {foreach $attributes as $name => $attribute}
-               {$name}="{$attribute|escape}"
+               {$name}="{$attribute}"
            {/foreach}
-         >{if $row->getOption('html')}{$value}{else}{$value|escape}{/if}</p>
+         >{if $row->getOption('html')}{$value}{else}{$value}{/if}</p>
     {/if}
 {/function}
 
@@ -295,9 +295,9 @@
 
         <button
             name="{$widget->getName()}{if $widget->isMultiple() || $part !== null}[{$part}]{/if}"
-            value="{$widget->getValue($part)|escape}"
+            value="{$widget->getValue($part)}"
            {foreach $attributes as $name => $attribute}
-               {$name}="{$attribute|escape}"
+               {$name}="{$attribute}"
            {/foreach}
          >{$row->getLabel()}</button>
     {/if}
@@ -347,18 +347,18 @@
             {foreach $value as $part => $val}
             <input type="text"
                    name="{$widget->getName()}{if $widget->isMultiple() || $part !== null}[{$part}]{/if}"
-                   value="{$val|escape}"
+                   value="{$val}"
                {foreach $attributes as $name => $attribute}
-                   {$name}="{$attribute|escape}"
+                   {$name}="{$attribute}"
                {/foreach}
              />
              {/foreach}
         {else}
             <input type="text"
                    name="{$widget->getName()}{if $widget->isMultiple() || $part !== null}[{$part}]{/if}"
-                   value="{$value|escape}"
+                   value="{$value}"
                {foreach $attributes as $name => $attribute}
-                   {$name}="{$attribute|escape}"
+                   {$name}="{$attribute}"
                {/foreach}
              />
         {/if}
@@ -385,9 +385,9 @@
 
         <input type="text" inputmode="number"
                name="{$widget->getName()}{if $part !== null}[{$part}]{/if}"
-               value="{$widget->getValue($part)|escape}"
+               value="{$widget->getValue($part)}"
            {foreach $attributes as $name => $attribute}
-               {$name}="{$attribute|escape}"
+               {$name}="{$attribute}"
            {/foreach}
          />
     {/if}
@@ -424,9 +424,9 @@
 
         <input type="email"
                name="{$widget->getName()}{if $part !== null}[{$part}]{/if}"
-               value="{$widget->getValue($part)|escape}"
+               value="{$widget->getValue($part)}"
            {foreach $attributes as $name => $attribute}
-               {$name}="{$attribute|escape}"
+               {$name}="{$attribute}"
            {/foreach}
          />
     {/if}
@@ -452,9 +452,9 @@
 
         <input type="text"
                name="{$widget->getName()}{if $part !== null}[{$part}]{/if}"
-               value="{$widget->getValue($part)|escape}"
+               value="{$widget->getValue($part)}"
            {foreach $attributes as $name => $attribute}
-               {$name}="{$attribute|escape}"
+               {$name}="{$attribute}"
            {/foreach}
          />
     {/if}
@@ -491,9 +491,9 @@
 
         <input type="website"
                name="{$widget->getName()}{if $part !== null}[{$part}]{/if}"
-               value="{$widget->getValue($part)|escape}"
+               value="{$widget->getValue($part)}"
            {foreach $attributes as $name => $attribute}
-               {$name}="{$attribute|escape}"
+               {$name}="{$attribute}"
            {/foreach}
          />
     {/if}
@@ -531,7 +531,7 @@
         <input type="password"
                name="{$widget->getName()}{if $part !== null}[{$part}]{/if}"
            {foreach $attributes as $name => $attribute}
-               {$name}="{$attribute|escape}"
+               {$name}="{$attribute}"
            {/foreach}
          />
     {/if}
@@ -570,16 +570,16 @@
             {foreach $value as $part => $val}
                 <textarea name="{$widget->getName()}{if $widget->isMultiple() || $part !== null}[{$part}]{/if}"
                    {foreach $attributes as $name => $attribute}
-                       {$name}="{$attribute|escape}"
+                       {$name}="{$attribute}"
                    {/foreach}
-                 >{$val|escape}</textarea>
+                 >{$val}</textarea>
              {/foreach}
         {else}
             <textarea name="{$widget->getName()}{if $widget->isMultiple() || $part !== null}[{$part}]{/if}"
                {foreach $attributes as $name => $attribute}
-                   {$name}="{$attribute|escape}"
+                   {$name}="{$attribute}"
                {/foreach}
-             >{$widget->getValue($part)|escape}</textarea>
+             >{$widget->getValue($part)}</textarea>
         {/if}
     {/if}
 {/function}
@@ -615,9 +615,9 @@
 
         <textarea name="{$widget->getName()}{if $part !== null}[{$part}]{/if}"
            {foreach $attributes as $name => $attribute}
-               {$name}="{$attribute|escape}"
+               {$name}="{$attribute}"
            {/foreach}
-         >{$widget->getValue($part)|escape}</textarea>
+         >{$widget->getValue($part)}</textarea>
     {/if}
 {/function}
 
@@ -665,9 +665,9 @@
         <input type="hidden"
                name="{$widget->getName()}"
                data-name="{$safeName}"
-               value="{$value|escape}"
+               value="{$value}"
            {foreach $attributes as $name => $attribute}
-               {$name}="{$attribute|escape}"
+               {$name}="{$attribute}"
            {/foreach}
          />
 
@@ -687,7 +687,7 @@
                                 {url id="assets.overview.locale" parameters=["locale" => $app.locale] var="assetsUrl"}
                             {/if}
                         {/if}
-                        <iframe {* data-src="{$assetsUrl}?embed=1&amp;selected={$value|escape}" *} data-url="{$assetsUrl}?embed=1" frameborder="0" scrolling="no"></iframe>
+                        <iframe {* data-src="{$assetsUrl}?embed=1&amp;selected={$value}" *} data-url="{$assetsUrl}?embed=1" frameborder="0" scrolling="no"></iframe>
                     </div>
                     <div class="modal-footer">
                         <div class="grid">
@@ -749,7 +749,7 @@
                        {if $name == 'id'}
                             {$attribute = "`$attribute`-`$part`"}
                        {/if}
-                       {$name}="{$attribute|escape}"
+                       {$name}="{$attribute}"
                    {/foreach}
              />
              {/if}
@@ -767,7 +767,7 @@
                                        {if $name == 'id'}
                                             {$attribute = "`$attribute`-`$option`"}
                                        {/if}
-                                       {$name}="{$attribute|escape}"
+                                       {$name}="{$attribute}"
                                    {/foreach}
                              />
                             {$label}
@@ -780,7 +780,7 @@
                     <label class="form__label form__label--checkbox{if isset($attributes.disabled)} form__label--muted{/if}">
                         <input type="checkbox" name="{$widget->getName()}" value="1"{if $value} checked="checked"{/if}
                             {foreach $attributes as $name => $attribute}
-                                {$name}="{$attribute|escape}"
+                                {$name}="{$attribute}"
                             {/foreach}
                         />
                         {$row->getDescription()}
@@ -829,7 +829,7 @@
         <select name="{$widget->getName()}{if $part !== null}[{$part}]{elseif $widget->isMultiple()}[]{/if}"
            {if $widget->isMultiple()} multiple="multiple"{/if}
            {foreach $attributes as $name => $attribute}
-               {$name}="{$attribute|escape}"
+               {$name}="{$attribute}"
            {/foreach}
 
            {if $value}
@@ -843,12 +843,12 @@
             {* Print selected items first *}
             {if !is_array($value) && isset($value)}
                 {if !is_object($value) && isset($options.$value)}
-                    <option value="{$value|escape}" selected="selected">{$options[$value]}</option>
+                    <option value="{$value}" selected="selected">{$options[$value]}</option>
                 {/if}
             {else}
                 {foreach $value as $option}
                     {if $option|array_key_exists:$options}
-                        <option value="{$option|escape}" selected="selected">{$options[$option]}</option>
+                        <option value="{$option}" selected="selected">{$options[$option]}</option>
                     {/if}
                 {/foreach}
             {/if}
@@ -857,13 +857,13 @@
             {foreach $options as $option => $label}
                 {if !isset($value) || (!is_array($value) && !strcmp($option, $value) == 0) || (is_array($value) && !isset($value[$option]))}
                     {if is_array($label)}
-                        <optgroup label="{$option|escape}">
+                        <optgroup label="{$option}">
                             {foreach $label as $o => $l}
-                                <option value="{$o|escape}"{if (!is_array($value) && strcmp($o, $value) == 0) || (is_array($value) && isset($value[$o]))} selected="selected"{/if}>{$l}</option>
+                                <option value="{$o}"{if (!is_array($value) && strcmp($o, $value) == 0) || (is_array($value) && isset($value[$o]))} selected="selected"{/if}>{$l}</option>
                             {/foreach}
                         </optgroup>
                     {else}
-                        <option value="{$option|escape}">{$label}</option>
+                        <option value="{$option}">{$label}</option>
                     {/if}
                 {/if}
             {/foreach}
@@ -895,7 +895,7 @@
             <input type="file"
                    name="{$widget->getName()}{if $part !== null}[{$part}]{/if}"
                {foreach $attributes as $name => $attribute}
-                   {$name}="{$attribute|escape}"
+                   {$name}="{$attribute}"
                {/foreach}
              />
          </div>
@@ -935,7 +935,7 @@
             <input type="file"
                    name="{$widget->getName()}{if $part !== null}[{$part}]{/if}"
                {foreach $attributes as $name => $attribute}
-                   {$name}="{$attribute|escape}"
+                   {$name}="{$attribute}"
                {/foreach}
              />
          </div>
@@ -996,7 +996,7 @@
 
     <div
        {foreach $attributes as $name => $attribute}
-           {$name}="{$attribute|escape}"
+           {$name}="{$attribute}"
        {/foreach}
      >
 
