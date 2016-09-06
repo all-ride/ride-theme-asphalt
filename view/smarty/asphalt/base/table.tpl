@@ -79,7 +79,7 @@
 
         {if $table->hasRows()}
             {block name="table.content"}
-                {$table->getHtml()}
+                {$table->getHtml() nofilter}
             {/block}
             {if $table->hasActions() || $table->hasPaginationOptions()}
                 <div class="grid">

@@ -141,7 +141,7 @@
         <script type="text/javascript">
             $(function() {
             {foreach $app.inlineJavascripts as $inlineJavascript}
-                {$inlineJavascript}
+                {$inlineJavascript nofilter}
             {/foreach}
             });
         </script>
