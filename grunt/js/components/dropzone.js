@@ -19,7 +19,7 @@ rideApp.dropzone = (function($, undefined) {
         location.reload();
       });
       this.on("sending", function(file, xhr, formData) {
-        formData.append("type", "file");
+        formData.append("resource", "file");
       });
     },
 
