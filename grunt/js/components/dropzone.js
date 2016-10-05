@@ -18,6 +18,9 @@ rideApp.dropzone = (function($, undefined) {
       $("#dropzone-upload").click(function() {
         location.reload();
       });
+      this.on("sending", function(file, xhr, formData) {
+        formData.append("resource", "file");
+      });
     },
 
     success : function(file, html) {
