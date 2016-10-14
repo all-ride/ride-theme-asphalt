@@ -2,7 +2,6 @@
     "name": "ride/theme-asphalt",
     "description": "Asphalt theme for the base web application of the Ride framework",
     "license": "MIT",
-    "version": "0.7.2",
     "authors": [
         {
             "name": "Joris Vandeweerd",
@@ -14,10 +13,10 @@
         }
     ],
     "require": {
-        "ride/app-template-smarty": ">=0.2.0",
-        "ride/lib-template": ">=0.4.0",
-        "ride/web-template-smarty": ">=0.3.9",
-        "ride/web-i18n-expose": ">=0.1.1"
+        "ride/app-template-smarty": "^1.0.0",
+        "ride/lib-template": "^1.0.0",
+        "ride/web-template-smarty": "^1.0.0",
+        "ride/web-i18n-expose": "^1.0.0"
     },
     "autoload": {
         "psr-0": {
