@@ -17,7 +17,7 @@
 
     {$tableMessages = json_encode($table->getActionConfirmationMessages())}
     <form id="{$tableForm->getId()}" action="{if isset($tableAction)}{$tableAction}{else}{$table->getFormUrl()}{/if}" method="POST" class="table spacer" role="form" data-confirm-messages="{$tableMessages|escape}">
-        {formWidget form=$tableForm row=$tableNameField}
+        {call formWidget form=$tableForm row=$tableNameField}
 
         <div class="form__group">
 
@@ -50,7 +50,7 @@
                     {if $table->hasSearch()}
                         {block name="table.search"}
                             {$tableForm->getRow($tableSearchQueryField)->getWidget()->setAttribute('placeholder', "label.search"|translate)}
-                            {formWidget form=$tableForm row=$tableSearchQueryField}
+                            {call formWidget form=$tableForm row=$tableSearchQueryField}
                         {/block}
                     {/if}
                 </div>
@@ -58,7 +58,7 @@
                     {if $table->hasOrderMethods()}
                         {block name="table.order"}
                             {translate key="label.table.order"}
-                            {formWidget form=$tableForm row=$tableOrderField}
+                            {call formWidget form=$tableForm row=$tableOrderField}
 
                             {if $table->getOrderDirection() == 'asc'}
                                 {assign var="direction" value="desc"}
@@ -88,7 +88,7 @@
                             {block name="table.actions"}
                                 {if $tableForm->hasRow($tableActionField)}
                                     <input type="checkbox" id="{$tableForm->getId()}-action-all" class="check-all" />
-                                    {formWidget form=$tableForm row=$tableActionField}
+                                    {call formWidget form=$tableForm row=$tableActionField}
                                 {/if}
                             {/block}
                         {/if}
@@ -107,7 +107,7 @@
                                 </div>
                                 <div class="grid--bp-med__3 pagination-options text--right">
                                     {if $table->getPaginationOptions()}
-                                        {formWidget form=$tableForm row=$tablePageRowsField}
+                                        {call formWidget form=$tableForm row=$tablePageRowsField}
                                         {translate key="label.table.rows.page"}
                                     {/if}
 
