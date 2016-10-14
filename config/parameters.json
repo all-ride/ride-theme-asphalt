@@ -1,3 +1,4 @@
 {
-    "template.theme": "asphalt"
+    "template.theme": "asphalt",
+    "template.smarty.plugin.asphalt": "%path%/src/ride/library/template/smarty/plugin/asphalt"
 }
