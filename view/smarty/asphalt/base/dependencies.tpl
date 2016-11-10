@@ -17,7 +17,7 @@
 
     {foreach $dependencies as $interface => $interfaceDependencies}
         {if $urlClass}
-    <h3><a href="{$urlClass}/{$interface|replace:'\\':'/'}">{$interface}</a></h3>
+    <h3><a href="{$urlClass}/{$interface|replace:'/\\\/':'/'}">{$interface}</a></h3>
         {else}
     <h3>{$interface}</h3>
         {/if}
@@ -35,7 +35,7 @@
                 <td>{$dependency->getId()}</td>
                 <td>
             {if $urlClass}
-                    <a href="{$urlClass}/{$dependency->getClassName()|replace:'\\':'/'}">{$dependency->getClassName()}</a>
+                    <a href="{$urlClass}/{$dependency->getClassName()|replace:'/\\\/':'/'}">{$dependency->getClassName()}</a>
             {else}
                     {$dependency->getClassName()}
             {/if}
@@ -48,7 +48,7 @@
                 {if $arguments}
                         <li>
                     {if $urlClass}
-                            <a href="{$urlClass}/{$dependency->getClassName()|replace:'\\':'/'}#method__construct">
+                            <a href="{$urlClass}/{$dependency->getClassName()|replace:'/\\\/':'/'}#method__construct">
                                 <span class="method">__construct()</span>
                             </a>
                     {else}
@@ -73,7 +73,7 @@
                 {foreach $calls as $call}
                         <li>
                     {if $urlClass}
-                            <a href="{$urlClass}/{$dependency->getClassName()|replace:'\\':'/'}#method{$call->getMethodName()}">
+                            <a href="{$urlClass}/{$dependency->getClassName()|replace:'/\\\/':'/'}#method{$call->getMethodName()}">
                                 <span class="method">{$call->getMethodName()}()</span>
                             </a>
                     {else}
@@ -87,11 +87,21 @@
                             {assign var="properties" value=$argument->getProperties()}
                                 <li>${$argument->getName()} ({$argument->getType()})
                             {if $properties}
-                                    <ul>
-                                {foreach $properties as $key => $value}
-                                        <li>{$key}: {$value}</li>
-                                {/foreach}
-                                    </ul>
+                                <ul>
+                                    {foreach $properties as $key => $value}
+                                        <li>{$key}:
+                                            {if !is_array($value)}
+                                                 {$value}
+                                            {else}
+                                                <ul>
+                                                {foreach $value as $property}
+                                                    <li>{$property}</li>
+                                                {/foreach}
+                                                </ul>
+                                            {/if}
+                                            </li>
+                                    {/foreach}
+                                </ul>
                             {/if}
                                 </li>
                         {/foreach}
