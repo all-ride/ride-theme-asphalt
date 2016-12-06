@@ -602,6 +602,11 @@
             {$attributes.class = 'form__text'}
         {/if}
 
+        {$locale = $row->getOption('locale')}
+        {if $locale}
+            {$attributes["data-locale"] = $locale}
+        {/if}
+
         {$validators = $row->getValidators()}
         {foreach $validators as $validator}
             {foreach $validator->getOptions() as $option => $value}
