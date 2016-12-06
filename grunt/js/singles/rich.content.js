@@ -1,7 +1,7 @@
 window.rideApp = window.rideApp || {};
 
 rideApp.content = (function ($, undefined) {
-  var locale = document.documentElement.lang;
+  var locale;
   var apiClient = new JsonApiClient('/api/v1');
 
   function htmlEscape(str) {
@@ -18,6 +18,7 @@ rideApp.content = (function ($, undefined) {
 
     var $richContent = $('.js-rich-content'),
     $element, options, redactorOptions;
+    locale = $richContent.data('locale');
 
     SirTrevor.Blocks.Heading = customBlocks.heading();
     SirTrevor.Blocks.Asset = customBlocks.asset();
