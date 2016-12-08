@@ -422,7 +422,7 @@ ul.st-text-block {
 .st-block-positioner__inner {
   background: #fff;
   position: relative;
-  z-index: 2;
+  z-index: 200;
   padding: 0.3em 0.5em;
 }
 
@@ -438,7 +438,7 @@ ul.st-text-block {
   bottom: 0;
   right: 0;
   opacity: 0;
-  z-index: 3;
+  z-index: 300;
 }
 
 .st-block__control-ui {
