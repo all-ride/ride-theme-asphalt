@@ -848,12 +848,12 @@
             {* Print selected items first *}
             {if !is_array($value) && isset($value)}
                 {if !is_object($value) && isset($options.$value)}
-                    <option value="{$value|escape}" selected="selected">{$options[$value]}</option>
+                    <option value="{$value|escape}" selected="selected">{$options[$value]|escape}</option>
                 {/if}
             {else}
                 {foreach $value as $option}
                     {if $option|array_key_exists:$options}
-                        <option value="{$option|escape}" selected="selected">{$options[$option]}</option>
+                        <option value="{$option|escape}" selected="selected">{$options[$option]|escape}</option>
                     {/if}
                 {/foreach}
             {/if}
@@ -864,11 +864,11 @@
                     {if is_array($label)}
                         <optgroup label="{$option|escape}">
                             {foreach $label as $o => $l}
-                                <option value="{$o|escape}"{if (!is_array($value) && strcmp($o, $value) == 0) || (is_array($value) && isset($value[$o]))} selected="selected"{/if}>{$l}</option>
+                                <option value="{$o|escape}"{if (!is_array($value) && strcmp($o, $value) == 0) || (is_array($value) && isset($value[$o]))} selected="selected"{/if}>{$l|escape}</option>
                             {/foreach}
                         </optgroup>
                     {else}
-                        <option value="{$option|escape}">{$label}</option>
+                        <option value="{$option|escape}">{$label|escape}</option>
                     {/if}
                 {/if}
             {/foreach}

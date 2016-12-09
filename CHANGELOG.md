@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.2] - 2016-12-09
+### Updated
+- escape the labels of an <option> in the form prototype
+
+## [1.1.1] - 2016-12-08
+### Updated
+- Sir Trevor position dropdown needs to have a higher z-index than the Redactor toolbar
+
 ## [1.1.0] - 2016-12-06
 ### Added
 - added locale data attribute to text areas
