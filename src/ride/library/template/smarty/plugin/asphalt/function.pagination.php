@@ -9,6 +9,7 @@ function smarty_function_pagination($params, &$smarty) {
     $onclick = null;
     $label = null;
     $class = null;
+    $pagination = null;
 
     foreach ($params as $k => $v) {
         switch ($k) {
@@ -18,14 +19,18 @@ function smarty_function_pagination($params, &$smarty) {
             case 'href':
             case 'onclick':
             case 'class':
+            case 'pagination':
                 $$k = $v;
                 break;
         }
     }
 
-    $pagination = new Pagination($pages, $page);
-    $pagination->setHref($href);
-    $pagination->setOnclick($onclick);
+    if ($pagination === null) {
+        $pagination = new Pagination($pages, $page);
+        $pagination->setHref($href);
+        $pagination->setOnclick($onclick);
+    }
+
     if ($label) {
         $pagination->setLabel($label);
     }
@@ -35,13 +40,11 @@ function smarty_function_pagination($params, &$smarty) {
 
     $anchors = $pagination->getAnchors();
 
-    $html = '<div class="btn-group">';
+    $html = '<ul class="pagination">';
     foreach ($anchors as $anchor) {
-        $anchor->addToClass('btn btn-default');
-
-        $html .= $anchor->getHtml();
+        $html .= '<li>' . $anchor->getHtml() . '</li>';
     }
-    $html .= '</div>';
+    $html .= '</ul>';
 
     return $html;
 }

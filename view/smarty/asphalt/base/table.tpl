@@ -102,7 +102,7 @@
 
                                 <div class="grid--bp-med__6">
                                     {if $pages > 1}
-                                        {pagination pagination=$table->getPagination()}
+                                        {call pagination pagination=$table->getPagination()}
                                     {/if}
                                 </div>
                                 <div class="grid--bp-med__3 pagination-options text--right">

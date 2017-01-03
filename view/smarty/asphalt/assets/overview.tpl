@@ -104,7 +104,7 @@
                         {if $pages > 1}
                             {url id="assets.folder.overview" parameters=["locale" => $locale, "folder" => $folder->id] var="urlPagination"}
                             {$urlPagination = "`$urlPagination``$urlSuffix`&limit=`$limit`&page=%page%"}
-                            {pagination pagination=$pagination}
+                            {call pagination pagination=$pagination}
                         {/if}
                     </div>
                     <div class="grid--bp-med__3 text--right">
