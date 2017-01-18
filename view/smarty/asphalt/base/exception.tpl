@@ -22,7 +22,6 @@
 
                 <div class="form__actions">
                     <button type="submit" class="btn btn--brand">{translate key="button.submit"}</button>
-                    <a class="btn btn--link" href="{url id="system.parameters"}">{translate key="button.cancel"}</a>
                 </div>
             </div>
         </form>
