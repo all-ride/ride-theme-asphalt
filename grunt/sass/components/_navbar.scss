@@ -1,43 +1,50 @@
 .navbar {
-  margin-bottom: $rh-lrg;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 900;
+  // Z-index should be higher than any other element on the page
+  // Sir Trevor delete controls currently have a z-index of 400
+  // Except for the modal, which currently has a z-index of 1100
   background: $gray-100;
   color: $white;
-}
 
-// Brand/project name
-.navbar__brand {
-  @include link-variant($white);
-  float: left;
-  padding: $rh-sml;
-  background: $color-brand-primary;
-  font-weight: $font-weight-bold;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
-.navbar__nav {
-  @include listreset;
-  > li {
+  // Brand/project name
+  &__brand {
+    @include link-variant($white);
     float: left;
-    > a {
-      @include link-variant($gray-0, $white);
-      display: inline-block;
-      padding: $rh-sml;
-      font-weight: $font-weight-bold;
-      text-decoration: none;
-      &:hover,
-      &:focus {
-        background: $gray-75;
+    padding: $rh-sml;
+    background: $color-brand-primary;
+    font-weight: $font-weight-bold;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  &__nav {
+    @include listreset;
+    > li {
+      float: left;
+      > a {
+        @include link-variant($gray-0, $white);
+        display: inline-block;
+        padding: $rh-sml;
+        font-weight: $font-weight-bold;
+        text-decoration: none;
+        &:hover,
+        &:focus {
+          background: $gray-75;
+        }
       }
+    }
+  }
+
+  &__form {
+    margin-top: 4px;
+    padding: 0 $rh-sml;
+    color: $color-text;
+    .form__text {
+      padding: 5px;
     }
   }
 }
 
-.navbar__form {
-  margin-top: 4px;
-  padding: 0 $rh-sml;
-  color: $color-text;
-  .form__text {
-    padding: 5px;
-  }
-}
