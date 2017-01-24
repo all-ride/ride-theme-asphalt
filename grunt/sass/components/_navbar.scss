@@ -2,10 +2,10 @@
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 900;
+  z-index: 8000;
   // Z-index should be higher than any other element on the page
-  // Sir Trevor delete controls currently have a z-index of 400
-  // Except for the modal, which currently has a z-index of 1100
+  // Highest element z-index currently is pika-single (4200)
+  // Except for the modal, which currently has a z-index of 9100
   background: $gray-100;
   color: $white;
 
