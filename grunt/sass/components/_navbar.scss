@@ -1,4 +1,7 @@
 .navbar {
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
   margin-bottom: $rh-lrg;
   background: $gray-100;
   color: $white;
