@@ -7,48 +7,6 @@
 //
 *, *:before, *:after { box-sizing: border-box; }
 
-// Page loading style
-//
-// html {
-//   &.js {
-//     &:before,
-//     &:after {
-//       content: "";
-//       display: block;
-//       width: 100%;
-//       height: 2px;
-//     }
-//     &:before {
-//       overflow: hidden;
-//     }
-//     &:after {
-//       animation: move 1s linear infinite;
-//       position: absolute;
-//       top: 0;
-//       left: -100%;
-//       z-index: 10;
-//       background: $color-brand-primary;
-//     }
-//   }
-//   &.wf-active,
-//   &.wf-inactive,
-//   &.js-done {
-//     &:before,
-//     &:after {
-//       display: none;
-//     }
-//   }
-// }
-
-// body {
-//   .js & {
-//     visibility: hidden !important;
-//   }
-//   .js-done & {
-//     visibility: visible !important;
-//   }
-// }
-
 // Html
 //
 html {
@@ -59,6 +17,8 @@ html {
 // Body
 //
 body {
+  position: relative;
+  padding-top: $rh-lrg * 2; // Nav bar height * 2
   min-width: 300px;
   background-color: $color-background;
   color: $color-text;
