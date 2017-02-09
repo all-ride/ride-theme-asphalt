@@ -14,37 +14,6 @@
  * @author Brian Reavis <brian@thirdroute.com>
  */
 
-// .selectize-control {
-//   position: relative;
-// }
-// .selectize-input {
-//   @extend .form__text;
-//   > input {
-//     border: none;
-//     display: inline-block;
-//     padding: 0;
-//     max-width: 100%;
-//     background: none;
-//     line-height: inherit;
-//     color: inherit;
-//     &:focus {
-//       outline: none;
-//     }
-//   }
-//   > * {
-//     display: inline-block;
-//   }
-//   div {
-//     padding: 2px 6px;
-//     margin: 0 3px 3px 0;
-//     color: #ffffff;
-//     cursor: pointer;
-//     background: #1da7ee;
-//     border: 1px solid #0073bb;
-//   }
-// }
-
-
 .selectize-control.plugin-drag_drop.multi > .selectize-input > div.ui-sortable-placeholder {
   visibility: visible !important;
   background: #f2f2f2 !important;
@@ -240,7 +209,7 @@
 }
 .selectize-dropdown {
   position: absolute;
-  z-index: 1055;
+  z-index: 600;
   border: 1px solid #d0d0d0;
   background: #ffffff;
   margin: -1px 0 0 0;
