@@ -5,7 +5,7 @@
   width: 300px;
   padding: $rh-med $rh-sml;
   background: $gray-0;
-  z-index: $zindex-layer-5;
+  z-index: 3000;
   h2 {
     @include fsRem(20px);
     font-weight: $font-weight-bold;

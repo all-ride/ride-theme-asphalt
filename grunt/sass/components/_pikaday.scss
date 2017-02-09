@@ -28,7 +28,7 @@ $pd-font-family: $font-family-sans;
 
 
 .pika-single {
-  z-index: 9999;
+  z-index: 4200;
   display: block;
   position: relative;
   color: $pd-text-color;
@@ -72,7 +72,7 @@ $pd-font-family: $font-family-sans;
   select {
     cursor: pointer;
     position: absolute;
-    z-index: 9998;
+    z-index: 4100;
     margin: 0;
     left: 0;
     top: 5px;
@@ -85,7 +85,7 @@ $pd-font-family: $font-family-sans;
   display: inline-block;
   *display: inline;
   position: relative;
-  z-index: 9999;
+  z-index: 4000;
   overflow: hidden;
   margin: 0;
   padding: 5px 3px;
