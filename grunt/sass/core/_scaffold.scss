@@ -24,7 +24,7 @@ html {
   @include fsRem($font-size-base);
   font-weight: $font-weight-base;
   line-height: lh($line-height-base);
-  &--adjusted {
+  &--with-header {
     position: relative;
     padding-top: $rh-lrg * 2; // Nav bar height * 2
   }
