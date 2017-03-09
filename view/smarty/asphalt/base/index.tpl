@@ -81,7 +81,7 @@
             {block name="content_title"}{/block}
             {block name="messages"}
                 {if isset($app.messages)}
-                    {$_messageTypes = ["error" => "danger", "warning" => "warning", "success" => "success", "information" => "info"]}
+                    {$_messageTypes = ["error" => "danger", "warning" => "warning", "success" => "success", "info" => "info"]}
                     {foreach $_messageTypes as $_messageType => $_messageClass}
                         {$_messages = $app.messages->getByType($_messageType)}
                         {if $_messages}
