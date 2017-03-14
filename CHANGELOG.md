@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Added
+- allow_delete option implementation to file and image field
+### Updated
+- fixed submission url of the exception view
+
+## [1.1.5]
+### Updated
+- Changed message type in index from information to info
+
 ## [1.1.4]
 ### Removed
 - removed cancel button from exception template
