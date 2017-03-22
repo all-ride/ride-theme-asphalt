@@ -29,6 +29,7 @@ rideApp.form = (function($, undefined) {
     }
 
     _selectize();
+    _pikaday();
     _autocomplete();
     this.assets.init();
 
