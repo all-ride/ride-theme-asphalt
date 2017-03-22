@@ -11,6 +11,7 @@ window.ParsleyValidator.setLocale('nl');
 
 rideApp.formComponent = (function($, undefined) {
 
+  var $document = $(document);
   var $forms = $('form');
   var $dateFields = $('.js-datepicker');
 
@@ -25,6 +26,21 @@ rideApp.formComponent = (function($, undefined) {
           firstDay: 1
         }, $(this).data()));
 
+      });
+
+      $document.on('collectionAdded', function (event) {
+
+        var $collection = $(event.target);
+        var $collectionDateFields = $collection.find('.js-datepicker');
+
+        $collectionDateFields.each(function (index, field) {
+
+          new Pikaday($.extend({
+            field: field,
+            firstDay: 1
+          }, $(this).data()));
+
+        });
       });
     }
 

@@ -1,1 +1,1 @@
-var rideApp=rideApp||{};rideApp.dashboard=function(a,b){var c=(a(document),a(window),a("html"),a("body"),function(){});return{initialize:c}}(jQuery),rideApp.dashboard.initialize();
+var rideApp=rideApp||{};rideApp.dashboard=function(a,b){a(document),a(window),a("html"),a("body");return{initialize:function(){}}}(jQuery),rideApp.dashboard.initialize();
