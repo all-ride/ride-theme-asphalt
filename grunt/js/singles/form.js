@@ -271,24 +271,23 @@ rideApp.form = (function($, undefined) {
     });
 
     $document.on('collectionAdded', function () {
-      console.log('collection was added');
       initPikaday();
     });
 
     function initPikaday() {
 
-      console.log('initializing Pikaday');
-
       var $datePickers = $('.js-datepicker:visible:not(.pikadayed)');
 
       $datePickers.each(function (i, field) {
 
-        new Pikaday($.extend({
+        var $field = $(field);
+
+        new Pikaday($.extend(true, {
           field: field,
           firstDay: 1
-        }, $(this).data()));
+        }, $field.data()));
 
-        $(field).addClass('pikadayed');
+        $field.addClass('pikadayed');
       });
     }
   };
