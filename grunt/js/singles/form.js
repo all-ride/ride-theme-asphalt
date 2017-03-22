@@ -270,11 +270,14 @@ rideApp.form = (function($, undefined) {
       initPikaday();
     });
 
-    $document.on('collectionAdded', function() {
+    $document.on('collectionAdded', function () {
+      console.log('collection was added');
       initPikaday();
     });
 
     function initPikaday() {
+
+      console.log('initializing Pikaday');
 
       var $datePickers = $('.js-datepicker:visible:not(.pikadayed)');
 
