@@ -30,10 +30,9 @@ rideApp.formComponent = (function($, undefined) {
 
       $document.on('collectionAdded', function (event) {
 
-        var $collection = $(event.target);
-        var $collectionDateFields = $collection.find('.js-datepicker');
+        console.log(event.target);
 
-        $collectionDateFields.each(function (index, field) {
+        $dateFields.each(function (index, field) {
 
           new Pikaday($.extend({
             field: field,
