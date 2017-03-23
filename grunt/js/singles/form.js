@@ -262,6 +262,7 @@ rideApp.form = (function($, undefined) {
 
   var _pikaday = function () {
 
+    //  Return if Pikaday isn't loaded
     if (typeof window.Pikaday === 'undefined') return;
 
     initPikaday();
@@ -286,8 +287,6 @@ rideApp.form = (function($, undefined) {
           field: field,
           firstDay: 1
         }, $field.data());
-
-        console.log(pikaOptions);
 
         new Pikaday(pikaOptions);
 
