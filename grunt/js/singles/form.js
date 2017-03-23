@@ -282,10 +282,14 @@ rideApp.form = (function($, undefined) {
 
         var $field = $(field);
 
-        new Pikaday($.extend(true, {
+        var pikaOptions = $.extend({
           field: field,
           firstDay: 1
-        }, $field.data()));
+        }, $field.data());
+
+        console.log(pikaOptions);
+
+        new Pikaday(pikaOptions);
 
         $field.addClass('pikadayed');
       });
