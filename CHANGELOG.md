@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Updated
 - fixed submission url of the exception view
 
+### Fixed
+- fix bug where datepickers didn't initialize when inside form collections
+
 ## [1.1.5]
 ### Updated
 - Changed message type in index from information to info
