@@ -29,6 +29,7 @@ rideApp.form = (function($, undefined) {
     }
 
     _selectize();
+    _pikaday();
     _autocomplete();
     this.assets.init();
 
@@ -256,6 +257,41 @@ rideApp.form = (function($, undefined) {
       }
 
       if(count <= 0 && !recommended) return false;
+    }
+  };
+
+  var _pikaday = function () {
+
+    //  Return if Pikaday isn't loaded
+    if (typeof window.Pikaday === 'undefined') return;
+
+    initPikaday();
+
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+      initPikaday();
+    });
+
+    $document.on('collectionAdded', function () {
+      initPikaday();
+    });
+
+    function initPikaday() {
+
+      var $datePickers = $('.js-datepicker:visible:not(.pikadayed)');
+
+      $datePickers.each(function (i, field) {
+
+        var $field = $(field);
+
+        var pikaOptions = $.extend({
+          field: field,
+          firstDay: 1
+        }, $field.data());
+
+        new Pikaday(pikaOptions);
+
+        $field.addClass('pikadayed');
+      });
     }
   };
 

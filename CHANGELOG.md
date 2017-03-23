@@ -4,11 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [1.1.6] - 2017-03-23
 ### Added
 - allow_delete option implementation to file and image field
 ### Updated
 - fixed submission url of the exception view
+- fix bug where datepickers didn't initialize when inside form collections
 
 ## [1.1.5]
 ### Updated
