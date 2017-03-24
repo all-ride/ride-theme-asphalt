@@ -16,7 +16,7 @@
         {include file="base/form.prototype"}
 
 
-        <form id="{$form->getId()}" class="form" action="{url id="system.exception" parameters=["id" => $id]}" method="POST" role="form">
+        <form id="{$form->getId()}" class="form" action="{url id="exception" parameters=["id" => $id]}" method="POST" role="form">
             <div class="form__group">
                 {call formRows form=$form}
 
