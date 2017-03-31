@@ -455,7 +455,6 @@ rideApp.form = (function($, undefined) {
             iframeUrl = iframeUrl.slice(0, (searchIndex + 1));
           }
           iframeQuery.selected = selected;
-
           $iframe.attr('src', iframeUrl + queryString.stringify(iframeQuery));
 
           $iframe.on('load', function (e) {
@@ -463,10 +462,9 @@ rideApp.form = (function($, undefined) {
             var $contents = $this.contents();
             var $iframeWindow = $(this.contentWindow);
             var framePath = this.contentWindow.location.pathname;
-
             //  Dynamically set height of iframe to accommodate for its contents.
             var targetHeight = $contents.find('body').height();
-
+            $contents.find('.body').removeClass('body--with-header');
             if (targetHeight) {
               $this.animate({'height': targetHeight}, Math.abs($this.height() - targetHeight), 'linear', function () {
                 //  Hide the modal footer when adding an asset or folder.
