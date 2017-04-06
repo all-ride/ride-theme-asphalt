@@ -18,7 +18,6 @@ function escapeID(myid) {
 
 rideApp.form = (function($, undefined) {
   var $document = $(document);
-  var client = new JsonApiClient('/api/v1');
 
   var _initialize = function() {
     formFile();
@@ -50,6 +49,11 @@ rideApp.form = (function($, undefined) {
   };
 
   var _assetImageStyleHandler = function() {
+
+    if (typeof JsonApiClient == 'undefined') return;
+
+    var client = new JsonApiClient('/api/v1');
+
     var asset = null;
     var style = null;
     var imageStyleAdded = rideApp.translator.translate('label.image.style.added');
