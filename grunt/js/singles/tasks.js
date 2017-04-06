@@ -39,6 +39,6 @@ rideApp.tasks = (function($, undefined) {
 })(jQuery);
 
 // Run the initializer
-$(document).ready(function() {
+$(function() {
   rideApp.tasks.initialize();
 });

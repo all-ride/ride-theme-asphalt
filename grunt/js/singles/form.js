@@ -628,7 +628,7 @@ rideApp.form = (function($, undefined) {
 })(jQuery);
 
 // Run the initializer
-$(document).ready(function() {
+$(function() {
   rideApp.form.initialize();
 });
 

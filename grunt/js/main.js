@@ -38,7 +38,7 @@ rideApp.main = (function($, undefined) {
 })(jQuery);
 
 
-$(document).ready(function() {
+$(function() {
   rideApp.main.init();
 });
 
