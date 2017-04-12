@@ -76,7 +76,7 @@
                     <ul class="tabs">
                         <li class="tabs__tab active"><a href="#tab-original" data-toggle="tab">{translate key="label.original"}</a></li>
                         {foreach $styles as $style}
-                            <li class="tabs__tab"><a href="#tab-{$style->getSlug()}" data-toggle="tab">{$style->getName()}</a></li>
+                            <li class="tabs__tab"><a href="#tab-{$style->getSlug()}" data-toggle="tab">{$style->getFriendlyName()}</a></li>
                         {/foreach}
                     </ul>
 
