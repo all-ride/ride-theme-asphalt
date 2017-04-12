@@ -18,7 +18,6 @@ function escapeID(myid) {
 
 rideApp.form = (function($, undefined) {
   var $document = $(document);
-  var client = new JsonApiClient('/api/v1');
 
   var _initialize = function() {
     formFile();
@@ -50,6 +49,11 @@ rideApp.form = (function($, undefined) {
   };
 
   var _assetImageStyleHandler = function() {
+
+    if (typeof JsonApiClient == 'undefined') return;
+
+    var client = new JsonApiClient('/api/v1');
+
     var asset = null;
     var style = null;
     var imageStyleAdded = rideApp.translator.translate('label.image.style.added');
@@ -455,7 +459,6 @@ rideApp.form = (function($, undefined) {
             iframeUrl = iframeUrl.slice(0, (searchIndex + 1));
           }
           iframeQuery.selected = selected;
-
           $iframe.attr('src', iframeUrl + queryString.stringify(iframeQuery));
 
           $iframe.on('load', function (e) {
@@ -463,10 +466,9 @@ rideApp.form = (function($, undefined) {
             var $contents = $this.contents();
             var $iframeWindow = $(this.contentWindow);
             var framePath = this.contentWindow.location.pathname;
-
             //  Dynamically set height of iframe to accommodate for its contents.
             var targetHeight = $contents.find('body').height();
-
+            $contents.find('.body').removeClass('body--with-header');
             if (targetHeight) {
               $this.animate({'height': targetHeight}, Math.abs($this.height() - targetHeight), 'linear', function () {
                 //  Hide the modal footer when adding an asset or folder.
@@ -626,7 +628,7 @@ rideApp.form = (function($, undefined) {
 })(jQuery);
 
 // Run the initializer
-$(document).ready(function() {
+$(function() {
   rideApp.form.initialize();
 });
 

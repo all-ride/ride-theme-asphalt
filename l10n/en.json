@@ -1,6 +1,7 @@
 {
     "button.add": "Add",
     "button.back.to.overview": "Back to the overview",
+    "button.back.home": "Back to the homepage",
     "button.crop.image": "Crop image",
     "button.crop.save": "Save cropped image",
     "button.done": "Done",
@@ -59,6 +60,8 @@
     "title.aliases": "Aliases",
     "title.credentials": "Credentials",
     "title.details": "Details",
+    "title.exception": "Something went wrong",
+    "title.exception.report.finish": "Thanks for your report",
     "title.image.processor": "Crop Image",
     "title.locales": "Languages",
     "title.password.reset": "Request A Password Reset",

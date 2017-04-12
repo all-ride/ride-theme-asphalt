@@ -422,6 +422,6 @@ rideApp.content = (function ($, undefined) {
   };
 })(jQuery);
 
-$(window).load(function () {
+$(window).on('load', function () {
   rideApp.content.init();
 });

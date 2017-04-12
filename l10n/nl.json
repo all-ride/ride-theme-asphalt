@@ -1,6 +1,7 @@
 {
     "button.add": "Toevoegen",
     "button.back.to.overview": "Terug naar het overzicht",
+    "button.back.home": "Terug naar de home pagina",
     "button.cookiemonster": "Ik ga akkoord",
     "button.crop.image": "Afbeelding bijsnijden",
     "button.crop.save": "Bijgesneden afbeelding opslaan",
@@ -62,6 +63,8 @@
     "title.cookiemonster": "Deze website maakt gebruik van cookies",
     "title.credentials": "Login gegevens",
     "title.details": "Details",
+    "title.exception": "Er ging iets mis",
+    "title.exception.report.finish": "Bedankt voor je rapport",
     "title.image.processor": "Afbeelding bijsnijden",
     "title.locales": "Talen",
     "title.password.reset": "Nieuw wachtwoord aanvragen",
