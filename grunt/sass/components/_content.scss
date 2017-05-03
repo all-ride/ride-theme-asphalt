@@ -594,8 +594,11 @@ ul.st-text-block {
 }
 
 .st-block textarea {
-  display: none;
   width: 100%;
+}
+
+.st-block textarea.st-text-block {
+  display: none;
 }
 
 .st-block .embed-preview.is-active {
