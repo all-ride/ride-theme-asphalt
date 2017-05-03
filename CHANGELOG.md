@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.3.1] - 2017-05-03
+### Fixed
+- fixed richcontent bug textarea
+
 ## [1.3.0] - 2017-04-12
 ### Added
 - template for finish page of exception report
