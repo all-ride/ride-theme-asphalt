@@ -88,6 +88,8 @@
         {else}
             {$errors = $form->getValidationErrors()}
             {$widget = $row->getWidget()}
+            {$rowName = $row->getName()}
+
             {$errorsName = $widget->getName()}
             {if $widget->isMultiple() && $part}
                 {$errorsName = "`$errorsName`[`$part`]"}
@@ -95,6 +97,8 @@
 
             {if isset($errors.$errorsName)}
                 {$errors = $errors.$errorsName}
+            {elseif isset($errors.$rowName)}
+                {$errors = $errors.$rowName}
             {else}
                 {$errors = array()}
             {/if}
