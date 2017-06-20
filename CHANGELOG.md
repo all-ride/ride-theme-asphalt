@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.4.0] - 2017-06-20
+
+### Added
+
+- Add `scaffold.export` and `scaffold.export.xls` support.
+
 ## [1.3.2] - 2017-05-31
 ### Updated
 - fixed validation errors with the form row name
@@ -15,6 +21,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.3.0] - 2017-04-12
 ### Added
 - template for finish page of exception report
+
 ### Updated
 - use display name from image styles
 - fixed event titles
