@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- Add `scaffold.export` and `scaffold.export.xls` support.
+- Add `scaffold.export` support to show and hide the export button.
 
 ## [1.3.2] - 2017-05-31
 ### Updated
