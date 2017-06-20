@@ -23,3 +23,17 @@ You can use [Composer](http://getcomposer.org) to install this application.
 ```
 composer require ride/theme-asphalt
 ```
+
+## Integrations
+
+### Export buttons
+
+Theme asphalt provides support for export buttons from model pages. To enable the export link, you should add either 
+one of following options to the model.
+
+```xml
+<option name="scaffold.export" value="true"/>
+<option name="scaffold.export.xls" value="true"/>
+```
+
+If other custom exports are configured, you can enable them on a per-export basis, as shown in the second line.
