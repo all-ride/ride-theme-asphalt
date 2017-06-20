@@ -16,14 +16,10 @@
 
 {block name="content_body" append}
     {function renderExportButton}
-        {if $exports}
+        {if $exports && $meta->getOption('scaffold.export')}
             <div class="spacer clearfix">
                 <div class="pull--right">
                     {foreach $exports as $extension => $url}
-                        {if !$meta->getOption('scaffold.export') && !$meta->getOption("scaffold.export.`$extension`")}
-                            {continue}
-                        {/if}
-
                         {strip}
                         <a href="{$url}" title="{translate key="label.export.to" format=$extension}">
                             <i class="icon icon--share-square-o icon--before icon--center"></i>
