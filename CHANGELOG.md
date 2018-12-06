@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.5.2] - 2018-12-06
+### Updated
+- removed actions for assets when in embed mode
+
 ## [1.5.1] - 2018-11-20
 ### Updated
 - fixed default thumbnail for new assets
