@@ -92,6 +92,7 @@
             <div class="asset-actions">
                 <div class="form__actions grid">
                     <div class="grid__12 grid--bp-med__3">
+                        {if !$embed}
                         <input type="checkbox" name="all" class="select-all" />
                         <select name="action" class="form-control form-action form__select form__select--inline">
                             <option value="">- {translate key="label.actions.bulk"} -</option>
@@ -99,6 +100,7 @@
                             <option value="delete">{translate key="button.delete"}</option>
                         </select>
                         <button class="btn btn--default btn--small" name="submit" value="bulk-action" type="submit">{translate key="button.apply"}</button>
+                        {/if}
                     </div>
                     <div class="grid__12 grid--bp-med__6 text--center">
                         {if $pages > 1}
@@ -119,6 +121,7 @@
                         </form>
                     </div>
                 </div>
+                {if !$embed}
                 <div class="form__actions text--center">
                     <select name="order" class="form-control form-order  form__select form__select--inline">
                         <option value="">- {translate key="label.actions.order"} -</option>
@@ -129,6 +132,7 @@
                     </select>
                     <button name="submit" value="order" type="submit" class="btn btn--default btn--small btn--order">{translate key="button.order"}</button>
                 </div>
+                {/if}
             </div>
         </form>
     </div>
