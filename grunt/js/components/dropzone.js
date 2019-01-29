@@ -5,13 +5,14 @@ rideApp.dropzone = (function($, undefined) {
   var maxFilesize = $dropzone.data('maxFilesize') || 16;
   var errorFilesize = $dropzone.data('errorFilesize') || "This file is too big.";
   var successUploadMsg = $dropzone.data('upload-success') || "File added.";
+  var defaultMessage = $dropzone.data('placeholder') || "Upload";
 
   errorFilesize = errorFilesize.replace("%size%", "" + maxFilesize);
 
   Dropzone.options.assetDropzone = {
     maxFilesize: maxFilesize,
     parallelUploads : 1,
-    dictDefaultMessage : "Upload",
+    dictDefaultMessage : defaultMessage,
     dictFileTooBig : errorFilesize,
 
     init: function() {

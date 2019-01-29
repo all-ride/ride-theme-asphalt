@@ -59,6 +59,7 @@
     "label.table.rows.page": "/ pagina",
     "label.table.rows.total": "%rows% in totaal",
     "label.table.search": "Zoeken",
+    "label.upload.dnd.placeholder": "Sleep je bestanden naar hier om ze te uploaden",
     "label.upload.success": "Bestand %file% toegevoegd",
     "theme.bootstrap": "Bootstrap",
     "title.aliases": "Aliassen",

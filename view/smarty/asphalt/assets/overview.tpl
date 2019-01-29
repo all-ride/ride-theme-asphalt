@@ -42,6 +42,7 @@
         id="asset-dropzone"
         data-error-filesize="{translate key="error.filesize"}"
         data-upload-success="{translate key="label.upload.success"}"
+        data-placeholder="{translate key="label.upload.dnd.placeholder"}"
         data-max-filesize={$maxFileSize}>
 
         <div class="fallback">
