@@ -55,6 +55,7 @@
     "label.table.rows.page": "/ page",
     "label.table.rows.total": "%rows% total",
     "label.table.search": "Search",
+    "label.upload.dnd.placeholder": "Drop your files here to upload",
     "label.upload.success": "File %file% added",
     "theme.bootstrap": "Bootstrap",
     "title.aliases": "Aliases",
