@@ -111,7 +111,7 @@ rideApp.form = (function($, undefined) {
         if (data.length) {
           data[0].setAttribute('image', dataUrl);
           client.save(data[0], function(data) {
-            finishUpdate($container, cropper, dataUrl, data.id);
+            finishUpdate($container, cropper, dataUrl, data.id, asset.id, imageStyle.id);
           });
         } else {
           var assetImageStyle = new JsonApiDataStoreModel('asset-image-styles');
@@ -121,14 +121,14 @@ rideApp.form = (function($, undefined) {
           assetImageStyle.setAttribute('image', dataUrl);
 
           client.save(assetImageStyle, function(data) {
-            finishUpdate($container, cropper, dataUrl, data.id);
+            finishUpdate($container, cropper, dataUrl, data.id, asset.id, imageStyle.id);
           });
         }
 
       });
     }
 
-    function finishUpdate($container, cropper, dataUrl, id) {
+    function finishUpdate($container, cropper, dataUrl, id, assetId, imageStyleId) {
       var $preview = $container.find('.js-crop-preview');
       var $crop = $container.find('.js-image-style-crop');
       var $file = $container.find('.js-image-style-file');
@@ -142,7 +142,14 @@ rideApp.form = (function($, undefined) {
       $file
         .removeClass('superhidden')
         .find('.form__image-preview')
-          .addClass('superhidden');
+        .addClass('superhidden');
+
+      if (assetId && imageStyleId) {
+        var url = client.url + '/asset-image-styles?filter[exact][asset]=' + assetId + '&filter[exact][style]=' + imageStyleId + '&fields[asset-image-styles]=id,image';
+        client.sendRequest('GET', url, null, function(data) {
+            $('input[type=hidden]', $file).val(data[0]._meta.image);
+        });
+      }
 
       alertify
         .logPosition("bottom right")

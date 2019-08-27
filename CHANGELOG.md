@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.5.4] - 2019-08--27
+### Updated
+- reload image style file field after cropping an asset
+
 ## [1.5.3] - 2019-01-29
 ### Updated
 - added translation for the dropzone
