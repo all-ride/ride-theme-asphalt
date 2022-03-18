@@ -50,7 +50,7 @@
                                 <span class="help-block">{$callback[0]}->{$callback[1]}()</span>
                             </td>
                             <td>{$route->getId()}</td>
-                            <td>{if $methods}{$methods|@array_keys|@implode:', '}{else}*{/if}</td>
+                            <td>{if $methods}{', '|implode:array_keys($methods)}{else}*{/if}</td>
                         </tr>
                 {/foreach}
                     </tbody>
